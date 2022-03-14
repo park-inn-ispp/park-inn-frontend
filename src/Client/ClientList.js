@@ -12,13 +12,13 @@ class ClientList extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/clients')
+        fetch('https://park-inn-ispp-be.herokuapp.com/clients')
             .then(response => response.json())
             .then(data => this.setState({clients: data}));
     }
 
     async remove(id) {
-        await fetch(`http://localhost:8080/clients/${id}`, {
+        await fetch(`https://park-inn-ispp-be.herokuapp.com/clients/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
