@@ -15,10 +15,14 @@ export const Wrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     margin: auto;
+
+    @media screen and (max-width: 960px){
+        justify-content: center;
+    }
 `;
 
 export const LogoContainer = styled.div`
-margin-top: 20px;
+    margin-top: 20px;
     height: 70px;
     display: flex;
     align-items: center;
@@ -31,10 +35,10 @@ export const Menu = styled.ul`
     justify-content: space-between;
     list-style: none;
 
-    @media screen and (max-width: 900px){
+    @media screen and (max-width: 960px){
         position: absolute;
         top: 90px;
-        left: 0;
+        left: ${({open}) => open ? "0" : "-100%"};
         width: 100%;
         height: 90vh;
         justify-content: center;
@@ -42,11 +46,20 @@ export const Menu = styled.ul`
         align-items: center;
         transition: 0.5s all ease;
         background-color: ${colors.fourth};
+        padding: 0;
     }
 `;
 
 export const MenuItem = styled.li`
     height: 100%;
+
+    @media screen and (max-width:960px){
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const MenuItemLink = styled.a`
@@ -65,9 +78,29 @@ export const MenuItemLink = styled.a`
 
     &:hover{
         color: #fff;
-        background-color: ${colors.third};
+        background-color: ${colors.fivth};
         text-decoration: underline;
         transition: 0.5s all ease;
+
+        svg{
+            fill: ${colors.fourth};
+        }
+    }
+
+    svg{
+        display: none;
+    }
+
+    @media screen and (max-width:960px){
+        width: 100%;
+
+        svg{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            fill: ${colors.fivth};
+        }
     }
 `;
 
@@ -88,14 +121,31 @@ export const LinkTitle = styled.a`
 export const MobileIcon = styled.div`
     display: none;
 
-    @media screen and (max-width: 900px){
+    @media screen and (max-width: 960px){
+        margin-left: 2rem;
         display: flex;
         height:inherit;
         align-items: center;
         cursor: pointer;
         svg{
             fill: ${colors.fivth};
-            margin-right: 0.5rem;
         }
+    }
+`;
+
+export const ProfileIcon = styled.div`
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem 2rem 1rem 2rem;
+    size: 100;
+    svg{
+        fill: ${colors.fivth};
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 960px){
+        display: none;
     }
 `;

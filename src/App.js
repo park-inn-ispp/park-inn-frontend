@@ -3,12 +3,14 @@ import ClientList from './Client/ClientList';
 import ClientEdit from "./Client/ClientEdit";
 import Navbar from './components/Navbar';
 import './App.css';
+import Buscador from './components/Buscador';
 
 export default function App(){
   
     return (
       <div className='App'>
         <Navbar/>
+        <div className='Buscador'><Buscador/></div>
         <section className='App-content'>
           <h1>Park-Inn, encuentra aparcamiento en un click</h1>
           <Router>
