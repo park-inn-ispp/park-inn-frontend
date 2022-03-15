@@ -4,5 +4,6 @@ export const colors = {
     third:  '#086198',
     fourth:  '#1D4A72',
     fivth:  '#012545',
-    sixth: 'lightblue'
+    sixth: 'lightblue',
+    background: '#282c34'
 }

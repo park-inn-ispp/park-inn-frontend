@@ -4,6 +4,7 @@ import ClientEdit from "./Client/ClientEdit";
 import Navbar from './components/Navbar';
 import './App.css';
 import Buscador from './components/Buscador';
+import Footer from './components/Footer';
 
 export default function App(){
   
@@ -11,7 +12,7 @@ export default function App(){
       <div className='App'>
         <Navbar/>
         <div className='Buscador'><Buscador/></div>
-        <section className='App-content'>
+        <section className='App-content'> 
           <h1>Park-Inn, encuentra aparcamiento en un click</h1>
           <Router>
             <Switch>
@@ -20,6 +21,7 @@ export default function App(){
             </Switch>
           </Router>
         </section>
+        <Footer/>
       </div>
     )
 }

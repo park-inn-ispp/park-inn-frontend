@@ -40,7 +40,7 @@ export const Menu = styled.ul`
         top: 90px;
         left: ${({open}) => open ? "0" : "-100%"};
         width: 100%;
-        height: 90vh;
+        height: 113vh;
         justify-content: center;
         flex-direction: column;
         align-items: center;
