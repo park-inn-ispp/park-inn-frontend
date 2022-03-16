@@ -1,14 +1,15 @@
-import Plaza_Icon from '../assets/plaza_icon.svg'
-import L from 'leaflet'
+import L from 'leaflet';
 
-export const IconLocation = L.icon(
-    {iconUrl:require("../assets/plaza_icon.svg"),
-    iconRetinaUrl: require("../assets/plaza_icon.svg"),
-    iconSize: [35, 35],
+
+const iconLocation = new L.Icon({
+    iconUrl: require('../resources/myPosition.png'),
+    iconRetinaUrl: require('../resources/myPosition.png'),
     iconAnchor: null,
     popupAnchor: null,
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    className: "Leaflet-venue-icon",
-})
+    iconSize: new L.Point(60, 60),
+});
+
+export { iconLocation };
