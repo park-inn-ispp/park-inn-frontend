@@ -2,14 +2,14 @@ import L from 'leaflet';
 
 
 const iconLocation = new L.Icon({
-    iconUrl: require('../resources/myPosition.png'),
-    iconRetinaUrl: require('../resources/myPosition.png'),
+    iconUrl: require('../resources/logoSinFondo.png'),
+    iconRetinaUrl: require('../resources/logoSinFondo.png'),
     iconAnchor: null,
     popupAnchor: null,
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(60, 60),
+    iconSize: new L.Point(90, 90),
 });
 
 export { iconLocation };
