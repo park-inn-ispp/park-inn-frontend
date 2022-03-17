@@ -12,6 +12,7 @@ export const Principal = styled.div`
     border-top: solid 2px;
     border-color: #373839;
     padding: 0 3rem 0 3rem;
+    z-index: 32;
 
     @media screen and (max-width: 500px){
         display: none;

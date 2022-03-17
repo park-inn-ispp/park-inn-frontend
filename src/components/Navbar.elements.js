@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colors } from '../theme';
 
 export const Container = styled.div`
-    width: 100%;
+    width: 110%;
     height: 90px;
     background-color: ${colors.fourth}; 
 `;
@@ -36,6 +36,7 @@ export const Menu = styled.ul`
     list-style: none;
 
     @media screen and (max-width: 960px){
+        z-index: 2;
         position: absolute;
         top: 90px;
         left: ${({open}) => open ? "0" : "-100%"};
