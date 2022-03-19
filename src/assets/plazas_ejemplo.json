@@ -1,0 +1,75 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+            "Code": "FRLA", 
+            "Name": "Frederick Law Olmsted National Historic Site"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -5.972496271133422,
+            37.38492369285528
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+            "Code": "FRLA", 
+            "Name": "Frederick Law Olmsted National Historic Site"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -5.985231399536133,
+            37.386901433968696
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+            "Code": "FRLA", 
+            "Name": "Frederick Law Olmsted National Historic Site"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -5.972045660018921,
+            37.391129533080765
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+            "Code": "FRLA", 
+            "Name": "Frederick Law Olmsted National Historic Site"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -5.974792242050171,
+            37.37744701913353
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+            "Code": "FRLA", 
+            "Name": "Frederick Law Olmsted National Historic Site"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -5.986154079437256,
+            37.38050768606403
+          ]
+        }
+      }
+    ]
+  }
