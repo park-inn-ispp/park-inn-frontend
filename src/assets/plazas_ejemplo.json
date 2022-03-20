@@ -4,7 +4,7 @@
       {
         "type": "Feature",
         "properties": {
-            "Code": "FRLA", 
+            "Precio_hora": 1.5, 
             "Name": "Frederick Law Olmsted National Historic Site"
         },
         "geometry": {
@@ -18,7 +18,7 @@
       {
         "type": "Feature",
         "properties": {
-            "Code": "FRLA", 
+            "Precio_hora": 2, 
             "Name": "Frederick Law Olmsted National Historic Site"
         },
         "geometry": {
@@ -32,7 +32,7 @@
       {
         "type": "Feature",
         "properties": {
-            "Code": "FRLA", 
+            "Precio_hora": 1.7, 
             "Name": "Frederick Law Olmsted National Historic Site"
         },
         "geometry": {
@@ -46,7 +46,7 @@
       {
         "type": "Feature",
         "properties": {
-            "Code": "FRLA", 
+            "Precio_hora": 200, 
             "Name": "Frederick Law Olmsted National Historic Site"
         },
         "geometry": {
@@ -60,7 +60,7 @@
       {
         "type": "Feature",
         "properties": {
-            "Code": "FRLA", 
+            "Precio_hora": 0.5, 
             "Name": "Frederick Law Olmsted National Historic Site"
         },
         "geometry": {

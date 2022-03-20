@@ -12,12 +12,14 @@ L.Icon.Default.mergeOptions({
     iconUrl: require('../resources/logoSinFondo.png'),
     iconRetinaUrl: require('../resources/logoSinFondo.png'),
     iconAnchor: null,
-    popupAnchor: null,
+    popupAnchor: [0, -40],
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
     iconSize: new L.point(90, 90),
 });
+
+let prueba_USA = "https://www.nps.gov/lib/npmap.js/4.0.0/examples/data/national-parks.geojson";
 
 function LocationMarker() {
     const [position, setPosition] = useState(null);
@@ -34,11 +36,8 @@ function LocationMarker() {
         const parksGeoJson = new L.GeoJSON(garages, {
           onEachFeature: (feature = {} , layer) => {
             const { properties = {} } = feature;
-            const { Name } = properties;
-            //if (!Name ) return;
-            console.log("Name:");
-            console.log(Name);
-            layer.bindPopup('<p>aaaaaaaaaaaaaaaaaaaaaa</p>');
+            if (!properties.Precio_hora ) return;
+            layer.bindPopup('<h1>' + properties.Precio_hora + ' €' + '</h1> <a href="/reserva-plaza"><button>Reservar plaza</button></a>');
           }
         });
 
