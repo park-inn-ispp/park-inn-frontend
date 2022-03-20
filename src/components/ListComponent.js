@@ -89,7 +89,7 @@ class ListComponent extends Component {
             });
             return (
                 <div>
-                  <Navbar/>
+          
                    <div>
                        {list}
                    </div>
@@ -99,7 +99,7 @@ class ListComponent extends Component {
         }
         
         return <div>
-            <Navbar/>
+            
            
             </div>
        

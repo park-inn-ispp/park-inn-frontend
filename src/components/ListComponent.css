@@ -43,3 +43,7 @@ thead{
     color:white;
 
   }
+table{
+    margin: 0 auto; /* or margin: 0 auto 0 auto */
+    margin-top: 2vh;
+}
