@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../theme';
 
 export const Container = styled.div`
     width: 110%;
     height: 90px;
-    background-color: ${colors.fourth}; 
+    background-color: ${colors.fivth}; 
 `;
 
 export const Wrapper = styled.div`
@@ -63,7 +64,7 @@ export const MenuItem = styled.li`
     }
 `;
 
-export const MenuItemLink = styled.a`
+export const MenuItemLink = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +80,7 @@ export const MenuItemLink = styled.a`
 
     &:hover{
         color: #fff;
-        background-color: ${colors.fivth};
+        background-color: ${colors.third};
         text-decoration: underline;
         transition: 0.5s all ease;
 
@@ -129,7 +130,7 @@ export const MobileIcon = styled.div`
         align-items: center;
         cursor: pointer;
         svg{
-            fill: ${colors.fivth};
+            fill: ${colors.fourth};
         }
     }
 `;
@@ -142,7 +143,7 @@ export const ProfileIcon = styled.div`
     margin: 0rem 2rem 1rem 2rem;
     size: 100;
     svg{
-        fill: ${colors.fivth};
+        fill: ${colors.fourth};
         cursor: pointer;
     }
 
