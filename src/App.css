@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.MainTitle {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.Details {
+  margin-left: 5%;
+}
