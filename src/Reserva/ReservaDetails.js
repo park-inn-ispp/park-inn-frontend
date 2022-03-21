@@ -1,48 +1,51 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 
-class ReservaDetails extends Component {
+export default function ReservaDetails() {
 
-    constructor(props) {
-        super(props);
-        this.state = {details: []};
-        this.remove = this.remove.bind(this);
+    const [reserva, setReserva] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        DetallesReserva()
+    }, []);
+
+    const id = parseInt(useParams().id)
+    const DetallesReserva = async () => {
+        const data = await fetch(`http://localhost:8080/reservas/${id}`)
+        const reserva = await data.json()
+        setReserva(reserva)
+        setIsLoading(false)
+        console.log(reserva)
     }
 
-    componentDidMount() {
-        fetch(`http://localhost:8080/reserva/${this.props.match.params.id}`)
-            .then(response => response.json())
-            .then(data => this.setState({details: data}));
-    }
+    if (isLoading) {
+        return <p>Loading...</p>;
+      }
 
-    async remove(id) {}
-    
-    render() {
-        const {details, isLoading} = this.state;
-    
-        if (isLoading) {
-            return <p>Loading...</p>;
-        }
-        return (
+    return (
             <div>
-                <div><h3 class= "MainTitle">Reserva {details.name}</h3></div>
+                <div><h3>Reserva {reserva.plaza.direccion}</h3></div>
 
                 <Container fluid>
-                    <div class="Details">
-                        Estado:{details.estado}<p/>
-                        Precio total:{details.precioTotal}<p/>
-                        Fecha de inicio:{details.fechaInicio}<p/>
-                        Fecha de fin:{details.fechaFin}<p/>
-                        Fecha de solicitud:{details.fechaSolicitud}<p/>
-                        Comentarios: {details.comentarios}
+                    <div className="Details">
+                        Estado: {reserva.estado}<p/>
+                        Precio total: {reserva.precioTotal} €<p/>
+                        Fecha de inicio: {reserva.fechaInicio}<p/>
+                        Fecha de fin: {reserva.fechaFin}<p/>
+                        Fecha de solicitud: {reserva.fechaSolicitud}<p/>
+                        Propietario: {reserva.plaza.administrador.name}<p/>
+                        Comentarios: {reserva.comentarios}
                     </div>
                 </Container>
             </div>
-        );
-    }
+
+
+
+    );
+
 }
 
-export default ReservaDetails;
