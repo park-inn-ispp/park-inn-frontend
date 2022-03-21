@@ -5,6 +5,7 @@ import Home from './Home'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PlazasList from './Plazas/PlazasList';
+import PlazasList from './Plazas/ReservasList';
 
 export default function App(){
   
