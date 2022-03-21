@@ -35,9 +35,9 @@ class ReservasList extends Component {
                 );
         
     }
-    }
+
 }
 export default ReservasList;
-}
-export default PlazasList;
+
+
 
