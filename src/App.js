@@ -13,7 +13,7 @@ export default function App(){
         <Navbar/>       
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/reserva-plaza/plaza=:id' element={<ReservaPlaza/>}/>
+            <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
           </Routes> 
         <Footer/>   
       </div>

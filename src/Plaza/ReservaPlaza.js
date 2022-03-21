@@ -9,6 +9,11 @@ export default function Reserva(){
 
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
+    const [fechaInicio, setFechaInicio] = useState(0)
+    const [fechaFin, setFechaFin] = useState(0)
+    const [hora, setHora] = useState(0)
+
+
     useEffect(() => {
         ObtenerDatos()
     }, []);
@@ -39,7 +44,7 @@ export default function Reserva(){
         fechaFin:'',
         horaInicio:'',
         horaFin:'',
-        precioTotal:''
+        precioTotal:'',
       })
 
     const handleSubmit= evt => {
@@ -52,21 +57,26 @@ export default function Reserva(){
         const target = evt.target
         const name = target.name
         console.log(name)
-        var value= target.value
-
-        if (target.type === 'radio'){
-          value= target.id === 'exterior' ? true : false
-          console.log(value)
+        var value= target.value.toString()
+        var sp = value.split('-')
+        var dia = sp[2]
+        console.log(parseInt(sp[2]))
+        if (name==='fechaInicio') {
+          setFechaInicio(dia)
+        } else if (name==='fechaFin') {
+          setFechaFin(dia)
         }
-        console.log(value)
         setForm({...form,[name]: value})
+        console.log(fechaInicio)
+        console.log(fechaFin)
+        console.log(hora)
 
       }
       
       //Cálculo de horas
-      const horas = 4
+      var horas = fechaFin-fechaInicio
       
-      console.log(plaza)
+      console.log(horas)
       
       if (isLoading) {
         return <p>Loading...</p>;
@@ -98,13 +108,13 @@ export default function Reserva(){
 
             <label>
             Hora de inicio:
-               <input onChange={handleChange} name= "horaInicio" type="time" value={form.horaInicio}/>
+               <input disabled onChange={handleChange} name= "horaInicio" type="time" value={form.horaInicio}/>
             </label>
             <br/> 
 
             <label>
             Hora de fin:
-               <input onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
+               <input disabled onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
             </label>
             <br/> 
             Precio por hora: {DetallesPlaza[0].precioHora} €
@@ -114,6 +124,7 @@ export default function Reserva(){
             <br/>
             Precio total: {DetallesPlaza[0].fianza + DetallesPlaza[0].precioHora*horas} €
             <br/>
+            Horas: {horas}
             <input type="submit" value="Submit" />
         </form>
         </div>
