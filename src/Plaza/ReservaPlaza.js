@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import getPlaza from '../Plaza/getPlazas';
+import validateReserva from './validateReserva';
 import Plaza from './Plaza';
+import FormErrorMessage from './FormErrorMesage';
 
 export default function Reserva(){
 
-    
-
+    const[errors, setErrors] = useState({});
     const [plaza, setPlaza] = useState([]);
 
     useEffect(() => {
@@ -20,15 +20,11 @@ export default function Reserva(){
         setPlaza(plazas)
     }
 
-    const id = useParams()
-    console.log(id)
+    const ID = parseInt(useParams().id);
 
-    function Filter(id) {
-        return plaza.filter(p=>p.id==`id: ${id}`)
+    function Filter(id){
+      return plaza.filter(p=>p.id===id)
     }
-
-
-    console.log(Filter(useParams()))
 
     const [form, setForm]= useState({
         fechaInicio:'',
@@ -36,27 +32,19 @@ export default function Reserva(){
         horaInicio:'',
         horaFin:'',
         precioTotal:''
-      })
+    })
 
     const handleSubmit= evt => {
         evt.preventDefault()
-        //setErrors(validateParkingForm(form))
-      }
+        setErrors(validateReserva(form))
+        console.log(errors)
+    }
 
       const handleChange= evt => {
-
         const target = evt.target
         const name = target.name
-        console.log(name)
         var value= target.value
-
-        if (target.type === 'radio'){
-          value= target.id === 'exterior' ? true : false
-          console.log(value)
-        }
-        console.log(value)
         setForm({...form,[name]: value})
-
       }
       
       
@@ -68,30 +56,34 @@ export default function Reserva(){
             <label>
             Fecha de Inicio:
                 <input onChange={handleChange} name= "fechaInicio" type="date" value={form.fechaInicio}/>
+                <FormErrorMessage jsonErrors={errors} errorName="fechaInicio"/>
             </label>
             <br/> 
 
             <label>
             Fecha de Fin:
                <input onChange={handleChange} name= "fechaFin" type="date" value={form.fechaFin}/>
+               <FormErrorMessage jsonErrors={errors} errorName="fechaFin"/>
             </label>
             <br/> 
 
             <label>
             Hora de inicio:
                <input onChange={handleChange} name= "horaInicio" type="time" value={form.horaInicio}/>
+               <FormErrorMessage jsonErrors={errors} errorName="horaInicio"/>
             </label>
             <br/> 
 
             <label>
             Hora de fin:
                <input onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
+               <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
             </label>
             <br/> 
-            Precio por hora: <Plaza />
+            Precio por hora:
 
 
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Confirmar" />
         </form>
         </div>
     );
