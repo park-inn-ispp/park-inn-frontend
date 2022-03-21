@@ -2,6 +2,24 @@
   text-align: center;
 }
 
+.App-content{
+  color: gray;
+  background-color: #1D4A72;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  
+}
+
+.Buscador{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:#282c34;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,15 +53,16 @@
   to {
     transform: rotate(360deg);
   }
+  
 }
 
-.MainTitle {
-  margin-top: 1%;
-  margin-bottom: 1%;
-  text-align: center;
-  text-decoration: underline;
-}
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: block;
+  object-fit: contain;
+  
 
-.Details {
-  margin-left: 5%;
+  transition: height 0.5s ease-in-out;
 }
