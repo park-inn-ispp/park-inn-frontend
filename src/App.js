@@ -4,6 +4,7 @@ import ReservaPlaza from './ReservaPlaza';
 import Home from './Home'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import PlazasList from './Plazas/PlazasList';
 
 export default function App(){
   
@@ -14,6 +15,8 @@ export default function App(){
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/reserva-plaza' element={<ReservaPlaza/>}/>
+            <Route path='/mis-plazas' element={<PlazasList/>}/>
+
           </Routes> 
         <Footer/>   
       </div>

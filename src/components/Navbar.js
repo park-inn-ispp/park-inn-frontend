@@ -26,7 +26,7 @@ export default function Navbar(){
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink to="/">
+                    <MenuItemLink to="/mis-plazas">
                         <FaParking/>
                         MIS PLAZAS
                     </MenuItemLink>
