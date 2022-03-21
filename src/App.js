@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import './App.css';
-import ReservaPlaza from './ReservaPlaza';
+import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -13,7 +13,7 @@ export default function App(){
         <Navbar/>       
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/reserva-plaza' element={<ReservaPlaza/>}/>
+            <Route path='/reserva-plaza/plaza=:id' element={<ReservaPlaza/>}/>
           </Routes> 
         <Footer/>   
       </div>
