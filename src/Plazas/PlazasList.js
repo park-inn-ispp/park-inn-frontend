@@ -33,4 +33,3 @@ class PlazasList extends Component {
     }
 }
 export default PlazasList;
-

@@ -10,7 +10,7 @@ class ListComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {plazas: [],items:[]};
+        this.state = {reservas: [],items:[]};
         //this.remove = this.remove.bind(this);
     }
    
