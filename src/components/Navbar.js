@@ -32,7 +32,7 @@ export default function Navbar(){
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink to="/">
+                    <MenuItemLink to="/mis-reservas-de-mis-plazas">
                         <BsBookmarksFill/>
                         MIS RESERVAS
                     </MenuItemLink>
