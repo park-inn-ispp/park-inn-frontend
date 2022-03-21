@@ -12,7 +12,7 @@ class ReservasList extends Component{
     }
 
     componentDidMount(){
-        fetch('https://park-inn-ispp-be.herokuapp.com/reservas/usuario/1')
+        fetch('http://localhost:8080/reservas/all')
         .then(response => response.json())
         .then((data) => {
             this.setState({reservas: data})
@@ -24,8 +24,8 @@ class ReservasList extends Component{
             <ListReserva
                 header={"fechaSolicitud"}
                 data={this.state.reservas}
-                attributes={[{position:1,val:'id'},{position:2,val:'fechaSolicitud'},{position:3,val:'fechaInicio'},{position:4,val:'fechaFin'}]} 
-                headers={['id', 'fechaSolicitud', 'fechaInicio', 'fechaFin']}
+                attributes={[{position:1,val:'id'},{position:2,val:'fechaInicio'},{position:3,val:'fechaFin'}, {position:4,val:'plaza.direccion'}]} 
+                headers={['id', 'fechaInicio', 'fechaFin', 'direccion']}
                 />
         );
     }
