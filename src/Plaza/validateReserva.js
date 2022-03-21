@@ -20,6 +20,7 @@ export default function validateReserva(form){
         errors.fechaFin = "La fecha de fin debe ser posterior a la de inicio"
     }
 
+    /*
     if(!form.horaInicio.trim()){
         errors.horaInicio = "La hora de inicio es un campo obligatorio"
     } 
@@ -29,7 +30,7 @@ export default function validateReserva(form){
     } else if (form.horaFin < form.horaInicio){
         errors.horaFin = "La hora de fin debe ser posterior a la de inicio"
     }
-
+    */
 
     return errors
 }

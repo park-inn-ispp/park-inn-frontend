@@ -16,7 +16,7 @@ export default function Reserva(){
 
     useEffect(() => {
         DetallesPlaza()
-    });
+    }, []);
 
     const id = parseInt(useParams().id)
     const DetallesPlaza = async () => {
