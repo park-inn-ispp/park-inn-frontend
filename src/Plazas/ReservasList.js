@@ -13,7 +13,7 @@ class ReservasList extends Component {
     }
 
     componentDidMount() {
-        fetch('https://park-inn-ispp-be.herokuapp.com/propietarios/reservas/all')
+        fetch('https://park-inn-ispp-be.herokuapp.com/reservas/usuario/1')
             .then(response => response.json())
             .then(data =>{ this.setState({ reservas: data})});
     }
