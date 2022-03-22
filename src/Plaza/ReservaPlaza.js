@@ -21,7 +21,7 @@ export default function Reserva(){
 
     const id = parseInt(useParams().id)
     const DetallesPlaza = async () => {
-        const data = await fetch(`http://localhost:8080/plazas/${id}`)
+        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/${id}`)
         const plazas = await data.json()
         setPlaza(plazas)
         setIsLoading(false)
@@ -68,11 +68,11 @@ export default function Reserva(){
         setErrors(validateReserva(form))
         const requestOptions = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"},
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
           body: (JSON.stringify(data))
         };
         
-        fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
+        fetch(`https://park-inn-ispp-be.herokuapp.com/${id}/reservar`, requestOptions)
           .then(response => {
             console.log(response.ok)
           })
