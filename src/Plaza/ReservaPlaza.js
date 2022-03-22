@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import validateReserva from './validateReserva';
 import FormErrorMessage from './FormErrorMesage';
+import { ReactNotifications } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Container, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 import Calendario from '../components/Calendario'
 export default function Reserva(){
@@ -25,7 +26,7 @@ export default function Reserva(){
         setPlaza(plazas)
         setIsLoading(false)
     }
-
+    var horas = fechaFin-fechaInicio
     const [form, setForm]= useState({
         fechaInicio:'',
         fechaFin:'',
@@ -33,11 +34,48 @@ export default function Reserva(){
         horaFin:'',
         precioTotal:''
     })
-
+    const data = {
+            
+      "comentarios":null,
+      "estado": "pendiente",
+      "fechaSolicitud":"2022-03-22T14:30:40",
+      "id":"4",
+      "incidencias":null,
+      "plaza": {
+        "id": 4,
+        "direccion": "58885 Carberry Street",
+        "precioHora": 2,
+        "fianza": 50,
+        "ancho": 4.86,
+        "largo": 2.53,
+        "estaDisponible": true,
+        "esAireLibre": true,
+        "descripcion": "Fexofenadine Hydrochloride",
+          "administrador": {
+          "id": 7,
+          "name": "Sòng",
+          "email": "jcaudle6@blogspot.com"
+        }
+      },
+      "precioTotal": horas*24*plaza.precioHora + plaza.fianza,
+      "user":null,
+      "fechaInicio": form.fechaInicio.toString()+'T00:00:00',
+      "fechaFin": form.fechaFin.toString()+'T00:00:00'
+          
+      }
     const handleSubmit= evt => {
         evt.preventDefault()
         setErrors(validateReserva(form))
-        console.log(errors)
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"},
+          body: (JSON.stringify(data))
+        };
+        
+        fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
+          .then(response => {
+            console.log(response.ok)
+          })
     }
 
       const handleChange= evt => {
@@ -58,10 +96,11 @@ export default function Reserva(){
         console.log(fechaInicio)
         console.log(fechaFin)
         console.log(hora)
+        console.log(form.fechaFin.toString()+'T00:00:00')
       }
       
       //Cálculo de horas
-      var horas = fechaFin-fechaInicio
+      
       if (isLoading) {
         return <p>Loading...</p>;
       }
