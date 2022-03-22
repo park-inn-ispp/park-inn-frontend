@@ -14,7 +14,7 @@
 }
 
 .Buscador{
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
   background-color:#282c34;
@@ -72,9 +72,13 @@
   position: fixed;
   display: block;
   object-fit: contain;
-  
-
   transition: height 0.5s ease-in-out;
+}
+
+.errorMessage{
+  color: lightcoral;
+}
+
 
 }
 
@@ -198,4 +202,5 @@
 	margin-top: 10px;
 	text-align: right;
 }
+
 

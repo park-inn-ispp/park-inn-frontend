@@ -9,9 +9,9 @@ import {RemoveScrollBar} from 'react-remove-scroll-bar';
 export default function Home(){
     return (
         <div className='App'>
-            <RemoveScrollBar />
-            <Buscador/>     
-            <MapView /> 
+            <RemoveScrollBar />  
+            <MapView/>
+            <Buscador/>
         </div>
     )
 

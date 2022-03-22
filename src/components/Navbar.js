@@ -14,25 +14,26 @@ export default function Navbar(){
         <Wrapper>
             <IconContext.Provider value = {{style: {fontSize: "2em"}}}>
             <LogoContainer>
-                <Logo size="90px"/>
-                <ParkinnTitle><LinkTitle href="">PARK-INN</LinkTitle></ParkinnTitle>
+                <Logo size="100px"/>
+                <ParkinnTitle><LinkTitle to="/">PARK-INN</LinkTitle></ParkinnTitle>
             </LogoContainer>
 
             <Menu open = {showMobileMenu}>
                 <MenuItem>
-                    <MenuItemLink to="/">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
                         <FaHome/>
                         INICIO
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink to="/mis-plazas">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
                         <FaParking/>
                         MIS PLAZAS
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink to="/mis-reservas-de-mis-plazas">
+
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
                         <BsBookmarksFill/>
                         MIS RESERVAS
                     </MenuItemLink>
