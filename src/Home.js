@@ -4,6 +4,8 @@ import Buscador from './components/Buscador';
 import {RemoveScrollBar} from 'react-remove-scroll-bar';
 
 
+
+
 export default function Home(){
     return (
         <div className='App'>

@@ -11,6 +11,7 @@ class PlazasList extends Component {
         this.state = {plazas: []};
         //this.remove = this.remove.bind(this);
     }
+    
     componentDidMount() {
         fetch('https://park-inn-ispp-be.herokuapp.com/plazas/all')
             .then(response => response.json())
@@ -21,14 +22,17 @@ class PlazasList extends Component {
     }
     
     render() {       
-
+        
         return (
+            <div> 
+                <a href="plaza/create">Crear nueva plaza </a>
                 <ListComponent 
                     header={"direccion"} 
                     data={this.state.plazas} 
                     attributes={[{position:1,val:'id'},{position:2,val:'direccion'},{position:3,val:'largo'},{position:4,val:'fianza'}]} 
                     headers={['id','direccion','largo','fianza']}
                 />
+            </div>
         );
     }
 }
