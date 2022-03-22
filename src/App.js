@@ -21,7 +21,7 @@ export default function App(){
             <Route path='/reserva-plaza' element={<ReservaPlaza/>}/>
             <Route path='/mis-plazas' element={<PlazasList/>}/>
             <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
-            <Route path='reserva/:id' element={<ReservaDetails/>}/>
+            <Route path='/reserva/:id' element={<ReservaDetails/>}/>
 
           </Routes> 
         <Footer/>   
