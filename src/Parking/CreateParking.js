@@ -33,7 +33,7 @@ export default function CreateParking() {
     var numeroErrores = Object.keys(nuevosErrores).length;
     if(numeroErrores===0){
       
-      /*
+      
       const data= {
         "direccion": "" + form.calle + "," + form.numero + "," + form.ciudad + "," + form.provincia + "," + form.codigoPostal,
         "precioHora": form.precioHora,
@@ -48,7 +48,8 @@ export default function CreateParking() {
             "name": "Sòng",
             "email": "jcaudle6@blogspot.com"
         }
-      }*/
+      }
+      /*
       const data= {
         "direccion": "Zahinos",
         "precioHora": "22",
@@ -63,7 +64,7 @@ export default function CreateParking() {
             "name": "Sòng",
             "email": "jcaudle6@blogspot.com"
         }
-    }
+    }*/
       console.log(data)
       
       const requestOptions = {
@@ -72,7 +73,7 @@ export default function CreateParking() {
         body: (JSON.stringify(data))
       };
       
-      fetch('http://localhost:8000/plazas/', requestOptions)
+      fetch('http://localhost:8080/plazas/', requestOptions)
         .then(response => {
           console.log(response.ok)
         })
