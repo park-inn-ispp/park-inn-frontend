@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../theme';
 
 export const Container = styled.div`
-    width: 110%;
+    width: 100%;
     height: 90px;
-    background-color: ${colors.fourth}; 
+    background-color: ${colors.fivth}; 
 `;
 
 export const Wrapper = styled.div`
@@ -27,6 +28,7 @@ export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
     font-family: sans-serif;
+    justify-content: left;
 `;
 
 export const Menu = styled.ul`
@@ -63,7 +65,7 @@ export const MenuItem = styled.li`
     }
 `;
 
-export const MenuItemLink = styled.a`
+export const MenuItemLink = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +81,7 @@ export const MenuItemLink = styled.a`
 
     &:hover{
         color: #fff;
-        background-color: ${colors.fivth};
+        background-color: ${colors.third};
         text-decoration: underline;
         transition: 0.5s all ease;
 
@@ -114,7 +116,7 @@ export const ParkinnTitle = styled.p`
     font-size: 2.1rem;
 `
 
-export const LinkTitle = styled.a`
+export const LinkTitle = styled(Link)`
     text-decoration: none;
     color: #fff;
 `;
@@ -129,7 +131,7 @@ export const MobileIcon = styled.div`
         align-items: center;
         cursor: pointer;
         svg{
-            fill: ${colors.fivth};
+            fill: ${colors.fourth};
         }
     }
 `;
@@ -142,7 +144,7 @@ export const ProfileIcon = styled.div`
     margin: 0rem 2rem 1rem 2rem;
     size: 100;
     svg{
-        fill: ${colors.fivth};
+        fill: ${colors.fourth};
         cursor: pointer;
     }
 

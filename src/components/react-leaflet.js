@@ -31,7 +31,7 @@ function LocationMarker() {
         map.flyTo(e.latlng, map.getZoom());
         setBbox(e.bounds.toBBoxString().split(","));
 
-        fetch('http://localhost:8080/plazas/all', {
+        fetch('https://park-inn-ispp-be.herokuapp.com//plazas/all', {
           method: 'GET',
           credentials:'same-origin',
           headers: {
@@ -45,7 +45,7 @@ function LocationMarker() {
           ).then(data => {
             L.geoJSON(data, {
               onEachFeature: function(feature, layer){
-                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5> <a href="/reserva-plaza"><button>Reservar plaza</button></a>')
+                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
               }
             }).addTo(map)
           }
