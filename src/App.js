@@ -5,7 +5,7 @@ import Home from './Home'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PlazasList from './Plazas/PlazasList';
-import ReservasList from './Reservas/ReservasList';
+import ReservasClientList from './Reservas/ReservasClientList';
 
 export default function App(){
   
@@ -17,7 +17,7 @@ export default function App(){
             <Route path='/' element={<Home/>}/>
             <Route path='/reserva-plaza' element={<ReservaPlaza/>}/>
             <Route path='/mis-plazas' element={<PlazasList/>}/>
-            <Route path='/mis-reservas' element={<ReservasList/>}/>
+            <Route path='/mis-reservas' element={<ReservasClientList/>}/>
 
           </Routes> 
         <Footer/>   

@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from '../AppNavBar';
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import ListReserva from '../components/ListReserva'
+import ListComponent from '../components/ListComponent'
 
 class ReservasList extends Component{
     constructor(props){
@@ -21,7 +21,7 @@ class ReservasList extends Component{
 
     render(){
         return(
-            <ListReserva
+            <ListComponent
                 header={"fechaSolicitud"}
                 data={this.state.reservas}
                 attributes={[{position:1,val:'id'},{position:2,val:'fechaInicio'},{position:3,val:'fechaFin'}, {position:4,val:'plaza.direccion'}]} 
