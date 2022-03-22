@@ -1,24 +1,29 @@
-import React, { Component } from 'react';
-import Home from './Home';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ClientList from './Client/ClientList';
-import ClientEdit from "./Client/ClientEdit";
-import CreateParking from "./Parking/CreateParking";
 
-class App extends Component {
-  render() {
-    return (
-        <Router>
-          <Switch>
-            <Route path='/' exact={true} component={Home}/>
-            <Route path='/clients' exact={true} component={ClientList}/>
-            <Route path='/clients/:id' component={ClientEdit}/>
-            <Route path='/parking/create' component={CreateParking}/>
-          </Switch>
-        </Router>
-    )
-  }
+import {Route, Routes} from 'react-router-dom';
+import './App.css';
+import ReservaPlaza from './ReservaPlaza';
+import Home from './Home'
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import PlazasList from './Plazas/PlazasList';
+import ReservasList from './Plazas/ReservasList';
 
+
+export default function App(){
   
+    return (
+
+      
+      <div className='App'> 
+        <Navbar/>       
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/reserva-plaza' element={<ReservaPlaza/>}/>
+            <Route path='/mis-plazas' element={<PlazasList/>}/>
+            <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
+
+          </Routes> 
+        <Footer/>   
+      </div>
+    )
 }
-export default App;

@@ -5,11 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter } from 'react-router-dom';
+import { MuiPickersUtilsProvider } from "@material-ui/pickers"
+import DateFnsUtils from "@date-io/date-fns"
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
+  <MuiPickersUtilsProvider utils={DateFnsUtils}>
     <App />
-  </React.StrictMode>,
+  </MuiPickersUtilsProvider>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
