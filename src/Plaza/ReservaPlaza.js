@@ -6,15 +6,19 @@ import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Container, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
+import Calendario from '../components/Calendario'
 export default function Reserva(){
 
     const [errors, setErrors] = useState(0);
+
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [fechaInicio, setFechaInicio] = useState(0)
     const [fechaFin, setFechaFin] = useState(0)
+
     const [idReserva, setIdReserva] = useState(0)
     let navigate = useNavigate();
+
 
     useEffect(() => {
         DetallesPlaza()
@@ -63,6 +67,7 @@ export default function Reserva(){
       "fechaFin": form.fechaFin.toString()+'T00:00:00'
           
       }
+
     const handleSubmit= async evt => {
         evt.preventDefault()
         setErrors(validateReserva(form))
@@ -103,7 +108,6 @@ export default function Reserva(){
       return response.id
     } 
     
-
       const handleChange= evt => {
         const target = evt.target
         const name = target.name
@@ -121,11 +125,11 @@ export default function Reserva(){
         setForm({...form,[name]: value})
         console.log(fechaInicio)
         console.log(fechaFin)
+
         console.log(form.fechaFin.toString()+'T00:00:00')
       }
       
       //Cálculo de horas
-  
       if (isLoading) {
         return <p>Loading...</p>;
       }
