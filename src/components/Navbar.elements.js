@@ -116,7 +116,7 @@ export const ParkinnTitle = styled.p`
     font-size: 2.1rem;
 `
 
-export const LinkTitle = styled.a`
+export const LinkTitle = styled(Link)`
     text-decoration: none;
     color: #fff;
 `;
