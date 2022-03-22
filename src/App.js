@@ -1,4 +1,5 @@
 
+import React, { Component } from 'react';
 import {Route, Routes} from 'react-router-dom';
 import './App.css';
 import ReservaPlaza from './ReservaPlaza';
@@ -7,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PlazasList from './Plazas/PlazasList';
 import ReservasList from './Plazas/ReservasList';
+import CreatePlaza from './Plaza/CreatePlaza';
 
 
 export default function App(){
@@ -21,6 +23,7 @@ export default function App(){
             <Route path='/reserva-plaza' element={<ReservaPlaza/>}/>
             <Route path='/mis-plazas' element={<PlazasList/>}/>
             <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
+            <Route path='/plaza/create' element={<CreatePlaza/>}/>
 
           </Routes> 
         <Footer/>   
