@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { colors } from '../theme';
 
 export const Container = styled.div`
-    width: 110%;
+    width: 100%;
     height: 90px;
     background-color: ${colors.fivth}; 
 `;
@@ -28,6 +28,7 @@ export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
     font-family: sans-serif;
+    justify-content: left;
 `;
 
 export const Menu = styled.ul`

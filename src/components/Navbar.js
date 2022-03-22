@@ -20,19 +20,19 @@ export default function Navbar(){
 
             <Menu open = {showMobileMenu}>
                 <MenuItem>
-                    <MenuItemLink to="/">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
                         <FaHome/>
                         INICIO
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink to="/">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
                         <FaParking/>
                         MIS PLAZAS
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink to="/">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
                         <BsBookmarksFill/>
                         MIS RESERVAS
                     </MenuItemLink>

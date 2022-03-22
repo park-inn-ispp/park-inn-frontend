@@ -5,6 +5,7 @@ export default function validateReserva(form){
     const fechaActual = fechaReserva.getFullYear() + "-" + 0+(fechaReserva.getMonth() + 1) + "-" + fechaReserva.getDate();
     
     console.log(fechaActual)
+
     //Validación Fecha Incio
     if(!form.fechaInicio.trim()){
         errors.fechaInicio = "La fecha de inicio es un campo obligatorio"
@@ -14,12 +15,13 @@ export default function validateReserva(form){
         errors.fechaInicio = "La fecha de Inicio debe ser de hoy en adelante"
     }
 
+    //Validación Fecha Fin
     if(!form.fechaFin.trim()){
         errors.fechaFin = "La fecha de fin es un campo obligatorio"
     } else if (form.fechaFin < form.fechaInicio){
         errors.fechaFin = "La fecha de fin debe ser posterior a la de inicio"
     }
-
+    //Validación de horas para el siguiente Sprint
     /*
     if(!form.horaInicio.trim()){
         errors.horaInicio = "La hora de inicio es un campo obligatorio"

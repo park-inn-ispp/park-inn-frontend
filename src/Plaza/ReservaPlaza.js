@@ -3,16 +3,16 @@ import { useParams } from 'react-router-dom';
 import validateReserva from './validateReserva';
 import FormErrorMessage from './FormErrorMesage';
 import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Container, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
-import Calendario from '../components/Calendario'
 export default function Reserva(){
 
-    const[errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({});
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [fechaInicio, setFechaInicio] = useState(0)
     const [fechaFin, setFechaFin] = useState(0)
-    const [hora, setHora] = useState(0)
 
 
     useEffect(() => {
@@ -75,6 +75,21 @@ export default function Reserva(){
         fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
           .then(response => {
             console.log(response.ok)
+            if (response.ok){
+              Store.addNotification({
+                title: "RESERVA CONFIRMADA!",
+                message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
+                type: "success",
+                insert: "top",
+                container: "top-left",
+                animationIn: ["animate__animated", "animate__fadeIn"],
+                animationOut: ["animate__animated", "animate__fadeOut"],
+                dismiss: {
+                  duration: 5000,
+                  onScreen: true
+                }
+              });
+            }
           })
     }
 
@@ -95,7 +110,6 @@ export default function Reserva(){
         setForm({...form,[name]: value})
         console.log(fechaInicio)
         console.log(fechaFin)
-        console.log(hora)
         console.log(form.fechaFin.toString()+'T00:00:00')
       }
       
@@ -107,6 +121,7 @@ export default function Reserva(){
 
     return (
         <Container>
+          <ReactNotifications />
           <Etiqueta>Propietario:</Etiqueta><Parrafo>{plaza.administrador.name}</Parrafo>
           <Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo> 
           <Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo>
