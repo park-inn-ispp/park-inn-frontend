@@ -22,7 +22,7 @@ export default function Reserva(){
 
     const id = parseInt(useParams().id)
     const DetallesPlaza = async () => {
-        const data = await fetch(`http://localhost:8080/plazas/${id}`)
+        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`)
         const plazas = await data.json()
         setPlaza(plazas)
         setIsLoading(false)
@@ -68,16 +68,10 @@ export default function Reserva(){
         setErrors(validateReserva(form))
         const requestOptions = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"},
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
           body: (JSON.stringify(data))
         };
-        
-        
-        /*const fet = async () => {
-          const data = await fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
-          const response = await data.json()
-          return response.id
-        }*/
+         
         console.log(idReserva)
         var numeroErrores = Object.keys(validateReserva(form)).length;
         console.log(numeroErrores)
@@ -86,19 +80,10 @@ export default function Reserva(){
           setIdReserva(await getData(requestOptions));
           navigate(`/reservas/${id}`)
         }
-
-
-
-/*
-        fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
-          .then(async response => {
-            (await JSON.parse(response).id)
-          }).then((result)=>console.log(result))
-     */    
     }
 
      async function getData(requestOptions) {
-      const data = await fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
+      const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}/reservar`, requestOptions)
       const response = await data.json()
       if (data.ok){
         Store.addNotification({
@@ -140,8 +125,7 @@ export default function Reserva(){
       }
       
       //Cálculo de horas
-      
-
+  
       if (isLoading) {
         return <p>Loading...</p>;
       }
