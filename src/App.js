@@ -7,12 +7,12 @@ import Home from './Home'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PlazasList from './Plazas/PlazasList';
+import ReservasClientList from './Reservas/ReservasClientList';
 import ReservasList from './Plazas/ReservasList';
 
 import CreatePlaza from './Plaza/CreatePlaza';
 
 
-import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 
@@ -28,6 +28,7 @@ export default function App(){
             <Route path='/' element={<Home/>}/>
             <Route path='/reserva-plaza' element={<ReservaPlaza/>}/>
             <Route path='/mis-plazas' element={<PlazasList/>}/>
+            <Route path='/mis-reservas' element={<ReservasClientList/>}/>
             <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
 
             <Route path='/plaza/create' element={<CreatePlaza/>}/>
