@@ -13,7 +13,6 @@ import ReservasList from './Plazas/ReservasList';
 import CreatePlaza from './Plaza/CreatePlaza';
 
 
-import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 
