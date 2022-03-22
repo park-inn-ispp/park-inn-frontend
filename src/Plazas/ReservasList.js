@@ -11,7 +11,7 @@ class ReservasList extends Component {
         this.state = {reservas: []};
        // this.remove = this.remove.bind(this);
     }
-
+    
     componentDidMount() {
         fetch('https://park-inn-ispp-be.herokuapp.com/reservas/usuario/1')
             .then(response => response.json())
