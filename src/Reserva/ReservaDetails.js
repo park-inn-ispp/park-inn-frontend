@@ -1,7 +1,9 @@
 import React, {Component, useEffect, useState} from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import { Button, ButtonGroup, Table } from 'reactstrap';
 import AppNavbar from '../AppNavBar';
 import { Link, useParams } from 'react-router-dom'
+import {Etiqueta, Container, Parrafo} from '../Reserva/ReservaDetails.elements';
+
 
 
 export default function ReservaDetails() {
@@ -26,22 +28,28 @@ export default function ReservaDetails() {
         return <p>Loading...</p>;
       }
 
-    return (
-            <div>
-                <div><h3>Reserva {reserva.plaza.direccion}</h3></div>
+    return (   
 
-                <Container fluid>
-                    <div className="Details">
-                        Estado: {reserva.estado}<p/>
-                        Precio total: {reserva.precioTotal} €<p/>
-                        Fecha de inicio: {reserva.fechaInicio}<p/>
-                        Fecha de fin: {reserva.fechaFin}<p/>
-                        Fecha de solicitud: {reserva.fechaSolicitud}<p/>
-                        Propietario: {reserva.plaza.administrador.name}<p/>
-                        Comentarios: {reserva.comentarios}
-                    </div>
-                </Container>
-            </div>
+        <Container>
+            <h3>Reserva {reserva.plaza.direccion}</h3>
+                <div className="Details">
+                <Etiqueta>Estado:</Etiqueta><p/> 
+                <Parrafo>{reserva.estado}</Parrafo><p/>
+                <Etiqueta>Precio total:</Etiqueta><p/> 
+                <Parrafo>{reserva.precioTotal}€</Parrafo><p/>
+                <Etiqueta>Fecha de inicio:</Etiqueta> <p/>
+                <Parrafo>{reserva.fechaInicio.split('T')[0]}</Parrafo><p/>
+                <Etiqueta>Fecha de fin:</Etiqueta> <p/>
+                <Parrafo>{reserva.fechaFin.split('T')[0]}</Parrafo><p/>
+                <Etiqueta>Fecha de solicitud:</Etiqueta> <p/>
+                <Parrafo>{reserva.fechaSolicitud.split('T')[0]}</Parrafo><p/>
+                <Etiqueta>Propietario:</Etiqueta> <p/>
+                <Parrafo>{reserva.plaza.administrador.name}</Parrafo><p/>
+                <Etiqueta>Comentarios:</Etiqueta> <p/>
+                <Parrafo>{reserva.comentarios}</Parrafo>
+                </div>
+        </Container>
+         
 
 
 
