@@ -3,10 +3,8 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';  
 import { Marker } from 'react-leaflet';
 import {  iconLocation  } from './IconLocation';
-import L from 'leaflet'
-import garages from '../assets/plazas_ejemplo.json'
-import axios from 'axios';
-import { map } from 'leaflet';
+import L from 'leaflet';
+import GeoJSON from 'geojson';
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -21,10 +19,6 @@ L.Icon.Default.mergeOptions({
     iconSize: new L.point(90, 90),
 });
 
-let prueba = 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson';
-
-
-
 function LocationMarker() {
     const [position, setPosition] = useState(null);
     const [bbox, setBbox] = useState([]);
@@ -37,23 +31,26 @@ function LocationMarker() {
         map.flyTo(e.latlng, map.getZoom());
         setBbox(e.bounds.toBBoxString().split(","));
 
-        fetch(
-          prueba
-          ).then(
-            res => res.json()
-          ).then(
-            data => L.geoJSON(data).addTo(map)
-          ).catch(error => console.error('Error:', error))
-
-
-        const parksGeoJson = new L.GeoJSON(garages, {
-          onEachFeature: (feature = {} , layer) => {
-            const { properties = {} } = feature;
-            if (!properties.Precio_hora ) return;
-            layer.bindPopup('<h1>' + properties.Precio_hora + ' €' + '</h1> <a href="/reserva-plaza"><button>Reservar plaza</button></a>');
+        fetch('http://localhost:8080/plazas/all', {
+          method: 'GET',
+          credentials:'same-origin',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
           }
-        });
-        parksGeoJson.addTo(map);
+      })
+          .then(res => res.json())
+          .then(
+            data => GeoJSON.parse(data, {Point: ['latitud', 'longitud'],include: ['id', 'precioHora']})
+          ).then(data => {
+            L.geoJSON(data, {
+              onEachFeature: function(feature, layer){
+                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5> <a href="/reserva-plaza"><button>Reservar plaza</button></a>')
+              }
+            }).addTo(map)
+          }
+          ).catch(error => console.error("Error: ",error));
+
       });
     }, [map]);
 
