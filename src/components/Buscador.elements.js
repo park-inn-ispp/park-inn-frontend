@@ -8,7 +8,7 @@ export const Input = styled.input`
     width: 600px;
     background-color: lightgray;
     position: sticky;
-    z-index: 2;
+    z-index: 1;
     
     @media screen and (max-width: 960px){
         width: 300px;
