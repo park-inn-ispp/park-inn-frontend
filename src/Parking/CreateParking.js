@@ -7,30 +7,82 @@ export default function CreateParking() {
  
 
   const [form, setForm]= useState({
-    calle:'',
-    numero:'',
-    ciudad:'',
-    provincia:'',
-    codigoPostal:'',
-    precioHora:'',
-    fianza: '0',
-    ancho:'2.22',
-    largo:'4.50',
+    calle:"",
+    numero:"",
+    ciudad:"",
+    provincia:"",
+    codigoPostal:"",
+    precioHora:"",
+    fianza: "0",
+    ancho:"2.22",
+    largo:"4.50",
     exterior:false,
     descripcion:'',
   })
 
   const[errors, setErrors]= useState({})
   
+  
+
   const handleSubmit= evt => {
    
     evt.preventDefault()
+    var nuevosErrores= validateParkingForm(form)
+    setErrors(nuevosErrores)
+
+    var numeroErrores = Object.keys(nuevosErrores).length;
+    if(numeroErrores===0){
+      
+      /*
+      const data= {
+        "direccion": "" + form.calle + "," + form.numero + "," + form.ciudad + "," + form.provincia + "," + form.codigoPostal,
+        "precioHora": form.precioHora,
+        "fianza": form.fianza,
+        "ancho": form.ancho,
+        "largo": form.largo,
+        "estaDisponible": true,
+        "esAireLibre": form.exterior,
+        "descripcion": form.descripcion,
+        "administrador": {
+            "id": 7,
+            "name": "Sòng",
+            "email": "jcaudle6@blogspot.com"
+        }
+      }*/
+      const data= {
+        "direccion": "Zahinos",
+        "precioHora": "22",
+        "fianza": "0",
+        "ancho": "2.22",
+        "largo": "4.50",
+        "estaDisponible": true,
+        "esAireLibre": false,
+        "descripcion": "Descripcion Vicente",
+        "administrador": {
+            "id": 7,
+            "name": "Sòng",
+            "email": "jcaudle6@blogspot.com"
+        }
+    }
+      console.log(data)
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"},
+        body: (JSON.stringify(data))
+      };
+      
+      fetch('http://localhost:8000/plazas/', requestOptions)
+        .then(response => {
+          console.log(response.ok)
+        })
+      
+    }  
     
-    setErrors(validateParkingForm(form))
-    
-     //llamar a la API pasando el form como cuerpo del POST
    
   }
+
+  
 
   const handleChange= evt => {
     
