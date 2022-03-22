@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import validateReserva from './validateReserva';
 import FormErrorMessage from './FormErrorMesage';
 import { ReactNotifications } from 'react-notifications-component'
@@ -8,12 +8,13 @@ import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Container, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 export default function Reserva(){
 
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState(0);
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [fechaInicio, setFechaInicio] = useState(0)
     const [fechaFin, setFechaFin] = useState(0)
-
+    const [idReserva, setIdReserva] = useState(0)
+    let navigate = useNavigate();
 
     useEffect(() => {
         DetallesPlaza()
@@ -39,7 +40,6 @@ export default function Reserva(){
       "comentarios":null,
       "estado": "pendiente",
       "fechaSolicitud":"2022-03-22T14:30:40",
-      "id":"4",
       "incidencias":null,
       "plaza": {
         "id": 4,
@@ -63,7 +63,7 @@ export default function Reserva(){
       "fechaFin": form.fechaFin.toString()+'T00:00:00'
           
       }
-    const handleSubmit= evt => {
+    const handleSubmit= async evt => {
         evt.preventDefault()
         setErrors(validateReserva(form))
         const requestOptions = {
@@ -72,26 +72,52 @@ export default function Reserva(){
           body: (JSON.stringify(data))
         };
         
+        
+        /*const fet = async () => {
+          const data = await fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
+          const response = await data.json()
+          return response.id
+        }*/
+        console.log(idReserva)
+        var numeroErrores = Object.keys(validateReserva(form)).length;
+        console.log(numeroErrores)
+        if (numeroErrores===0) {
+          const id = await getData(requestOptions)
+          setIdReserva(await getData(requestOptions));
+          navigate(`/reservas/${id}`)
+        }
+
+
+
+/*
         fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
-          .then(response => {
-            console.log(response.ok)
-            if (response.ok){
-              Store.addNotification({
-                title: "RESERVA CONFIRMADA!",
-                message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
-                type: "success",
-                insert: "top",
-                container: "top-left",
-                animationIn: ["animate__animated", "animate__fadeIn"],
-                animationOut: ["animate__animated", "animate__fadeOut"],
-                dismiss: {
-                  duration: 5000,
-                  onScreen: true
-                }
-              });
-            }
-          })
+          .then(async response => {
+            (await JSON.parse(response).id)
+          }).then((result)=>console.log(result))
+     */    
     }
+
+     async function getData(requestOptions) {
+      const data = await fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
+      const response = await data.json()
+      if (data.ok){
+        Store.addNotification({
+          title: "RESERVA CONFIRMADA!",
+          message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
+          type: "success",
+          insert: "top",
+          container: "top-left",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true
+          }
+        });
+      }
+      return response.id
+    } 
+    
 
       const handleChange= evt => {
         const target = evt.target
@@ -115,6 +141,7 @@ export default function Reserva(){
       
       //Cálculo de horas
       
+
       if (isLoading) {
         return <p>Loading...</p>;
       }
