@@ -62,7 +62,7 @@ export default function Reserva(){
       "incidencias":null,
       "plaza": {
         "id": plaza.id,
-        "direccion": " Carberry Street, 58885, Cadiz, Andalucia, 11130",
+        "direccion": " Carberry Street,58885,Cadiz,Andalucia,11130",
         "precioHora": plaza.precioHora,
         "fianza": plaza.fianza,
         "ancho": plaza.ancho,
@@ -98,7 +98,12 @@ export default function Reserva(){
         if (numeroErrores===0) {
           const id = await getData(requestOptions)
           setIdReserva(await getData(requestOptions));
-          navigate(`/reservas/${id}`)
+          if(id!="undefined"){
+            navigate(`/reservas/${id}`)
+
+          }else{
+            navigate("/")
+          }
         }
     }
 
@@ -119,8 +124,6 @@ export default function Reserva(){
             onScreen: true
           }
         });
-      }else{
-        navigate("/")
       }
       return response.id
     } 
