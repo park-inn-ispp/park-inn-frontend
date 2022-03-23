@@ -19,7 +19,7 @@ export default function Logout(){
             body: (JSON.stringify(data))
         };
       
-        fetch('https://park-inn-ispp-be.herokuapp.com', requestOptions)
+        fetch('https://park-inn-ispp-be.herokuapp.com/clients/logout', requestOptions)
             .then(async response  =>  {
 
             if(response.ok && await response.json()==="SUCCESS"){

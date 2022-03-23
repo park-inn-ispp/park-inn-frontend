@@ -34,7 +34,7 @@ class Login extends Component {
             body: (JSON.stringify(data))
         };
       
-        fetch('https://park-inn-ispp-be.herokuapp.com', requestOptions)
+        fetch('https://park-inn-ispp-be.herokuapp.com/clients/login', requestOptions)
             .then(async response  =>  {
             if(response.ok && await response.json()==="SUCCESS"){
                 cookies.set('email', data.email, {path: "/"});
