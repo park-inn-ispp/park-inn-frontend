@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from '../AppNavBar';
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import ListComponent from '../components/ListComponent'
+import ListComponentPlazas from '../components/ListComponentPlazas'
 class PlazasList extends Component {
 
     constructor(props) {
@@ -16,21 +16,31 @@ class PlazasList extends Component {
         fetch('https://park-inn-ispp-be.herokuapp.com/plazas/all')
             .then(response => response.json())
             .then((data) =>{
-                this.setState({plazas: data})
                 
+                
+                var i= 0
+                var numeroPlazas = Object.keys(data).length;
+                
+                data.map(plaza => {
+                    data[i]["editURL"]= "/plaza/edit/"+ data[i]["id"]
+                    i++
+                })
+                this.setState({plazas: data})
             });
     }
     
+    
+
     render() {       
         
         return (
             <div> 
                 <a href="plaza/create">Crear nueva plaza </a>
-                <ListComponent 
+                <ListComponentPlazas
                     header={"direccion"} 
                     data={this.state.plazas} 
-                    attributes={[{position:1,val:'id'},{position:2,val:'direccion'},{position:3,val:'largo'},{position:4,val:'fianza'}]} 
-                    headers={['id','direccion','largo','fianza']}
+                    attributes={[{position:1,val:'id'},{position:2,val:'direccion'},{position:3,val:'largo'},{position:4,val:'fianza'},{position:5,val:'editURL'}]} 
+                    headers={['id','direccion','largo','fianza','Detalles']}
                 />
             </div>
         );
