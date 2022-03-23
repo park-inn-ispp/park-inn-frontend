@@ -3,7 +3,6 @@ import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
 
-const baseUrl="http://localhost:3001/usuarios";
 const cookies = new Cookies();
 
 class Login extends Component {
@@ -31,25 +30,19 @@ class Login extends Component {
         
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com', "mode": "cors"},
             body: (JSON.stringify(data))
         };
       
-        fetch('https://park-inn-ispp-be.herokuapp.com/clients/login/', requestOptions)
-            .then(response => {
-            console.log(response.ok)
-            return response.data;
-        })
+        fetch('https://park-inn-ispp-be.herokuapp.com', requestOptions)
+            .then(async response  =>  {
+            if(response.ok && await response.json()==="SUCCESS"){
+                cookies.set('email', data.email, {path: "/"});
+                window.location.href="./";           
+                console.log("cookie en navegador")
 
-        .then(response=>{
-            if(response.length>0){
-                var respuesta=response[0];
-                cookies.set('username', respuesta.email, {path: "/"});
-                alert(`Bienvenido ${respuesta.email}`);
-                window.location.href="./";
-            }else{
-                alert('El email o la contraseña no son correctos');
             }
+            return response.data;
         })
         .catch(error=>{
             console.log(error);

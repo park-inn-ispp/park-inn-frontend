@@ -7,6 +7,7 @@ import 'react-notifications-component/dist/theme.css'
 import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Container, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 import Calendario from '../components/Calendario'
+import displaySucessNotification from '../Util/Notifications'
 export default function Reserva(){
 
     const [errors, setErrors] = useState(0);
@@ -91,19 +92,7 @@ export default function Reserva(){
       const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}/reservar`, requestOptions)
       const response = await data.json()
       if (data.ok){
-        Store.addNotification({
-          title: "RESERVA CONFIRMADA!",
-          message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
-          type: "success",
-          insert: "top",
-          container: "top-left",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true
-          }
-        });
+        displaySucessNotification("RESERVA CONFIRMADA!","Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas")
       }
       return response.id
     } 
