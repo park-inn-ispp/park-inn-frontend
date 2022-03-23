@@ -38,6 +38,13 @@ export default function Navbar(){
                         MIS RESERVAS
                     </MenuItemLink>
                 </MenuItem>
+                <MenuItem>
+
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/logout">
+                        <BsBookmarksFill/>
+                        Cerrar Sesión
+                    </MenuItemLink>
+                </MenuItem>
             </Menu>
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? <FaTimes/> : <FaBars/>}
