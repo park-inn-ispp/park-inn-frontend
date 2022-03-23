@@ -3,10 +3,13 @@ import { Button, ButtonGroup, Table } from 'reactstrap';
 import AppNavbar from '../AppNavBar';
 import { Link, useParams } from 'react-router-dom'
 import {Etiqueta, Container, Parrafo} from '../Reserva/ReservaDetails.elements';
+import { Store } from 'react-notifications-component'
 
 
 
 export default function ReservaDetails() {
+
+
 
     const [reserva, setReserva] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +20,7 @@ export default function ReservaDetails() {
 
     const id = parseInt(useParams().id)
     const DetallesReserva = async () => {
-        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/reservas/${id}`)
+        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com//reservas/${id}`)
         const reserva = await data.json()
         setReserva(reserva)
         setIsLoading(false)

@@ -57,7 +57,7 @@ export default function CreatePlaza() {
         body: (JSON.stringify(data))
       };
       
-      fetch('https://park-inn-ispp-be.herokuapp.com/plazas/', requestOptions)
+      fetch('https://park-inn-ispp-be.herokuapp.com//plazas/', requestOptions)
         .then(response => {
           console.log(response.ok)
           if (response.ok){
@@ -93,12 +93,12 @@ export default function CreatePlaza() {
   
   return (
     
-  <div class="form-style-10">
+  <div className="form-style-10">
   <h1>Crear Plaza</h1>
     <form onSubmit={handleSubmit}>
 
-    <div class="section"><span>1</span>Dirección</div>
-    <div class="inner-wrap">
+    <div className="section"><span>1</span>Dirección</div>
+    <div className="inner-wrap">
       <label>
       Calle:
         <input onChange={handleChange} name= "calle" type="text" value={form.calle}/>
@@ -137,8 +137,8 @@ export default function CreatePlaza() {
 
       <br/> 
 
-    <div class="section"><span>2</span>Precios</div>
-    <div class="inner-wrap">
+    <div className="section"><span>2</span>Precios</div>
+    <div className="inner-wrap">
       <label>
           Precio/Hora (€):
           <input onChange={handleChange} name="precioHora" type="number" step="0.01" value={form.precioHora}/>
@@ -154,8 +154,8 @@ export default function CreatePlaza() {
       </label>
       </div>
       <br/>
-      <div class="section"><span>3</span>Características de la plaza</div>
-      <div class="inner-wrap">
+      <div className="section"><span>3</span>Características de la plaza</div>
+      <div className="inner-wrap">
       <label>
           Ancho (metros):
           <input onChange={handleChange} name="ancho" type="number" step="0.01" value={form.ancho}/>

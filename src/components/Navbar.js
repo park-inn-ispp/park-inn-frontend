@@ -26,14 +26,14 @@ export default function Navbar(){
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/mis-plazas">
                         <FaParking/>
                         MIS PLAZAS
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
 
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/mis-reservas">
                         <BsBookmarksFill/>
                         MIS RESERVAS
                     </MenuItemLink>

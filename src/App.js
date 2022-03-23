@@ -35,8 +35,12 @@ return( <div className='App'>
             <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
 
             <Route path='/plaza/create' element={<CreatePlaza/>}/>
+
+
+            <Route path='/reservas/:id' element={<ReservaDetails/>}/>
+
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
-            <Route path='/reserva/:id' element={<ReservaDetails/>}/>
+
 
           </Route>
           <Route path='/login' element={<Login />}/>

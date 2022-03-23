@@ -13,7 +13,7 @@ class PlazasList extends Component {
     }
     
     componentDidMount() {
-        fetch('https://park-inn-ispp-be.herokuapp.com/plazas/all')
+        fetch('https://park-inn-ispp-be.herokuapp.com//plazas/all')
             .then(response => response.json())
             .then((data) =>{
                 
