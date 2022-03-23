@@ -14,7 +14,9 @@ export default function Logout(){
         
         const requestOptions = {
             method: 'POST',
+
             headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com', "mode": "cors"},
+
             body: (JSON.stringify(data))
         };
       
