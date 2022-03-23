@@ -110,22 +110,28 @@ export default function Reserva(){
      async function getData(requestOptions) {
       const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}/reservar`, requestOptions)
       const response = await data.json()
-      if (data.ok){
-        Store.addNotification({
-          title: "RESERVA CONFIRMADA!",
-          message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
-          type: "success",
-          insert: "top",
-          container: "top-left",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true
-          }
-        });
+      if(response.status != '400'){
+        if (data.ok){
+          Store.addNotification({
+            title: "RESERVA CONFIRMADA!",
+            message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
+            type: "success",
+            insert: "top",
+            container: "top-left",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true
+            }
+          });
+        }
+        return response.id
+      }else{
+        return 18
+ 
       }
-      return response.id
+    
     } 
     
       const handleChange= evt => {
