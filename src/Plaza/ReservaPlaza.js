@@ -98,7 +98,7 @@ export default function Reserva(){
         if (numeroErrores===0) {
           const id = await getData(requestOptions)
           setIdReserva(await getData(requestOptions));
-          if(id!="undefined"){
+          if(id!="undefined" || id!="NaN"){
             navigate(`/reservas/${id}`)
 
           }else{
