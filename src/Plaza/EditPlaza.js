@@ -31,7 +31,7 @@ export default function EditPlaza() {
   }, []);
 
   const DetallesPlaza = async () => {
-    const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`)
+    const data = await fetch(`https://parkinn-api-v1.herokuapp.com/plazas/${id}`)
     const plaza = await data.json()
     var direccion = plaza["direccion"]  // DESCOMENTAR ESTO
     //var direccion= "Calle Castillo de Alcala de Guadaira,25,Sevilla,Sevilla,41013" // ELIMINAR ESTO
@@ -88,11 +88,11 @@ export default function EditPlaza() {
       
       const requestOptions = {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://parkinn-app-v1.herokuapp.com/', "mode": "cors"},
         body: (JSON.stringify(data))
       };
       
-      fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`, requestOptions).then(response => {
+      fetch(`https://parkinn-api-v1.herokuapp.com/plazas/${id}`, requestOptions).then(response => {
         console.log(response.ok)
 
         if (response.ok){
@@ -134,10 +134,10 @@ export default function EditPlaza() {
   const deletePlaza= evt => {
     const requestOptions = {
       method: 'DELETE',
-      headers: { 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"}
+      headers: { 'Access-Control-Allow-Origin' : 'https://parkinn-app-v1.herokuapp.com/', "mode": "cors"}
     };
     
-    fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`, requestOptions)
+    fetch(`https://parkinn-api-v1.herokuapp.com/plazas/${id}`, requestOptions)
       .then(response => {
         console.log(response.ok)
 

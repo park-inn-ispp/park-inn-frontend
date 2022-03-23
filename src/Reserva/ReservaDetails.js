@@ -20,7 +20,7 @@ export default function ReservaDetails() {
 
     const id = parseInt(useParams().id)
     const DetallesReserva = async () => {
-        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/reservas/${id}`)
+        const data = await fetch(`https://parkinn-api-v1.herokuapp.com/reservas/${id}`)
         const reserva = await data.json()
         setReserva(reserva)
         setIsLoading(false)

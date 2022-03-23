@@ -31,7 +31,7 @@ function LocationMarker() {
         map.flyTo(e.latlng, map.getZoom());
         setBbox(e.bounds.toBBoxString().split(","));
 
-        fetch('https://park-inn-ispp-be.herokuapp.com/plazas/all', {
+        fetch('https://parkinn-api-v1.herokuapp.com/plazas/all', {
           method: 'GET',
           credentials:'same-origin',
           headers: {

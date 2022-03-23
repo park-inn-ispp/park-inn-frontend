@@ -12,7 +12,7 @@ class ReservasList extends Component{
     }
 
     componentDidMount(){
-        fetch('https://park-inn-ispp-be.herokuapp.com/reservas/all')
+        fetch('https://parkinn-api-v1.herokuapp.com/reservas/all')
         .then(response => response.json())
         .then((data) => {
             this.setState({reservas: data})
