@@ -15,11 +15,11 @@ export default function Logout(){
         
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"},
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-be.herokuapp.com', "mode": "cors"},
             body: (JSON.stringify(data))
         };
       
-        fetch('http://localhost:8080/clients/logout/', requestOptions)
+        fetch('https://park-inn-ispp-be.herokuapp.com', requestOptions)
             .then(async response  =>  {
 
             if(response.ok && await response.json()==="SUCCESS"){
