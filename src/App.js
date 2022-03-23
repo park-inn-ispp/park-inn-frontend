@@ -12,6 +12,7 @@ import ReservasList from './Plazas/ReservasList';
 import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
+import EditPlaza from './Plaza/EditPlaza';
 
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -37,7 +38,7 @@ export default function App(){
             <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
 
             <Route path='/plaza/create' element={<CreatePlaza/>}/>
-
+            <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
             <Route path='/reserva/:id' element={<ReservaDetails/>}/>
 
           </Routes> 
