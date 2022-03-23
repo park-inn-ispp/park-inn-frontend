@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import validateParkingForm from './ValidatePlazaForm';
+import React, { useState,useEffect } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import validateParkingForm from './ValidatePlazaForm';
 import FormErrorMessage from '../Util/FormErrorMessage';
+import { Store } from 'react-notifications-component'
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
-export default function CreatePlaza() {
- 
+export default function EditPlaza() {
+
   let navigate = useNavigate();
   const [form, setForm]= useState({
     calle:"",
@@ -20,12 +23,43 @@ export default function CreatePlaza() {
     descripcion:'',
   })
 
+ 
+  const id = parseInt(useParams().id)
+
+  useEffect(() => {
+    DetallesPlaza()
+  }, []);
+
+  const DetallesPlaza = async () => {
+    const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`)
+    const plaza = await data.json()
+    var direccion = plaza["direccion"]  // DESCOMENTAR ESTO
+    //var direccion= "Calle Castillo de Alcala de Guadaira,25,Sevilla,Sevilla,41013" // ELIMINAR ESTO
+    var arrayDireccion= direccion.split(",")
+    console.log(arrayDireccion)
+
+    setForm({
+      ["calle"]: "" + arrayDireccion[0],
+      ["numero"]: "" + arrayDireccion[1],
+      ["ciudad"]: "" + arrayDireccion[2],
+      ["provincia"]: "" + arrayDireccion[3],
+      ["codigoPostal"]: "" + arrayDireccion[4],
+      ["precioHora"]: "" + plaza["precioHora"],
+      ["fianza"]: "" + plaza["fianza"],
+      ["ancho"]: "" + plaza["ancho"],
+      ["largo"]: "" + plaza["largo"],
+      ["exterior"]: plaza["esAireLibre"],
+      ["descripcion"]:"" + plaza["descripcion"],
+    })
+    
+}
+
   const[errors, setErrors]= useState({})
   
   
 
   const handleSubmit= evt => {
-   
+    console.log("SUBMIT")
     evt.preventDefault()
     var nuevosErrores= validateParkingForm(form)
     setErrors(nuevosErrores)
@@ -35,6 +69,7 @@ export default function CreatePlaza() {
       
       
       const data= {
+        "id": id,
         "direccion": "" + form.calle + "," + form.numero + "," + form.ciudad + "," + form.provincia + "," + form.codigoPostal,
         "precioHora": form.precioHora,
         "fianza": form.fianza,
@@ -44,27 +79,33 @@ export default function CreatePlaza() {
         "esAireLibre": form.exterior,
         "descripcion": form.descripcion,
         "administrador": {
-          "id": 0,
-          "name": "sergio",
-          "email": "admin@admin.com"
+            "id": 0,
+            "name": "sergio",
+            "email": "admin@admin.com"
         }
       }
-      console.log(data)
+      
       
       const requestOptions = {
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
         body: (JSON.stringify(data))
       };
       
-      fetch('https://park-inn-ispp-be.herokuapp.com//plazas/', requestOptions)
-        .then(response => {
-          console.log(response.ok)
-          if (response.ok){
+      fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`, requestOptions).then(response => {
+        console.log(response.ok)
+
+        if (response.ok){
+          console.log("EDITADA")
+          navigate(`/mis-plazas`)
+        }
         
-            navigate(`/mis-plazas`)
-          }
-        })
+      })
+     
+
+     
+     
+     
       
     }  
     
@@ -89,16 +130,33 @@ export default function CreatePlaza() {
     
   }
   
+  
+  const deletePlaza= evt => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"}
+    };
+    
+    fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`, requestOptions)
+      .then(response => {
+        console.log(response.ok)
 
+        if (response.ok){
+          console.log("ELIMINADA")
+          navigate(`/mis-plazas`)
+        }
+      })
+  }
   
   return (
     
-  <div className="form-style-10">
+  <div class="form-style-10">
+  <ReactNotifications />
   <h1>Crear Plaza</h1>
     <form onSubmit={handleSubmit}>
 
-    <div className="section"><span>1</span>Dirección</div>
-    <div className="inner-wrap">
+    <div class="section"><span>1</span>Dirección</div>
+    <div class="inner-wrap">
       <label>
       Calle:
         <input onChange={handleChange} name= "calle" type="text" value={form.calle}/>
@@ -137,8 +195,8 @@ export default function CreatePlaza() {
 
       <br/> 
 
-    <div className="section"><span>2</span>Precios</div>
-    <div className="inner-wrap">
+    <div class="section"><span>2</span>Precios</div>
+    <div class="inner-wrap">
       <label>
           Precio/Hora (€):
           <input onChange={handleChange} name="precioHora" type="number" step="0.01" value={form.precioHora}/>
@@ -154,8 +212,8 @@ export default function CreatePlaza() {
       </label>
       </div>
       <br/>
-      <div className="section"><span>3</span>Características de la plaza</div>
-      <div className="inner-wrap">
+      <div class="section"><span>3</span>Características de la plaza</div>
+      <div class="inner-wrap">
       <label>
           Ancho (metros):
           <input onChange={handleChange} name="ancho" type="number" step="0.01" value={form.ancho}/>
@@ -190,7 +248,8 @@ export default function CreatePlaza() {
       </div>
       <br/>
       <br/>
-      <input type="submit" value="Crear plaza" />
+      <input type="submit" value="Guardar plaza" />  &nbsp; &nbsp;
+      <button type="button" class="deleteButton" onClick={deletePlaza}> Eliminar plaza </button>
     </form>
   </div>
   );

@@ -1,6 +1,8 @@
 export default async function getPlaza() {
-    //const apiURL = 'https://park-inn-ispp-be.herokuapp.com//plazas/all';
-    return await fetch('https://park-inn-ispp-be.herokuapp.com//plazas/all', {
+
+    //const apiURL = 'https://park-inn-ispp-be.herokuapp.com/plazas/all';
+    return await fetch('https://park-inn-ispp-be.herokuapp.com/plazas/all', {
+
         method: 'GET',
         credentials:'same-origin',
         headers: {
