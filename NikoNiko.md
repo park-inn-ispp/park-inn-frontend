@@ -13,10 +13,10 @@
 
 ## Sprint Template
 
-| Day           | Félix   | Marchena | Fernando     | Campu    | Vicente     | Juanjo     | Carnero    | Luismi    |
+| Day           | Félix         | Marchena       | Fernando       | Campu          | Vicente        | Juanjo         | Carnero         | Luismi         | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |  -------------  | -------------  |
-| 15/03        | :smile:        |   :smile:          |    :smile:         | :smile:      | :smile:        |  :smile:        |  :smile:          |  :smile:       |
-| 22/03         |               |             |                |                |                |                |       |                |
-| 29/03         |               |               |                |                |                |                |   |                |
-| 5/04         |            |             |                |                |                |                |       |                |
+| 15/03         | :smile:       |   :smile:      |    :smile:     | :smile:        | :smile:        |  :smile:       |  :smile:        |  :smile:       |
+| 22/03         | 😟            | 😐            | 😃             | 😨            | 😐             |   😐          | 😃              |  😐              |
+| 29/03         |               |                |                |                |                |                |   |                |
+| 5/04          |               |                |                |                |                |                |       |                |
 ...
