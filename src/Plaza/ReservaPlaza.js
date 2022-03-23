@@ -119,6 +119,8 @@ export default function Reserva(){
             onScreen: true
           }
         });
+      }else{
+        navigate("/")
       }
       return response.id
     } 
