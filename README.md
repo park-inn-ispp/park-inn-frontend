@@ -9,7 +9,7 @@ Una vez instaladas dichas herramientas, y clonado el repostorio, en la carpeta r
  y después `npm start`
 
 Esto correrá la app en modo desarrollador
-Open [http://localhost:3000/](http://localhost:3000/)
+Open [https://park-inn-ispp-fe.herokuapp.com/](https://park-inn-ispp-fe.herokuapp.com/)
 
 Abajo dejo otra documentación oficial
 
