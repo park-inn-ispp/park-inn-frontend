@@ -9,7 +9,8 @@ import Footer from './components/Footer';
 import PlazasList from './Plazas/PlazasList';
 import ReservasClientList from './Reservas/ReservasClientList';
 import ReservasList from './Plazas/ReservasList';
-
+import Login from './Login/Login';
+import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 
 
@@ -28,7 +29,8 @@ export default function App(){
             <Route path='/' element={<Home/>}/>
 
             <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
-
+            <Route path='/login' element={<Login />}/>
+            <Route path='/logout' element={<Logout />}/>
 
             <Route path='/mis-plazas' element={<PlazasList/>}/>
             <Route path='/mis-reservas' element={<ReservasClientList/>}/>
