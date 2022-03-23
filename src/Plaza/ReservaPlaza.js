@@ -8,6 +8,12 @@ import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Container, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 import Calendario from '../components/Calendario'
 import displaySucessNotification from '../Util/Notifications'
+import Cookie from 'universal-cookie'
+import email from '../components/email';
+
+
+const cookies = new Cookie()
+
 export default function Reserva(){
 
     const [errors, setErrors] = useState(0);
@@ -27,7 +33,7 @@ export default function Reserva(){
 
     const id = parseInt(useParams().id)
     const DetallesPlaza = async () => {
-        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`)
+        const data = await fetch(`http://localhost:8080/plazas/${id}`)
         const plazas = await data.json()
         setPlaza(plazas)
         setIsLoading(false)
@@ -40,6 +46,14 @@ export default function Reserva(){
         horaFin:'',
         precioTotal:''
     })
+
+    // const [cliente, setCLiente] = useState()
+
+    // useEffect(()=>{
+    //   email().then(cliente => setCLiente(cliente))
+    // },[])
+    
+
     const data = {
             
       "comentarios":null,
@@ -47,19 +61,19 @@ export default function Reserva(){
       "fechaSolicitud":"2022-03-22T14:30:40",
       "incidencias":null,
       "plaza": {
-        "id": 4,
-        "direccion": "58885 Carberry Street",
-        "precioHora": 2,
-        "fianza": 50,
-        "ancho": 4.86,
-        "largo": 2.53,
+        "id": plaza.id,
+        "direccion": " Carberry Street, 58885, Cadiz, Andalucia, 11130",
+        "precioHora": plaza.precioHora,
+        "fianza": plaza.fianza,
+        "ancho": plaza.ancho,
+        "largo": plaza.largo,
         "estaDisponible": true,
         "esAireLibre": true,
         "descripcion": "Fexofenadine Hydrochloride",
           "administrador": {
-          "id": 7,
-          "name": "Sòng",
-          "email": "jcaudle6@blogspot.com"
+          "id": 0,
+          "name": 'sergio',
+          "email": 'admin@admin.com'
         }
       },
       "precioTotal": horas*24*plaza.precioHora + plaza.fianza,
@@ -69,12 +83,12 @@ export default function Reserva(){
           
       }
 
-    const handleSubmit= async evt => {
+      const handleSubmit= async evt => {
         evt.preventDefault()
         setErrors(validateReserva(form))
         const requestOptions = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"},
           body: (JSON.stringify(data))
         };
          
@@ -89,10 +103,22 @@ export default function Reserva(){
     }
 
      async function getData(requestOptions) {
-      const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}/reservar`, requestOptions)
+      const data = await fetch(`http://localhost:8080/plazas/${id}/reservar`, requestOptions)
       const response = await data.json()
       if (data.ok){
-        displaySucessNotification("RESERVA CONFIRMADA!","Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas")
+        Store.addNotification({
+          title: "RESERVA CONFIRMADA!",
+          message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
+          type: "success",
+          insert: "top",
+          container: "top-left",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+            duration: 5000,
+            onScreen: true
+          }
+        });
       }
       return response.id
     } 

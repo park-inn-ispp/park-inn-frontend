@@ -53,11 +53,11 @@ export default function CreatePlaza() {
       
       const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"},
         body: (JSON.stringify(data))
       };
       
-      fetch('https://park-inn-ispp-be.herokuapp.com//plazas/', requestOptions)
+      fetch('http://localhost:8080/plazas/', requestOptions)
         .then(response => {
           console.log(response.ok)
           if (response.ok){
