@@ -9,12 +9,14 @@ const cookies = new Cookies();
 export default function Logout(){
     useEffect(() => {
         const data= {
-            "email": cookies.get('email'),
+            "email": cookies.get(),
         }
         
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-be.herokuapp.com', "mode": "cors"},
+
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com', "mode": "cors"},
+
             body: (JSON.stringify(data))
         };
       
