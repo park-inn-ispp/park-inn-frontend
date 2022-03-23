@@ -110,7 +110,7 @@ export default function Reserva(){
      async function getData(requestOptions) {
       const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}/reservar`, requestOptions)
       const response = await data.json()
-      if(response.status != '400'){
+      if(response.status.toString() != '400'){
         if (data.ok){
           Store.addNotification({
             title: "RESERVA CONFIRMADA!",
