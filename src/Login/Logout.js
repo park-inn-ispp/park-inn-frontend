@@ -1,5 +1,6 @@
 import  { useEffect } from 'react';
 import '../App.css';
+import displaySucessNotification from '../Util/Notifications'
 
 
 import Cookies from 'universal-cookie';
@@ -7,8 +8,33 @@ const cookies = new Cookies();
 
 export default function Logout(){
     useEffect(() => {
-        cookies.remove('email', {path: "/"});
-        window.location.href='./login';
+        const data= {
+            "email": "admin@admin.com",
+            "password" : "123456"
+        }
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"},
+            body: (JSON.stringify(data))
+        };
+      
+        fetch('http://localhost:8080/clients/logout/', requestOptions)
+            .then(async response  =>  {
+
+            if(response.ok && await response.json()==="SUCCESS"){
+                cookies.remove('email', {path: "/"});
+                window.location.href='./login';
+            }else{
+                alert("no se ha podido deslogar")
+            }
+            return response.data;
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+
+ 
     }, []);
 
     return (

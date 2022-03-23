@@ -1,6 +1,6 @@
 
-import React, { Component } from 'react';
-import {Route, Routes} from 'react-router-dom';
+import React, { Component,useState } from 'react';
+import {Route, Routes,Navigate} from 'react-router-dom';
 import './App.css';
 import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
@@ -17,20 +17,17 @@ import EditPlaza from './Plaza/EditPlaza';
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
+import PrivateRoute from './Services/AuthService';
 
+function App() {
 
-export default function App(){
-  
-    return (
+return( <div className='App'> 
+      <Navbar/>       
+        <Routes>
 
-      
-      <div className='App'> 
-        <Navbar/>       
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-
+          <Route exact path='/' element={<PrivateRoute/>}>
+            <Route  path='/' element={<Home/>}/>
             <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
-            <Route path='/login' element={<Login />}/>
             <Route path='/logout' element={<Logout />}/>
 
             <Route path='/mis-plazas' element={<PlazasList/>}/>
@@ -41,8 +38,14 @@ export default function App(){
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
             <Route path='/reserva/:id' element={<ReservaDetails/>}/>
 
-          </Routes> 
-        <Footer/>   
-      </div>
-    )
+          </Route>
+          <Route path='/login' element={<Login />}/>
+
+
+         
+        </Routes> 
+      <Footer/>   
+    </div>);
 }
+
+export default App;

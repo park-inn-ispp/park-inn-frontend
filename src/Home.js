@@ -9,11 +9,7 @@ const cookies = new Cookies();
 
 
 export default function Home(){
-    useEffect(() => {
-        if(!cookies.get('email')){
-          window.location.href="./login";
-        }
-      }, [])
+
     return (
         <div className='App'>
             <RemoveScrollBar />  
