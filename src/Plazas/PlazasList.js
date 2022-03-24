@@ -4,6 +4,7 @@ import AppNavbar from '../AppNavBar';
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import ListComponentPlazas from '../components/ListComponentPlazas'
+import call from '../Util/Caller';
 class PlazasList extends Component {
 
     constructor(props) {
@@ -13,7 +14,7 @@ class PlazasList extends Component {
     }
     
     componentDidMount() {
-        fetch('https://park-inn-ispp-be.herokuapp.com/plazas/all')
+        call('/plazas/all','GET')
             .then(response => response.json())
             .then((data) =>{
                 

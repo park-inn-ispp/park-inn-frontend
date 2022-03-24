@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
-
+import call from '../Util/Caller';
 const cookies = new Cookies();
 
 class Login extends Component {
@@ -34,7 +34,7 @@ class Login extends Component {
             body: (JSON.stringify(data))
         };
       
-        fetch('https://park-inn-ispp-be.herokuapp.com/clients/login', requestOptions)
+        call(`/clients/login`,"POST",data)
             .then(async response  =>  {
             if(response.ok && await response.json()==="SUCCESS"){
                 cookies.set('email', data.email, {path: "/"});

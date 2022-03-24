@@ -10,7 +10,7 @@ import Calendario from '../components/Calendario'
 import displaySucessNotification from '../Util/Notifications'
 import Cookie from 'universal-cookie'
 import email from '../components/email';
-
+import call from '../Util/Caller';
 
 const cookies = new Cookie()
 
@@ -33,7 +33,8 @@ export default function Reserva(){
 
     const id = parseInt(useParams().id)
     const DetallesPlaza = async () => {
-        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`)
+      
+        const data = await call(`/plazas/${id}`,"GET")
         const plazas = await data.json()
         setPlaza(plazas)
         setIsLoading(false)
@@ -86,18 +87,13 @@ export default function Reserva(){
       const handleSubmit= async evt => {
         evt.preventDefault()
         setErrors(validateReserva(form))
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com', "mode": "cors"},
-          body: (JSON.stringify(data))
-        };
          
         console.log(idReserva)
         var numeroErrores = Object.keys(validateReserva(form)).length;
         console.log(numeroErrores)
         if (numeroErrores===0) {
-          const id = await getData(requestOptions)
-          setIdReserva(await getData(requestOptions));
+          const id = await getData()
+          setIdReserva(await getData());
           if(id!="undefined" || id!="NaN"){
             navigate(`/reservas/${id}`)
 
@@ -107,8 +103,9 @@ export default function Reserva(){
         }
     }
 
-     async function getData(requestOptions) {
-      const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}/reservar`, requestOptions)
+     async function getData() {
+      
+      const data = await call(`/plazas/${id}/reservar`,"POST")
       const response = await data.json()
       if (data.ok){
         Store.addNotification({
