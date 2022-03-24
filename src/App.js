@@ -25,7 +25,7 @@ return( <div className='App'>
       <Navbar/>       
         <Routes>
 
-          {/* <Route exact path='/' element={<PrivateRoute/>}> */}
+          <Route exact path='/' element={<PrivateRoute/>}>
             <Route  path='/' element={<Home/>}/>
             <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
             <Route path='/logout' element={<Logout />}/>
@@ -42,7 +42,7 @@ return( <div className='App'>
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
 
 
-          {/* </Route> */}
+          </Route>
           <Route path='/login' element={<Login />}/>
 
 

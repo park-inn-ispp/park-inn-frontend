@@ -55,7 +55,7 @@ export default function Reserva(){
     // },[])
     
 
-    const data = {
+    const body = {
             
       "comentarios":null,
       "estado": "pendiente",
@@ -105,7 +105,7 @@ export default function Reserva(){
 
      async function getData() {
       
-      const data = await call(`/plazas/${id}/reservar`,"POST")
+      const data = await call(`/plazas/${id}/reservar`,"POST",body)
       const response = await data.json()
       if (data.ok){
         Store.addNotification({
