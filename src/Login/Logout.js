@@ -1,6 +1,5 @@
 import  { useEffect } from 'react';
 import '../App.css';
-import displaySucessNotification from '../Util/Notifications'
 import call from '../Util/Caller';
 
 import Cookies from 'universal-cookie';

@@ -1,14 +1,13 @@
 .slided{
     height:17vh;
     transition: all 0.2s;
-    cursor: pointer;
+    cursor: pointer;  
+}
 
-    
-}   
 .divPlaza:hover{
     background-color: rgb(240, 240, 240);
-
 } 
+
 .no-slided{
     height:3vh;
     transition: all 0.2s;
@@ -25,6 +24,7 @@
     margin-bottom:1vh;
     margin-top: 1vh;
 }
+
 .container{
     display: flex; /* establish flex container */
     justify-content: center; /* center flex items horizontally, in this case */

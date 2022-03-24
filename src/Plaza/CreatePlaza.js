@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import validateParkingForm from './ValidatePlazaForm';
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import call from '../Util/Caller';
 export default function CreatePlaza() {
@@ -64,8 +64,6 @@ export default function CreatePlaza() {
     
    
   }
-
-  
 
   const handleChange= evt => {
     

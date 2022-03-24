@@ -1,6 +1,6 @@
 
 
-const url_backend ="https://park-inn-ispp-be.herokuapp.com"
+const url_backend ="http://localhost:8080"
 
 
      async function call(path_to_call,method,body){
