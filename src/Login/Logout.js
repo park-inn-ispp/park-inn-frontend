@@ -1,7 +1,7 @@
 import  { useEffect } from 'react';
 import '../App.css';
 import displaySucessNotification from '../Util/Notifications'
-
+import call from '../Util/Caller';
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
@@ -12,15 +12,7 @@ export default function Logout(){
             "email": cookies.get(),
         }
         
-        const requestOptions = {
-            method: 'POST',
-
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com', "mode": "cors"},
-
-            body: (JSON.stringify(data))
-        };
-      
-        fetch('https://park-inn-ispp-be.herokuapp.com/clients/logout', requestOptions)
+        call(`/clients/logout}`,"POST",data)
             .then(async response  =>  {
 
             if(response.ok && await response.json()==="SUCCESS"){

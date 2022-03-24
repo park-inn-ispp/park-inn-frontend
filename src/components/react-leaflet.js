@@ -5,7 +5,7 @@ import { Marker } from 'react-leaflet';
 import {  iconLocation  } from './IconLocation';
 import L from 'leaflet';
 import GeoJSON from 'geojson';
-
+import call from '../Util/Caller';
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -30,15 +30,7 @@ function LocationMarker() {
         setPosition(e.latlng);
         map.flyTo(e.latlng, map.getZoom());
         setBbox(e.bounds.toBBoxString().split(","));
-
-        fetch('https://park-inn-ispp-be.herokuapp.com/plazas/all', {
-          method: 'GET',
-          credentials:'same-origin',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-          }
-      })
+        call(`/plazas/all`,"GET")
           .then(res => res.json())
           .then(
             data => GeoJSON.parse(data, {Point: ['latitud', 'longitud'],include: ['id', 'precioHora']})

@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar'
 import ListComponent from '../components/ListComponent'
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-
+import call from '../Util/Caller';
 class ReservasList extends Component {
 
     constructor(props) {
@@ -16,7 +16,8 @@ class ReservasList extends Component {
     }
     
     componentDidMount() {
-        fetch('https://park-inn-ispp-be.herokuapp.com/reservas/usuario/1')
+        
+        call(`/reservas/usuario/1`,"GET") 
             .then(response => response.json())
             .then(data =>{ this.setState({ reservas: data})});
     }

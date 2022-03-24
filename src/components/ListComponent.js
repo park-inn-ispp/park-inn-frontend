@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import './ListComponent.css'
 
-
 class ListComponent extends Component {
 
     constructor(props) {

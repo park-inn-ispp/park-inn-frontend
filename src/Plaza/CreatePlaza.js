@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import validateParkingForm from './ValidatePlazaForm';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import FormErrorMessage from '../Util/FormErrorMessage';
-
+import call from '../Util/Caller';
 export default function CreatePlaza() {
  
   let navigate = useNavigate();
@@ -51,13 +51,7 @@ export default function CreatePlaza() {
       }
       console.log(data)
       
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
-        body: (JSON.stringify(data))
-      };
-      
-      fetch('https://park-inn-ispp-be.herokuapp.com/plazas/', requestOptions)
+      call('/plazas',"POST", data)
         .then(response => {
           console.log(response.ok)
           if (response.ok){

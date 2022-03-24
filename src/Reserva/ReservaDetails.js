@@ -4,7 +4,7 @@ import AppNavbar from '../AppNavBar';
 import { Link, useParams } from 'react-router-dom'
 import {Etiqueta, Container, Parrafo} from '../Reserva/ReservaDetails.elements';
 import { Store } from 'react-notifications-component'
-
+import call from '../Util/Caller';
 
 
 export default function ReservaDetails() {
@@ -20,7 +20,8 @@ export default function ReservaDetails() {
 
     const id = parseInt(useParams().id)
     const DetallesReserva = async () => {
-        const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/reservas/${id}`)
+       
+        const data = await  call(`/reservas/${id}`,"GET")
         const reserva = await data.json()
         setReserva(reserva)
         setIsLoading(false)
