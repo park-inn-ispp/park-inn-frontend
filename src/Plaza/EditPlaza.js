@@ -5,7 +5,7 @@ import FormErrorMessage from '../Util/FormErrorMessage';
 import { Store } from 'react-notifications-component'
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-
+import call from '../Util/Caller';
 export default function EditPlaza() {
 
   let navigate = useNavigate();
@@ -31,7 +31,8 @@ export default function EditPlaza() {
   }, []);
 
   const DetallesPlaza = async () => {
-    const data = await fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`)
+
+    const data = await call(`/plazas/${id}`,"GET")
     const plaza = await data.json()
     var direccion = plaza["direccion"]  // DESCOMENTAR ESTO
     //var direccion= "Calle Castillo de Alcala de Guadaira,25,Sevilla,Sevilla,41013" // ELIMINAR ESTO
@@ -84,15 +85,10 @@ export default function EditPlaza() {
             "email": "admin@admin.com"
         }
       }
+
       
-      
-      const requestOptions = {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"},
-        body: (JSON.stringify(data))
-      };
-      
-      fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`, requestOptions).then(response => {
+      call(`/plazas/${id}`,"PUT", data)
+      .then(response => {
         console.log(response.ok)
 
         if (response.ok){
@@ -134,10 +130,9 @@ export default function EditPlaza() {
   const deletePlaza= evt => {
     const requestOptions = {
       method: 'DELETE',
-      headers: { 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com/', "mode": "cors"}
+      headers: { 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
     };
-    
-    fetch(`https://park-inn-ispp-be.herokuapp.com/plazas/${id}`, requestOptions)
+    call(`/plazas/${id}`,"GET")
       .then(response => {
         console.log(response.ok)
 
