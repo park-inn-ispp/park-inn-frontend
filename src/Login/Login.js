@@ -27,12 +27,7 @@ class Login extends Component {
             "email": this.state.form.email,
             "password":this.state.form.password
         }
-        
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://park-inn-ispp-fe.herokuapp.com', "mode": "cors"},
-            body: (JSON.stringify(data))
-        };
+
       
         call(`/clients/login`,"POST",data)
             .then(async response  =>  {

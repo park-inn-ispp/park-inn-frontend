@@ -1,41 +1,34 @@
-import React, {Component, useEffect, useState} from 'react';
-import { Button, ButtonGroup, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link, useParams } from 'react-router-dom'
-import {Etiqueta, Container, Parrafo} from '../Reserva/ReservaDetails.elements';
-import { Store } from 'react-notifications-component'
+import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom'
+import Loading from '../components/Loading';
+import {Etiqueta, Parrafo} from '../Reserva/ReservaDetails.elements';
 import call from '../Util/Caller';
-
 
 export default function ReservaDetails() {
 
-
-
     const [reserva, setReserva] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const id = parseInt(useParams().id)
 
     useEffect(() => {
+        const DetallesReserva = async () => {
+            const data = await  call(`/reservas/${id}`,"GET")
+            const reserva = await data.json()
+            setReserva(reserva)
+            setIsLoading(false)
+            console.log(reserva)
+        }
         DetallesReserva()
-    }, []);
+    }, [id]);
 
-    const id = parseInt(useParams().id)
-    const DetallesReserva = async () => {
-       
-        const data = await  call(`/reservas/${id}`,"GET")
-        const reserva = await data.json()
-        setReserva(reserva)
-        setIsLoading(false)
-        console.log(reserva)
-    }
-
+    //Pantalla de carga
     if (isLoading) {
-        return <p>Loading...</p>;
+        return <Loading/>;
       }
 
     return (   
-
-        <Container>
-            <h3>Reserva</h3>
+        <div className="form-style-10">
+            <h1>Detalles de la Reserva</h1>
                 <div className="Details">
                 <Etiqueta>Estado:</Etiqueta><p/> 
                 <Parrafo>{reserva.estado}</Parrafo><p/>
@@ -52,12 +45,7 @@ export default function ReservaDetails() {
                 <Etiqueta>Comentarios:</Etiqueta> <p/>
                 <Parrafo>{reserva.comentarios}</Parrafo>
                 </div>
-        </Container>
-         
-
-
-
+        </div>
     );
-
 }
 

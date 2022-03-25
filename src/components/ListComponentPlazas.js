@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
 import './ListComponent.css'
-
 
 class ListComponentPlazas extends Component {
 

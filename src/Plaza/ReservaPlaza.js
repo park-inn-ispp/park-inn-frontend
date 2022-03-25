@@ -1,45 +1,42 @@
 import { useEffect, useState } from 'react';
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import validateReserva from './validateReserva';
-import FormErrorMessage from './FormErrorMesage';
+import FormErrorMessage from '../Util/FormErrorMessage';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { Store } from 'react-notifications-component'
-import {Etiqueta, Parrafo, Container, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
-import Calendario from '../components/Calendario'
-import displaySucessNotification from '../Util/Notifications'
-import Cookie from 'universal-cookie'
-import email from '../components/email';
+import {Etiqueta, Parrafo, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 import call from '../Util/Caller';
+import Loading from '../components/Loading';
 
-const cookies = new Cookie()
 
 export default function Reserva(){
 
+    //Estados con Hooks 
     const [errors, setErrors] = useState(0);
-
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [fechaInicio, setFechaInicio] = useState(0)
     const [fechaFin, setFechaFin] = useState(0)
-
     const [idReserva, setIdReserva] = useState(0)
+
+    //Navigate para redirigir con react-router-dom
     let navigate = useNavigate();
 
+    const id = parseInt(useParams().id)
 
     useEffect(() => {
-        DetallesPlaza()
-    }, []);
-
-    const id = parseInt(useParams().id)
-    const DetallesPlaza = async () => {
       
+      const DetallesPlaza = async () => {
         const data = await call(`/plazas/${id}`,"GET")
         const plazas = await data.json()
         setPlaza(plazas)
         setIsLoading(false)
-    }
-    var horas = fechaFin-fechaInicio
+      }
+        DetallesPlaza()
+    },[id]);
+
+    let horas = fechaFin-fechaInicio
     const [form, setForm]= useState({
         fechaInicio:'',
         fechaFin:'',
@@ -47,13 +44,6 @@ export default function Reserva(){
         horaFin:'',
         precioTotal:''
     })
-
-    // const [cliente, setCLiente] = useState()
-
-    // useEffect(()=>{
-    //   email().then(cliente => setCLiente(cliente))
-    // },[])
-    
 
     const body = {
             
@@ -94,7 +84,7 @@ export default function Reserva(){
         if (numeroErrores===0) {
           const id = await getData()
           setIdReserva(await getData());
-          if(id!="undefined" || id!="NaN"){
+          if(id!=="undefined" || id!=="NaN"){
             navigate(`/reservas/${id}`)
 
           }else{
@@ -145,15 +135,15 @@ export default function Reserva(){
 
         console.log(form.fechaFin.toString()+'T00:00:00')
       }
-      
-      //Cálculo de horas
+      //Pantalla de carga
       if (isLoading) {
-        return <p>Loading...</p>;
+        return <Loading/>;
       }
 
     return (
-        <Container>
+        <div className="form-style-10">
           <ReactNotifications />
+          <h1>Reservar Plaza</h1>
           <Etiqueta>Propietario:</Etiqueta><Parrafo>{plaza.administrador.name}</Parrafo>
           <Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo> 
           <Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo>
@@ -189,6 +179,6 @@ export default function Reserva(){
           <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{horas*24*plaza.precioHora + plaza.fianza} €</Parrafo>   
           <input type="submit" value="Confirmar Reserva"/>
         </Formulario>
-        </Container>
+        </div>
     );
 }

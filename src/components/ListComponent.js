@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
 import './ListComponent.css'
 
 class ListComponent extends Component {
@@ -12,9 +8,7 @@ class ListComponent extends Component {
         this.state = {reservas: [],items:[]};
         //this.remove = this.remove.bind(this);
     }
-   
     slideFunction(event){
-        
         let el = event.target;
         if(el.classList.contains("firstRow")){
             el.classList.toggle('no-slided');
