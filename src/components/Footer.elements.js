@@ -13,10 +13,10 @@ export const Principal = styled.div`
     border-color: #373839;
     padding: 0 3rem 0 3rem;
     z-index: 32;
-
     @media screen and (max-width: 500px){
         display: none;
     }
+
 `;
 
 export const Info = styled.a`

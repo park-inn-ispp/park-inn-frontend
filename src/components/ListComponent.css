@@ -5,7 +5,7 @@
 }
 
 .divPlaza:hover{
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(237, 240, 243);
 } 
 
 .no-slided{
@@ -16,10 +16,9 @@
 }
 
 .divPlaza{
-    background-color: rgb(255, 255, 255);
     padding: 2vh;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #F1F7FE;
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
     margin-bottom:1vh;
     margin-top: 1vh;

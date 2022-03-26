@@ -4,7 +4,7 @@ import {HiLibrary} from 'react-icons/hi'
 
 export default function Footer(){
     return (
-        <Principal>
+        <Principal id="footer-parkinn">
             <Info>
                 <FaPhoneSquareAlt/>
                 Contacto

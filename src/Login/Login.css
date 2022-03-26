@@ -1,13 +1,79 @@
-.containerPrincipal {
-    position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border: 1px solid blue;
-      padding: 40px;
-      background-color: white;
-  }
-  
-  .containerSecundario{
-    text-align: center;
-  }
+.login{
+  width: 90vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-left:6%;
+}
+
+.container_body{
+    height: 100vh;
+    background-color: #F1F7FE;
+    width: 35vw;
+    border-radius: 30px;
+
+}
+
+.parkinn-icon{
+    margin-top: 20%;
+    width: 100%;
+    height: 33%;
+}
+
+.login-inputs{
+    width: 100%;
+    height: 30%;
+
+}
+
+.signup{
+    padding: 5%;
+
+}
+
+.span-signup:hover{
+    cursor: pointer;
+    color: rgb(136, 136, 136);
+}
+
+.button-login{
+    background-color: #1D4A72;
+    color: white;
+    padding:16px;
+    width: 35%;
+    border: none;
+    border-radius: 40px;
+}
+.button-login:hover{
+    background-color: #0c375e;
+
+}
+
+
+
+/* INPUT CSS */
+
+
+.input{
+    background-color:#ffffff ;
+    border-radius: 20px;
+	box-shadow: 0 0 2em hsl(231deg 62% 94%);
+    width: 60%;
+    height: 40%;
+    margin-left: 22%;
+    margin-top: 5%;
+}
+input{
+    border:0;outline:0;
+    width: 60%;
+    height: 50%;
+    margin-left: 0px;
+    float: left;
+    left: 3%;
+
+}
+.label{
+    text-align: left;
+    margin-left: 3%;
+    padding:1%;
+}
