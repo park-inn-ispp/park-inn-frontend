@@ -1,4 +1,5 @@
 
+
 import React, { Component,useState } from 'react';
 import {Route, Routes,Navigate} from 'react-router-dom';
 import './App.css';
@@ -13,6 +14,7 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import Pagar from './Payments/Pagar';
 
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -40,6 +42,7 @@ return( <div className='App'>
             <Route path='/reservas/:id' element={<ReservaDetails/>}/>
 
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
+            <Route path='/pagar/' element={<Pagar/>}/>
 
 
           </Route>
@@ -48,7 +51,8 @@ return( <div className='App'>
 
          
         </Routes> 
-      <Footer/>   
+      <Footer/>
+      
     </div>);
 }
 
