@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { PayPalScriptProvider, PayPalButtons} from "@paypal/react-paypal-js";
 
-export default function Pagar({precio,reserva}) {
+export default function Pagar({precio=1.0,reserva}) {
  
   
   const initialOptions= {
