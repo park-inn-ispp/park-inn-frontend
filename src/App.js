@@ -18,6 +18,7 @@ import EditPlaza from './Plaza/EditPlaza';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
+import Dashboard from './Dashboard/Dashboard';
 
 function App() {
 
@@ -40,6 +41,7 @@ return( <div className='App'>
             <Route path='/reservas/:id' element={<ReservaDetails/>}/>
 
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
+            <Route path='/dashboard' element={<Dashboard/>}/>
 
 
           </Route>
