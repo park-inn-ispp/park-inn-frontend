@@ -20,7 +20,6 @@ export default function PlazasDashboard(){
             const plazas = await data.json()
             setPlazas(plazas);
             setIsLoading(false);
-            console.log(plazas);
             
         }
         Dashboard();
@@ -28,21 +27,24 @@ export default function PlazasDashboard(){
         
     });
 
-    function deletePlaza(id){
-        const requestOptions = {
-          method: 'DELETE',
-          headers: { 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
-        };
-        call(`/plazas/`+id,"GET")
-          .then(response => {
-            console.log(response.ok)
-    
-            if (response.ok){
-              console.log("ELIMINADA")
-              navigate(`/dashboard-plazas`)
-            }
-          })
-      }
+    function deletePlaza(id) {
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
+      };
+      
+      fetch(`http://localhost:8080/plazas/`+id, requestOptions)
+        .then(response => {
+          console.log(response.ok)
+  
+          if (response.ok){
+            console.log("ELIMINADA")
+            navigate(`/dashboard-plazas`)
+          }
+        })
+    }
+
+
     if (isLoading) {
         return <Loading/>;
       }
@@ -59,6 +61,7 @@ export default function PlazasDashboard(){
                     <th>Acciones</th>
                 </tr>
                 {plazas.map((plaza) => {
+    
                     return <tr>
                     <td>{plaza.direccion}</td>
                     <td>{plaza.precioHora}</td>
@@ -66,7 +69,7 @@ export default function PlazasDashboard(){
                     <td>{plaza.ancho}</td>
                     <td>{plaza.largo}</td>
                     <td><a type="button" className='editButton' href={'/plaza/edit/'+plaza.id}>Editar/Ver detalles</a>
-                    <button type="button" className="deleteButton" on={deletePlaza(plaza.id)} > Eliminar </button></td>
+                    <button type="button" class="deleteButton"  onClick={() => deletePlaza(plaza.id)}> Eliminar plaza </button></td>
                                                             
                 </tr>
                 })

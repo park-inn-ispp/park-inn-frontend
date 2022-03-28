@@ -132,7 +132,8 @@ export default function EditPlaza() {
       method: 'DELETE',
       headers: { 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
     };
-    call(`/plazas/${id}`,"GET")
+    
+    fetch(`http://localhost:8080/plazas/${id}`, requestOptions)
       .then(response => {
         console.log(response.ok)
 
