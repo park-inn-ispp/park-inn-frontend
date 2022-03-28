@@ -13,6 +13,7 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import CreateIncidencia from './Incidencia/CreateIncidencia'
 
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -40,7 +41,7 @@ return( <div className='App'>
             <Route path='/reservas/:id' element={<ReservaDetails/>}/>
 
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
-
+            <Route path='/reservas/:id/incidencia/new' element={<CreateIncidencia/>}/>
 
           </Route>
           <Route path='/login' element={<Login />}/>
