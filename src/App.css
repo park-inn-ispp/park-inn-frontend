@@ -166,7 +166,8 @@
 	margin-top: -3px;
 }
 .form-style-10 input[type="button"], 
-.form-style-10 input[type="submit"]{
+.form-style-10 input[type="submit"],
+.botonAzul{
 	background: #2A88AD;
 	padding: 8px 20px 8px 20px;
 	border-radius: 5px;
