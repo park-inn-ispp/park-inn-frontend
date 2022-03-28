@@ -1,15 +1,11 @@
 import React, {Component, useEffect, useState} from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavBar from '../AppNavBar';
 import { Link, useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
-import Navbar from '../components/Navbar';
-import ListComponent from '../components/ListComponent';
+
 import call from '../Util/Caller'
-import {Etiqueta, Parrafo} from '../Reserva/ReservaDetails.elements';
 
 
-export default function Dashboard(){
+export default function ReservasDashboard(){
     const [reservas, setReservas] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const id = parseInt(useParams().id);

@@ -78,7 +78,7 @@
 
 
 .form-style-10{
-	width:450px;
+	width:fit-content;
 	padding:30px;
 	margin:40px auto;
 	background: lightblue;
@@ -196,7 +196,58 @@
 	box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
 	border: 1px solid #257C9E;
 	font-size: 15px;
+	text-decoration: none;
 }
+
+.deleteButton:visited {
+	color: #FFFFFF;
+  }
+  
+.deleteButton:active {
+	background: #FFFFFF;
+	color: #FFFFFF;
+  }
+.deleteButton:link {
+	color: #FFFFFF;
+  }
+.deleteButton:hover {
+	border-bottom: 1px solid;
+	background: #8b240cd0;
+  }
+
+.editButton{
+	background: #2A88AD;
+	padding: 8px 20px 8px 20px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	color: #fff;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+	font: normal 30px 'Bitter', serif;
+	-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+	-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+	box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+	border: 1px solid #257C9E;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.editButton:visited {
+	color: #FFFFFF;
+  }
+  
+.editButton:active {
+	background: #FFFFFF;
+	color: #FFFFFF;
+  }
+.editButton:link {
+	color: #FFFFFF;
+  }
+.editButton:hover {
+	border-bottom: 1px solid;
+	background: #2A6881;
+  }
+
 .form-style-10 input[type="button"]:hover, 
 .form-style-10 input[type="submit"]:hover{
 	background: #2A6881;
@@ -213,4 +264,28 @@
 	text-align: right;
 }
 
+.customers {
+	font-family: Helvetica, Arial, sans-serif;
+	border-collapse: collapse;
+	text-align: center;
+	width: 100%;
+}	
 
+.customers td, .customers th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.customers tr {
+	background-color: #ADD8E6;
+}
+
+
+.customers th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #1D4A72;
+	color: #FFFFFF;
+
+}

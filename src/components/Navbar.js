@@ -42,9 +42,10 @@ export default function Navbar(){
 
                     <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/logout">
                         <BsBookmarksFill/>
-                        Cerrar Sesión
+                        CERRAR SESIÓN
                     </MenuItemLink>
                 </MenuItem>
+                
             </Menu>
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? <FaTimes/> : <FaBars/>}

@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../theme';
 
+export const Dropdown = styled.div`
+    background-color: #ddd;
+    color: black;
+  `;
+
 export const Container = styled.div`
     width: 100%;
     height: 90px;

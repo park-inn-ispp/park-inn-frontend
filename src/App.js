@@ -18,7 +18,8 @@ import EditPlaza from './Plaza/EditPlaza';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
-import Dashboard from './Dashboard/Dashboard';
+import ReservasDashboard from './Dashboard/ReservasDashboard';
+import PlazasDashboard from './Dashboard/PlazasDashboard';
 
 function App() {
 
@@ -41,7 +42,8 @@ return( <div className='App'>
             <Route path='/reservas/:id' element={<ReservaDetails/>}/>
 
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
-            <Route path='/dashboard' element={<Dashboard/>}/>
+            <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
+            <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
 
 
           </Route>
