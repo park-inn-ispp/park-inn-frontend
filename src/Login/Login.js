@@ -5,32 +5,51 @@ import Cookies from 'universal-cookie';
 import call from '../Util/Caller';
 import Logo from '../components/Logo';
 import Input from '../components/Input/Input';
+import jwt_decode from 'jwt-decode';
+import displayNotification from '../Util/Notifications';
 const cookies = new Cookies();
 
 class Login extends Component {
     state={
         form:{
             email: '',
-            password: ''
-        }
+            password: '',
+            recuerdame: false
+        },
+      
+        user_password : undefined
+  
     }
+
+
 
     
     handleChange=async e=>{
-        await this.setState({
-            form:{
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            }
-        });
+        if(e.target.name=="recuerdame"){
+            await this.setState({
+                form:{
+                    ...this.state.form,
+                    [e.target.name]: e.target.checked
+                }
+            });
+        }else{
+            await this.setState({
+                form:{
+                    ...this.state.form,
+                    [e.target.name]: e.target.value
+                }
+            });
+        }
+       
     }
 
     
      iniciarSesion=async()=>{
-    //     const data= {
-    //         "email": this.state.form.email,
-    //         "password":this.state.form.password
-    //     }
+        const data= {
+            email: this.state.form.email,
+            password:this.state.form.password,
+            recuerdame : this.state.form.recuerdame
+        }
 
       
     //     call(`/clients/login`,"POST",data)
@@ -46,7 +65,27 @@ class Login extends Component {
     //     .catch(error=>{
     //         console.log(error);
     //     })
-        console.log("hola")
+        
+        var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+
+        if(data.email=="admin" && data.password=="123"){
+            cookies.set("AuthToken",token)
+            
+            if(data.recuerdame){
+                localStorage["AuthToken"] = token
+            }
+            window.location.href="./"
+        }else{
+            if(data.email &&  data.password){
+                displayNotification("Error","Usuario o contraseña incorrectos","danger")
+
+            }else{
+                displayNotification("Error","Debes de rellenar los datos","danger")
+            }
+            
+        }
+       
+   
      }
 
     componentDidMount() {
@@ -61,10 +100,12 @@ class Login extends Component {
     render() {
         return (
             <div className='login'>
+
                 <div className="container_body">
                     <div className='parkinn-icon'>
                         <Logo className="logo" margin-top="500px" />
                     </div>
+
                     <div className='login-inputs'>
                     
                     <div className='input'>
@@ -75,15 +116,19 @@ class Login extends Component {
                     <div className='input'>
                         <div className='label'>Contraseña</div>
                         <input type="password" name="password" placeholder="password123" onChange={this.handleChange}></input>
-                    </div>    
 
+                    </div>   
+
+                    <input className="checkb-input" name="recuerdame" type="checkbox" onChange={this.handleChange}  />
                     </div>
+                    
                     <div className='login-footer'>
                         <button className='button-login' onClick={()=> this.iniciarSesion()}>Log In</button>
                         <div className='signup'>
                             <span className='span-signup'>Registrame</span>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         );

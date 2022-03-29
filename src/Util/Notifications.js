@@ -1,11 +1,11 @@
 import 'react-notifications-component/dist/theme.css'
 import { Store } from 'react-notifications-component'
 
-function displaySucessNotification(title,message){
+function displayNotification(title,message,type){
     Store.addNotification({
         title: title,
         message: message,
-        type: "success",
+        type: type,
         insert: "top",
         container: "top-left",
         animationIn: ["animate__animated", "animate__fadeIn"],
@@ -16,4 +16,4 @@ function displaySucessNotification(title,message){
         }
       });
 }
-export default displaySucessNotification
+export default displayNotification

@@ -13,19 +13,23 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
 
+
 function App() {
 
 return( <div className='App'> 
+      <ReactNotifications />
       <Navbar/>       
+        
         <Routes>
-
-          {/* <Route exact path='/' element={<PrivateRoute/>}> */}
+          <Route exact path='/' element={<PrivateRoute/>}>
             <Route  path='/' element={<Home/>}/>
             <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
             <Route path='/logout' element={<Logout />}/>
@@ -42,12 +46,10 @@ return( <div className='App'>
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
 
 
-          {/* </Route> */}
+          </Route>
           <Route path='/login' element={<Login />}/>
-
-
-         
         </Routes> 
+        
       <Footer/>   
     </div>);
 }

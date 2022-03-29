@@ -77,3 +77,14 @@ input{
     margin-left: 3%;
     padding:1%;
 }
+.checkb-input{
+    width: 2vw;
+    height: 2vh;
+    margin-top: 2vh;
+    margin-left: 12vw;
+}
+
+.erroresLogin{
+    margin-top: -5vh;
+    background-color: transparent;
+}
