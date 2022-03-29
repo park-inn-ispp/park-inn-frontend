@@ -38,6 +38,8 @@ return( <div className='App'>
 
 
             <Route path='/reservas/:id' element={<ReservaDetails/>}/>
+                  
+            <Route path='/reservas/plaza/:id' element={<ReservaOwnerDetails/>}/>
 
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
 
