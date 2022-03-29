@@ -27,13 +27,9 @@ export default function PlazasDashboard(){
         
     });
 
-    function deletePlaza(id) {
-      const requestOptions = {
-        method: 'DELETE',
-        headers: { 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
-      };
-      
-      fetch(`http://localhost:8080/plazas/`+id, requestOptions)
+    function borrarPlaza(id) {
+        
+      call(`/plazas/`+id, 'DELETE')
         .then(response => {
           console.log(response.ok)
   
@@ -50,7 +46,8 @@ export default function PlazasDashboard(){
       }
 
       return (
-          <div className='customers'>
+          <div className='tablas'>
+            <h1 className='titulos'>PLAZAS</h1>
             <table>
                 <tr>
                     <th>Direccion</th>
@@ -69,7 +66,7 @@ export default function PlazasDashboard(){
                     <td>{plaza.ancho}</td>
                     <td>{plaza.largo}</td>
                     <td><a type="button" className='editButton' href={'/plaza/edit/'+plaza.id}>Editar/Ver detalles</a>
-                    <button type="button" class="deleteButton"  onClick={() => deletePlaza(plaza.id)}> Eliminar plaza </button></td>
+                    <button type="button" class="deleteButton"  onClick={() => borrarPlaza(plaza.id)}> Eliminar plaza </button></td>
                                                             
                 </tr>
                 })

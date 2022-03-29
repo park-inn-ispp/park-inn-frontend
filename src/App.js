@@ -20,6 +20,7 @@ import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
 import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
+import UsuariosDashboard from './Dashboard/UsuariosDashboard';
 
 function App() {
 
@@ -44,6 +45,7 @@ return( <div className='App'>
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
             <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
             <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
+            <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
 
 
           </Route>

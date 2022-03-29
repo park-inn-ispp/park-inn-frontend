@@ -127,22 +127,19 @@ export default function EditPlaza() {
   }
   
   
-  const deletePlaza= evt => {
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
-    };
-    
-    fetch(`http://localhost:8080/plazas/${id}`, requestOptions)
-      .then(response => {
-        console.log(response.ok)
 
-        if (response.ok){
-          console.log("ELIMINADA")
-          navigate(`/mis-plazas`)
-        }
-      })
-  }
+    const borrarPlaza = evt => {
+        
+      call(`/plazas/`+id, 'DELETE')
+        .then(response => {
+          console.log(response.ok)
+  
+          if (response.ok){
+            console.log("ELIMINADA")
+            navigate(`/mis-plazas`)
+          }
+        })
+    }
   
   
 
@@ -247,7 +244,7 @@ export default function EditPlaza() {
       <br/>
       <br/>
       <input type="submit" value="Guardar plaza" />  &nbsp; &nbsp;
-      <button type="button" class="deleteButton" onClick={deletePlaza}> Eliminar plaza </button>
+      <button type="button" class="deleteButton" onClick={borrarPlaza}> Eliminar plaza </button>
     </form>
   </div>
   );

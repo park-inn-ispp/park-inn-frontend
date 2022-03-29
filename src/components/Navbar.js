@@ -4,6 +4,7 @@ import {FaBars, FaHome, FaParking, FaTimes, FaUserCircle} from "react-icons/fa"
 import {BsBookmarksFill} from "react-icons/bs"
 import { IconContext } from "react-icons";
 import Logo from './Logo'
+import DropdownComponent from "./Dropdown";
 export default function Navbar(){
 
     //Estado para el boton del menu desplegable 
@@ -39,11 +40,9 @@ export default function Navbar(){
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/logout">
-                        <BsBookmarksFill/>
-                        CERRAR SESIÓN
-                    </MenuItemLink>
+                    <MenuItemLink  to=''>
+                        <DropdownComponent />   
+                    </MenuItemLink>             
                 </MenuItem>
                 
             </Menu>
