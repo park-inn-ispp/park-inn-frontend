@@ -40,9 +40,7 @@ export default function Navbar(){
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink  to=''>
-                        <DropdownComponent />   
-                    </MenuItemLink>             
+                    <DropdownComponent />   
                 </MenuItem>
                 
             </Menu>

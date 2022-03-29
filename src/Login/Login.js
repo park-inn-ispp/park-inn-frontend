@@ -28,9 +28,8 @@ class Login extends Component {
             "password":this.state.form.password
         }
 
-        cookies.set('email', data.email, {path: "/"});
 
-    /*  
+    
         call(`/clients/login`,"POST",data)
             .then(async response  =>  {
             if(response.ok && await response.json()==="SUCCESS"){
@@ -44,7 +43,7 @@ class Login extends Component {
         .catch(error=>{
             console.log(error);
         })
-*/
+
     }
 
     componentDidMount() {
