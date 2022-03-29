@@ -21,14 +21,14 @@ class Login extends Component {
             }
         });
     }
-
+    
     iniciarSesion=async()=>{
         const data= {
             "email": this.state.form.email,
             "password":this.state.form.password
         }
+        
 
-      
         call(`/clients/login`,"POST",data)
             .then(async response  =>  {
             if(response.ok && await response.json()==="SUCCESS"){
@@ -44,7 +44,7 @@ class Login extends Component {
         })
 
     }
-
+    
     componentDidMount() {
         if(cookies.get('email')){
             window.location.href="./";
