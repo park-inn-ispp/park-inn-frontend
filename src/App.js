@@ -14,12 +14,9 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
-<<<<<<< HEAD
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-=======
 import Pagar from './Payments/Pagar';
->>>>>>> develop
 
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';

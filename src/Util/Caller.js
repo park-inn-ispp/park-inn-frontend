@@ -2,8 +2,8 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const url_backend ="https://park-inn-ispp-be.herokuapp.com/"
-const url_frontend = "https://park-inn-ispp-fe.herokuapp.com/"
+const url_backend ="http://localhost:8080"
+const url_frontend = "http://localhost:3000"
 
 
      async function call(path_to_call,method,body){
