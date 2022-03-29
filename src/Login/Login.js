@@ -5,7 +5,6 @@ import Cookies from 'universal-cookie';
 import call from '../Util/Caller';
 import Logo from '../components/Logo';
 import Input from '../components/Input/Input';
-import jwt_decode from 'jwt-decode';
 import displayNotification from '../Util/Notifications';
 const cookies = new Cookies();
 
@@ -46,45 +45,35 @@ class Login extends Component {
     
      iniciarSesion=async()=>{
         const data= {
-            email: this.state.form.email,
-            password:this.state.form.password,
-            recuerdame : this.state.form.recuerdame
+            nameOrEmail: this.state.form.email,
+            password:this.state.form.password
         }
 
       
-    //     call(`/clients/login`,"POST",data)
-    //         .then(async response  =>  {
-    //         if(response.ok && await response.json()==="SUCCESS"){
-    //             cookies.set('email', data.email, {path: "/"});
-    //             window.location.href="./";           
-    //             console.log("cookie en navegador")
+        call(`/api/auth/signin`,"POST",data)
+            .then(async response  =>  {
+            if(response.ok){
+                let auth_token = await (await response.text()).split(" ")[1]
 
-    //         }
-    //         return response.data;
-    //     })
-    //     .catch(error=>{
-    //         console.log(error);
-    //     })
-        
-        var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+                if(this.state.form.recuerdame){
+                    localStorage["AuthToken"] = auth_token
+                }
 
-        if(data.email=="admin" && data.password=="123"){
-            cookies.set("AuthToken",token)
-            
-            if(data.recuerdame){
-                localStorage["AuthToken"] = token
-            }
-            window.location.href="./"
-        }else{
-            if(data.email &&  data.password){
-                displayNotification("Error","Usuario o contraseña incorrectos","danger")
+                cookies.set("AuthToken",auth_token)
+                window.location.href="./";           
 
-            }else{
-                displayNotification("Error","Debes de rellenar los datos","danger")
-            }
-            
-        }
-       
+             }else{
+                if(data.nameOrEmail &&  data.password){
+                    displayNotification("Error","Usuario o contraseña incorrectos","danger")
+    
+                }else{
+                    displayNotification("Error","Debes de rellenar los datos","danger")
+                }
+             }
+        })
+        .catch(error=>{
+            console.log(error);
+        })
    
      }
 

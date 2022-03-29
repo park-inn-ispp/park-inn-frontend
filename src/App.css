@@ -222,3 +222,7 @@
 	margin-top: 30vh;
 	position: absolute;
 }
+
+.container{
+	min-height: 86.1vh;
+}
