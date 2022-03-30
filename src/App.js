@@ -1,4 +1,5 @@
 
+
 import React, { Component,useState } from 'react';
 import {Route, Routes,Navigate} from 'react-router-dom';
 import './App.css';
@@ -13,6 +14,9 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import Pagar from './Payments/Pagar';
 
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -22,12 +26,14 @@ import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
 
+
 function App() {
 
 return( <div className='App'> 
+      <ReactNotifications />
       <Navbar/>       
+        
         <Routes>
-
           <Route exact path='/' element={<PrivateRoute/>}>
             <Route  path='/' element={<Home/>}/>
             <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
@@ -46,14 +52,13 @@ return( <div className='App'>
             <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
             <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
             <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
+            <Route path='/pagar/' element={<Pagar/>}/>
 
 
           </Route>
           <Route path='/login' element={<Login />}/>
-
-
-         
         </Routes> 
+        
       <Footer/>   
     </div>);
 }

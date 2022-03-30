@@ -11,7 +11,7 @@ export default function Navbar(){
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     return (
-    <Container>
+    <Container id="navbar-parkinn">
         <Wrapper>
             <IconContext.Provider value = {{style: {fontSize: "2em"}}}>
             <LogoContainer>

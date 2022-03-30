@@ -3,6 +3,10 @@ import { colors } from "../theme";
 
 export default function Loading(){
     return (
-        <TailSpin heigth="100%" width="100%" color={colors.fivth} ariaLabel="loading" />
+        <div className="loading-div">
+            <div className="loading-gif">
+                <TailSpin  heigth="100vh" width="100vw" color={colors.fivth} ariaLabel="loading" />
+            </div>
+        </div>
     )
 }

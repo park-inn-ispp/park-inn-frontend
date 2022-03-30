@@ -8,6 +8,7 @@ import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
+import Pagar from '../Payments/Pagar';
 
 
 export default function Reserva(){
@@ -19,6 +20,8 @@ export default function Reserva(){
     const [fechaInicio, setFechaInicio] = useState(0)
     const [fechaFin, setFechaFin] = useState(0)
     const [idReserva, setIdReserva] = useState(0)
+    const [pagando, setPagando] = useState(false)
+    
 
     //Navigate para redirigir con react-router-dom
     let navigate = useNavigate();
@@ -82,38 +85,11 @@ export default function Reserva(){
         var numeroErrores = Object.keys(validateReserva(form)).length;
         console.log(numeroErrores)
         if (numeroErrores===0) {
-          const id = await getData()
-          setIdReserva(await getData());
-          if(id!=="undefined" || id!=="NaN"){
-            navigate(`/reservas/${id}`)
-
-          }else{
-            navigate("/")
-          }
+          setPagando(true)
         }
     }
 
-     async function getData() {
-      
-      const data = await call(`/plazas/${id}/reservar`,"POST",body)
-      const response = await data.json()
-      if (data.ok){
-        Store.addNotification({
-          title: "RESERVA CONFIRMADA!",
-          message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
-          type: "success",
-          insert: "top",
-          container: "top-left",
-          animationIn: ["animate__animated", "animate__fadeIn"],
-          animationOut: ["animate__animated", "animate__fadeOut"],
-          dismiss: {
-            duration: 5000,
-            onScreen: true
-          }
-        });
-      }
-      return response.id
-    } 
+    
     
       const handleChange= evt => {
         const target = evt.target
@@ -141,14 +117,25 @@ export default function Reserva(){
       }
 
     return (
+        <>
+        {pagando ? <> <Pagar precio={body.precioTotal} reserva={body}/>
+         <button class="botonAzul" type="submit" onClick={()=> {setPagando(false)}}> Atrás </button> </>
+         : 
+        
         <div className="form-style-10">
-          <ReactNotifications />
           <h1>Reservar Plaza</h1>
+          <ReactNotifications />
+          <div class="section"><span>1</span>Propiedades de la plaza</div>
+          <div class="inner-wrap">
+          
           <Etiqueta>Propietario:</Etiqueta><Parrafo>{plaza.administrador.name}</Parrafo>
           <Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo> 
           <Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo>
           <Etiqueta>Ancho:</Etiqueta><Parrafo>{plaza.ancho} m</Parrafo>
+          </div>
         <Formulario onSubmit={handleSubmit}>
+        <div class="section"><span>2</span>Fecha de reserva</div>
+        <div class="inner-wrap">
             <Etiqueta>Fecha Inicio:</Etiqueta>
             <Parrafo>
               <input onChange={handleChange} name= "fechaInicio" type="date" value={form.fechaInicio}/>
@@ -173,12 +160,20 @@ export default function Reserva(){
               <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
             </Parrafo>
           </Wrapper>
+          </div>
+          <div class="section"><span>3</span>Precios</div>
+          <div class="inner-wrap">
           <Etiqueta>Precio por hora:</Etiqueta><Parrafo>{plaza.precioHora} €</Parrafo>
           <Etiqueta>Precio de la fianza:</Etiqueta><Parrafo>{plaza.fianza} €</Parrafo>  
           <Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{horas*24*plaza.precioHora} €</Parrafo>  
-          <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{horas*24*plaza.precioHora + plaza.fianza} €</Parrafo>   
-          <input type="submit" value="Confirmar Reserva"/>
+          <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{horas*24*plaza.precioHora + plaza.fianza} €</Parrafo>
+          </div>  
+          <input type="submit" value="Siguiente"/>
         </Formulario>
         </div>
+        }
+
+        
+        </>
     );
 }
