@@ -2,16 +2,16 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const url_backend ="http://localhost:8080"
-const url_frontend = "http://localhost:3000"
+const url_backend ="https://park-inn-ispp-be.herokuapp.com"
+const url_frontend = "https://park-inn-ispp-fe.herokuapp.com"
 
 
      async function call(path_to_call,method,body){
-        let headers_ = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"}
+        let headers_ = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : url_frontend, "mode": "cors"}
         const token = await cookies.get('AuthToken')
 
         if(token!=undefined && token!="undefined"){
-            headers_ = {'Authorization' : 'Bearer ' + token.toString(),'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'http://localhost:3000', "mode": "cors"}
+            headers_ = {'Authorization' : 'Bearer ' + token.toString(),'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : url_frontend, "mode": "cors"}
         }
 
         const requestOptions = {
