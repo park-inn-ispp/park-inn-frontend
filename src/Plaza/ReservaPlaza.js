@@ -10,7 +10,6 @@ import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
 
-
 export default function Reserva(){
 
     //Estados con Hooks 
@@ -21,6 +20,9 @@ export default function Reserva(){
     const [fechaFin, setFechaFin] = useState(0)
     const [idReserva, setIdReserva] = useState(0)
     const [pagando, setPagando] = useState(false)
+    const [diff, setDiff] = useState(0);
+
+
     
 
     //Navigate para redirigir con react-router-dom
@@ -39,7 +41,7 @@ export default function Reserva(){
         DetallesPlaza()
     },[id]);
 
-    let horas = fechaFin-fechaInicio
+    let dias = ((fechaFin-fechaInicio)/(1000 * 60 * 60 * 24)).toFixed(0)
     const [form, setForm]= useState({
         fechaInicio:'',
         fechaFin:'',
@@ -70,7 +72,7 @@ export default function Reserva(){
           "email": 'admin@admin.com'
         }
       },
-      "precioTotal": horas*24*plaza.precioHora + plaza.fianza,
+      "precioTotal": dias*24*plaza.precioHora + plaza.fianza,
       "user":null,
       "fechaInicio": form.fechaInicio.toString()+'T00:00:00',
       "fechaFin": form.fechaFin.toString()+'T00:00:00'
@@ -89,7 +91,21 @@ export default function Reserva(){
         }
     }
 
-    
+    const handleChangeFecha = evt => {
+      const target = evt.target
+      const name = target.name
+      if (name==='fechaInicio') {
+        const INI = new Date(target.value)
+        setFechaInicio(INI)
+      } else {
+        const FIN = new Date(target.value)
+        setFechaFin(FIN)
+      }
+      var value= target.value.toString()
+      setForm({...form,[name]: value})
+      
+     }
+
     
       const handleChange= evt => {
         const target = evt.target
@@ -101,6 +117,7 @@ export default function Reserva(){
         var dia = sp[2]
         console.log(parseInt(sp[2]))
         if (name==='fechaInicio') {
+          console.log(value)
           setFechaInicio(dia)
         } else if (name==='fechaFin') {
           setFechaFin(dia)
@@ -125,6 +142,7 @@ export default function Reserva(){
         <div className="form-style-10">
           <h1>Reservar Plaza</h1>
           <ReactNotifications />
+          
           <div class="section"><span>1</span>Propiedades de la plaza</div>
           <div class="inner-wrap">
           
@@ -138,35 +156,33 @@ export default function Reserva(){
         <div class="inner-wrap">
             <Etiqueta>Fecha Inicio:</Etiqueta>
             <Parrafo>
-              <input onChange={handleChange} name= "fechaInicio" type="date" value={form.fechaInicio}/>
+              <input onChange={handleChangeFecha} name= "fechaInicio" type="date" value={form.fechaInicio}/>
               <FormErrorMessage jsonErrors={errors} errorName="fechaInicio"/>
             </Parrafo>
-
+            <p/>
             <Etiqueta>Fecha Fin:</Etiqueta>
             <Parrafo>
-              <input onChange={handleChange} name= "fechaFin" type="date" value={form.fechaFin}/>
+              <input onChange={handleChangeFecha} name= "fechaFin" type="date" value={form.fechaFin}/>
               <FormErrorMessage jsonErrors={errors} errorName="fechaFin"/>
             </Parrafo>
-          <Wrapper>
+            
             <Etiqueta>Hora Inicio: </Etiqueta>
             <Parrafo>
-              <input disabled onChange={handleChange} name= "horaInicio" type="time" value={form.horaInicio}/>
+              <input  onChange={handleChange} name= "horaInicio" type="time" step="600" value={form.horaInicio}/>
               <FormErrorMessage jsonErrors={errors} errorName="horaInicio"/>
             </Parrafo>
-            
             <Etiqueta>Hora Fin: </Etiqueta>
             <Parrafo>
-              <input disabled onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
+              <input  onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
               <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
-            </Parrafo>
-          </Wrapper>
+    </Parrafo>
           </div>
           <div class="section"><span>3</span>Precios</div>
           <div class="inner-wrap">
           <Etiqueta>Precio por hora:</Etiqueta><Parrafo>{plaza.precioHora} €</Parrafo>
           <Etiqueta>Precio de la fianza:</Etiqueta><Parrafo>{plaza.fianza} €</Parrafo>  
-          <Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{horas*24*plaza.precioHora} €</Parrafo>  
-          <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{horas*24*plaza.precioHora + plaza.fianza} €</Parrafo>
+          <Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{dias*24*plaza.precioHora} €</Parrafo>  
+          <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{dias*24*plaza.precioHora + plaza.fianza} €</Parrafo>
           </div>  
           <input type="submit" value="Siguiente"/>
         </Formulario>
