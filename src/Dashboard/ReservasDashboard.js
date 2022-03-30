@@ -28,21 +28,18 @@ export default function ReservasDashboard(){
         Dashboard();
     });
 
-    function deleteReserva(id){
-        const requestOptions = {
-            method:'DELETE',
-            headers:{ 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
-        };
-
-        fetch('http://localhost:8080/reservas/' +id, requestOptions)
-            .then(response => {
-                console.log(response.ok)
-                if(response.ok){
-                    console.log('Eliminada con exito')
-                    navigate('/dashboard-reservas')
-                }
-            })
-    }
+    function borrarReserva(id) {
+        
+        call(`/reservas/`+id, 'DELETE')
+          .then(response => {
+            console.log(response.ok)
+    
+            if (response.ok){
+              console.log("ELIMINADA")
+              navigate(`/dashboard-reservas`)
+            }
+          })
+      }
 
     if (isLoading) {
         return <Loading/>;
@@ -50,6 +47,7 @@ export default function ReservasDashboard(){
 
       return (
         <div>
+            <h1>Datos de reservas</h1>
             <table className='tablas'>
                 <tr>
                     <th>Propietario</th>
@@ -72,7 +70,7 @@ export default function ReservasDashboard(){
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>
                         <td><a type="button" className="editButton" href={'/reservas/edit/'+reserva.id}>Editar/ver detalles</a>
-                        <button type='button' class='deleteButton' onClick={() => deleteReserva(reserva.id)}>Eliminar reserva</button></td>
+                        <button type='button' class='deleteButton' onClick={() => borrarReserva(reserva.id)}>Eliminar reserva</button></td>
 
                     </tr>
                 })
