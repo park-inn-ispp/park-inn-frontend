@@ -1,6 +1,8 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: #DDE5F4;
+  height: 100%;
+  width:100vw;
 }
 
 .App-content{
@@ -81,7 +83,7 @@
 	width:450px;
 	padding:30px;
 	margin:40px auto;
-	background: lightblue;
+	background: #F1F7FE;
 	border-radius: 10px;
 	-webkit-border-radius:10px;
 	-moz-border-radius: 10px;
@@ -91,7 +93,7 @@
 }
 .form-style-10 .inner-wrap{
 	padding: 30px;
-	background: #b4d7f3;
+	background: #F1F7FE;
 	border-radius: 6px;
 	margin-bottom: 15px;
 }
@@ -214,4 +216,14 @@
 	text-align: right;
 }
 
+.loading-div{
+	height: 83.55vh;
+}
+.loading-gif{
+	margin-top: 30vh;
+	position: absolute;
+}
 
+.container{
+	min-height: 86.1vh;
+}

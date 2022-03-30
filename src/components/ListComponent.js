@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ListComponent.css'
-
+import Loading from './Loading'
 class ListComponent extends Component {
 
     constructor(props) {
@@ -92,7 +92,7 @@ class ListComponent extends Component {
         }
         
         return <div>
-            
+                <Loading></Loading>
            
             </div>
        
