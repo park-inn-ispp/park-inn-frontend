@@ -31,7 +31,7 @@ export default class DropdownComponent extends React.Component {
   render() {
 
     
-    if (cookies.get('email')=="admin@admin.com"){
+    if (cookies.get('user_autorities')=="ROLE_ADMIN"){
         return (
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle className='menu'caret>

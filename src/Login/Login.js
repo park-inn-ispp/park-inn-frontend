@@ -61,7 +61,24 @@ class Login extends Component {
                 }
 
                 cookies.set("AuthToken",auth_token)
-                window.location.href="./";           
+
+                const data = await call('/clients', 'GET');
+                const usuarios = await data.json()
+                
+
+                function usuarioLogueado(userEmail, usuarios){
+                    for (var i=0; i<usuarios.length; i++) {
+                      if (usuarios[i].email===userEmail) {
+                        return usuarios[i]
+                      }
+                    }
+                  }
+                  
+
+                const usuario = await usuarioLogueado(this.state.form.email, usuarios);
+                cookies.set("UserData",usuario);
+
+                 window.location.href="./";           
 
              }else{
                 if(data.nameOrEmail &&  data.password){

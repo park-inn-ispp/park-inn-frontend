@@ -72,6 +72,16 @@ export default function PlazasDashboard(){
                 })
             }
             </table>
+            <table className='form-styled-10'>
+              <tr>
+
+                    <tr>
+                      <td scope='row' abbr='numPlazas'>Número total de reservas realizadas</td>
+                      <td>{totalplazas}</td>
+                    </tr>
+
+                </tr>
+              </table>
 
           </div>
           

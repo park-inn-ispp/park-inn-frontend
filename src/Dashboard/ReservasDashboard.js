@@ -28,29 +28,25 @@ export default function ReservasDashboard(){
         Dashboard();
     });
 
-    function deleteReserva(id){
-        const requestOptions = {
-            method:'DELETE',
-            headers:{ 'Access-Control-Allow-Origin' : 'http://localhost:3000/', "mode": "cors"}
-        };
 
-        fetch('http://localhost:8080/reservas/' +id, requestOptions)
-            .then(response => {
-                console.log(response.ok)
-                if(response.ok){
-                    console.log('Eliminada con exito')
-                    navigate('/dashboard-reservas')
-                }
-            })
-    }
+    function borrarReservas(id) {
+        call(`/reservas/`+id, 'DELETE')
+          .then(response => {
+
+    
+            if (response.ok){
+              navigate(`/dashboard-reservas`)
+            }
+          })
+      }
 
     if (isLoading) {
         return <Loading/>;
       }
 
       return (
-        <div>
-            <table className='tablas'>
+        <div className='tablas'>
+            <table >
                 <tr>
                     <th>Propietario</th>
                     <th>Cliente</th>
@@ -62,7 +58,6 @@ export default function ReservasDashboard(){
                     <th>Acciones</th>
                 </tr>
                 {reservas.map((reserva) => {
-                    console.log(reserva);
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.user.name}</td>
@@ -72,7 +67,7 @@ export default function ReservasDashboard(){
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>
                         <td><a type="button" className="editButton" href={'/reservas/edit/'+reserva.id}>Editar/ver detalles</a>
-                        <button type='button' class='deleteButton' onClick={() => deleteReserva(reserva.id)}>Eliminar reserva</button></td>
+                        <button type='button' class='deleteButton' onClick={() => borrarReservas(reserva.id)}>Eliminar reserva</button></td>
 
                     </tr>
                 })
@@ -84,22 +79,22 @@ export default function ReservasDashboard(){
     <tr>
 
         <tr>
-        <th scope='row' abbr='numReservas'>Número total de reservas realizadas</th>
+        <td scope='row' abbr='numReservas'>Número total de reservas realizadas</td>
         <td>{totalReservas}</td>
         </tr>
 
         <tr>
-            <th scope='row' abbr='numReservasPendiente'>Número total de reservas pendientes</th>
+            <td scope='row' abbr='numReservasPendiente'>Número total de reservas pendientes</td>
             <td>{pendientes}</td>
         </tr>
 
         <tr>
-            <th scope='row' abbr='numReservasAceptada'>Número total de reservas aceptadas</th>
+            <td scope='row' abbr='numReservasAceptada'>Número total de reservas aceptadas</td>
             <td>{aceptadas}</td>
         </tr>
 
         <tr>
-            <th scope='row' abbr='numReservasRechazada'>Número total de reservas rechazadas</th>
+            <td scope='row' abbr='numReservasRechazada'>Número total de reservas rechazadas</td>
             <td>{rechazadas}</td>
         </tr>
     </tr>

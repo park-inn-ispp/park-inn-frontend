@@ -18,8 +18,6 @@ import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import Pagar from './Payments/Pagar';
 
-
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
 import ReservasDashboard from './Dashboard/ReservasDashboard';

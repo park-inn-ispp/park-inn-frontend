@@ -9,7 +9,8 @@ import {Etiqueta, Parrafo, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elem
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export default function Reserva(){
 
@@ -28,6 +29,8 @@ export default function Reserva(){
 
     const id = parseInt(useParams().id)
 
+    const [usuarios, setUsuarios] = useState([]);
+
     useEffect(() => {
       
       const DetallesPlaza = async () => {
@@ -37,7 +40,11 @@ export default function Reserva(){
         setIsLoading(false)
       }
         DetallesPlaza()
+
     },[id]);
+
+    const usuario = cookies.get('UserData');
+
 
     let horas = fechaFin-fechaInicio
     const [form, setForm]= useState({
@@ -48,6 +55,7 @@ export default function Reserva(){
         precioTotal:''
     })
 
+
     const body = {
             
       "comentarios":null,
@@ -56,22 +64,22 @@ export default function Reserva(){
       "incidencias":null,
       "plaza": {
         "id": plaza.id,
-        "direccion": " Carberry Street,58885,Cadiz,Andalucia,11130",
+        "direccion": plaza.direccion,
         "precioHora": plaza.precioHora,
         "fianza": plaza.fianza,
         "ancho": plaza.ancho,
         "largo": plaza.largo,
         "estaDisponible": true,
         "esAireLibre": true,
-        "descripcion": "Fexofenadine Hydrochloride",
-          "administrador": {
-          "id": 0,
-          "name": 'sergio',
-          "email": 'admin@admin.com'
+        "descripcion": plaza.descripcion,
+        "administrador": {
+          "id": usuario.id,
+          "name": usuario.name,
+          "email": usuario.email
         }
       },
       "precioTotal": horas*24*plaza.precioHora + plaza.fianza,
-      "user":null,
+      "user":plaza.administrador,
       "fechaInicio": form.fechaInicio.toString()+'T00:00:00',
       "fechaFin": form.fechaFin.toString()+'T00:00:00'
           
@@ -81,9 +89,7 @@ export default function Reserva(){
         evt.preventDefault()
         setErrors(validateReserva(form))
          
-        console.log(idReserva)
         var numeroErrores = Object.keys(validateReserva(form)).length;
-        console.log(numeroErrores)
         if (numeroErrores===0) {
           setPagando(true)
         }
@@ -96,20 +102,16 @@ export default function Reserva(){
         const name = target.name
         var value= target.value.toString()
         setForm({...form,[name]: value})
-        console.log(name)
         var sp = value.split('-')
         var dia = sp[2]
-        console.log(parseInt(sp[2]))
         if (name==='fechaInicio') {
           setFechaInicio(dia)
         } else if (name==='fechaFin') {
           setFechaFin(dia)
         }
         setForm({...form,[name]: value})
-        console.log(fechaInicio)
-        console.log(fechaFin)
 
-        console.log(form.fechaFin.toString()+'T00:00:00')
+
       }
       //Pantalla de carga
       if (isLoading) {

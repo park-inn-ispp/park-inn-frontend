@@ -11,6 +11,9 @@ export default function UsuariosDashboard(){
 
     const [usuarios, setUsuarios] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    var totalUsuarios = Object.keys(usuarios).length;
+
     
 
     useEffect(() => {
@@ -78,6 +81,16 @@ export default function UsuariosDashboard(){
                 })
             }
             </table>
+            <table className='form-styled-10'>
+              <tr>
+
+                    <tr>
+                      <td scope='row' abbr='numUsuarios'>Número total de reservas realizadas</td>
+                      <td>{totalUsuarios}</td>
+                    </tr>
+
+                </tr>
+              </table>
 
           </div>
           

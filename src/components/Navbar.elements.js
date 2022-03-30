@@ -110,7 +110,21 @@ export const MenuItemLink = styled(Link)`
 `;
 
 
+export const DropdownStyle = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+padding: 0.5rem 2.5rem;
+color: ${colors.sixth};
+font-family: sans-serif;
+font-size: 1.1rem;
+font-weight: 700;
+cursor: pointer;
+transition: 0.5s all ease;
+text-decoration: none;
 
+`;
 
 export const ParkinnTitle = styled.p`
     margin: 0;
