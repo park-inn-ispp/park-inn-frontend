@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import ListComponent from '../components/ListComponent'
 import call from '../Util/Caller';
-class ReservasList extends Component{
+class ReservasOwnerList extends Component{
     constructor(props){
         super(props);
         this.state = {reservas: []};
@@ -30,4 +30,4 @@ class ReservasList extends Component{
         );
     }
 }
-export default ReservasList;
+export default ReservasOwnerList;
