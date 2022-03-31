@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ProfileIcon, Container, LogoContainer, Menu, MenuItem, MenuItemLink, ParkinnTitle, Wrapper, LinkTitle, MobileIcon } from "./Navbar.elements";
+import { ProfileIcon, Container, LogoContainer, Menu, MenuItem, MenuItemLink, ParkinnTitle, Wrapper, LinkTitle, MobileIcon} from "./Navbar.elements";
 import {FaBars, FaHome, FaParking, FaTimes, FaUserCircle} from "react-icons/fa"
 import {BsBookmarksFill} from "react-icons/bs"
 import { IconContext } from "react-icons";
@@ -20,29 +20,22 @@ export default function Navbar(){
 
             <Menu open = {showMobileMenu}>
                 <MenuItem>
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
+                    <MenuItemLink to="/">
                         <FaHome/>
                         INICIO
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/mis-plazas">
+                    <MenuItemLink to="/mis-plazas">
                         <FaParking/>
                         MIS PLAZAS
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
 
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/mis-reservas">
+                    <MenuItemLink to="/mis-reservas">
                         <BsBookmarksFill/>
                         MIS RESERVAS
-                    </MenuItemLink>
-                </MenuItem>
-                <MenuItem>
-
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/logout">
-                        <BsBookmarksFill/>
-                        Cerrar Sesión
                     </MenuItemLink>
                 </MenuItem>
             </Menu>
@@ -55,7 +48,7 @@ export default function Navbar(){
                     <FaUserCircle/>
                 </ProfileIcon>
             </IconContext.Provider>
-        </Wrapper>
+            </Wrapper>
     </Container>
     )
 }

@@ -33,16 +33,10 @@ export default function FormularioRegistro(){
             validationProps: { required: "El correo electrónico es un campo obligatorio"}
         },
         {
-            title: "Confirmar correo electrónico:",
-            type: "email",
-            name: "confirmEmail",
-            validationProps: {required: "No coincide con el correo original"} 
-        },
-        {
             title: "Contraseña:",
             type: "password",
             name: "password",
-            validationProps: { required: "La contraseña debe contener 7 caracteres o más"}
+            validationProps: { required: "La contraseña es un campo obligatorio"}
         },
         {
             title: "Confirmar contraseña:",
@@ -63,7 +57,37 @@ export default function FormularioRegistro(){
         console.log(values)
     }
 
+    function validate(watchValues, errorMethods){
+        let {errors, setError, clearErrors} = errorMethods
+        //Validación nombreno pjuede ser admin
+        if ( watchValues["name"] === "admin"){
+            if(!errors['name']){
+                setError('name', {
+                    type: 'manual',
+                    message: 'No puedes usar este nombre de usuario'
+                });
+            }
+        } else{
+            if (errors['name'] && errors['name']['type'] === 'manual'){
+                clearErrors('name');
+            }
+        }
+        //Validación de contraseñas iguales  
+        if ( watchValues["password"] !== watchValues["confirmPassword"]){
+            if(!errors['confirmPassword']){
+                setError('confirmPassword', {
+                    type: 'manual',
+                    message: 'No coinciden las contraseñas'
+                }); 
+            }   
+        } else{
+            if (errors['confirmPassword'] && errors['confirmPassword']['type'] === 'manual'){
+                clearErrors('confirmPassword');
+            }
+        }
+    }
+
     return(
-        <Formulario template={template} onSubmit={onSubmit}/>
+        <Formulario validate={validate} watchFields={["name","phone","password", "confirmPassword"]} template={template} onSubmit={onSubmit}/>
     )   
 }

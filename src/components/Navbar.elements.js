@@ -137,15 +137,20 @@ export const MobileIcon = styled.div`
 `;
 
 export const ProfileIcon = styled.div`
-    
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0rem 2rem 1rem 2rem;
     size: 100;
+   
     svg{
         fill: ${colors.fourth};
         cursor: pointer;
+
+        &:hover{
+            fill: #fff;
+            transition: 0.5s all ease;
+        }
     }
 
     @media screen and (max-width: 960px){
