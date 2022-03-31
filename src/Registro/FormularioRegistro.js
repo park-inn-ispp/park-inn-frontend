@@ -51,7 +51,7 @@ export default function FormularioRegistro(){
             title: "",
             type: "checkbox",
             name: "acceptTerms",
-            validationProps: { required: "Debe aceptar los términos y condiciones de uso"}
+            //validationProps: { required: "Debe aceptar los términos y condiciones de uso"}
         }
     ]   
     }
@@ -61,8 +61,8 @@ export default function FormularioRegistro(){
         console.log(evt)
         call('/api/auth/signup', "POST", evt)
         .then (response => { console.log(response)
-            //if (response.ok) 
-            //navigate('/register')
+            if (response.ok) 
+            navigate('/register')
         })
     }
 

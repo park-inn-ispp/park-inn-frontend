@@ -44,7 +44,6 @@ export default function Reserva(){
 
     const usuario = cookies.get('UserData');
 
-
     let horas = fechaFin-fechaInicio
     const [form, setForm]= useState({
         fechaInicio:'',
@@ -71,26 +70,26 @@ export default function Reserva(){
         "estaDisponible": true,
         "esAireLibre": true,
         "descripcion": plaza.descripcion,
-        "administrador": {
-          "id": usuario.id,
-          "name": usuario.name,
-          "email": usuario.email,
-          "password": usuario.password,
-          "loggedIn": usuario.loggedIn,
-          "phone": usuario.phone,
-          "surname": usuario.surname,
-          "acceptedTerms": usuario.acceptedTerms,
-          "roles": [
-            {
-              "id": usuario.roles.id,
-              "name": usuario.roles.name
-            }
-          ]
-
-        }
+        "administrador": plaza.administrador,
       },
       "precioTotal": horas*24*plaza.precioHora + plaza.fianza,
-      "user":plaza.administrador,
+      "user":{
+        "id": usuario.id,
+        "name": usuario.name,
+        "email": usuario.email,
+        "password": usuario.password,
+        "loggedIn": usuario.loggedIn,
+        "phone": usuario.phone,
+        "surname": usuario.surname,
+        "acceptedTerms": usuario.acceptedTerms,
+        "roles": [
+          {
+            "id": usuario.roles.id,
+            "name": usuario.roles.name
+          }
+        ]
+
+      },
       "fechaInicio": form.fechaInicio.toString()+'T00:00:00',
       "fechaFin": form.fechaFin.toString()+'T00:00:00'
           

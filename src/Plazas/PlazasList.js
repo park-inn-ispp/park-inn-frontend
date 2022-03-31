@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import ListComponentPlazas from '../components/ListComponentPlazas'
 import call from '../Util/Caller';
+
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 class PlazasList extends Component {
 
     constructor(props) {
@@ -14,7 +14,8 @@ class PlazasList extends Component {
     }
     
     componentDidMount() {
-        call('/plazas/all','GET')
+        const usuario = cookies.get('UserData');
+        call('/plazas/plazasDelUsuario/21','GET')
             .then(response => response.json())
             .then((data) =>{
                 
