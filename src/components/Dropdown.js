@@ -30,8 +30,8 @@ export default class DropdownComponent extends React.Component {
 
   render() {
 
-    
-    if (cookies.get('user_autorities')=="ROLE_ADMIN"){
+    //console.log(cookies.get('user_autorities').includes('ROLE_ADMIN'));
+    if (cookies.get('user_autorities').includes('ROLE_ADMIN')){
         return (
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle className='menu'caret>
