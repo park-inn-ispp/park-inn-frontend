@@ -13,6 +13,7 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import ReservasOwnerList from './Reservas/ReservasOwnerList';
 
 
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
