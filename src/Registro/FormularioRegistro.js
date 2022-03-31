@@ -1,5 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Formulario from "../components/Formulario/Formulario";
+import call from "../Util/Caller";
 
 export default function FormularioRegistro(){
     let template = {
@@ -41,7 +43,7 @@ export default function FormularioRegistro(){
         {
             title: "Confirmar contraseña:",
             type: "password",
-            name: "confirmPassword",
+            name: "confirm",
             validationProps: { required: "No coincide con la contraseña original"}
         },
         {
@@ -52,14 +54,20 @@ export default function FormularioRegistro(){
         }
     ]   
     }
-
-    function onSubmit(values){
-        console.log(values)
+    let navigate = useNavigate();
+    const onSubmit= evt => {
+        
+        console.log(evt)
+        call('/api/auth/signup', "POST", evt)
+        .then (response => { console.log(response)
+            if (response.ok) 
+            navigate('/')
+        })
     }
 
     function validate(watchValues, errorMethods){
         let {errors, setError, clearErrors} = errorMethods
-        //Validación nombreno pjuede ser admin
+        //Validación nombre no puede ser admin
         if ( watchValues["name"] === "admin"){
             if(!errors['name']){
                 setError('name', {
@@ -73,21 +81,23 @@ export default function FormularioRegistro(){
             }
         }
         //Validación de contraseñas iguales  
-        if ( watchValues["password"] !== watchValues["confirmPassword"]){
-            if(!errors['confirmPassword']){
-                setError('confirmPassword', {
+        if ( watchValues["password"] !== watchValues["confirm"]){
+            if(!errors['confirm']){
+                setError('confirm', {
                     type: 'manual',
                     message: 'No coinciden las contraseñas'
                 }); 
             }   
         } else{
-            if (errors['confirmPassword'] && errors['confirmPassword']['type'] === 'manual'){
-                clearErrors('confirmPassword');
+            if (errors['confirm'] && errors['confirm']['type'] === 'manual'){
+                clearErrors('confirm');
             }
         }
     }
 
     return(
-        <Formulario validate={validate} watchFields={["name","phone","password", "confirmPassword"]} template={template} onSubmit={onSubmit}/>
+        <Formulario validate={validate} watchFields={["name","phone","password", "confirm"]} 
+        template={template} onSubmit={onSubmit}/>   
     )   
+
 }

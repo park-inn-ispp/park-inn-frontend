@@ -28,7 +28,9 @@
     "react-remove-scroll-bar": "^2.2.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "react-smooth-scrollbar": "^8.0.6",
     "reactstrap": "^8.10.0",
+    "smooth-scrollbar": "^8.7.4",
     "styled-components": "^5.3.3",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"

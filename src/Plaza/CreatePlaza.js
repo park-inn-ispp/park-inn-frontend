@@ -14,16 +14,14 @@ export default function CreatePlaza() {
     codigoPostal:"",
     precioHora:"",
     fianza: "0",
-    ancho:"2.22",
-    largo:"4.50",
+    ancho:"0",
+    largo:"0",
     exterior:false,
     descripcion:'',
   })
 
   const[errors, setErrors]= useState({})
   
-  
-
   const handleSubmit= evt => {
    
     evt.preventDefault()
@@ -58,11 +56,8 @@ export default function CreatePlaza() {
         
             navigate(`/mis-plazas`)
           }
-        })
-      
+        }) 
     }  
-    
-   
   }
 
   const handleChange= evt => {
