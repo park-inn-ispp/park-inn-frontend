@@ -8,9 +8,15 @@ export const Wrapper = styled.div`
     padding: 30px;
 	background: #b4d7f3;
 	border-radius: 6px;
+    
 `;
 
 export const StyledForm = styled.form`
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width:60%;
 	padding:30px;
 	margin:auto;
@@ -28,10 +34,10 @@ export const StyledForm = styled.form`
 `;
 
 export const InputForm = styled.input`
-    width: 70%;
+    width: 80%;
     padding: 5px;
     border-radius: 15px;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
     @media screen and (max-width: 650px){
         width: 100%;
     }
@@ -51,5 +57,13 @@ export const Etiqueta = styled.label`
 
 export const ErrorMessage = styled.span`
     color: red;
+`;
+
+export const Div = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 `;
 

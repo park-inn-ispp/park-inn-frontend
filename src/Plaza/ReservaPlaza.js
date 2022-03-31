@@ -4,7 +4,6 @@ import validateReserva from './validateReserva';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
@@ -75,7 +74,19 @@ export default function Reserva(){
         "administrador": {
           "id": usuario.id,
           "name": usuario.name,
-          "email": usuario.email
+          "email": usuario.email,
+          "password": usuario.password,
+          "loggedIn": usuario.loggedIn,
+          "phone": usuario.phone,
+          "surname": usuario.surname,
+          "acceptedTerms": usuario.acceptedTerms,
+          "roles": [
+            {
+              "id": usuario.roles.id,
+              "name": usuario.roles.name
+            }
+          ]
+
         }
       },
       "precioTotal": horas*24*plaza.precioHora + plaza.fianza,

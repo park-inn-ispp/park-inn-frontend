@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Formulario from "../components/Formulario/Formulario";
+import Navbar from "../components/Navbar";
 import call from "../Util/Caller";
 
 export default function FormularioRegistro(){
@@ -60,8 +61,8 @@ export default function FormularioRegistro(){
         console.log(evt)
         call('/api/auth/signup', "POST", evt)
         .then (response => { console.log(response)
-            if (response.ok) 
-            navigate('/')
+            //if (response.ok) 
+            //navigate('/register')
         })
     }
 
@@ -96,8 +97,11 @@ export default function FormularioRegistro(){
     }
 
     return(
+        <>
         <Formulario validate={validate} watchFields={["name","phone","password", "confirm"]} 
         template={template} onSubmit={onSubmit}/>   
+        </>
     )   
+
 
 }
