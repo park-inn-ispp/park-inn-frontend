@@ -13,13 +13,22 @@ import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
 import FormularioRegistro from './Registro/FormularioRegistro';
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import Pagar from './Payments/Pagar';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
+import ReservasDashboard from './Dashboard/ReservasDashboard';
+import PlazasDashboard from './Dashboard/PlazasDashboard';
+import UsuariosDashboard from './Dashboard/UsuariosDashboard';
+
 
 function App() {
 
 return( <div className='App'> 
+      <ReactNotifications />
       <Navbar/>       
+        
         <Routes>
           <Route exact path='/' element={<PrivateRoute/>}>
             <Route  path='/' element={<Home/>}/>
@@ -31,9 +40,13 @@ return( <div className='App'>
             <Route path='/plaza/create' element={<CreatePlaza/>}/>
             <Route path='/reservas/:id' element={<ReservaDetails/>}/>
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
-            <Route path='/register' element={<FormularioRegistro/>}/>
+            <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
+            <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
+            <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
+            <Route path='/pagar/' element={<Pagar/>}/>
           </Route>
           <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<FormularioRegistro/>}/>
         </Routes> 
       <Footer/>   
     </div>);

@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { ProfileIcon, Container, LogoContainer, Menu, MenuItem, MenuItemLink, ParkinnTitle, Wrapper, LinkTitle, MobileIcon} from "./Navbar.elements";
+import { ProfileIcon, Container, LogoContainer, Menu, MenuItem, MenuItemLink, DropdownStyle, ParkinnTitle, Wrapper, LinkTitle, MobileIcon } from "./Navbar.elements";
 import {FaBars, FaHome, FaParking, FaTimes, FaUserCircle} from "react-icons/fa"
 import {BsBookmarksFill} from "react-icons/bs"
 import { IconContext } from "react-icons";
 import Logo from './Logo'
+import DropdownComponent from "./Dropdown";
 export default function Navbar(){
 
     //Estado para el boton del menu desplegable 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     return (
-    <Container>
+    <Container id="navbar-parkinn">
         <Wrapper>
             <IconContext.Provider value = {{style: {fontSize: "2em"}}}>
             <LogoContainer>
@@ -37,6 +38,12 @@ export default function Navbar(){
                         <BsBookmarksFill/>
                         MIS RESERVAS
                     </MenuItemLink>
+                </MenuItem>
+
+                <MenuItem>
+                    <DropdownStyle>
+                        <DropdownComponent /> 
+                    </DropdownStyle> 
                 </MenuItem>
             </Menu>
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
