@@ -28,7 +28,7 @@ return( <div className='App'>
 
           <Route exact path='/' element={<PrivateRoute/>}>
             <Route  path='/' element={<Home/>}/>
-            //<Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
+            <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
             <Route path='/logout' element={<Logout />}/>
 
             <Route path='/mis-plazas' element={<PlazasList/>}/>
@@ -40,7 +40,7 @@ return( <div className='App'>
 
             <Route path='/reservas/:id' element={<ReservaDetails/>}/>
                   
-            <Route path='/reservas/plaza/:id' element={<ReservasOwnerList/>}/>
+            <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservasOwnerList/>}/>
 
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
 
