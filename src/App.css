@@ -291,9 +291,10 @@
   border-collapse: collapse;
   text-align: center;
   width: 100%;
-}	
+}
 
-.tablas td, .tablas th {
+.tablas td,
+.tablas th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -329,7 +330,7 @@
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px #002;
   z-index: 1;
 }
   
