@@ -1,7 +1,4 @@
-import styled from 'styled-components'
-
-export const Container = styled.div`
-`;
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
     height: 100%;
@@ -11,8 +8,7 @@ export const Wrapper = styled.div`
     
 `;
 
-export const StyledForm = styled.form`
-    
+export const StyledForm = styled.form` 
     display: flex;
     flex-direction: column;
     align-items: center;
