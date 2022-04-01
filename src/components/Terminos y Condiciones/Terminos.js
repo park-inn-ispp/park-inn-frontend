@@ -3,7 +3,6 @@ import { colors } from '../../theme';
 import { FaTimes } from 'react-icons/fa';
 
 const Container = styled.div`
-    display: none;
     position: absolute;
     width: 22%;
     height: 60%;

@@ -16,7 +16,7 @@ export default function Formulario ({ template, onSubmit, watchFields, validate 
                 case 'checkbox':
                     return (
                         <Div key={name}>
-                            <CheckBox type='checkbox' name={name} id={name} ref={register(validationProps)}/>
+                            <CheckBox type={type} name={name} id={name} ref={register(validationProps)}/>
                             <Etiqueta htmlFor={name}>He leído y acepto las <a href='/'>condiciones de uso</a> y servicio</Etiqueta>
                             {errors[name] && <ErrorMessage>{errors[name]['message']}</ErrorMessage>}
                         </Div>

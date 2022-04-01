@@ -44,26 +44,32 @@ export const InputForm = styled.input`
 `;
 
 export const CheckBox = styled.input`
-    transform: scale(1.7);
-    margin-right: 15px;
-    margin-top: 20px;
-    transition: 0.5s all ease;
+    width: 1.4em;
+    height: 1.4em;
+    margin-top: 0.25em;
+    margin-right: 30px;
+    vertical-align: top;
+    background-color: #fff;
 `;
 
 export const Etiqueta = styled.label`
+    flex-direction: rpw;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
     font-size: 18px;
 `;
 
 export const ErrorMessage = styled.span`
+    margin-top: -5px;
     color: red;
 `;
 
 export const Div = styled.div`
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
 `;
+
 

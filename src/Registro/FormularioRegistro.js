@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Formulario from "../components/Formulario/Formulario";
-import Navbar from "../components/Navbar";
+import Terminos from "../components/Terminos y Condiciones/Terminos";
 import call from "../Util/Caller";
 
 export default function FormularioRegistro(){
@@ -51,7 +51,7 @@ export default function FormularioRegistro(){
             title: "",
             type: "checkbox",
             name: "acceptTerms",
-            //validationProps: { required: "Debe aceptar los términos y condiciones de uso"}
+            validationProps: { required: "Debe aceptar los términos y condiciones de uso"}
         }
     ]   
     }
