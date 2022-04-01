@@ -10,6 +10,7 @@ import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
 
+
 export default function Reserva(){
 
     //Estados con Hooks 
@@ -18,9 +19,11 @@ export default function Reserva(){
     const [isLoading, setIsLoading] = useState(true)
     const [fechaInicio, setFechaInicio] = useState(0)
     const [fechaFin, setFechaFin] = useState(0)
+    const [horaInicio, setHoraInicio] = useState(0)
+    const [horaFin, setHoraFin] = useState(0)
     const [idReserva, setIdReserva] = useState(0)
     const [pagando, setPagando] = useState(false)
-    const [diff, setDiff] = useState(0);
+   
 
 
     
@@ -41,7 +44,7 @@ export default function Reserva(){
         DetallesPlaza()
     },[id]);
 
-    let dias = ((fechaFin-fechaInicio)/(1000 * 60 * 60 * 24)).toFixed(0)
+    
     const [form, setForm]= useState({
         fechaInicio:'',
         fechaFin:'',
@@ -49,35 +52,56 @@ export default function Reserva(){
         horaFin:'',
         precioTotal:''
     })
+    
+    //Cálculo de la diferencia entre las fechas
+    let FechaYHoraInicio = new Date(form.fechaInicio.toString()+'T'+form.horaInicio.toString())
+    let FechaYHoraFin = new Date(form.fechaFin.toString()+'T'+form.horaFin.toString())
+    console.log(FechaYHoraInicio)
+    console.log(FechaYHoraFin)
+    
+    let horas = 0
+    let precioEstacionamiento = 0;
+    let precioTotalConFianza=plaza.fianza;
+    
+    if (FechaYHoraFin>FechaYHoraInicio) {
+       //dias = ((FechaYHoraFin-FechaYHoraInicio)/(1000 * 60 * 60 * 24)).toFixed(0)
+       horas = ((FechaYHoraFin-FechaYHoraInicio)/(1000 * 60 * 60))
+       precioEstacionamiento = (horas*plaza.precioHora).toFixed(2)
+       precioTotalConFianza = (plaza.fianza + horas*plaza.precioHora).toFixed(2)
+       console.log (precioEstacionamiento)
+       console.log (precioTotalConFianza)
+
+    }
 
     const body = {
             
       "comentarios":null,
       "estado": "pendiente",
-      "fechaSolicitud":"2022-03-22T14:30:40",
+      "fechaSolicitud":new Date(),
       "incidencias":null,
       "plaza": {
         "id": plaza.id,
-        "direccion": " Carberry Street,58885,Cadiz,Andalucia,11130",
+        "direccion": plaza.direccion,
         "precioHora": plaza.precioHora,
         "fianza": plaza.fianza,
         "ancho": plaza.ancho,
         "largo": plaza.largo,
         "estaDisponible": true,
         "esAireLibre": true,
-        "descripcion": "Fexofenadine Hydrochloride",
+        "descripcion": plaza.descripcion,
           "administrador": {
           "id": 0,
           "name": 'sergio',
           "email": 'admin@admin.com'
         }
       },
-      "precioTotal": dias*24*plaza.precioHora + plaza.fianza,
+      "precioTotal": precioTotalConFianza,
       "user":null,
-      "fechaInicio": form.fechaInicio.toString()+'T00:00:00',
-      "fechaFin": form.fechaFin.toString()+'T00:00:00'
+      "fechaInicio": FechaYHoraInicio,
+      "fechaFin": FechaYHoraFin
           
       }
+
 
       const handleSubmit= async evt => {
         evt.preventDefault()
@@ -88,6 +112,7 @@ export default function Reserva(){
         console.log(numeroErrores)
         if (numeroErrores===0) {
           setPagando(true)
+          console.log(body)
         }
     }
 
@@ -106,6 +131,22 @@ export default function Reserva(){
       
      }
 
+
+     const handleChangeHora = evt => {
+      const target = evt.target
+      const name = target.name
+      if (name==='horaInicio') {
+        const INI = target.value.toString()
+        setHoraInicio(INI)
+      } else {
+        const FIN = target.value.toString()
+        setHoraFin(FIN)
+      }
+      var value= target.value.toString()
+      console.log(value)
+      setForm({...form,[name]: value})
+      
+     }
     
       const handleChange= evt => {
         const target = evt.target
@@ -168,12 +209,12 @@ export default function Reserva(){
             
             <Etiqueta>Hora Inicio: </Etiqueta>
             <Parrafo>
-              <input  onChange={handleChange} name= "horaInicio" type="time" step="600" value={form.horaInicio}/>
+              <input  onChange={handleChangeHora} name= "horaInicio" type="time" step="600" value={form.horaInicio}/>
               <FormErrorMessage jsonErrors={errors} errorName="horaInicio"/>
             </Parrafo>
             <Etiqueta>Hora Fin: </Etiqueta>
             <Parrafo>
-              <input  onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
+              <input  onChange={handleChangeHora} name= "horaFin" type="time" value={form.horaFin}/>
               <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
     </Parrafo>
           </div>
@@ -181,8 +222,8 @@ export default function Reserva(){
           <div class="inner-wrap">
           <Etiqueta>Precio por hora:</Etiqueta><Parrafo>{plaza.precioHora} €</Parrafo>
           <Etiqueta>Precio de la fianza:</Etiqueta><Parrafo>{plaza.fianza} €</Parrafo>  
-          <Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{dias*24*plaza.precioHora} €</Parrafo>  
-          <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{dias*24*plaza.precioHora + plaza.fianza} €</Parrafo>
+          <Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{precioEstacionamiento} €</Parrafo>  
+          <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{precioTotalConFianza} €</Parrafo>
           </div>  
           <input type="submit" value="Siguiente"/>
         </Formulario>
