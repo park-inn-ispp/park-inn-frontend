@@ -6,12 +6,12 @@ const urlBackend ="http://localhost:8080";
 const urlFrontend = "http://localhost:3000";
 
 
-     async function call(path_to_call,method,body){
-        let headers_ = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : urlFrontend, "mode": "cors"}
-        const token = await cookies.get('AuthToken')
+     async function call(pathToCall,method,body){
+        let headers_ = {"Content-Type": "application/json", "Access-Control-Allow-Origin" : urlFrontend, "mode": "cors"};
+        const token = await cookies.get('AuthToken');
 
         if(token !== undefined && token !== "undefined"){
-            headers_ = {'Authorization' : 'Bearer ' + token.toString(),'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : urlFrontend, "mode": "cors"}
+            headers_ = {"Authorization" : "Bearer" + token.toString(), "Content-Type": "application/json", "Access-Control-Allow-Origin" : urlFrontend, "mode": "cors"};
         }
 
         const requestOptions = {
@@ -20,11 +20,10 @@ const urlFrontend = "http://localhost:3000";
             body: (JSON.stringify(body))
         };
 
-        return await fetch(urlBackend+path_to_call, requestOptions)
+        return await fetch(urlBackend+pathToCall, requestOptions);
             
       
     
     }
-
-
+    
 export default call

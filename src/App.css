@@ -87,7 +87,7 @@
 }
 
 .form-style-10 {
-  width:fit-content;
+  width: fit-content;
   padding:30px;
   margin:40px auto;
   background: #f1f7fe;
@@ -259,9 +259,11 @@
   background: #fff;
   color: #fff;
 }
+
 .editButton:link {
   color: #fff;
 }
+
 .editButton:hover {
   border-bottom: 1px solid;
   background: #2a6881;
