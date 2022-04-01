@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form'
 import GeneralButton from '../GeneralButton/GeneraButton';
-import { Container, Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div } from './Formulario.components'
+import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div } from './Formulario.components'
 
 export default function Formulario ({ template, onSubmit, watchFields, validate }){
 
+    //Hook de react para el uso de formluarios con una función handleSubmit
     let { register, handleSubmit, errors, watch, setError, clearErrors } = useForm();
     let { title, fields } = template;
     let watchValues = watch(watchFields);
@@ -50,15 +51,12 @@ export default function Formulario ({ template, onSubmit, watchFields, validate 
     }
 
     return (
-        <Container>
-            <Wrapper>
-                <StyledForm onSubmit={handleSubmit(onSubmit)}>
-                <h2>{title}</h2>
-                {renderFields(fields)}<br/>
-                <GeneralButton type='submit' content="Confirmar"></GeneralButton>
-                </StyledForm>
-            </Wrapper>
-        </Container>
+        <Wrapper>
+            <StyledForm onSubmit={handleSubmit(onSubmit)}>
+            <h2>{title}</h2>
+            {renderFields(fields)}<br/>
+            <GeneralButton type='submit' content="Confirmar"></GeneralButton>
+            </StyledForm>
+        </Wrapper>
     );
-
 }

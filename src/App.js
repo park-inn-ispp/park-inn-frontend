@@ -23,33 +23,32 @@ import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
 
 
-function App() {
+export default function App() {
 
-return( <div className='App'> 
-      <ReactNotifications />
-      <Navbar/>       
-        
-        <Routes>
-          <Route exact path='/' element={<PrivateRoute/>}>
-            <Route  path='/' element={<Home/>}/>
-            <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
-            <Route path='/logout' element={<Logout />}/>
-            <Route path='/mis-plazas' element={<PlazasList/>}/>
-            <Route path='/mis-reservas' element={<ReservasClientList/>}/>
-            <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
-            <Route path='/plaza/create' element={<CreatePlaza/>}/>
-            <Route path='/reservas/:id' element={<ReservaDetails/>}/>
-            <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
-            <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
-            <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
-            <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
-            <Route path='/pagar/' element={<Pagar/>}/>
-          </Route>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/register' element={<FormularioRegistro/>}/>
-        </Routes> 
-      <Footer/>   
-    </div>);
+return( 
+        <div className='App'> 
+          <ReactNotifications />
+          <Navbar/>       
+            <Routes>
+              <Route exact path='/' element={<PrivateRoute/>}>
+                <Route  path='/' element={<Home/>}/>
+                <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
+                <Route path='/logout' element={<Logout />}/>
+                <Route path='/mis-plazas' element={<PlazasList/>}/>
+                <Route path='/mis-reservas' element={<ReservasClientList/>}/>
+                <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
+                <Route path='/plaza/create' element={<CreatePlaza/>}/>
+                <Route path='/reservas/:id' element={<ReservaDetails/>}/>
+                <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
+                <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
+                <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
+                <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
+                <Route path='/pagar/' element={<Pagar/>}/>
+              </Route>
+              <Route path='/login' element={<Login />}/>
+              <Route path='/register' element={<FormularioRegistro/>}/>
+            </Routes> 
+          <Footer/>   
+        </div>
+      );
 }
-
-export default App;
