@@ -329,7 +329,7 @@
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0 8px 16px 0px #002;
+  box-shadow: 0 8px 16px 0 #002;
   z-index: 1;
 }
   
