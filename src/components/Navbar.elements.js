@@ -1,8 +1,6 @@
-import { DropdownButton } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { colors } from '../theme';
-
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { colors } from "../theme";
 
 export const Container = styled.div`
     width: 100%;

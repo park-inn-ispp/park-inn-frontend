@@ -1,42 +1,42 @@
-import styled from 'styled-components'
-import { colors } from '../../theme';
-import { FaTimes } from 'react-icons/fa';
+import styled from "styled-components";
+import { colors } from "../../theme";
+import { FaTimes } from "react-icons/fa";
 
 const Container = styled.div`
-    position: absolute;
-    width: 22%;
-    height: 60%;
-    margin-left: 40%;
-    margin-top: 3%;
-    background-color: ${colors.fivth};
-    border-radius: 20px;
-    overflow-y: scroll;
-    z-index: 3;
-    ::-webkit-scrollbar{
-        display: none;
-        
-    }
-    ::-webkit-scrollbar-thumb{
-        background-color: transparent;
-    }
+  position: absolute;
+  width: 22%;
+  height: 60%;
+  margin-left: 40%;
+  margin-top: 3%;
+  background-color: ${colors.fivth};
+  border-radius: 20px;
+  overflow-y: scroll;
+  z-index: 3;
+  ::-webkit-scrollbar{
+  display: none;   
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: transparent;
+}
 `;
 
 const Header = styled.header`
-    width: 100%;
-    height: 5%;
-    svg{
-        fill: #fff;
-        width: 20px;
-        height: 20px;
-        margin-left: 90%;
-    }
-    cursor: pointer;
+  width: 100%;
+  height: 5%;
+  svg{
+    fill: #fff;
+    width: 20px;
+    height: 20px;
+    margin-left: 90%;
+  }
+  cursor: pointer;
 `;
 
 
 const Parrafo = styled.p`
-    margin: 5px 5px 5px 5px;
-    color: #fff;
+  margin: 5px 5px 5px 5px;
+  color: #fff;
 `;
 
 export default function Terminos(){

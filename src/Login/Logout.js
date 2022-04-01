@@ -8,6 +8,6 @@ export default function Logout(){
     cookies.remove("user_mail");
     cookies.remove("UserData");
     cookies.remove("user_autorities");
-    localStorage["AuthToken"] = undefined
+    localStorage["AuthToken"] = undefined;
     window.location.href = "./login";
 }
