@@ -12,6 +12,8 @@ class ReservasOwnerList extends Component{
     }
 
     componentDidMount(){
+      const id = this.props.match.params.id;
+	 this.fetchData(id);
         call(`/reservas/plaza/${id}`,"GET")
         .then(response => response.json())
         .then((data) => {
@@ -24,8 +26,8 @@ class ReservasOwnerList extends Component{
             <ListComponent
                 header={"fechaSolicitud"}
                 data={this.state.reservas}
-                attributes={[{position:1,val:'id'},{position:2,val:'fechaInicio'},{position:3,val:'fechaFin'}, {position:4,val:'plaza.direccion'}, {position:5,val:'user.name'}. {position:6,val:'comentarios'}]} 
-                headers={['id', 'fechaInicio', 'fechaFin', 'direccion', 'nombre','comentarios']}
+                attributes={[{position:1,val:'id'},{position:2,val:'estado'},{position:3,val:'precioTotal'},{position:4,val:'fechaInicio'},{position:5,val:'fechaFin'},{position:6,val:'fechaSolicitud'},{position:7,val:'comentarios'},{position:8,val:'incidencias'}]} 
+                headers={['id','estado','precioTotal','fechaInicio','fechaFin', 'fechaSolicitud', 'comentarios','incidencias']}
                 />
         );
     }
