@@ -4,14 +4,10 @@ export default function validateReserva(form){
     const fechaReserva = new Date();
     const fechaActual = fechaReserva.getFullYear() + "-" + 0+(fechaReserva.getMonth() + 1) + "-" + fechaReserva.getDate();
     
-    console.log(fechaActual)
-
     //Validación Fecha Incio
     if(!form.fechaInicio.trim()){
         errors.fechaInicio = "La fecha de inicio es un campo obligatorio"
     } else if (form.fechaInicio < fechaActual){
-        console.log(fechaActual)
-        console.log(form.fechaInicio)
         errors.fechaInicio = "La fecha de Inicio debe ser de hoy en adelante"
     }
 
