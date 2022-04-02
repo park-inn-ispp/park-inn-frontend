@@ -21,7 +21,7 @@ import Pagar from './Payments/Pagar';
 import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
-
+import ReservaOwnerList from './Reservas/ReservasOwnerList';
 
 export default function App() {
 
@@ -44,6 +44,7 @@ return(
               <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
               <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
               <Route path='/pagar/' element={<Pagar/>}/>
+              <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservaOwnerList/>}/>
             </Route>
             <Route path='/login' element={<Login />}/>
             <Route path='/register' element={<FormularioRegistro/>}/>
