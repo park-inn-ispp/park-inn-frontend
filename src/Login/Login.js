@@ -3,82 +3,132 @@ import './Login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
 import call from '../Util/Caller';
+import Logo from '../components/Logo';
+import Input from '../components/Input/Input';
+import displayNotification from '../Util/Notifications';
+import { Link } from 'react-router-dom';
+import { Etiqueta } from '../components/Formulario/Formulario.components';
 const cookies = new Cookies();
 
 class Login extends Component {
     state={
         form:{
             email: '',
-            password: ''
-        }
+            password: '',
+            recuerdame: false
+        },
+      
+        user_password : undefined
+  
     }
 
     handleChange=async e=>{
-        await this.setState({
-            form:{
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            }
-        });
+        if(e.target.name==="recuerdame"){
+            await this.setState({
+                form:{
+                    ...this.state.form,
+                    [e.target.name]: e.target.checked
+                }
+            });
+        }else{
+            await this.setState({
+                form:{
+                    ...this.state.form,
+                    [e.target.name]: e.target.value
+                }
+            });
+        }
+       
     }
 
-    iniciarSesion=async()=>{
+    
+     iniciarSesion=async()=>{
         const data= {
-            "email": this.state.form.email,
-            "password":this.state.form.password
+            nameOrEmail: this.state.form.email,
+            password:this.state.form.password
         }
-
-      
-        call(`/clients/login`,"POST",data)
+        call(`/api/auth/signin`,"POST",data)
             .then(async response  =>  {
-            if(response.ok && await response.json()==="SUCCESS"){
-                cookies.set('email', data.email, {path: "/"});
-                window.location.href="./";           
-                console.log("cookie en navegador")
+            if(response.ok){
+                let auth_token = await (await response.text()).split(" ")[1]
 
-            }
-            return response.data;
+                if(this.state.form.recuerdame){
+                    localStorage["AuthToken"] = auth_token
+                }
+
+                cookies.set("AuthToken",auth_token)
+
+                const data = await call('/clients', 'GET');
+                const usuarios = await data.json()
+            
+                function usuarioLogueado(userEmail, usuarios){
+                    for (var i=0; i<usuarios.length; i++) {
+                      if (usuarios[i].email===userEmail) {
+                        return usuarios[i]
+                      }
+                    }
+                  }
+                
+                const usuario = await usuarioLogueado(this.state.form.email, usuarios);
+                cookies.set("UserData",usuario);
+
+                 window.location.href="./";           
+
+             }else{
+                if(data.nameOrEmail &&  data.password){
+                    displayNotification("Error","Usuario o contraseña incorrectos","danger")
+    
+                }else{
+                    displayNotification("Error","Debes de rellenar los datos","danger")
+                }
+             }
         })
         .catch(error=>{
             console.log(error);
         })
-
-    }
+   
+     }
 
     componentDidMount() {
-        if(cookies.get('email')){
-            window.location.href="./";
-        }
+        // if(cookies.get('email')){
+        //     window.location.href="./";
+        // }
+        document.getElementById("navbar-parkinn").setAttribute("hidden",true)
+        document.getElementById("footer-parkinn").setAttribute("hidden",true)
     }
     
 
     render() {
         return (
-    <div className="containerPrincipal">
-        <div className="containerSecundario">
-          <div className="form-group">
-            <label>Email: </label>
-            <br />
-            <input
-              type="text"
-              className="form-control"
-              name="email"
-              onChange={this.handleChange}
-            />
-            <br />
-            <label>Contraseña: </label>
-            <br />
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              onChange={this.handleChange}
-            />
-            <br />
-            <button className="btn btn-primary" onClick={()=> this.iniciarSesion()}>Iniciar Sesión</button>
-          </div>
-        </div>
-      </div>
+            <div className='login'>
+
+                <div className="container_body">
+                    <div className='parkinn-icon'>
+                        <Logo className="logo" margin-top="500px" />
+                    </div>
+
+                    <div className='login-inputs'>
+                    
+                    <div className='input'>
+                        <div className='label'>Dirección mail</div>
+                        <input type="text" name="email" placeholder="usuario@gmail.com" onChange={this.handleChange}></input>
+                    </div>   
+
+                    <div className='input'>
+                        <div className='label'>Contraseña</div>
+                        <input type="password" name="password" placeholder="password" onChange={this.handleChange}></input>
+
+                    </div>   
+                        <input className="checkb-input" name="recuerdame" type="checkbox" onChange={this.handleChange}/>
+                    </div>
+                    
+                    <div className='login-footer'>
+                        <button className='button-login' onClick={()=> this.iniciarSesion()}>Log In</button>
+                    </div>
+                    <br/>
+                    <Link to="/register">Registrarme</Link>
+                </div>
+            </div>
         );
     }
 }

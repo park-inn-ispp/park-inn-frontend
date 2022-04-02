@@ -1,6 +1,5 @@
-
-import React, { Component,useState } from 'react';
-import {Route, Routes,Navigate} from 'react-router-dom';
+import React from 'react';
+import {Route, Routes} from 'react-router-dom';
 import './App.css';
 import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
@@ -14,45 +13,30 @@ import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
 import ReservasOwnerList from './Reservas/ReservasOwnerList';
-
-
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
 
-function App() {
+export default function App() {
 
 return( <div className='App'> 
       <Navbar/>       
         <Routes>
-
           <Route exact path='/' element={<PrivateRoute/>}>
             <Route  path='/' element={<Home/>}/>
             <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
             <Route path='/logout' element={<Logout />}/>
-
             <Route path='/mis-plazas' element={<PlazasList/>}/>
             <Route path='/mis-reservas' element={<ReservasClientList/>}/>
             <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
-
             <Route path='/plaza/create' element={<CreatePlaza/>}/>
-
-
-            <Route path='/reservas/:id' element={<ReservaDetails/>}/>
-                  
+            <Route path='/reservas/:id' element={<ReservaDetails/>}/>      
             <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservasOwnerList/>}/>
-
             <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
-
-
           </Route>
           <Route path='/login' element={<Login />}/>
-
-
-         
         </Routes> 
       <Footer/>   
     </div>);
 }
 
-export default App;
+

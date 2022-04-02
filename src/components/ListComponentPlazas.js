@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ListComponent.css'
+import Loading from './Loading'
 
 class ListComponentPlazas extends Component {
 
@@ -103,7 +104,8 @@ class ListComponentPlazas extends Component {
         }
         
         return <div>
-            
+            <Loading></Loading>
+
            
             </div>
        
