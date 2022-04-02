@@ -1,12 +1,13 @@
-import  { useEffect } from 'react';
 import '../App.css';
-import call from '../Util/Caller';
+import Cookies from "universal-cookie";
 
-import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export default function Logout(){
-    cookies.remove('AuthToken'); // determine if authorized, from context or however you're doing it
-    localStorage['AuthToken'] = undefined
-    window.location.href='./login';
+    cookies.remove("AuthToken"); // determine if authorized, from context or however you're doing it
+    cookies.remove("user_mail");
+    cookies.remove("UserData");
+    cookies.remove("user_autorities");
+    localStorage.removeItem("AuthToken");
+    window.location.href = "./login";
 }
