@@ -26,8 +26,8 @@ class ReservasOwnerList extends Component{
             <ListComponent
                 header={"fechaSolicitud"}
                 data={this.state.reservas}
-                attributes={[{position:1,val:'id'},{position:2,val:'estado'},{position:3,val:'precioTotal'},{position:4,val:'fechaInicio'},{position:5,val:'fechaFin'},{position:6,val:'fechaSolicitud'},{position:7,val:'comentarios'},{position:8,val:'incidencias'}]} 
-                headers={['id','estado','precioTotal','fechaInicio','fechaFin', 'fechaSolicitud', 'comentarios','incidencias']}
+                attributes={[{position:1,val:'id'},{position:2,val:'fechaInicio'},{position:3,val:'fechaFin'}, {position:4,val:'plaza.direccion'}]} 
+                headers={['id', 'fechaInicio', 'fechaFin', 'direccion']}
                 />
         );
     }
