@@ -3,6 +3,9 @@ import ValidateIncidenciaForm from './ValidateIncidenciaForm';
 import { useParams, useNavigate } from 'react-router-dom';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import call from '../Util/Caller';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+const email = cookies.get('user_mail');
 
 export default function CreateIncidencia() {
     const reservaId = parseInt(useParams().id)
@@ -27,20 +30,16 @@ export default function CreateIncidencia() {
         if(numeroErrores===0){
 
             const data= {
-            //"idIncidencia"
             "fecha": new Date(),
             "titulo": form.titulo,
             "descripcion": form.descripcion,
-            "idUsuario": '',
-            //"estado": '', //abierta,cerrada, pending
-            "idReserva": reservaId,
+            "email": email,
+            "idReserva": reservaId
             }
-      
             call('/incidencia/new',"POST", data)
                 .then(response => {
-                console.log(response.ok)
                 if (response.ok){
-                    navigate(`/mis-plazas`)
+                    navigate(`/mis-reservas`)
                 }
             })
         }
