@@ -12,31 +12,43 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
-import ReservasOwnerList from './Reservas/ReservasOwnerList';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
+import FormularioRegistro from './Registro/FormularioRegistro';
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import Pagar from './Payments/Pagar';
+import ReservasDashboard from './Dashboard/ReservasDashboard';
+import PlazasDashboard from './Dashboard/PlazasDashboard';
+import UsuariosDashboard from './Dashboard/UsuariosDashboard';
+
 
 export default function App() {
 
-return( <div className='App'> 
-      <Navbar/>       
-        <Routes>
-          <Route exact path='/' element={<PrivateRoute/>}>
-            <Route  path='/' element={<Home/>}/>
-            <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
-            <Route path='/logout' element={<Logout />}/>
-            <Route path='/mis-plazas' element={<PlazasList/>}/>
-            <Route path='/mis-reservas' element={<ReservasClientList/>}/>
-            <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
-            <Route path='/plaza/create' element={<CreatePlaza/>}/>
-            <Route path='/reservas/:id' element={<ReservaDetails/>}/>      
-            <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservasOwnerList/>}/>
-            <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
-          </Route>
-          <Route path='/login' element={<Login />}/>
-        </Routes> 
-      <Footer/>   
-    </div>);
+return( 
+      <div className='App'> 
+        <ReactNotifications />
+        <Navbar/>       
+          <Routes>
+            <Route exact path='/' element={<PrivateRoute/>}>
+              <Route  path='/' element={<Home/>}/>
+              <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
+              <Route path='/logout' element={<Logout />}/>
+              <Route path='/mis-plazas' element={<PlazasList/>}/>
+              <Route path='/mis-reservas' element={<ReservasClientList/>}/>
+              <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
+              <Route path='/plaza/create' element={<CreatePlaza/>}/>
+              <Route path='/reservas/:id' element={<ReservaDetails/>}/>
+              <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
+              <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
+              <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
+              <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
+              <Route path='/pagar/' element={<Pagar/>}/>
+            </Route>
+            <Route path='/login' element={<Login />}/>
+            <Route path='/register' element={<FormularioRegistro/>}/>
+          </Routes> 
+        <Footer/>   
+      </div>
+    );
 }
-
-
