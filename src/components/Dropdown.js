@@ -29,31 +29,47 @@ export default class DropdownComponent extends React.Component {
   }
 
   render() {
+    try{
+      const user_data = cookies.get('UserData')
 
-    //console.log(cookies.get('user_autorities').includes('ROLE_ADMIN'));
-    if (cookies.get('user_autorities').includes('ROLE_ADMIN')){
-        return (
-            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-              <DropdownToggle className='menu'caret>
-                Panel Administrador
-              </DropdownToggle>
-              <DropdownMenu>
-                  <DropdownItem href="/dashboard-reservas">Reservas</DropdownItem>
-                  <DropdownItem href="/dashboard-plazas">Plazas</DropdownItem>
-                  <DropdownItem href="/dashboard-usuarios">Usuarios</DropdownItem>
-                  <DropdownItem href="/logout">Cerrar Sesión</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+      var is_authorized =false
+      for(let i=0;i<user_data.roles.length;i++){
+
+          if(user_data.roles[i].name=='ROLE_ADMIN'){
+              is_authorized =true
+              break
+          }
+      }
+
+      if (is_authorized){
+          return (
+              <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <DropdownToggle className='menu'caret>
+                  Panel Administrador
+                </DropdownToggle>
+                <DropdownMenu>
+                    <DropdownItem href="/dashboard-reservas">Reservas</DropdownItem>
+                    <DropdownItem href="/dashboard-plazas">Plazas</DropdownItem>
+                    <DropdownItem href="/dashboard-usuarios">Usuarios</DropdownItem>
+                    <DropdownItem href="/logout">Cerrar Sesión</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            );
+      }else{
+          return (
+          <MenuItemLink to="/logout">
+              <BsBookmarksFill/>
+              CERRAR SESIÓN
+          </MenuItemLink>
           );
-    }else{
-        return (
+      }
+    }catch{
+      return (
         <MenuItemLink to="/logout">
             <BsBookmarksFill/>
             CERRAR SESIÓN
         </MenuItemLink>
         );
     }
-
-
-  }
+}
 }
