@@ -12,6 +12,7 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import CreateIncidencia from './Incidencia/CreateIncidencia'
 import FormularioRegistro from './Registro/FormularioRegistro';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
@@ -39,6 +40,7 @@ return(
                 <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
                 <Route path='/plaza/create' element={<CreatePlaza/>}/>
                 <Route path='/reservas/:id' element={<ReservaDetails/>}/>
+                <Route path='/reservas/:id/incidencia/new' element={<CreateIncidencia/>}/>
                 <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
                 <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
                 <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
