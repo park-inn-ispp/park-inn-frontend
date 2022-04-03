@@ -6,6 +6,8 @@ import call from '../Util/Caller';
 import Logo from '../components/Logo';
 import Input from '../components/Input/Input';
 import displayNotification from '../Util/Notifications';
+import { Link } from 'react-router-dom';
+import { Etiqueta } from '../components/Formulario/Formulario.components';
 const cookies = new Cookies();
 
 class Login extends Component {
@@ -20,11 +22,8 @@ class Login extends Component {
   
     }
 
-
-
-    
     handleChange=async e=>{
-        if(e.target.name=="recuerdame"){
+        if(e.target.name==="recuerdame"){
             await this.setState({
                 form:{
                     ...this.state.form,
@@ -48,9 +47,6 @@ class Login extends Component {
             nameOrEmail: this.state.form.email,
             password:this.state.form.password
         }
-        
-
-      
         call(`/api/auth/signin`,"POST",data)
             .then(async response  =>  {
             if(response.ok){
@@ -64,8 +60,7 @@ class Login extends Component {
 
                 const data = await call('/clients', 'GET');
                 const usuarios = await data.json()
-                
-
+            
                 function usuarioLogueado(userEmail, usuarios){
                     for (var i=0; i<usuarios.length; i++) {
                       if (usuarios[i].email===userEmail) {
@@ -73,8 +68,7 @@ class Login extends Component {
                       }
                     }
                   }
-                  
-
+                
                 const usuario = await usuarioLogueado(this.state.form.email, usuarios);
                 cookies.set("UserData",usuario);
 
@@ -117,25 +111,22 @@ class Login extends Component {
                     
                     <div className='input'>
                         <div className='label'>Dirección mail</div>
-                        <input type="text" name="email" placeholder="alguien@gmail.com" onChange={this.handleChange}></input>
+                        <input type="text" name="email" placeholder="usuario@gmail.com" onChange={this.handleChange}></input>
                     </div>   
 
                     <div className='input'>
                         <div className='label'>Contraseña</div>
-                        <input type="password" name="password" placeholder="password123" onChange={this.handleChange}></input>
+                        <input type="password" name="password" placeholder="password" onChange={this.handleChange}></input>
 
                     </div>   
-
-                    <input className="checkb-input" name="recuerdame" type="checkbox" onChange={this.handleChange}  />
+                        <input className="checkb-input" name="recuerdame" type="checkbox" onChange={this.handleChange}/>
                     </div>
                     
                     <div className='login-footer'>
                         <button className='button-login' onClick={()=> this.iniciarSesion()}>Log In</button>
-                        <div className='signup'>
-                            <span className='span-signup'>Registrame</span>
-                        </div>
                     </div>
-                    
+                    <br/>
+                    <Link to="/register">Registrarme</Link>
                 </div>
             </div>
         );

@@ -92,7 +92,7 @@ export default function validateParkingForm(form){
     }
 
     // Validación exterior (true or false)
-    if (form.exterior != true && form.exterior!= false){
+    if (form.exterior !== true && form.exterior !== false){
         errors.exterior= "Debe seleccionar si su aparcamiento se encuentra en el exterior o en el interior"
     }
 

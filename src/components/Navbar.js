@@ -21,30 +21,30 @@ export default function Navbar(){
 
             <Menu open = {showMobileMenu}>
                 <MenuItem>
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
+                    <MenuItemLink to="/">
                         <FaHome/>
                         INICIO
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/mis-plazas">
+                    <MenuItemLink to="/mis-plazas">
                         <FaParking/>
                         MIS PLAZAS
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
 
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/mis-reservas">
+                    <MenuItemLink to="/mis-reservas">
                         <BsBookmarksFill/>
                         MIS RESERVAS
                     </MenuItemLink>
                 </MenuItem>
+
                 <MenuItem>
                     <DropdownStyle>
                         <DropdownComponent /> 
                     </DropdownStyle> 
                 </MenuItem>
-                
             </Menu>
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? <FaTimes/> : <FaBars/>}
@@ -55,7 +55,7 @@ export default function Navbar(){
                     <FaUserCircle/>
                 </ProfileIcon>
             </IconContext.Provider>
-        </Wrapper>
+            </Wrapper>
     </Container>
     )
 }

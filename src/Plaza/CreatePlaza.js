@@ -66,7 +66,19 @@ export default function CreatePlaza() {
         "administrador": {
           "id": usuario.id,
           "name": usuario.name,
-          "email": usuario.email
+          "email": usuario.email,
+		      "password": usuario.password,
+          "loggedIn": usuario.loggedIn,
+          "phone": usuario.phone,
+          "surname": usuario.surname,
+          "acceptedTerms": usuario.acceptedTerms,
+          "roles": [
+            {
+              "id": 3,
+              "name": 'ROLE_USER'
+            }
+          ]
+
         }
       }
       
