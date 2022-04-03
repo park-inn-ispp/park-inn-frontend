@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import ListComponent from '../components/ListComponent'
 import call from '../Util/Caller';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+
 class ReservasList extends Component{
     constructor(props){
         super(props);
@@ -12,7 +12,8 @@ class ReservasList extends Component{
     }
 
     componentDidMount(){
-        call(`/reservas/all`,"GET")
+        const usuario = cookies.get('UserData');
+        call(`/reservas/usuario/`+usuario.id,"GET")
         .then(response => response.json())
         .then((data) => {
             this.setState({reservas: data})

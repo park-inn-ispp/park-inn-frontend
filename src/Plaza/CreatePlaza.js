@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import validateParkingForm from './ValidatePlazaForm';
 import { useNavigate } from 'react-router-dom';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import call from '../Util/Caller';
+
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 export default function CreatePlaza() {
  
   let navigate = useNavigate();
@@ -21,14 +25,30 @@ export default function CreatePlaza() {
   })
 
   const[errors, setErrors]= useState({})
-  
-  
+  /*
+  const [usuarios, setUsuarios] = useState([]);
+
+    useEffect(() => {
+      const Users = async () => {
+          const data = await call('/clients/usuariopormail/'+cookies.get('user_mail'), 'GET');
+          const usuarios = await data.json()
+          setUsuarios(usuarios);
+      }
+      Users();
+      
+      
+  });
+  */
+
 
   const handleSubmit= evt => {
    
     evt.preventDefault()
     var nuevosErrores= validateParkingForm(form)
     setErrors(nuevosErrores)
+
+    const usuario = cookies.get('UserData');
+    console.log(usuario);
 
     var numeroErrores = Object.keys(nuevosErrores).length;
     if(numeroErrores===0){
@@ -44,16 +64,26 @@ export default function CreatePlaza() {
         "esAireLibre": form.exterior,
         "descripcion": form.descripcion,
         "administrador": {
-          "id": 0,
-          "name": "sergio",
-          "email": "admin@admin.com"
+          "id": usuario.id,
+          "name": usuario.name,
+          "email": usuario.email,
+		      "password": usuario.password,
+          "loggedIn": usuario.loggedIn,
+          "phone": usuario.phone,
+          "surname": usuario.surname,
+          "acceptedTerms": usuario.acceptedTerms,
+          "roles": [
+            {
+              "id": 3,
+              "name": 'ROLE_USER'
+            }
+          ]
+
         }
       }
-      console.log(data)
       
       call('/plazas',"POST", data)
         .then(response => {
-          console.log(response.ok)
           if (response.ok){
         
             navigate(`/mis-plazas`)
@@ -69,14 +99,12 @@ export default function CreatePlaza() {
     
     const target = evt.target
     const name = target.name
-    console.log(name)
     var value= target.value
     
     if (target.type === 'radio'){
       value= target.id === 'exterior' ? true : false
-      console.log(value)
+
     }
-    console.log(value)
     setForm({...form,[name]: value})
     
   }

@@ -4,12 +4,12 @@ import validateReserva from './validateReserva';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import { Store } from 'react-notifications-component'
 import {Etiqueta, Parrafo, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export default function Reserva(){
 
@@ -33,6 +33,8 @@ export default function Reserva(){
 
     const id = parseInt(useParams().id)
 
+    const [usuarios, setUsuarios] = useState([]);
+
     useEffect(() => {
       
       const DetallesPlaza = async () => {
@@ -42,9 +44,12 @@ export default function Reserva(){
         setIsLoading(false)
       }
         DetallesPlaza()
+
     },[id]);
 
-    
+    const usuario = cookies.get('UserData');
+
+    //let horas = fechaFin-fechaInicio
     const [form, setForm]= useState({
         fechaInicio:'',
         fechaFin:'',
@@ -67,11 +72,10 @@ export default function Reserva(){
        //dias = ((FechaYHoraFin-FechaYHoraInicio)/(1000 * 60 * 60 * 24)).toFixed(0)
        horas = ((FechaYHoraFin-FechaYHoraInicio)/(1000 * 60 * 60))
        precioEstacionamiento = (horas*plaza.precioHora).toFixed(2)
-       precioTotalConFianza = (plaza.fianza + horas*plaza.precioHora).toFixed(2)
-       console.log (precioEstacionamiento)
-       console.log (precioTotalConFianza)
+       precioTotalConFianza = Number((plaza.fianza + horas*plaza.precioHora).toFixed(2))
 
     }
+
 
     const body = {
             
@@ -89,14 +93,26 @@ export default function Reserva(){
         "estaDisponible": true,
         "esAireLibre": true,
         "descripcion": plaza.descripcion,
-          "administrador": {
-          "id": 0,
-          "name": 'sergio',
-          "email": 'admin@admin.com'
-        }
+        "administrador": plaza.administrador,
       },
       "precioTotal": precioTotalConFianza,
-      "user":null,
+      "user":{
+        "id": usuario.id,
+        "name": usuario.name,
+        "email": usuario.email,
+        "password": usuario.password,
+        "loggedIn": usuario.loggedIn,
+        "phone": usuario.phone,
+        "surname": usuario.surname,
+        "acceptedTerms": usuario.acceptedTerms,
+        "roles": [
+          {
+            "id": usuario.roles.id,
+            "name": usuario.roles.name
+          }
+        ]
+
+      },
       "fechaInicio": FechaYHoraInicio,
       "fechaFin": FechaYHoraFin
           
@@ -107,9 +123,7 @@ export default function Reserva(){
         evt.preventDefault()
         setErrors(validateReserva(form))
          
-        console.log(idReserva)
         var numeroErrores = Object.keys(validateReserva(form)).length;
-        console.log(numeroErrores)
         if (numeroErrores===0) {
           setPagando(true)
           console.log(body)
@@ -153,10 +167,8 @@ export default function Reserva(){
         const name = target.name
         var value= target.value.toString()
         setForm({...form,[name]: value})
-        console.log(name)
         var sp = value.split('-')
         var dia = sp[2]
-        console.log(parseInt(sp[2]))
         if (name==='fechaInicio') {
           console.log(value)
           setFechaInicio(dia)
@@ -164,10 +176,8 @@ export default function Reserva(){
           setFechaFin(dia)
         }
         setForm({...form,[name]: value})
-        console.log(fechaInicio)
-        console.log(fechaFin)
 
-        console.log(form.fechaFin.toString()+'T00:00:00')
+
       }
       //Pantalla de carga
       if (isLoading) {

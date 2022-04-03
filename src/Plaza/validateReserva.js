@@ -12,8 +12,6 @@ export default function validateReserva(form){
     if(!form.fechaInicio.trim()){
         errors.fechaInicio = "La fecha de inicio es un campo obligatorio"
     } else if (form.fechaInicio < fechaActual){
-        console.log(fechaActual)
-        console.log(form.fechaInicio)
         errors.fechaInicio = "La fecha de Inicio debe ser de hoy en adelante"
     }
 
