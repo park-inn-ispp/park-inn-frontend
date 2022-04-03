@@ -15,7 +15,7 @@ class PlazasList extends Component {
     
     componentDidMount() {
         const usuario = cookies.get('UserData');
-        call('/plazas/plazasDelUsuario/21','GET')
+        call('/plazas/plazasDelUsuario/'+usuario.id,'GET')
             .then(response => response.json())
             .then((data) =>{
                 
