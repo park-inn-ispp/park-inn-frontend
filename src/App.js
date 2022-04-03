@@ -22,6 +22,7 @@ import PrivateRoute from './Services/AuthService';
 import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
+import IncidenciasDashboard from './Dashboard/IncidenciasDashboard';
 
 
 export default function App() {
@@ -45,6 +46,7 @@ return(
                 <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
                 <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
                 <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
+                <Route path='/dashboard-incidencias' element={<IncidenciasDashboard/>}/>
                 <Route path='/pagar/' element={<Pagar/>}/>
               </Route>
               <Route path='/login' element={<Login />}/>
