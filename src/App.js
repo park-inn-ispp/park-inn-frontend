@@ -12,22 +12,24 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import ReservaDetails from './Reserva/ReservaDetails';
+import PrivateRoute from './Services/AuthService';
 import CreateIncidencia from './Incidencia/CreateIncidencia'
 import FormularioRegistro from './Registro/FormularioRegistro';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import Pagar from './Payments/Pagar';
-import ReservaDetails from './Reserva/ReservaDetails';
-import PrivateRoute from './Services/AuthService';
 import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
+import ReservaOwnerList from './Reservas/ReservasOwnerList';
 import Terminos from './components/Terminos y Condiciones/Terminos';
 
 
 export default function App() {
 
 return( 
+    
         <div className='App'> 
           <ReactNotifications />
           <Navbar/>       
@@ -47,6 +49,7 @@ return(
                 <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
                 <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
                 <Route path='/pagar/' element={<Pagar/>}/>
+                <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservaOwnerList/>}/>
               </Route>
               <Route path='/login' element={<Login />}/>
               <Route path='/register' element={<FormularioRegistro/>}/>
