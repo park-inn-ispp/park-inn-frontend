@@ -115,7 +115,6 @@ export default function Reserva(){
         var numeroErrores = Object.keys(validateReserva(form)).length;
         if (numeroErrores===0) {
           setPagando(true)
-          console.log(body)
         }
     }
 
