@@ -29,9 +29,9 @@ export default function validateReserva(form){
 
     if(!form.horaFin.trim()){
         errors.horaFin = "La hora de fin es un campo obligatorio"
-    } /*else if (form.horaFin < form.horaInicio){
+    } else if (form.horaFin < form.horaInicio && form.fechaFin===form.fechaInicio){
         errors.horaFin = "La hora de fin debe ser posterior a la de inicio"
-    }*/
+    }
     
 
     return errors

@@ -47,8 +47,21 @@ export default function Reserva(){
     //Cálculo de la diferencia entre las fechas
     let FechaYHoraInicio = new Date(form.fechaInicio.toString()+'T'+form.horaInicio.toString())
     let FechaYHoraFin = new Date(form.fechaFin.toString()+'T'+form.horaFin.toString())
-    let FechaYHoraSolicitud = new Date()
+    let FechaHoy = new Date()
+    let fS = FechaHoy.toLocaleString().split(",")
+    let año = format(fS[0].split("/")[2])
+    let mes = format(fS[0].split("/")[1])
+    let dia = format(fS[0].split("/")[0])
+    let hora = format(fS[1].split(":")[0].trim())
+    let minuto = format(fS[1].split(":")[1])
+    let segundo = format(fS[1].split(":")[2])
+    let FechaYHoraSolicitud = año+'-'+mes+'-'+dia+'T'+hora+':'+minuto+':'+segundo
 
+    function format(num) {
+      if (num.length===1) {
+        return "0"+num
+      } else return num
+    }
 
     let horas = 0
     let precioEstacionamiento = 0;
@@ -90,8 +103,8 @@ export default function Reserva(){
                 {}
             ]
         },
-        "fechaInicio": form.fechaInicio.toString()+'T'+form.horaInicio.toString(),
-        "fechaFin": form.fechaFin.toString()+'T'+form.horaFin.toString(),
+        "fechaInicio": form.fechaInicio.toString()+'T'+form.horaInicio.toString()+':00',
+        "fechaFin": form.fechaFin.toString()+'T'+form.horaFin.toString()+':00',
     
     }
 
