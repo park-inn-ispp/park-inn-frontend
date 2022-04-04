@@ -108,6 +108,16 @@ export default function Terminos(){
               <li>En uso específico para la función con que fue diseñado de fábrica.</li>
               <li>En condiciones de operación eléctricas acorde con las especificaciones y tolerancias indicadas.</li>
             </ul>
+            El reembolso que recibas dependerá del momento en el que canceles tu reserva y también del motivo que indiques (según quién sea el responsable de la cancelación).
+
+            Si cancelas con más de 24 horas de antelación respecto a la reserva de la plaza y eres el responsable de 
+            la cancelación: recibirás el reembolso de la aportación que pagaste por los gastos del alquiler con el propietario de la plaza.
+            Si cancelas en las últimas 24 horas antes de la salida y eres el responsable de la 
+            cancelación: recibirás el 50% del importe que habías pagado para los gastos del trayecto. El otro 50% permite que Park-Inn indemnice a tu administrador de la plaza por esta cancelación de última hora.
+            Si cancelas después del viaje o no te presentas a la cita: no recibirás ningún 
+            reembolso y el propietario recibirá el 100% del importe que habías pagado por los gastos del trayecto con él, como si hubieras viajado con él. BlaBlaCar recibirá los gastos de gestión que hayas abonado.
+            Si se cancela la reserva y el propietario es el responsable, recibirás el 
+            reembolso íntegro.
             <br/>
             <strong>COMPROBACIÓN ANTIFRAUDE</strong>
             <br/>
