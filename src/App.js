@@ -23,6 +23,7 @@ import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
 import IncidenciasDashboard from './Dashboard/IncidenciasDashboard';
+import Terminos from './components/Terminos y Condiciones/Terminos';
 
 
 export default function App() {
@@ -51,6 +52,7 @@ return(
               </Route>
               <Route path='/login' element={<Login />}/>
               <Route path='/register' element={<FormularioRegistro/>}/>
+              <Route path='/Terminos-y-condiciones' element={<Terminos/>}/>
             </Routes> 
           <Footer/>   
         </div>

@@ -50,6 +50,7 @@ export default function PlazasDashboard(){
             <h1 className='titulos'>PLAZAS</h1>
             <table>
                 <tr>
+                    <th>ID</th>
                     <th>Direccion</th>
                     <th>Precio Hora</th>
                     <th>Fianza</th>
@@ -60,6 +61,7 @@ export default function PlazasDashboard(){
                 {plazas.map((plaza) => {
     
                     return <tr>
+                    <td>{plaza.id}</td>
                     <td>{plaza.direccion}</td>
                     <td>{plaza.precioHora}</td>
                     <td>{plaza.fianza}</td>

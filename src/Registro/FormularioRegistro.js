@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Formulario from "../components/Formulario/Formulario";
+import Terminos from "../components/Terminos y Condiciones/Terminos";
 import call from "../Util/Caller";
 
 export default function FormularioRegistro(){
@@ -54,6 +55,7 @@ export default function FormularioRegistro(){
         }
     ]   
     }
+
     let navigate = useNavigate();
     const onSubmit= evt => {
         
@@ -61,7 +63,7 @@ export default function FormularioRegistro(){
         call('/api/auth/signup', "POST", evt)
         .then (response => { console.log(response)
             if (response.ok) 
-            navigate('/register')
+            navigate('/')
         })
     }
 

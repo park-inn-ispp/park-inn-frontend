@@ -66,7 +66,7 @@ export default function ReservasDashboard(){
                         <td>{reserva.fechaFin}</td>
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>
-                        <td><a type="button" className="editButton" href={'/reservas/edit/'+reserva.id}>Editar/ver detalles</a>
+                        <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a>
                         <button type='button' class='deleteButton' onClick={() => borrarReservas(reserva.id)}>Eliminar reserva</button></td>
 
                     </tr>
