@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import validateReserva from './validateReserva';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import {Etiqueta, Parrafo, Formulario, Wrapper} from '../Plaza/ReservaPlaza.elements';
+import {Etiqueta, Parrafo, Formulario} from '../Plaza/ReservaPlaza.elements';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
@@ -17,23 +17,10 @@ export default function Reserva(){
     const [errors, setErrors] = useState(0);
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
-    const [fechaInicio, setFechaInicio] = useState(0)
-    const [fechaFin, setFechaFin] = useState(0)
-    const [horaInicio, setHoraInicio] = useState(0)
-    const [horaFin, setHoraFin] = useState(0)
-    const [idReserva, setIdReserva] = useState(0)
     const [pagando, setPagando] = useState(false)
-   
-
-
-    
-
-    //Navigate para redirigir con react-router-dom
-    let navigate = useNavigate();
 
     const id = parseInt(useParams().id)
 
-    const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
       
@@ -49,7 +36,6 @@ export default function Reserva(){
 
     const usuario = cookies.get('UserData');
 
-    //let horas = fechaFin-fechaInicio
     const [form, setForm]= useState({
         fechaInicio:'',
         fechaFin:'',
@@ -61,68 +47,58 @@ export default function Reserva(){
     //Cálculo de la diferencia entre las fechas
     let FechaYHoraInicio = new Date(form.fechaInicio.toString()+'T'+form.horaInicio.toString())
     let FechaYHoraFin = new Date(form.fechaFin.toString()+'T'+form.horaFin.toString())
-    console.log(FechaYHoraInicio)
-    console.log(FechaYHoraFin)
-    
+    let FechaYHoraSolicitud = new Date()
+
+
     let horas = 0
     let precioEstacionamiento = 0;
     let precioTotalConFianza=plaza.fianza;
     
     if (FechaYHoraFin>FechaYHoraInicio) {
-       //dias = ((FechaYHoraFin-FechaYHoraInicio)/(1000 * 60 * 60 * 24)).toFixed(0)
        horas = ((FechaYHoraFin-FechaYHoraInicio)/(1000 * 60 * 60))
        precioEstacionamiento = (horas*plaza.precioHora).toFixed(2)
        precioTotalConFianza = Number((plaza.fianza + horas*plaza.precioHora).toFixed(2))
 
     }
 
-
+    //Cuerpo de la petición
     const body = {
-            
-      "comentarios":null,
-      "estado": "pendiente",
-      "fechaSolicitud":new Date(),
-      "incidencias":null,
-      "plaza": {
-        "id": plaza.id,
-        "direccion": plaza.direccion,
-        "precioHora": plaza.precioHora,
-        "fianza": plaza.fianza,
-        "ancho": plaza.ancho,
-        "largo": plaza.largo,
-        "estaDisponible": true,
-        "esAireLibre": true,
-        "descripcion": plaza.descripcion,
-        "administrador": plaza.administrador,
-      },
-      "precioTotal": precioTotalConFianza,
-      "user":{
-        "id": usuario.id,
-        "name": usuario.name,
-        "email": usuario.email,
-        "password": usuario.password,
-        "loggedIn": usuario.loggedIn,
-        "phone": usuario.phone,
-        "surname": usuario.surname,
-        "acceptedTerms": usuario.acceptedTerms,
-        "roles": [
-          {
-            "id": usuario.roles.id,
-            "name": usuario.roles.name
-          }
-        ]
-
-      },
-      "fechaInicio": FechaYHoraInicio,
-      "fechaFin": FechaYHoraFin
-          
-      }
+        "comentarios": null,
+        "estado": "pendiente",
+        "fechaSolicitud": FechaYHoraSolicitud,
+        "incidencias": null,
+        "plaza": {
+            "id": plaza.id,
+            "direccion": plaza.direccion,
+            "precioHora": plaza.precioHora,
+            "fianza": plaza.fianza,
+            "ancho": plaza.ancho,
+            "largo": plaza.largo,
+            "estaDisponible": plaza.estaDisponible,
+            "esAireLibre": plaza.esAireLibre,
+            "descripcion": plaza.descripcion,
+            "administrador": plaza.administrador
+        },
+        "precioTotal": precioTotalConFianza,
+        "user": {
+            "id": usuario.id,
+            "name": usuario.name,
+            "email": usuario.email,
+            "password": usuario.password,
+            "loggedIn": usuario.loggedIn,
+            "roles": [
+                {}
+            ]
+        },
+        "fechaInicio": form.fechaInicio.toString()+'T'+form.horaInicio.toString(),
+        "fechaFin": form.fechaFin.toString()+'T'+form.horaFin.toString(),
+    
+    }
 
 
       const handleSubmit= async evt => {
         evt.preventDefault()
         setErrors(validateReserva(form))
-         
         var numeroErrores = Object.keys(validateReserva(form)).length;
         if (numeroErrores===0) {
           setPagando(true)
@@ -130,55 +106,13 @@ export default function Reserva(){
         }
     }
 
-    const handleChangeFecha = evt => {
+    const handleChange = evt => {
       const target = evt.target
       const name = target.name
-      if (name==='fechaInicio') {
-        const INI = new Date(target.value)
-        setFechaInicio(INI)
-      } else {
-        const FIN = new Date(target.value)
-        setFechaFin(FIN)
-      }
       var value= target.value.toString()
       setForm({...form,[name]: value})
-      
-     }
-
-
-     const handleChangeHora = evt => {
-      const target = evt.target
-      const name = target.name
-      if (name==='horaInicio') {
-        const INI = target.value.toString()
-        setHoraInicio(INI)
-      } else {
-        const FIN = target.value.toString()
-        setHoraFin(FIN)
-      }
-      var value= target.value.toString()
-      console.log(value)
-      setForm({...form,[name]: value})
-      
      }
     
-      const handleChange= evt => {
-        const target = evt.target
-        const name = target.name
-        var value= target.value.toString()
-        setForm({...form,[name]: value})
-        var sp = value.split('-')
-        var dia = sp[2]
-        if (name==='fechaInicio') {
-          console.log(value)
-          setFechaInicio(dia)
-        } else if (name==='fechaFin') {
-          setFechaFin(dia)
-        }
-        setForm({...form,[name]: value})
-
-
-      }
       //Pantalla de carga
       if (isLoading) {
         return <Loading/>;
@@ -207,24 +141,24 @@ export default function Reserva(){
         <div class="inner-wrap">
             <Etiqueta>Fecha Inicio:</Etiqueta>
             <Parrafo>
-              <input onChange={handleChangeFecha} name= "fechaInicio" type="date" value={form.fechaInicio}/>
+              <input onChange={handleChange} name= "fechaInicio" type="date" value={form.fechaInicio}/>
               <FormErrorMessage jsonErrors={errors} errorName="fechaInicio"/>
             </Parrafo>
             <p/>
             <Etiqueta>Fecha Fin:</Etiqueta>
             <Parrafo>
-              <input onChange={handleChangeFecha} name= "fechaFin" type="date" value={form.fechaFin}/>
+              <input onChange={handleChange} name= "fechaFin" type="date" value={form.fechaFin}/>
               <FormErrorMessage jsonErrors={errors} errorName="fechaFin"/>
             </Parrafo>
             
             <Etiqueta>Hora Inicio: </Etiqueta>
             <Parrafo>
-              <input  onChange={handleChangeHora} name= "horaInicio" type="time" step="600" value={form.horaInicio}/>
+              <input  onChange={handleChange} name= "horaInicio" type="time" step="600" value={form.horaInicio}/>
               <FormErrorMessage jsonErrors={errors} errorName="horaInicio"/>
             </Parrafo>
             <Etiqueta>Hora Fin: </Etiqueta>
             <Parrafo>
-              <input  onChange={handleChangeHora} name= "horaFin" type="time" value={form.horaFin}/>
+              <input  onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
               <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
     </Parrafo>
           </div>
