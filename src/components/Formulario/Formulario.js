@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import GeneralButton from "../GeneralButton/GeneraButton";
-import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div } from "./Formulario.components";
+import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div, Enlace } from "./Formulario.components";
 
 export default function Formulario ({ template, onSubmit, watchFields, validate }){
 
@@ -18,7 +19,7 @@ export default function Formulario ({ template, onSubmit, watchFields, validate 
                     return (
                         <Div key={name}>
                             <CheckBox type={type} name={name} id={name} ref={register(validationProps)}/>
-                            <Etiqueta htmlFor={name}>He leído y acepto las <a href='/'>condiciones de uso</a> y servicio</Etiqueta>
+                            <Etiqueta htmlFor={name}>He leído y acepto las <Link to="/Terminos-y-condiciones">condiciones de uso</Link> y servicio</Etiqueta>
                             {errors[name] && <ErrorMessage>{errors[name]["message"]}</ErrorMessage>}
                         </Div>
                     )
