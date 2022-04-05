@@ -13,10 +13,11 @@ export default function CreateIncidencia() {
     const reservaId = parseInt(useParams().id)
     let navigate = useNavigate();
     const [form, setForm]= useState({
-        fecha: "",
         titulo: "",
         descripcion: "",
-        idUsuario: "",
+        estado: "",
+        fecha: "",
+        email: "",
         idReserva: "",
     })
     const[errors, setErrors]= useState({})
@@ -27,13 +28,18 @@ export default function CreateIncidencia() {
         var numeroErrores = Object.keys(nuevosErrores).length;
         if(numeroErrores===0){
             const data= {
-            "fecha": new Date(),
             "titulo": form.titulo,
             "descripcion": form.descripcion,
-            "email": email,
-            "idReserva": reservaId
+            "estado": "pendiente",
+            "fecha": new Date(),
+            "user": {
+              "email" : email
+            },
+            "reserva": {
+              "id" : reservaId
             }
-            call('/incidencia/new',"POST", data)
+            }
+            call('/incidencias',"POST", data)
                 .then(response => {
                 if (response.ok){
                     navigate(`/mis-reservas`)
