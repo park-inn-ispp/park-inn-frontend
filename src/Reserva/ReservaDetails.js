@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading';
 import {Etiqueta, Parrafo} from '../Reserva/ReservaDetails.elements';
 import call from '../Util/Caller';
 import Cookies from 'universal-cookie';
 import { StyledButton } from '../components/GeneralButton/GeneralButton.elements';
+import { Store } from 'react-notifications-component';
 
 
 export default function ReservaDetails() {
@@ -16,13 +17,13 @@ export default function ReservaDetails() {
     const today = new Date()
     const cookies = new Cookies();
     const usuario = cookies.get('UserData');
-    console.log(usuario)
     const [esCliente, setEsCliente] = useState(false);
     const [esPropietario, setEsPropietario] = useState(false);
+    const [estado, setEstado] = useState(false);
 
     let navigate = useNavigate();
-
     
+
 
 
     useEffect(() => {
@@ -35,75 +36,100 @@ export default function ReservaDetails() {
             const esPro = reserva.plaza.administrador.id===usuario.id;
             setEsCliente(esCli)
             setEsPropietario(esPro)
+            setEstado(reserva.estado)
             setIsLoading(false)
-            console.log(reserva)
         }
         DetallesReserva()
     }, [id]);
 
-    console.log(fechaFin)
-    
-    //const esCliente = reserva.user.id===usuario.id;
-    //const esPropietario = reserva.plaza.administrador.id===usuario.id;
-    console.log(esCliente)
-    console.log(esPropietario)
 
 
-    function confirmarServicio(id) {
+
+    async function confirmarServicio(id) {
         const url = '/reservas/'+id+'/confirmar'
-        call(url,'GET').then(response => response.json()).then(response=>console.log(response))
+        call(url,'GET').then(response => response.json())
+        .then(response=>console.log(response)).then(navigate("/"));
         
+        Store.addNotification({
+            title: "SERVICIO CONFIRMADO!",
+            message: "El servicio se ha confirmado con éxito",
+            type: "success",
+            insert: "top",
+            container: "top-left",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true
+            }
+          })
     }
-
+        
     function generarIncidencia(id) {
         const url = '/reservas/'+id+'/denegar'
-        call(url,'GET').then(response => response.json()).then(response=>console.log(response)).then(response => {
-            if(response.ok) {
-                navigate("/reservas/"+id+"/incidencia/new")
-            }
-        })
-        
-        
-
-        
+        call(url,'GET').then(response=>{console.log(response.ok)}).then(navigate("/reservas/"+id+"/incidencia/new"))       
     }
 
     //Pantalla de carga
     if (isLoading) {
         return <Loading/>;
       }
-      let validaFecha = fechaFin<today.toLocaleString()
-      let validaEstado = fechaFin<today.toLocaleString() && ((reserva.estado!=="confirmadaUsuario" && !esCliente) 
-        || (reserva.estado!=="confirmadaPropietario" && !esPropietario) || reserva.estado=="confirmadaAmbos")
-      let botones = validaFecha && validaEstado
-      //let show = true
+
+    //Validaciones de la confirmación del servicio
+    let validaFecha = fechaFin<today
+    console.log("Fecha fin:"+fechaFin)
+    console.log("Hoy:"+today.toLocaleString())
+
+    let validaEstado = validaFecha && ((reserva.estado!=="confirmadaUsuario" && !esPropietario) 
+        || (reserva.estado!=="confirmadaPropietario" && !esCliente)) && reserva.estado!=="confirmadaAmbos"
+        
+    let botones = validaFecha && validaEstado
+    let denegada = estado === "denegada"
+
+    let FInicio = reserva.fechaInicio.split('T')
+    let FFin = reserva.fechaFin.split('T')
+    let FSolicitud = reserva.fechaSolicitud.split('T')
+
+
     return (   
         <div className="form-style-10">
             <h1>Detalles de la Reserva</h1>
                 <div className="Details">
                 <Etiqueta>Estado:</Etiqueta><p/> 
-                <Parrafo>{reserva.estado}</Parrafo><p/>
+                <Parrafo>{estado}</Parrafo><p/>
+                <Etiqueta>Dirección:</Etiqueta><p/> 
+                <Parrafo>{reserva.plaza.direccion}</Parrafo><p/>
+                <Etiqueta>Precio de la fianza:</Etiqueta><p/> 
+                <Parrafo>{reserva.plaza.fianza} €</Parrafo><p/>
                 <Etiqueta>Precio total:</Etiqueta><p/> 
-                <Parrafo>{reserva.precioTotal}€</Parrafo><p/>
+                <Parrafo>{reserva.precioTotal} €</Parrafo><p/>
                 <Etiqueta>Fecha de inicio:</Etiqueta> <p/>
-                <Parrafo>{reserva.fechaInicio}</Parrafo><p/>
+                <Parrafo>{FInicio[0]}</Parrafo><p/>
+                <Parrafo>{FInicio[1]}</Parrafo><p/>
                 <Etiqueta>Fecha de fin:</Etiqueta> <p/>
-                <Parrafo>{reserva.fechaFin}</Parrafo><p/>
+                <Parrafo>{FFin[0]}</Parrafo><p/>
+                <Parrafo>{FFin[1]}</Parrafo><p/>
                 <Etiqueta>Fecha de solicitud:</Etiqueta> <p/>
-                <Parrafo>{reserva.fechaSolicitud}</Parrafo><p/>
+                <Parrafo>{FSolicitud[0]}</Parrafo><p/>
                 <Etiqueta>Propietario:</Etiqueta> <p/>
                 <Parrafo>{reserva.plaza.administrador.name}</Parrafo><p/>
+                <Parrafo>{reserva.plaza.administrador.email}</Parrafo><p/>
                 <Etiqueta>Comentarios:</Etiqueta> <p/>
                 <Parrafo>{reserva.comentarios}</Parrafo>
                 
 
-                {
+                {denegada ? (
+                <><Etiqueta>Servicio:</Etiqueta>
+                <StyledButton type="button" onClick={() => generarIncidencia(reserva.id)}>Generar incidencia</StyledButton></>
+                ) : 
                     botones ? (
                         <><Etiqueta>Servicio:</Etiqueta>
                         <StyledButton type="button" onClick={() => confirmarServicio(reserva.id)}>Confirmar servicio</StyledButton><br/>
                         <StyledButton type="button" onClick={() => generarIncidencia(reserva.id)}>Generar incidencia</StyledButton></>
 
-                    ) : (validaFecha ? (<Parrafo>Has confirmado este servicio</Parrafo>) : ("") 
+                    ) : (validaFecha ? 
+                        (<><Etiqueta>Servicio:</Etiqueta>
+                        <Parrafo>Has confirmado este servicio</Parrafo></>) : ("") 
                     
                     )
                 }
