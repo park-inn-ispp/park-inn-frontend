@@ -11,7 +11,7 @@ const urlFrontend = "http://localhost:3000";
         const token = await cookies.get('AuthToken');
 
         if(token !== undefined && token !== "undefined"){
-            headers_ = {"Authorization" : "Bearer" + token.toString(), "Content-Type": "application/json", "Access-Control-Allow-Origin" : urlFrontend, "mode": "cors"};
+            headers_ = {"Authorization" : "Bearer " + token.toString(), "Content-Type": "application/json", "Access-Control-Allow-Origin" : urlFrontend, "mode": "cors"};
         }
 
         const requestOptions = {
@@ -19,7 +19,7 @@ const urlFrontend = "http://localhost:3000";
             headers: headers_,
             body: (JSON.stringify(body))
         };
-
+        
         return await fetch(urlBackend+pathToCall, requestOptions);
             
       
