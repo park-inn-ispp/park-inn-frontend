@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import './404.css'
-class Error_404 extends Component {
+class ERROR_404 extends Component {
 
     constructor(props) {
         super(props);
         this.state = {plazas: []};
         //this.remove = this.remove.bind(this);
     }
-    
 
+    componentDidMount() {
+        document.getElementById("footer-parkinn").setAttribute("hidden",true)
+    }
     
-    
-
     render() {       
-        try{
-            document.getElementById("footer-parkinn").setAttribute("hidden",true)
-    
-          }catch{
-            
-          }
+
         return (
             <div class="main"> 
 <svg xmlns="http://www.w3.org/2000/svg" width="470" height="290" viewBox="0 0 470 290">
@@ -69,4 +64,4 @@ class Error_404 extends Component {
         );
     }
 }
-export default Error_404;
+export default ERROR_404;

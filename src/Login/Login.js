@@ -4,10 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
 import call from '../Util/Caller';
 import Logo from '../components/Logo';
-import Input from '../components/Input/Input';
 import displayNotification from '../Util/Notifications';
 import { Link } from 'react-router-dom';
-import { Etiqueta } from '../components/Formulario/Formulario.components';
 const cookies = new Cookies();
 
 class Login extends Component {
@@ -50,7 +48,7 @@ class Login extends Component {
         call(`/api/auth/signin`,"POST",data)
             .then(async response  =>  {
 
-                if(response!=undefined && response.ok){
+                if(response !== undefined && response.ok){
                 let auth_token = await (await response.text()).split(" ")[1]
                 
                 if(this.state.form.recuerdame){
@@ -89,9 +87,6 @@ class Login extends Component {
      }
 
     componentDidMount() {
-        // if(cookies.get('email')){
-        //     window.location.href="./";
-        // }
         document.getElementById("navbar-parkinn").setAttribute("hidden",true)
         document.getElementById("footer-parkinn").setAttribute("hidden",true)
     }

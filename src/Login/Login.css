@@ -8,7 +8,7 @@
 
 .container_body{
     height: 100vh;
-    background-color: #F1F7FE;
+    background-color: #f1f7fe;
     width: 35vw;
     border-radius: 30px;
 
@@ -23,68 +23,67 @@
 .login-inputs{
     width: 100%;
     height: 30%;
-
 }
 
 .signup{
     padding: 5%;
-
 }
 
 .span-signup:hover{
-    cursor: pointer;
-    color: rgb(136, 136, 136);
+  cursor: pointer;
+  color: rgb(136, 136, 136);
 }
 
 .button-login{
-    background-color: #1D4A72;
-    color: white;
-    padding:16px;
-    width: 35%;
-    border: none;
-    border-radius: 40px;
+  background-color: #1D4A72;
+  color: white;
+  padding:16px;
+  width: 35%;
+  border: none;
+  border-radius: 40px;
+  margin-top: 10px;
 }
+
 .button-login:hover{
     background-color: #0c375e;
-
 }
-
-
 
 /* INPUT CSS */
 
 
 .input{
-    background-color:#ffffff ;
-    border-radius: 20px;
-	box-shadow: 0 0 2em hsl(231deg 62% 94%);
-    width: 60%;
-    height: 40%;
-    margin-left: 22%;
-    margin-top: 5%;
+  background-color:#ffffff ;
+  border-radius: 20px;
+  box-shadow: 0 0 2em hsl(231deg 62% 94%);
+  width: 60%;
+  height: 40%;
+  margin-left: 22%;
+  margin-top: 5%;
 }
-input{
-    border:0;outline:0;
-    width: 60%;
-    height: 50%;
-    margin-left: 0px;
-    float: left;
-    left: 3%;
 
+input{
+  border:0;outline:0;
+  width: 60%;
+  height: 50%;
+  margin-left: 0px;
+  float: left;
+  left: 3%;
 }
+
 .label{
-    text-align: left;
-    margin-left: 3%;
-    padding:1%;
+  text-align: left;
+  margin-left: 3%;
+  padding:1%;
 }
+
 .checkb-input{
-    width: 2vw;
-    height: 2vh;
-    margin-top: 2vh;
-    margin-left: 12vw;
+  margin-top: 5px;
+  margin-left: 47%;
+  width: 2vw;
+  height: 2vh;   
 }
 
 .erroresLogin{
-    margin-top: -5vh;
-    background-color: transparent;
+  margin-top: -5vh;
+  background-color: transparent;
 }

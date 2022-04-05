@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Input = styled.input`
     margin: 1rem;
@@ -12,5 +12,5 @@ export const Input = styled.input`
     
     @media screen and (max-width: 960px){
         width: 300px;
-    }
+    };
 `

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './403.css'
-class Error_403 extends Component {
+class ERROR_403 extends Component {
 
     constructor(props) {
         super(props);
@@ -9,16 +9,12 @@ class Error_403 extends Component {
     }
     
 
-    
-    
-
+    componentDidMount() {
+      document.getElementById("footer-parkinn").setAttribute("hidden",true)
+    }
+ 
     render() {    
-      try{
-        document.getElementById("footer-parkinn").setAttribute("hidden",true)
 
-      }catch{
-        
-      }
         return (
   <div class="container_403">
     <div class="neon">403</div>
@@ -42,4 +38,4 @@ class Error_403 extends Component {
         );
     }
 }
-export default Error_403;
+export default ERROR_403;

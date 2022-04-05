@@ -21,7 +21,7 @@ export default function Navbar(){
 
             <Menu open = {showMobileMenu}>
                 <MenuItem>
-                    <MenuItemLink to="/">
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/">
                         <FaHome/>
                         INICIO
                     </MenuItemLink>

@@ -1,19 +1,13 @@
-import ListComponent from "../components/ListComponent";
 import call from "../Util/Caller";
 import {useEffect, useState} from "react";
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Loading from "../components/Loading";
-import Cookies from 'universal-cookie';
-import { BsWindowSidebar } from "react-icons/bs";
-
-const cookies = new Cookies();
-
 
 export default function ReservaOwnerList(){
     let navigate = useNavigate();
 
     const id = useParams().id;
-    const [reservas, setReservas] = useState(['loading']);
+    const [reservas, setReservas] = useState(["loading"]);
      
     console.log(id);
     useEffect(() => {
@@ -23,19 +17,19 @@ export default function ReservaOwnerList(){
     },[id]);
 
     console.log(reservas);
-    if (reservas[0] === 'loading'){
+    if (reservas[0] === "loading"){
         return(
             <Loading></Loading>
         )
     }
-    if (reservas === 'undefined' || reservas.length === 0){
+    if (reservas === "undefined" || reservas.length === 0){
         return(
             <h2>Esta plaza no existe o no está disponible en este momento</h2>
         )
     }
 
     function aceptarReserva(reservaId) {
-        call(`/reservas/`+reservaId+'/aceptar', 'GET')
+        call(`/reservas/`+reservaId+'/aceptar', "GET")
           .then(response => {
 
     
@@ -47,7 +41,7 @@ export default function ReservaOwnerList(){
       }
 
       function rechazarReserva(reservaId) {
-        call(`/reservas/`+reservaId+'/rechazar', 'GET')
+        call(`/reservas/`+reservaId+'/rechazar', "GET")
           .then(response => {
             console.log(response)
     
@@ -58,7 +52,7 @@ export default function ReservaOwnerList(){
           })
       }
   function cancelarReserva(reservaId) {
-        call(`/reservas/`+reservaId+'/cancelar', 'GET')
+        call(`/reservas/`+reservaId+'/cancelar', "GET")
           .then(response => {
             console.log(response)
     
@@ -87,8 +81,8 @@ export default function ReservaOwnerList(){
                     <th>Detalles</th>
                 </tr>
                 {reservas.map((reserva) => {
-                    var estadoReserva = reserva.estado=="pendiente";
-                    var cancelacionReserva = reserva.estado=="aceptada";
+                    var estadoReserva = reserva.estado === "pendiente";
+                    var cancelacionReserva = reserva.estado === "aceptada";
                     return <tr>
                         <td>{reserva.user.name}</td>
                         <td>{reserva.fechaInicio}</td>
@@ -98,18 +92,19 @@ export default function ReservaOwnerList(){
                         <td>
                         {
                     estadoReserva ? (
-                        <><button type='button' class='deleteButton' onClick={() => rechazarReserva(reserva.id)}>Rechazar reserva</button><button type='button' class='editButton' onClick={() => aceptarReserva(reserva.id)}>Aceptar reserva</button></>
+                        <><button type="button" class="deleteButton" onClick={() => rechazarReserva(reserva.id)}>Rechazar reserva</button>
+                        <button type="button" class="editButton" onClick={() => aceptarReserva(reserva.id)}>Aceptar reserva</button></>
 
                     ) : ("")}
                         
                         {
                     cancelacionReserva ? (
-                        <button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
+                        <button type="button" class="deleteButton" onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
 
                     ) : ("")}
                         </td>
                         <td>
-                        <button type='button' class='editButton' onClick={() => verDetallesReserva(reserva.id)}>Ver detalles</button>  
+                        <button type="button" class="editButton" onClick={() => verDetallesReserva(reserva.id)}>Ver detalles</button>  
                         </td>
                     </tr>
                 })}

@@ -5,8 +5,9 @@
   margin-left:45%;
   margin-top: 5%;
 }
+
 .message{
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 30px;
   color: white;
   font-weight: 500;
@@ -14,8 +15,9 @@
   top: 230px;
   left: 40px;
 }
+
 .message2{
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 18px;
   color: white;
   font-weight: 300;
@@ -30,31 +32,33 @@
   width: 300px;
   margin-top: 30px;
   margin-bottom: 10px;
-  font-family: 'Varela Round', sans-serif;
+  font-family: "Varela Round", sans-serif;
   font-size: 90px;
   color: #010e09;
   letter-spacing: 3px;
   text-shadow: 0 0 5px #08553b;
   animation: flux 2s linear infinite;
-  
 }
+
 .trash{
   width: 170px;
   height: 220px;
-  background-color: #585F67;
+  background-color: #585f67;
   top: 300px;
 }
+
 .can{
   width: 190px;
   height: 30px;
   background-color: #6B737C;
   border-radius: 15px 15px 0 0;
 }
+
 .door-frame {
   height: 495px;
   width: 295px;
   border-radius: 90px 90px 0 0;
-  background-color: #8594A5;
+  background-color: #8594a5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,7 +68,7 @@
   height: 450px;
   width: 250px;
   border-radius: 70px 70px 0 0;
-  background-color: #A0AEC0;
+  background-color: #a0aec0;
 }
 
 .eye{
@@ -77,6 +81,7 @@
   animation: eye 7s ease-in-out infinite;
   position: absolute;
  }
+
 .eye2{
   left: 65px;
 }
@@ -84,7 +89,7 @@
 .window{
   height: 40px;
   width: 130px;
-  background-color: #1C2127;
+  background-color: #1c2127;
   border-radius: 3px;
   margin: 80px auto;
   position: relative;
@@ -93,7 +98,7 @@
 .leaf{
   height: 40px;
   width: 130px;
-  background-color: #8594A5;
+  background-color: #8594a5;
   border-radius: 3px;
   margin: 80px auto;
   animation: leaf 7s infinite;
@@ -104,7 +109,7 @@
   height: 8px;
   width: 50px;
   border-radius: 4px;
-  background-color: #EBF3FC;
+  background-color: #ebf3fc;
   position: absolute;
   margin-top: 250px;
   margin-left: 30px;
@@ -113,7 +118,7 @@
 .rectangle {
   height: 70px;
   width: 25px;
-  background-color: #CBD8E6;
+  background-color: #cbd8e6;
   border-radius: 4px;
   position: absolute;
   margin-top: 220px;

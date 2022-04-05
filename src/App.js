@@ -23,9 +23,9 @@ import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
 import IncidenciasDashboard from './Dashboard/IncidenciasDashboard';
-import Error_403 from './errorViews/403';
-import Error_404 from './errorViews/404';
-import Error_500 from './errorViews/500';
+import ERROR_403 from './errorViews/403';
+import ERROR_404 from './errorViews/404';
+import ERROR_500 from './errorViews/500';
 import AdminRoute from './Services/AdminRoute';
 import ReservaOwnerList from './Reservas/ReservasOwnerList';
 import Terminos from './components/Terminos y Condiciones/Terminos';
@@ -65,13 +65,13 @@ return(
               </Route>
               <Route path='/login' element={<Login />}/>
               <Route path='/register' element={<FormularioRegistro/>}/>
-              <Route path='/500' element={<Error_500/>}/>
-              <Route path='/404' element={<Error_404/>}/>
-              <Route path='/403' element={<Error_403/>}/>
+              <Route path='/500' element={<ERROR_500/>}/>
+              <Route path='/404' element={<ERROR_404/>}/>
+              <Route path='/403' element={<ERROR_403/>}/>
               <Route path='/Terminos-y-condiciones' element={<Terminos/>}/>
 
               {/* ESTA RUTA TIENE QUE ESTAR SIEMPRE LA ULTIMA */}
-              <Route path ='*' element={<Error_404/>}/>
+              <Route path ='*' element={<ERROR_404/>}/>
             </Routes> 
 
 
