@@ -71,7 +71,8 @@ export default function UsuariosDashboard(){
                     <td>{usuario.name}</td>
                     <td>{usuario.surname}</td>
                     <td>{usuario.email}</td>
-                    <td>{usuario.phone}</td>                                                           
+                    <td>{usuario.phone}</td> 
+                    <td></td>                                                          
                 </tr>
                 })
             }

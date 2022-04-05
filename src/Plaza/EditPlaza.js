@@ -244,7 +244,6 @@ export default function EditPlaza() {
       <br/>
       <br/>
       <input type="submit" value="Guardar plaza" />  &nbsp; &nbsp;
-      <button type="button" class="deleteButton" onClick={borrarPlaza}> Eliminar plaza </button>
     </form>
   </div>
   );

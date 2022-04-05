@@ -61,7 +61,7 @@ export default function PlazasDashboard(){
                     <td>{plaza.ancho}</td>
                     <td>{plaza.largo}</td>
                     <td><a type="button" className='editButton' href={'/plaza/edit/'+plaza.id}>Editar/Ver detalles</a>
-                    <button type="button" class="deleteButton"  onClick={() => borrarPlaza(plaza.id)}> Eliminar plaza </button></td>
+                   </td>
                                                             
                 </tr>
                 })
