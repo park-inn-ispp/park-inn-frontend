@@ -1,11 +1,9 @@
 import React, { useEffect, useState} from 'react';
 import Loading from '../components/Loading';
-import { useNavigate } from 'react-router-dom';
 import call from '../Util/Caller'
 import Popup from '../components/Popup'
 
 export default function IncidenciasDashboard(){
-    let navigate = useNavigate();
     const [incidencias, setIncidencias] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [buttonPopup, setButtonPopup] = useState(false);
@@ -28,7 +26,7 @@ export default function IncidenciasDashboard(){
         call(`/incidencias/`+id, 'PUT')
           .then(response => {
             if (response.ok){
-              navigate(`/dashboard-incidencias`)
+              window.location.reload();
             }
           })
     }
@@ -70,7 +68,7 @@ export default function IncidenciasDashboard(){
                         <td>{incidencia.user.email}</td>
                         <td>{incidencia.reserva.id}</td>
                         <td>{incidencia.estado}</td>
-                        <td>{incidencia.estado == "pendiente" ?
+                        <td>{incidencia.estado === "pendiente" ?
                             <button type='button' class='deleteButton' onClick={() => cerrarIncidencia(incidencia.id)}>Cerrar Incidencia</button> : 
                             <p>Incidencia cerrada</p>}
                         </td>

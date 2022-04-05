@@ -1,13 +1,11 @@
 import React, { useEffect, useState} from 'react';
 import Loading from '../components/Loading';
 import call from '../Util/Caller'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 
 export default function PlazasDashboard(){
-    let navigate = useNavigate();
-
     const [plazas, setPlazas] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const id = parseInt(useParams().id);
@@ -20,7 +18,6 @@ export default function PlazasDashboard(){
             const plazas = await data.json()
             setPlazas(plazas);
             setIsLoading(false);
-            
         }
         Dashboard();
 
@@ -28,14 +25,10 @@ export default function PlazasDashboard(){
     }, []);
 
     function borrarPlaza(id) {
-        
       call(`/plazas/`+id, 'DELETE')
         .then(response => {
-          console.log(response.ok)
-  
           if (response.ok){
-            console.log("ELIMINADA")
-            navigate(`/dashboard-plazas`)
+            window.location.reload();
           }
         })
     }

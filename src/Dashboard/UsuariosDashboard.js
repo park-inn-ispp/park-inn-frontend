@@ -22,13 +22,12 @@ export default function UsuariosDashboard(){
             const usuarios = await data.json()
             setUsuarios(usuarios);
             setIsLoading(false);
-            
         }
         Dashboard();
     }, []);
 
     function loggedInParse(usuario){
-        if (usuario.loggedIn==true) {
+        if (usuario.loggedIn===true) {
             return 'Si';
         } else {
             return 'No';
