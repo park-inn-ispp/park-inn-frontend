@@ -49,9 +49,10 @@ class Login extends Component {
         }
         call(`/api/auth/signin`,"POST",data)
             .then(async response  =>  {
-            if(response.ok){
-                let auth_token = await (await response.text()).split(" ")[1]
 
+                if(response!=undefined && response.ok){
+                let auth_token = await (await response.text()).split(" ")[1]
+                
                 if(this.state.form.recuerdame){
                     localStorage["AuthToken"] = auth_token
                 }
@@ -75,6 +76,7 @@ class Login extends Component {
                  window.location.href="./";           
 
              }else{
+
                 if(data.nameOrEmail &&  data.password){
                     displayNotification("Error","Usuario o contraseña incorrectos","danger")
     
@@ -82,9 +84,6 @@ class Login extends Component {
                     displayNotification("Error","Debes de rellenar los datos","danger")
                 }
              }
-        })
-        .catch(error=>{
-            console.log(error);
         })
    
      }
