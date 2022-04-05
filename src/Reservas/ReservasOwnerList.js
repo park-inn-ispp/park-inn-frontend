@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import Loading from "../components/Loading";
 import Cookies from 'universal-cookie';
+import { BsWindowSidebar } from "react-icons/bs";
 
 const cookies = new Cookies();
 
@@ -39,7 +40,8 @@ export default function ReservaOwnerList(){
 
     
             if (response.ok){
-              navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              //navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              window.location.reload()
             }
           })
       }
@@ -50,10 +52,26 @@ export default function ReservaOwnerList(){
             console.log(response)
     
             if (response.ok){
-              navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              //navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              window.location.reload()
             }
           })
       }
+  function cancelarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/cancelar', 'GET')
+          .then(response => {
+            console.log(response)
+    
+            if (response.ok){
+              //navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              window.location.reload()
+            }
+          })
+      }
+
+      function verDetallesReserva(reservaId) {
+        navigate(`/reservas/`+reservaId)
+}
 
     return(
         <body>
@@ -65,21 +83,33 @@ export default function ReservaOwnerList(){
                     <th>Fecha Fin</th>
                     <th>Precio total</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
+                    <th>Detalles</th>
                 </tr>
                 {reservas.map((reserva) => {
                     var estadoReserva = reserva.estado=="pendiente";
-                    var cancalacionReserva = reserva.estadoo=="aceptada" || reserva.estado=="rechazada";
+                    var cancelacionReserva = reserva.estado=="aceptada";
                     return <tr>
                         <td>{reserva.user.name}</td>
                         <td>{reserva.fechaInicio}</td>
                         <td>{reserva.fechaFin}</td>
                         <td>{reserva.precioTotal}</td>
+                        <td>{reserva.estado}</td>
                         <td>
                         {
                     estadoReserva ? (
                         <><button type='button' class='deleteButton' onClick={() => rechazarReserva(reserva.id)}>Rechazar reserva</button><button type='button' class='editButton' onClick={() => aceptarReserva(reserva.id)}>Aceptar reserva</button></>
 
-                    ) : (reserva.estado)}
+                    ) : ("")}
+                        
+                        {
+                    cancelacionReserva ? (
+                        <button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
+
+                    ) : ("")}
+                        </td>
+                        <td>
+                        <button type='button' class='editButton' onClick={() => verDetallesReserva(reserva.id)}>Ver detalles</button>  
                         </td>
                     </tr>
                 })}
@@ -88,4 +118,5 @@ export default function ReservaOwnerList(){
         </body>
         
     );
+
 }
