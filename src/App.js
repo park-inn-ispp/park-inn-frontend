@@ -22,6 +22,7 @@ import Pagar from './Payments/Pagar';
 import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
+import IncidenciasDashboard from './Dashboard/IncidenciasDashboard';
 import Error_403 from './errorViews/403';
 import Error_404 from './errorViews/404';
 import Error_500 from './errorViews/500';
@@ -56,6 +57,7 @@ return(
                   <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
                   <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
                   <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
+                  <Route path='/dashboard-incidencias' element={<IncidenciasDashboard/>}/>
                 </Route>
 
                 <Route path='/pagar/' element={<Pagar/>}/>

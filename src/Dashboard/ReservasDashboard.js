@@ -1,21 +1,19 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Loading from '../components/Loading';
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 import call from '../Util/Caller'
 
 
 export default function ReservasDashboard(){
-    let navigate = useNavigate();
-
     const [reservas, setReservas] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const id = parseInt(useParams().id);
     var totalReservas = Object.keys(reservas).length;
-    var pendientes = Object.keys(reservas.filter(x => x.estado=="pendiente")).length;
-    var aceptadas = Object.keys(reservas.filter(x => x.estado=="aceptada")).length;
-    var rechazadas = Object.keys(reservas.filter(x => x.estado=="rechazada")).length;
+    var pendientes = Object.keys(reservas.filter(x => x.estado==="pendiente")).length;
+    var aceptadas = Object.keys(reservas.filter(x => x.estado==="aceptada")).length;
+    var rechazadas = Object.keys(reservas.filter(x => x.estado==="rechazada")).length;
 
     useEffect(() => {
         const Dashboard = async () => {
@@ -23,19 +21,43 @@ export default function ReservasDashboard(){
             const reservas = await data.json()
             setReservas(reservas);
             setIsLoading(false);
-            
         }
         Dashboard();
-    });
+    }, []);
 
 
     function borrarReservas(id) {
         call(`/reservas/`+id, 'DELETE')
           .then(response => {
-
-    
             if (response.ok){
-              navigate(`/dashboard-reservas`)
+              window.location.reload();
+            }
+          })
+      }
+
+      function aceptarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/aceptar', 'GET')
+          .then(response => {
+            if (response.ok){
+              window.location.reload();
+            }
+          })
+      }
+
+      function rechazarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/rechazar', 'GET')
+          .then(response => {
+            if (response.ok){
+              window.location.reload();
+            }
+          })
+      }
+
+      function cancelarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/cancelar', 'GET')
+          .then(response => {
+            if (response.ok){
+              window.location.reload();
             }
           })
       }
@@ -56,8 +78,11 @@ export default function ReservasDashboard(){
                     <th>Precio total</th>
                     <th>Estado</th>
                     <th>Acciones</th>
+                    <th>Detalles</th>
                 </tr>
                 {reservas.map((reserva) => {
+                    var estadoReserva = reserva.estado==="pendiente";
+                    var cancelacionReserva = reserva.estado==="aceptada";
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.user.name}</td>
@@ -66,8 +91,21 @@ export default function ReservasDashboard(){
                         <td>{reserva.fechaFin}</td>
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>
-                        <td><a type="button" className="editButton" href={'/reservas/edit/'+reserva.id}>Editar/ver detalles</a>
-                        <button type='button' class='deleteButton' onClick={() => borrarReservas(reserva.id)}>Eliminar reserva</button></td>
+                        <td>
+                        {
+                            estadoReserva ? (
+                            <><button type='button' class='deleteButton' onClick={() => rechazarReserva(reserva.id)}>Rechazar reserva</button><button type='button' class='editButton' onClick={() => aceptarReserva(reserva.id)}>Aceptar reserva</button></>
+
+                        ) : ("")}
+                        
+
+                        {
+                            cancelacionReserva ? (
+                                <button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
+        
+                            ) : ("")}
+                            </td>
+                        <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a></td>
 
                     </tr>
                 })

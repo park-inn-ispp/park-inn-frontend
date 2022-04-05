@@ -1,7 +1,7 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Loading from '../components/Loading';
 import call from '../Util/Caller'
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -22,15 +22,12 @@ export default function UsuariosDashboard(){
             const usuarios = await data.json()
             setUsuarios(usuarios);
             setIsLoading(false);
-            
         }
         Dashboard();
-
-        
-    });
+    }, []);
 
     function loggedInParse(usuario){
-        if (usuario.loggedIn==true) {
+        if (usuario.loggedIn===true) {
             return 'Si';
         } else {
             return 'No';
@@ -38,8 +35,7 @@ export default function UsuariosDashboard(){
     }
 
 
-    function borrarUsuario(id) {
-        
+    function borrarUsuario(id) {      
         call(`/clients/`+id, 'DELETE')
           .then(response => {
             console.log(response.ok)
@@ -63,8 +59,9 @@ export default function UsuariosDashboard(){
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Apellidos</th>
                     <th>Correo electrónico</th>
-                    <th>Esta logueado</th>
+                    <th>Teléfono</th>
                     <th>Acciones</th>
                 </tr>
                 {usuarios.map((usuario) => {
@@ -72,11 +69,9 @@ export default function UsuariosDashboard(){
                     return <tr>
                     <td>{usuario.id}</td>   
                     <td>{usuario.name}</td>
+                    <td>{usuario.surname}</td>
                     <td>{usuario.email}</td>
-                    <td>{loggedInParse(usuario)}</td>
-                    <td><a type="button" className='editButton' href={'/dashboard-usuarios'}>Editar/Ver detalles</a>
-                    <button type="button" class="deleteButton"  onClick={() => borrarUsuario(usuario.id)}> Eliminar usuario </button></td>
-                                                            
+                    <td>{usuario.phone}</td>                                                           
                 </tr>
                 })
             }
