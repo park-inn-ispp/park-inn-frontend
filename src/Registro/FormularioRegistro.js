@@ -49,19 +49,18 @@ export default function FormularioRegistro(){
         {
             title: "",
             type: "checkbox",
-            name: "acceptTerms",
+            name: "terms",
             validationProps: { required: "Debe aceptar los términos y condiciones de uso"}
         }
     ]   
     }
     let navigate = useNavigate();
     const onSubmit= evt => {
-        
-        console.log(evt)
         call('/api/auth/signup', "POST", evt)
-        .then (response => { console.log(response)
-            if (response.ok) 
-            navigate('/register')
+        .then (response => { 
+            if (response.ok){ 
+            navigate('/')
+        }
         })
     }
 
