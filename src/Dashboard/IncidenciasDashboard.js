@@ -11,8 +11,8 @@ export default function IncidenciasDashboard(){
     const [buttonPopup, setButtonPopup] = useState(false);
     const [contenido, setContenido] = useState("");
     var totalIncidencias = Object.keys(incidencias).length;
-    var abiertas = Object.keys(incidencias.filter(x => x.estado==="abierta")).length;
-    var cerradas = Object.keys(incidencias.filter(x => x.estado==="cerrada")).length;
+    var abiertas = Object.keys(incidencias.filter(x => x.estado==="pendiente")).length;
+    var cerradas = Object.keys(incidencias.filter(x => x.estado==="resuelta")).length;
     useEffect(() => {
         const Dashboard = async () => {
             const data = await call('/incidencias/all', 'GET');
@@ -29,7 +29,6 @@ export default function IncidenciasDashboard(){
           .then(response => {
             if (response.ok){
               navigate(`/dashboard-incidencias`)
-              window.location.reload()
             }
           })
     }
@@ -41,8 +40,14 @@ export default function IncidenciasDashboard(){
 
     if (isLoading) {
         return <Loading/>;
-      }
-      return (
+    } else if (totalIncidencias === 0) {
+        return (
+            <div>
+                <h1>No hay incidencias</h1>
+            </div>
+        )   
+    }else {
+        return (
         <div className='tablas'>
             <table >
                 <tr>
@@ -68,7 +73,7 @@ export default function IncidenciasDashboard(){
                         <td>{incidencia.estado == "pendiente" ?
                             <button type='button' class='deleteButton' onClick={() => cerrarIncidencia(incidencia.id)}>Cerrar Incidencia</button> : 
                             <p>Incidencia cerrada</p>}
-                            </td>
+                        </td>
 
                     </tr>
                 })
@@ -94,5 +99,6 @@ export default function IncidenciasDashboard(){
     </table>
     </div>
         </div>
-)
+    )
+    }
 }

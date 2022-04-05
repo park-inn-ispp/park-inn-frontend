@@ -1,7 +1,7 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Loading from '../components/Loading';
 import call from '../Util/Caller'
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,9 +25,7 @@ export default function UsuariosDashboard(){
             
         }
         Dashboard();
-
-        
-    });
+    }, []);
 
     function loggedInParse(usuario){
         if (usuario.loggedIn==true) {

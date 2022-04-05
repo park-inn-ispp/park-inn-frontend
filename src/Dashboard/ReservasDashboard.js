@@ -1,6 +1,6 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Loading from '../components/Loading';
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 import call from '../Util/Caller'
@@ -26,7 +26,7 @@ export default function ReservasDashboard(){
             
         }
         Dashboard();
-    });
+    }, []);
 
 
     function borrarReservas(id) {
