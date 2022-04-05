@@ -29,6 +29,7 @@ export default function IncidenciasDashboard(){
           .then(response => {
             if (response.ok){
               navigate(`/dashboard-incidencias`)
+              window.location.reload()
             }
           })
     }

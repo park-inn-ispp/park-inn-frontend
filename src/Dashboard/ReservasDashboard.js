@@ -35,7 +35,44 @@ export default function ReservasDashboard(){
 
     
             if (response.ok){
-              navigate(`/dashboard-reservas`)
+              //navigate(`/dashboard-reservas`)
+              window.location.reload()
+            }
+          })
+      }
+
+      function aceptarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/aceptar', 'GET')
+          .then(response => {
+
+    
+            if (response.ok){
+              //navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              window.location.reload()
+            }
+          })
+      }
+
+      function rechazarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/rechazar', 'GET')
+          .then(response => {
+            console.log(response)
+    
+            if (response.ok){
+              //navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              window.location.reload()
+            }
+          })
+      }
+
+      function cancelarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/cancelar', 'GET')
+          .then(response => {
+            console.log(response)
+    
+            if (response.ok){
+              //navigate(`/mis-reservas-de-mis-plazas/plaza/`+id)
+              window.location.reload()
             }
           })
       }
@@ -56,8 +93,11 @@ export default function ReservasDashboard(){
                     <th>Precio total</th>
                     <th>Estado</th>
                     <th>Acciones</th>
+                    <th>Detalles</th>
                 </tr>
                 {reservas.map((reserva) => {
+                    var estadoReserva = reserva.estado=="pendiente";
+                    var cancelacionReserva = reserva.estado=="aceptada";
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.user.name}</td>
@@ -66,8 +106,21 @@ export default function ReservasDashboard(){
                         <td>{reserva.fechaFin}</td>
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>
-                        <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a>
-                        <button type='button' class='deleteButton' onClick={() => borrarReservas(reserva.id)}>Eliminar reserva</button></td>
+                        <td>
+                        {
+                            estadoReserva ? (
+                            <><button type='button' class='deleteButton' onClick={() => rechazarReserva(reserva.id)}>Rechazar reserva</button><button type='button' class='editButton' onClick={() => aceptarReserva(reserva.id)}>Aceptar reserva</button></>
+
+                        ) : ("")}
+                        
+
+                        {
+                            cancelacionReserva ? (
+                                <button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
+        
+                            ) : ("")}
+                            </td>
+                        <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a></td>
 
                     </tr>
                 })
