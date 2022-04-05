@@ -83,13 +83,15 @@ export default function ReservaDetails() {
     let validaEstado = validaFecha && ((reserva.estado!=="confirmadaUsuario" && !esPropietario) 
         || (reserva.estado!=="confirmadaPropietario" && !esCliente)) && reserva.estado!=="confirmadaAmbos"
         
-    let botones = validaFecha && validaEstado
+    let unrelated = !esPropietario && !esCliente
+    let botones = validaFecha && validaEstado && !unrelated
     let denegada = estado === "denegada"
 
     let FInicio = reserva.fechaInicio.split('T')
     let FFin = reserva.fechaFin.split('T')
     let FSolicitud = reserva.fechaSolicitud.split('T')
 
+    console.log(esPropietario)
 
     return (   
         <div className="form-style-10">
@@ -127,11 +129,7 @@ export default function ReservaDetails() {
                         <StyledButton type="button" onClick={() => confirmarServicio(reserva.id)}>Confirmar servicio</StyledButton><br/>
                         <StyledButton type="button" onClick={() => generarIncidencia(reserva.id)}>Generar incidencia</StyledButton></>
 
-                    ) : (validaFecha ? 
-                        (<><Etiqueta>Servicio:</Etiqueta>
-                        <Parrafo>Has confirmado este servicio</Parrafo></>) : ("") 
-                    
-                    )
+                    ) :("") 
                 }
                 </div>
         </div>

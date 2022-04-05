@@ -16,14 +16,12 @@ export default function ReservaClientList(){
     const [reservas, setReservas] = useState(['loading']);
     const usuario = cookies.get('UserData');
      
-    console.log(id);
     useEffect(() => {
         call(`/reservas/usuario/`+usuario.id,"GET")
         .then(response => response.json())
         .then((res) => setReservas(res));
     },[id]);
 
-    console.log(reservas);
     if (reservas[0] === 'loading'){
         return(
             <Loading></Loading>
@@ -65,6 +63,7 @@ export default function ReservaClientList(){
                     <th>Fecha Fin</th>
                     <th>Precio total</th>
                     <th>Estado</th>
+                    <th></th>
                 </tr>
                 {reservas.map((reserva) => {
                     //var estadoReserva = reserva.estado=="pendiente";

@@ -29,17 +29,20 @@ const urlFrontend = "http://localhost:3000";
                     window.location.href="/500";           
 
                 }else if(response.status === 403){
-                    window.location.href="/403";           
-
+                    window.location.href="/403"; 
+                    
+                }else if(response.status===404){
+                    window.location.href="/404";  
                 }else{
-                    if(window.location.pathname !=="/login"){
-                        window.location.href="/404";           
-                    }
+                    
+                    response.json().then(res => console.log(res))        
+                    
 
                 }
             }
         }).catch(exception =>{
-            window.location.href="./500";    
+           // window.location.href="/500";  
+           console.log(exception);  
         })
         
 

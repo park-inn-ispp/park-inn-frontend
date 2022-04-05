@@ -72,9 +72,8 @@ export default function ReservasDashboard(){
                 <tr>
                     <th>Propietario</th>
                     <th>Cliente</th>
+                    <th>Dirección</th>
                     <th>Fecha Solicitud</th>
-                    <th>Fecha inicio</th>
-                    <th>Fecha fin</th>
                     <th>Precio total</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -86,9 +85,8 @@ export default function ReservasDashboard(){
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.user.name}</td>
+                        <td>{reserva.plaza.direccion}</td>
                         <td>{reserva.fechaSolicitud}</td>
-                        <td>{reserva.fechaInicio}</td>
-                        <td>{reserva.fechaFin}</td>
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>
                         <td>

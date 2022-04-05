@@ -47,6 +47,7 @@ export default function IncidenciasDashboard(){
     }else {
         return (
         <div className='tablas'>
+            <h1 className='titulos'>INCIDENCIAS</h1>
             <table >
                 <tr>
                     <th>Id</th>
