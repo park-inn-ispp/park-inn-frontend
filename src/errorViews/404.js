@@ -8,17 +8,13 @@ class Error_404 extends Component {
         //this.remove = this.remove.bind(this);
     }
     
-
-    
-    
+    componentDidMount() {
+        document.getElementById("navbar-parkinn").setAttribute("hidden",true)
+        document.getElementById("footer-parkinn").setAttribute("hidden",true)
+    }
 
     render() {       
-        try{
-            document.getElementById("footer-parkinn").setAttribute("hidden",true)
-    
-          }catch{
-            
-          }
+        
         return (
             <div class="main"> 
 <svg xmlns="http://www.w3.org/2000/svg" width="470" height="290" viewBox="0 0 470 290">
