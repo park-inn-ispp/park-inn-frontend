@@ -33,4 +33,8 @@ const PrivateRoute = () => {
     return auth? <Outlet /> : <Navigate to="/login" />;
 }
 
+
 export default PrivateRoute;
+
+
+
