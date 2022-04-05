@@ -14,10 +14,11 @@ export default function ReservaClientList(){
 
     const id = useParams().id;
     const [reservas, setReservas] = useState(['loading']);
+    const usuario = cookies.get('UserData');
      
     console.log(id);
     useEffect(() => {
-        call(`/mis-reservas/usuario/${id}`,"GET")
+        call(`/reservas/usuario/`+usuario.id,"GET")
         .then(response => response.json())
         .then((res) => setReservas(res));
     },[id]);
@@ -35,15 +36,22 @@ export default function ReservaClientList(){
     }
 
    
-      function cancelarReserva(reservaId) {
+    function cancelarReserva(reservaId) {
         call(`/reservas/`+reservaId+'/cancelar', 'GET')
           .then(response => {
             console.log(response)
     
             if (response.ok){
-              navigate(`/mis-reservas`)
+              //navigate(`/mis-reservas`)
+              window.location.reload()
             }
           })
+      }
+
+      function verDetallesReserva(reservaId) {
+              navigate(`/reservas/`+reservaId)
+            
+        
       }
 
     return(
@@ -74,6 +82,9 @@ export default function ReservaClientList(){
                         <><button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button></>
 
                     ) : (reserva.estado)}
+                        </td>
+                        <td>
+                        <button type='button' class='editButton' onClick={() => verDetallesReserva(reserva.id)}>Ver detalles</button>
                         </td>
                     </tr>
                 })}

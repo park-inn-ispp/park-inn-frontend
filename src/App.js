@@ -39,7 +39,7 @@ return(
                 <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
                 <Route path='/logout' element={<Logout />}/>
                 <Route path='/mis-plazas' element={<PlazasList/>}/>
-                <Route path='/mis-reservas/usuario/:id' element={<ReservasClientList/>}/>
+                <Route path='/mis-reservas' element={<ReservasClientList/>}/>
                 <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
                 <Route path='/plaza/create' element={<CreatePlaza/>}/>
                 <Route path='/reservas/:id' element={<ReservaDetails/>}/>
