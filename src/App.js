@@ -12,13 +12,13 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
+import ReservaDetails from './Reserva/ReservaDetails';
+import PrivateRoute from './Services/AuthService';
 import CreateIncidencia from './Incidencia/CreateIncidencia'
 import FormularioRegistro from './Registro/FormularioRegistro';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import Pagar from './Payments/Pagar';
-import ReservaDetails from './Reserva/ReservaDetails';
-import PrivateRoute from './Services/AuthService';
 import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
@@ -26,9 +26,14 @@ import Error_403 from './errorViews/403';
 import Error_404 from './errorViews/404';
 import Error_500 from './errorViews/500';
 import AdminRoute from './Services/AdminRoute';
+import ReservaOwnerList from './Reservas/ReservasOwnerList';
+import Terminos from './components/Terminos y Condiciones/Terminos';
+
+
 export default function App() {
 
 return( 
+    
         <div className='App'> 
           <ReactNotifications />
           <Navbar/>  
@@ -54,12 +59,14 @@ return(
                 </Route>
 
                 <Route path='/pagar/' element={<Pagar/>}/>
+                <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservaOwnerList/>}/>
               </Route>
               <Route path='/login' element={<Login />}/>
               <Route path='/register' element={<FormularioRegistro/>}/>
               <Route path='/500' element={<Error_500/>}/>
               <Route path='/404' element={<Error_404/>}/>
               <Route path='/403' element={<Error_403/>}/>
+              <Route path='/Terminos-y-condiciones' element={<Terminos/>}/>
 
               {/* ESTA RUTA TIENE QUE ESTAR SIEMPRE LA ULTIMA */}
               <Route path ='*' element={<Error_404/>}/>
