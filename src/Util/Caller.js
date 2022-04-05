@@ -1,4 +1,4 @@
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const urlBackend ="http://localhost:8080";
@@ -25,15 +25,15 @@ const urlFrontend = "http://localhost:3000";
             if(response.ok){
                 return response
             }else{
-                if(response.status==500){
-                    window.location.href="./500";           
+                if(response.status === 500){
+                    window.location.href="/500";           
 
-                }else if(response.status==403){
-                    window.location.href="./403";           
+                }else if(response.status === 403){
+                    window.location.href="/403";           
 
                 }else{
-                    if(window.location.pathname!='/login'){
-                        window.location.href="./404";           
+                    if(window.location.pathname !=="/login"){
+                        window.location.href="/404";           
                     }
 
                 }
