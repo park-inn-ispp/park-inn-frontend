@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import './App.css';
 import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
@@ -31,12 +31,12 @@ import Terminos from './components/Terminos y Condiciones/Terminos';
 
 
 export default function App() {
-
-return( 
-    
+  const location = useLocation();
+  return( 
+        
         <div className='App'> 
           <ReactNotifications />
-          <Navbar/>  
+          {['/register', '/Terminos-y-condiciones'].includes(location.pathname) ? null : <Navbar/>}  
      
             <Routes>
 
