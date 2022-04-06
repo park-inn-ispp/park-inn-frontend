@@ -38,7 +38,7 @@ export default function EditPlaza() {
 
   const DetallesPlaza = async () => {
 
-    const data = await call(`/plazas/${id}`,"GET")
+    const data = await call(`/plazas/${id}/formularioEditar`,"GET")
     if(data.ok){
       setMiPlaza(true)
     }
