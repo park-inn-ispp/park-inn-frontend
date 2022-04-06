@@ -1,9 +1,12 @@
 import Cookies from "universal-cookie";
 import displayNotification from '../Util/Notifications';
+import Logout from "../Login/Logout";
+import jwt_decode from 'jwt-decode';
+
 const cookies = new Cookies();
 
 const urlBackend ="http://localhost:8080";
-const urlFrontend = "http://localhost:3000";
+const urlFrontend = "http://localhost:3000/";
 
 
      async function call(pathToCall,method,body){
@@ -11,7 +14,15 @@ const urlFrontend = "http://localhost:3000";
         let headers_ = {"Content-Type": "application/json", "Access-Control-Allow-Origin" : urlFrontend, "mode": "cors"};
         const token = await cookies.get('AuthToken');
 
+
+        
         if(token !== undefined && token !== "undefined"){
+            
+            var decoded = jwt_decode(token);
+            if(Date.now() >new Date(decoded.exp*1000) ){ // el token ha expirado y tenemos que logearnos de nuevo
+                Logout()        
+            }
+
             headers_ = {"Authorization" : "Bearer " + token.toString(), "Content-Type": "application/json", "Access-Control-Allow-Origin" : urlFrontend, "mode": "cors"};
         }
 
@@ -48,7 +59,7 @@ const urlFrontend = "http://localhost:3000";
                             window.location.href="/404";  
                         }else{
                             
-                            response.json().then(res => console.log(res))        
+                            console.log(response)    
                             
         
                         }
@@ -67,7 +78,6 @@ const urlFrontend = "http://localhost:3000";
         })
         
 
-        // return await fetch(urlBackend+pathToCall, requestOptions);
             
       
     
