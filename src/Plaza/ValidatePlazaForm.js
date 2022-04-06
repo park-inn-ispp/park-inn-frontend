@@ -34,8 +34,8 @@ export default function validateParkingForm(form){
         errors.fianza= "La fianza debe ser un número"
     } else if (+form.fianza > 1000){
         errors.fianza= "La fianza no puede ser mayor a 1000€"
-    } else if (+form.fianza < 0){
-        errors.fianza= "La fianza no puede ser un número negativo"
+    } else if (+form.fianza < 5){
+        errors.fianza= "La fianza no puede ser menor a 5"
     } else {
         var m = Number((Math.abs(+form.fianza) * 100).toPrecision(15));
         var value= Math.round(m) / 100 * Math.sign(+form.fianza);

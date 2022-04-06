@@ -30,7 +30,7 @@ export default function ReservaOwnerList(){
     }
     if (reservas === 'undefined' || reservas.length === 0){
         return(
-            <h2>Esta plaza no existe o no está disponible en este momento</h2>
+            <h2>Esta plaza no existe, no está disponible en este momento o no tiene reservas asociadas</h2>
         )
     }
 
