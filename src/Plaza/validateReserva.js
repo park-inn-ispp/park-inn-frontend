@@ -17,7 +17,6 @@ export default function validateReserva(form){
 
     //Validación Fecha Fin
     if(!form.fechaFin.trim()){
-        console.log("========"+hcompleta)
         errors.fechaFin = "La fecha de fin es un campo obligatorio"
     } else if (form.fechaFin < form.fechaInicio){
         errors.fechaFin = "La fecha de fin debe ser posterior a la de inicio"
@@ -44,7 +43,6 @@ export default function validateReserva(form){
     var mins2 = trozos2[0];
     var hcompleta2 = (horas2+mins2);
     if((form.fechaFin==form.fechaInicio) && (hcompleta2-hcompleta<=100)){
-        console.log("======================="+form.horaFin)
         errors.horaFin = "La hora de fin debe ser una hora posterior a la hora de inicio";
     }
     
