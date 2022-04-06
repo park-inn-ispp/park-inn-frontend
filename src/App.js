@@ -60,7 +60,7 @@ return(
                   <Route path='/dashboard-incidencias' element={<IncidenciasDashboard/>}/>
                 </Route>
 
-                <Route path='/pagar/' element={<Pagar/>}/>
+                
                 <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservaOwnerList/>}/>
               </Route>
               <Route path='/login' element={<Login />}/>
