@@ -64,7 +64,7 @@ export default function ReservaClientList(){
                 </tr>
                 {reservas.map((reserva) => {
                     //var estadoReserva = reserva.estado=="pendiente";
-                    var cancelacionReserva = reserva.estado==="aceptada" || reserva.estado==="rechazada";
+                    var cancelacionReserva = reserva.estado==="aceptada";
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.plaza.direccion}</td>
