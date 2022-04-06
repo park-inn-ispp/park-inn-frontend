@@ -1,33 +1,92 @@
-import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import ListComponent from '../components/ListComponent'
+import call from "../Util/Caller";
+import {useEffect, useState} from "react";
+import { useNavigate } from 'react-router-dom';
+import Loading from "../components/Loading";
+import Cookies from 'universal-cookie';
 
-class ReservasList extends Component{
-    constructor(props){
-        super(props);
-        this.state = {reservas: []};
-    }
+const cookies = new Cookies();
 
-    componentDidMount(){
-        fetch('https://parkinn-api-v1.herokuapp.com/reservas/all')
+
+
+export default function ReservaClientList(){
+    let navigate = useNavigate();
+    const [reservas, setReservas] = useState(['loading']);
+    const usuario = cookies.get('UserData');
+     
+    useEffect(() => {
+        call(`/reservas/usuario/`+usuario.id,"GET")
         .then(response => response.json())
-        .then((data) => {
-            this.setState({reservas: data})
-        });
+        .then((res) => setReservas(res));
+    },[usuario.id]);
+
+    if (reservas[0] === 'loading'){
+        return(
+            <Loading></Loading>
+        )
+    }
+    if (reservas === 'undefined' || reservas.length === 0){
+        return(
+            <h2>No hay reservas asociadas a este usuario</h2>
+        )
     }
 
-    render(){
-        return(
-            <ListComponent
-                header={"fechaSolicitud"}
-                data={this.state.reservas}
-                attributes={[{position:1,val:'id'},{position:2,val:'fechaInicio'},{position:3,val:'fechaFin'}, {position:4,val:'plaza.direccion'}]} 
-                headers={['id', 'fechaInicio', 'fechaFin', 'direccion']}
-                />
-        );
-    }
+   
+    function cancelarReserva(reservaId) {
+        call(`/reservas/`+reservaId+'/cancelar', 'GET')
+          .then(response => {
+            console.log(response)
+    
+            if (response.ok){
+              //navigate(`/mis-reservas`)
+              window.location.reload()
+            }
+          })
+      }
+
+      function verDetallesReserva(reservaId) {
+              navigate(`/reservas/`+reservaId)
+            
+        
+      }
+
+    return(
+        <body>
+        <div className="tablas">
+            <table>
+                <tr>
+                    <th>Propietario</th>
+                    <th>Direccion</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Precio total</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+                {reservas.map((reserva) => {
+                    //var estadoReserva = reserva.estado=="pendiente";
+                    var cancelacionReserva = reserva.estado==="aceptada";
+                    return <tr>
+                        <td>{reserva.plaza.administrador.name}</td>
+                        <td>{reserva.plaza.direccion}</td>
+
+                        <td>{reserva.fechaInicio}</td>
+                        <td>{reserva.fechaFin}</td>
+                        <td>{reserva.precioTotal}</td>
+                        <td>
+                        {
+                    cancelacionReserva ? (
+                        <><button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button></>
+
+                    ) : (reserva.estado)}
+                        </td>
+                        <td>
+                        <button type='button' class='editButton' onClick={() => verDetallesReserva(reserva.id)}>Ver detalles</button>
+                        </td>
+                    </tr>
+                })}
+            </table>
+        </div>
+        </body>
+        
+    );
 }
-export default ReservasList;

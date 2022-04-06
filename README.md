@@ -9,7 +9,7 @@ Una vez instaladas dichas herramientas, y clonado el repostorio, en la carpeta r
  y después `npm start`
 
 Esto correrá la app en modo desarrollador
-Open [https://parkinn-app-v1.herokuapp.com/](https://parkinn-app-v1.herokuapp.com/)
+Open [https://parkinn-app-v2.herokuapp.com/](http://parkinn-app-v2.herokuapp.com/)
 
 Abajo dejo otra documentación oficial
 

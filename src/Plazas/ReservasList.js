@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
 import ListComponent from '../components/ListComponent'
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-
+import call from '../Util/Caller';
 class ReservasList extends Component {
 
     constructor(props) {
@@ -16,14 +12,11 @@ class ReservasList extends Component {
     }
     
     componentDidMount() {
-        fetch('https://parkinn-api-v1.herokuapp.com/reservas/usuario/1')
+        
+        call(`/reservas/all`,"GET") 
             .then(response => response.json())
             .then(data =>{ this.setState({ reservas: data})});
     }
-
-
-    
-        
         render() {       
 
         return (

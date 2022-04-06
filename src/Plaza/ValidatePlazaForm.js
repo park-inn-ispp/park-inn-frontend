@@ -19,6 +19,12 @@ export default function validateParkingForm(form){
         errors.precioHora= "El precio por hora no puede ser mayor a 100€"
     } else if (+form.precioHora < 0){
         errors.precioHora= "El precio por hora no puede ser un número negativo"
+    } else {
+        var m = Number((Math.abs(+form.precioHora) * 100).toPrecision(15));
+        var value= Math.round(m) / 100 * Math.sign(+form.precioHora);
+        if(value!=+form.precioHora){
+            errors.precioHora= "Este campo no puede contener más de 2 decimales"
+        }
     }
 
     // Validación fianza
@@ -28,8 +34,14 @@ export default function validateParkingForm(form){
         errors.fianza= "La fianza debe ser un número"
     } else if (+form.fianza > 1000){
         errors.fianza= "La fianza no puede ser mayor a 1000€"
-    } else if (+form.fianza < 0){
-        errors.fianza= "La fianza no puede ser un número negativo"
+    } else if (+form.fianza < 5){
+        errors.fianza= "La fianza no puede ser menor a 5"
+    } else {
+        var m = Number((Math.abs(+form.fianza) * 100).toPrecision(15));
+        var value= Math.round(m) / 100 * Math.sign(+form.fianza);
+        if(value!=+form.fianza){
+            errors.fianza= "Este campo no puede contener más de 2 decimales"
+        }
     }
 
     //Validación ancho
@@ -37,10 +49,16 @@ export default function validateParkingForm(form){
         errors.ancho= "El ancho es un campo obligatorio" 
     } else if(isNaN(+form.ancho)){
         errors.ancho= "El ancho debe ser un número"
-    } else if(+form.ancho < 0){
-        errors.ancho= "El ancho no puede ser un número negativo"
+    } else if(+form.ancho <= 0){
+        errors.ancho= "El ancho no puede ser 0 o un número negativo"
     } else if (+form.ancho > 20){
         errors.ancho= "El ancho no puede ser mayor a 20 metros"
+    }else {
+        var m = Number((Math.abs(+form.ancho) * 100).toPrecision(15));
+        var value= Math.round(m) / 100 * Math.sign(+form.ancho);
+        if(value!=+form.ancho){
+            errors.ancho= "Este campo no puede contener más de 2 decimales"
+        }
     }
 
     //Validación largo
@@ -49,9 +67,15 @@ export default function validateParkingForm(form){
     } else if(isNaN(+form.largo)){
         errors.largo= "El largo debe ser un número"
     } else if(+form.largo <= 0){
-        errors.largo= "El largo no puede ser un número negativo"
+        errors.largo= "El largo no puede ser 0 o un número negativo"
     } else if (+form.ancho >= 20){
         errors.largo= "El largo no puede ser mayor a 20 metros"
+    }else {
+        var m = Number((Math.abs(+form.largo) * 100).toPrecision(15));
+        var value= Math.round(m) / 100 * Math.sign(+form.largo);
+        if(value!=+form.largo){
+            errors.largo= "Este campo no puede contener más de 2 decimales"
+        }
     }
 
     // Validación número
@@ -92,8 +116,8 @@ export default function validateParkingForm(form){
     }
 
     // Validación exterior (true or false)
-    if (form.exterior != true && form.exterior!= false){
-        errors.exterior= "Debe seleccionar si su aparcamiento se encuentra en el exterior o en el interior"
+    if (form.exterior !== true && form.exterior !== false){
+        errors.exterior= "La ubicación solo puede ser exterior o interior"
     }
 
     return errors

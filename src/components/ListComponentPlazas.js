@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
 import './ListComponent.css'
-
+import Loading from './Loading'
 
 class ListComponentPlazas extends Component {
 
@@ -69,12 +65,15 @@ class ListComponentPlazas extends Component {
                                                         
                                                     }
                                                 })
-                                                if(property_position!=4){
+                                                if(property_position!=3  && property_position!=4){
                                                     tds[this.props.attributes[property_position].position] = <td key={this.props.attributes[property_position].val}>{object[this.props.attributes[property_position].val]}</td>
 
-                                                }else{
+                                                }else if(property_position==3){
                                                     var enlace= "" + object[this.props.attributes[property_position].val]
                                                     tds[this.props.attributes[property_position].position] = <td key={this.props.attributes[property_position].val}><a href={enlace}> Ver detalles/editar </a></td>
+                                                }else if(property_position==4){
+                                                    var enlace= "" + object[this.props.attributes[property_position].val]
+                                                    tds[this.props.attributes[property_position].position] = <td key={this.props.attributes[property_position].val}><a href={enlace}> Reservas </a></td>
                                                 }
 
 
@@ -108,7 +107,8 @@ class ListComponentPlazas extends Component {
         }
         
         return <div>
-            
+            <Loading></Loading>
+
            
             </div>
        

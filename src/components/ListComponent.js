@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import AppNavbar from '../AppNavBar';
-import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
 import './ListComponent.css'
-
-
+import Loading from './Loading'
 class ListComponent extends Component {
 
     constructor(props) {
@@ -13,9 +8,7 @@ class ListComponent extends Component {
         this.state = {reservas: [],items:[]};
         //this.remove = this.remove.bind(this);
     }
-   
     slideFunction(event){
-        
         let el = event.target;
         if(el.classList.contains("firstRow")){
             el.classList.toggle('no-slided');
@@ -25,9 +18,9 @@ class ListComponent extends Component {
   }
 
     render() {
-        if(this.props.data.length>0){
+        if(this.props.data !== 'undefined'){
             let i =0
-            let att_values = []
+            let att_values = [];
             for(var att in this.props.attributes ){
              att_values.push(this.props.attributes[att].val)
         
@@ -99,7 +92,7 @@ class ListComponent extends Component {
         }
         
         return <div>
-            
+                <Loading></Loading>
            
             </div>
        

@@ -1,6 +1,5 @@
-
-import React, { Component,useState } from 'react';
-import {Route, Routes,Navigate} from 'react-router-dom';
+import React from 'react';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import './App.css';
 import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
@@ -13,43 +12,69 @@ import Login from './Login/Login';
 import Logout from './Login/Logout';
 import CreatePlaza from './Plaza/CreatePlaza';
 import EditPlaza from './Plaza/EditPlaza';
-
-
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import ReservaDetails from './Reserva/ReservaDetails';
 import PrivateRoute from './Services/AuthService';
-
-function App() {
-
-return( <div className='App'> 
-      <Navbar/>       
-        <Routes>
-
-          <Route exact path='/' element={<PrivateRoute/>}>
-            <Route  path='/' element={<Home/>}/>
-            <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
-            <Route path='/logout' element={<Logout />}/>
-
-            <Route path='/mis-plazas' element={<PlazasList/>}/>
-            <Route path='/mis-reservas' element={<ReservasClientList/>}/>
-            <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
-
-            <Route path='/plaza/create' element={<CreatePlaza/>}/>
+import CreateIncidencia from './Incidencia/CreateIncidencia'
+import FormularioRegistro from './Registro/FormularioRegistro';
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import ReservasDashboard from './Dashboard/ReservasDashboard';
+import PlazasDashboard from './Dashboard/PlazasDashboard';
+import UsuariosDashboard from './Dashboard/UsuariosDashboard';
+import IncidenciasDashboard from './Dashboard/IncidenciasDashboard';
+import ERROR_403 from './errorViews/403';
+import ERROR_404 from './errorViews/404';
+import ERROR_500 from './errorViews/500';
+import AdminRoute from './Services/AdminRoute';
+import ReservaOwnerList from './Reservas/ReservasOwnerList';
+import Terminos from './components/Terminos y Condiciones/Terminos';
 
 
-            <Route path='/reservas/:id' element={<ReservaDetails/>}/>
+export default function App() {
+  const location = useLocation();
+  return( 
+        
+        <div className='App'> 
+          <ReactNotifications />
+          {['/register', '/Terminos-y-condiciones'].includes(location.pathname) ? null : <Navbar/>}  
+     
+            <Routes>
 
-            <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
+              <Route exact path='/' element={<PrivateRoute/>}>
+                <Route  path='/' element={<Home/>}/>
+                <Route path='/reservas/plaza/:id' element={<ReservaPlaza/>}/>
+                <Route path='/logout' element={<Logout />}/>
+                <Route path='/mis-plazas' element={<PlazasList/>}/>
+                <Route path='/mis-reservas' element={<ReservasClientList/>}/>
+                <Route path='/mis-reservas-de-mis-plazas' element={<ReservasList/>}/>
+                <Route path='/plaza/create' element={<CreatePlaza/>}/>
+                <Route path='/reservas/:id' element={<ReservaDetails/>}/>
+                <Route path='/reservas/:id/incidencia/new' element={<CreateIncidencia/>}/>
+                <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
+
+                <Route exact path='/' element={<AdminRoute/>}>
+                  <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
+                  <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
+                  <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
+                  <Route path='/dashboard-incidencias' element={<IncidenciasDashboard/>}/>
+                </Route>
+
+                
+                <Route path='/mis-reservas-de-mis-plazas/plaza/:id' element={<ReservaOwnerList/>}/>
+              </Route>
+              <Route path='/login' element={<Login />}/>
+              <Route path='/register' element={<FormularioRegistro/>}/>
+              <Route path='/500' element={<ERROR_500/>}/>
+              <Route path='/404' element={<ERROR_404/>}/>
+              <Route path='/403' element={<ERROR_403/>}/>
+              <Route path='/Terminos-y-condiciones' element={<Terminos/>}/>
+
+              {/* ESTA RUTA TIENE QUE ESTAR SIEMPRE LA ULTIMA */}
+              <Route path ='*' element={<ERROR_404/>}/>
+            </Routes> 
 
 
-          </Route>
-          <Route path='/login' element={<Login />}/>
-
-
-         
-        </Routes> 
-      <Footer/>   
-    </div>);
+          <Footer/>   
+        </div>
+      );
 }
-
-export default App;

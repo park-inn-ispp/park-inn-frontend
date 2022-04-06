@@ -1,46 +1,13 @@
-import  { useEffect } from 'react';
 import '../App.css';
-import displaySucessNotification from '../Util/Notifications'
+import Cookies from "universal-cookie";
 
-
-import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export default function Logout(){
-    useEffect(() => {
-        const data= {
-            "email": cookies.get(),
-        }
-        
-        const requestOptions = {
-            method: 'POST',
-
-            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : 'https://parkinn-app-v1.herokuapp.com', "mode": "cors"},
-
-            body: (JSON.stringify(data))
-        };
-      
-        fetch('https://parkinn-api-v1.herokuapp.com/clients/logout', requestOptions)
-            .then(async response  =>  {
-
-            if(response.ok && await response.json()==="SUCCESS"){
-                cookies.remove('email', {path: "/"});
-                window.location.href='./login';
-            }else{
-                alert("no se ha podido deslogar")
-            }
-            return response.data;
-        })
-        .catch(error=>{
-            console.log(error);
-        })
-
- 
-    }, []);
-
-    return (
-        <div className='App'>
-        </div>
-    )
-    
+    cookies.remove("AuthToken"); // determine if authorized, from context or however you're doing it
+    cookies.remove("user_mail");
+    cookies.remove("UserData");
+    cookies.remove("user_autorities");
+    localStorage.removeItem("AuthToken");
+    window.location.href = "./login";
 }

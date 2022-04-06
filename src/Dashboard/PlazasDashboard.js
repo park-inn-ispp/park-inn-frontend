@@ -1,0 +1,84 @@
+import React, { useEffect, useState} from 'react';
+import Loading from '../components/Loading';
+import call from '../Util/Caller'
+import { useParams } from 'react-router-dom';
+
+
+
+export default function PlazasDashboard(){
+    const [plazas, setPlazas] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const id = parseInt(useParams().id);
+    var totalplazas = Object.keys(plazas).length;
+    
+
+    useEffect(() => {
+        const Dashboard = async () => {
+            const data = await call('/plazas/all', 'GET');
+            const plazas = await data.json()
+            setPlazas(plazas);
+            setIsLoading(false);
+        }
+        Dashboard();
+
+        
+    }, []);
+
+    function borrarPlaza(id) {
+      call(`/plazas/`+id, 'DELETE')
+        .then(response => {
+          if (response.ok){
+            window.location.reload();
+          }
+        })
+    }
+
+
+    if (isLoading) {
+        return <Loading/>;
+      }
+
+      return (
+          <div className='tablas'>
+            <h1 className='titulos'>PLAZAS</h1>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Direccion</th>
+                    <th>Precio Hora</th>
+                    <th>Fianza</th>
+                    <th>Ancho</th>
+                    <th>Largo</th>
+                    <th>Acciones</th>
+                </tr>
+                {plazas.map((plaza) => {
+    
+                    return <tr>
+                    <td>{plaza.id}</td>
+                    <td>{plaza.direccion}</td>
+                    <td>{plaza.precioHora}</td>
+                    <td>{plaza.fianza}</td>
+                    <td>{plaza.ancho}</td>
+                    <td>{plaza.largo}</td>
+                    <td><a type="button" className='editButton' href={'/plaza/edit/'+plaza.id}>Editar/Ver detalles</a>
+                   </td>
+                                                            
+                </tr>
+                })
+            }
+            </table>
+            <table className='form-styled-10'>
+              <tr>
+
+                    <tr>
+                      <td scope='row' abbr='numPlazas'>Número total de reservas realizadas</td>
+                      <td>{totalplazas}</td>
+                    </tr>
+
+                </tr>
+              </table>
+
+          </div>
+          
+      )
+}

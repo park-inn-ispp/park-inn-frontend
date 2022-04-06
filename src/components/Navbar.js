@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { ProfileIcon, Container, LogoContainer, Menu, MenuItem, MenuItemLink, ParkinnTitle, Wrapper, LinkTitle, MobileIcon } from "./Navbar.elements";
+import { ProfileIcon, Container, LogoContainer, Menu, MenuItem, MenuItemLink, DropdownStyle, ParkinnTitle, Wrapper, LinkTitle, MobileIcon } from "./Navbar.elements";
 import {FaBars, FaHome, FaParking, FaTimes, FaUserCircle} from "react-icons/fa"
 import {BsBookmarksFill} from "react-icons/bs"
 import { IconContext } from "react-icons";
 import Logo from './Logo'
+import DropdownComponent from "./Dropdown";
 export default function Navbar(){
 
     //Estado para el boton del menu desplegable 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     return (
-    <Container>
+    <Container id="navbar-parkinn">
         <Wrapper>
             <IconContext.Provider value = {{style: {fontSize: "2em"}}}>
             <LogoContainer>
@@ -38,12 +39,11 @@ export default function Navbar(){
                         MIS RESERVAS
                     </MenuItemLink>
                 </MenuItem>
-                <MenuItem>
 
-                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/logout">
-                        <BsBookmarksFill/>
-                        Cerrar Sesión
-                    </MenuItemLink>
+                <MenuItem>
+                    <DropdownStyle>
+                        <DropdownComponent /> 
+                    </DropdownStyle> 
                 </MenuItem>
             </Menu>
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
@@ -55,7 +55,7 @@ export default function Navbar(){
                     <FaUserCircle/>
                 </ProfileIcon>
             </IconContext.Provider>
-        </Wrapper>
+            </Wrapper>
     </Container>
     )
 }
