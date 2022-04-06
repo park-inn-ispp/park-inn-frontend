@@ -42,7 +42,7 @@ export default function CreateIncidencia() {
             call('/incidencias',"POST", data)
                 .then(response => {
                 if (response.ok){
-                    navigate(`/mis-reservas`)
+                  call('/reservas/'+reservaId+'/denegar','GET').then(response=>{console.log(response.ok)}).then(navigate(`/mis-reservas`))
                 }
             })
         }
