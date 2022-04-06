@@ -38,6 +38,19 @@ export default function validateReserva(form){
     } else if (form.horaFin < form.horaInicio && form.fechaFin===form.fechaInicio){
         errors.horaFin = "La hora de fin debe ser posterior a la de inicio";
     }
+
+    //Validacion reservas de 1 hora min
+    const trozos = form.horaInicio.split(':');
+    var horas = trozos[0];
+    var mins = trozos[1];
+    var hcompleta= (horas+mins);
+    const trozos2 = form.horaFin.split(':');
+    var horas2 = trozos2[0];
+    var mins2 = trozos2[0];
+    var hcompleta2 = (horas2+mins2);
+    if((form.fechaFin==form.fechaInicio) && (hcompleta2-hcompleta<=100)){
+        errors.horaFin = "La hora de fin debe ser una hora posterior a la hora de inicio";
+    }
     
 
     return errors
