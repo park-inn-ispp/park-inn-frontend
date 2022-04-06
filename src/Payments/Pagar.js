@@ -62,13 +62,18 @@ export default function Pagar({precio=1.0,reserva}) {
                          call(`/plazas/${reserva.plaza.id}/reservar`,"POST",reserva).then(response => {
                           console.log(response)
                           if (response.ok ){
-                            displayNotification("Éxito","Reserva solicitada correctamente","success")
+                            
+                            response.json().then(res => {
+                              if(res.id!=="undefined" && res.id!=="NaN"){
+                                displayNotification("Éxito","Reserva solicitada correctamente","success")
+                                navigate(`/reservas/${res.id}`)
+                          
+                               }
+
+
+                            })  
                           }
-                          if(response.id!=="undefined" && response.id!=="NaN"){
-                            displayNotification("Éxito","Reserva solicitada correctamente","success")
-                            navigate(`/reservas/${response.id}`)
-                      
-                           }
+                         
 
                         }) 
                          
