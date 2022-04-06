@@ -20,29 +20,6 @@ export default function Pagar({precio=1.0,reserva}) {
     
 
   }
-
-  
-  
-
-  async function getData() {
-      
-    const data = await call(`/plazas/${reserva.plaza.id}/reservar`,"POST",reserva)
-    const response = await data.json()
-    console.log(response)
-    if (data.ok){
-      displayNotification("Éxito","Reserva solicitada correctamente","success")
-      
-    }
-    
-                         
-    if(response.id!=="undefined" && response.id!=="NaN"){
-      displayNotification("Éxito","Reserva solicitada correctamente","success")
-      navigate(`/reservas/${response.id}`)
-
-     }
-    return response.id
-  } 
- 
  
    
 
@@ -95,7 +72,7 @@ export default function Pagar({precio=1.0,reserva}) {
 
                         }) 
                          
-                         const id =  getData()
+                        
                          
                      });
                  }}
