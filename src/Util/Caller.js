@@ -1,5 +1,5 @@
 import Cookies from "universal-cookie";
-import displayNotification from '../Util/Notifications';
+import displayNotification from "../Util/Notifications";
 const cookies = new Cookies();
 
 const urlBackend ="http://localhost:8080";
@@ -28,7 +28,7 @@ const urlFrontend = "http://localhost:3000";
             }else{
                 response.json().then(res => {
 
-                    if(res.hasOwnProperty('errores')){ // Mostrar errores CONTROLADOS
+                    if(res.hasOwnProperty("errores")){ // Mostrar errores CONTROLADOS
                         console.log("HAY ERRORES CONTROLADOS")
                         var errores= res.errores
                         console.log(errores)
