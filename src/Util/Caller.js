@@ -1,4 +1,5 @@
 import Cookies from "universal-cookie";
+import displayNotification from '../Util/Notifications';
 const cookies = new Cookies();
 
 const urlBackend ="http://localhost:8080";
@@ -25,21 +26,41 @@ const urlFrontend = "http://localhost:3000";
             if(response.ok){
                 return response
             }else{
-                if(response.status === 500){
-                    window.location.href="/500";           
+                response.json().then(res => {
 
-                }else if(response.status === 403){
-                    window.location.href="/403"; 
-                    
-                }else if(response.status===404){
-                    window.location.href="/404";  
-                }else{
-                    
-                    response.json().then(res => console.log(res))        
-                    
+                    if(res.hasOwnProperty('errores')){ // Mostrar errores CONTROLADOS
+                        console.log("HAY ERRORES CONTROLADOS")
+                        var errores= res.errores
+                        console.log(errores)
+                        for (var i=0; i<errores.length; i++){
+                            displayNotification("Error",errores[i],"danger")
+                            
+                        }
+                    } else{ // Errores no controlados
 
-                }
+                        if(response.status === 500){
+                            window.location.href="/500";           
+        
+                        }else if(response.status === 403){
+                            window.location.href="/403"; 
+                            
+                        }else if(response.status===404){
+                            window.location.href="/404";  
+                        }else{
+                            
+                            response.json().then(res => console.log(res))        
+                            
+        
+                        }
+                    }
+                   
+
+
+                })
+            
+                
             }
+            
         }).catch(exception =>{
            // window.location.href="/500";  
            console.log(exception);  

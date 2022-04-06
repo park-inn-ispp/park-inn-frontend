@@ -4,8 +4,13 @@ import validateParkingForm from './ValidatePlazaForm';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import { Store } from 'react-notifications-component'
 import { ReactNotifications } from 'react-notifications-component'
+import displayNotification from '../Util/Notifications';
 import 'react-notifications-component/dist/theme.css'
 import call from '../Util/Caller';
+
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 export default function EditPlaza() {
 
   let navigate = useNavigate();
@@ -64,6 +69,9 @@ export default function EditPlaza() {
     evt.preventDefault()
     var nuevosErrores= validateParkingForm(form)
     setErrors(nuevosErrores)
+    
+    const usuario = cookies.get('UserData');
+    console.log(usuario);
 
     var numeroErrores = Object.keys(nuevosErrores).length;
     if(numeroErrores===0){
@@ -78,21 +86,16 @@ export default function EditPlaza() {
         "largo": form.largo,
         "estaDisponible": true,
         "esAireLibre": form.exterior,
-        "descripcion": form.descripcion,
-        "administrador": {
-            "id": 0,
-            "name": "sergio",
-            "email": "admin@admin.com"
-        }
+        "descripcion": form.descripcion
       }
-
-      
+      console.log("DATOS ENVIADOS:")
+      console.log(data)
       call(`/plazas/${id}`,"PUT", data)
       .then(response => {
         console.log(response.ok)
 
         if (response.ok){
-          console.log("EDITADA")
+          displayNotification("Éxito","Plaza guardada correctamente","success")
           navigate(`/mis-plazas`)
         }
         
@@ -114,21 +117,21 @@ export default function EditPlaza() {
     
     const target = evt.target
     const name = target.name
-    console.log(name)
+    
     var value= target.value
     
-    if (target.type === 'radio'){
-      value= target.id === 'exterior' ? true : false
-      console.log(value)
+   
+    if (target.type === 'select-one'){
+      value= target.value === 'true' ? true : false
+     
     }
-    console.log(value)
     setForm({...form,[name]: value})
     
   }
   
   
-
-    const borrarPlaza = evt => {
+    
+    /*const borrarPlaza = evt => {
         
       call(`/plazas/`+id, 'DELETE')
         .then(response => {
@@ -139,22 +142,22 @@ export default function EditPlaza() {
             navigate(`/mis-plazas`)
           }
         })
-    }
+    }*/
   
   
 
   return (
     
   <div class="form-style-10">
-  <ReactNotifications />
-  <h1>Crear Plaza</h1>
+   <h1>Editar Plaza</h1>
     <form onSubmit={handleSubmit}>
-
-    <div class="section"><span>1</span>Dirección</div>
-    <div class="inner-wrap">
+    
+    <div className="section"><span>1</span>Dirección</div>
+    <div className="inner-wrap">
+    
       <label>
-      Calle:
-        <input onChange={handleChange} name= "calle" type="text" value={form.calle}/>
+      Dirección:
+        <input onChange={handleChange} name= "calle" type="text" value={form.calle} placeholder="Calle Bami"/>
         <FormErrorMessage jsonErrors={errors} errorName="calle"/>
         
 
@@ -162,7 +165,7 @@ export default function EditPlaza() {
 
       <label>
       Número:
-        <input onChange={handleChange} name= "numero" type="text" value={form.numero}/>
+        <input onChange={handleChange} name= "numero" type="text" value={form.numero} placeholder="4"/>
         
         <FormErrorMessage jsonErrors={errors} errorName="numero"/>
 
@@ -171,68 +174,64 @@ export default function EditPlaza() {
       <label>
       Ciudad:
         <input onChange={handleChange} name= "ciudad" type="text" value={form.ciudad}/>
-        <FormErrorMessage jsonErrors={errors} errorName="ciudad"/>
+        <FormErrorMessage jsonErrors={errors} errorName="ciudad" placeholder="Sevilla"/>
 
       </label>
 
       <label>
       Provincia:
-        <input onChange={handleChange} name= "provincia" type="text" value={form.provincia}/>
+        <input onChange={handleChange} name= "provincia" type="text" value={form.provincia} placeholder="Sevilla"/>
         <FormErrorMessage jsonErrors={errors} errorName="provincia"/>
       </label>
 
       <label>
       Código Postal:
-        <input onChange={handleChange} name= "codigoPostal" type="number" value={form.codigoPostal}/>
+        <input onChange={handleChange} name= "codigoPostal" type="number" value={form.codigoPostal} placeholder="41004"/>
         <FormErrorMessage jsonErrors={errors} errorName="codigoPostal"/>
       </label>
     </div>
 
       <br/> 
 
-    <div class="section"><span>2</span>Precios</div>
-    <div class="inner-wrap">
+    <div className="section"><span>2</span>Precios</div>
+    <div className="inner-wrap">
       <label>
           Precio/Hora (€):
-          <input onChange={handleChange} name="precioHora" type="number" step="0.01" value={form.precioHora}/>
+          <input onChange={handleChange} name="precioHora" type="number"  value={form.precioHora} placeholder="1.20"/>
           <FormErrorMessage jsonErrors={errors} errorName="precioHora"/>
 
       </label>
       <br/>
       <label>
           Fianza (€):
-          <input onChange={handleChange} name="fianza" type="number" step="0.01" value={form.fianza}/>
+          <input onChange={handleChange} name="fianza" type="number"  value={form.fianza} placeholder="10"/>
           <FormErrorMessage jsonErrors={errors} errorName="fianza"/>
 
       </label>
       </div>
       <br/>
-      <div class="section"><span>3</span>Características de la plaza</div>
-      <div class="inner-wrap">
+      <div className="section"><span>3</span>Características de la plaza</div>
+      <div className="inner-wrap">
       <label>
           Ancho (metros):
-          <input onChange={handleChange} name="ancho" type="number" step="0.01" value={form.ancho}/>
+          <input onChange={handleChange} name="ancho" type="number"  value={form.ancho}/>
           <FormErrorMessage jsonErrors={errors} errorName="ancho"/>
 
       </label>
       <br/>
       <label>
           Largo (metros):
-          <input onChange={handleChange} name="largo" type="number" step="0.01" value={form.largo}/>
+          <input onChange={handleChange} name="largo" type="number" value={form.largo}/>
           <FormErrorMessage jsonErrors={errors} errorName="largo"/>
 
       </label>
       <br/>
       <label>
-        Exterior:
-        <input onChange={handleChange} id="exterior" name="exterior"  type="radio" value={form.exterior}/>
-        
-
-      </label>
-      <label>
-        Interior:
-        <input onChange={handleChange} id="interior" name="exterior" type="radio" value={form.exterior} defaultChecked/>
-        <FormErrorMessage jsonErrors={errors} errorName="exterior"/>
+        Ubicación:
+      <select onChange={handleChange} value={form.exterior}  name="exterior" id="exterior">
+          <option value="false" selected>Interior</option>
+          <option value="true">Exterior</option>
+    </select>
       </label>
       <br/>
       <label>
@@ -240,10 +239,11 @@ export default function EditPlaza() {
         <input  onChange={handleChange} name= "descripcion" type="text" value={form.descripcion}/>
         <FormErrorMessage jsonErrors={errors} errorName="descripcion"/>
       </label>
+     
       </div>
       <br/>
-      <br/>
-      <input type="submit" value="Guardar plaza" />  &nbsp; &nbsp;
+     
+      <input type="submit" value="Guardar plaza" />
     </form>
   </div>
   );
