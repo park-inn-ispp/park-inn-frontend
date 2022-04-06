@@ -1,7 +1,6 @@
-import ListComponent from "../components/ListComponent";
 import call from "../Util/Caller";
 import {useEffect, useState} from "react";
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Loading from "../components/Loading";
 import Cookies from 'universal-cookie';
 
@@ -65,7 +64,7 @@ export default function ReservaClientList(){
                 </tr>
                 {reservas.map((reserva) => {
                     //var estadoReserva = reserva.estado=="pendiente";
-                    var cancelacionReserva = reserva.estado=="aceptada";
+                    var cancelacionReserva = reserva.estado==="aceptada";
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.plaza.direccion}</td>

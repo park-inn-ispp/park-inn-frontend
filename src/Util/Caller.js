@@ -39,7 +39,7 @@ const urlFrontend = "http://localhost:3000/";
             }else{
                 response.json().then(res => {
 
-                    if(res.hasOwnProperty('errores')){ // Mostrar errores CONTROLADOS
+                    if(res.hasOwnProperty("errores")){ // Mostrar errores CONTROLADOS
                         console.log("HAY ERRORES CONTROLADOS")
                         var errores= res.errores
                         console.log(errores)

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import GeneralButton from "../GeneralButton/GeneraButton";
-import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div, Enlace } from "./Formulario.components";
+import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div} from "./Formulario.components";
 
 export default function Formulario ({ template, onSubmit, watchFields, validate }){
 

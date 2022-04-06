@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './500.css'
-class Error_500 extends Component {
+class ERROR_500 extends Component {
 
     constructor(props) {
         super(props);
@@ -349,4 +349,4 @@ class Error_500 extends Component {
         );
     }
 }
-export default Error_500;
+export default ERROR_500;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './404.css'
-class Error_404 extends Component {
+class ERROR_404 extends Component {
 
     constructor(props) {
         super(props);
@@ -65,4 +65,4 @@ class Error_404 extends Component {
         );
     }
 }
-export default Error_404;
+export default ERROR_404;
