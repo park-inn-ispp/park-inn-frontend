@@ -6,6 +6,10 @@ import { ReactNotifications } from 'react-notifications-component'
 import { PayPalScriptProvider, PayPalButtons} from "@paypal/react-paypal-js";
 import Loading from '../components/Loading';
 import { useParams, useNavigate } from 'react-router-dom';
+import displayNotification from '../Util/Notifications';
+import {Etiqueta, Parrafo, Formulario} from '../Plaza/ReservaPlaza.elements';
+
+
 
 export default function Pagar({precio=1.0,reserva}) {
  
@@ -26,29 +30,15 @@ export default function Pagar({precio=1.0,reserva}) {
     const response = await data.json()
     console.log(response)
     if (data.ok){
-      Store.addNotification({
-        title: "RESERVA CONFIRMADA!",
-        message: "Tu reserva se ha realizado con éxito, ahora puedes ver los detalles o cancelarla antes de 24 horas",
-        type: "success",
-        insert: "top",
-        container: "top-left",
-        animationIn: ["animate__animated", "animate__fadeIn"],
-        animationOut: ["animate__animated", "animate__fadeOut"],
-        dismiss: {
-          duration: 5000,
-          onScreen: true
-        }
-      });
+      displayNotification("Éxito","Reserva solicitada correctamente","success")
       
     }
     
                          
     if(response.id!=="undefined" && response.id!=="NaN"){
-     
+      displayNotification("Éxito","Reserva solicitada correctamente","success")
       navigate(`/reservas/${response.id}`)
 
-     }else{ // Si ha ocurrido algún error, mostrarlo
-      navigate("/")
      }
     return response.id
   } 
@@ -64,7 +54,16 @@ export default function Pagar({precio=1.0,reserva}) {
     <ReactNotifications />
     <h1> Realizar pago</h1>
 
-    <div class="section"> Importe total: {precio} € </div>
+    
+    <div class="section"> <span>1</span>  Cuenta PayPal de prueba: 
+    
+    <p> <br/>(Recomendamos copiar las credenciales antes de realizar el pago)</p></div>
+    <div class="inner-wrap">
+      
+    <Etiqueta>Usuario:</Etiqueta><Parrafo>sb-ah4x115239563@personal.example.com</Parrafo>
+    <Etiqueta>Contraseña:</Etiqueta><Parrafo>Dv),ev0r</Parrafo>
+     </div>
+    <div class="section"> <span>2</span> Importe total: {precio} €</div>
     <div class="inner-wrap">
     <PayPalScriptProvider options={initialOptions}>
                 <PayPalButtons
@@ -83,10 +82,18 @@ export default function Pagar({precio=1.0,reserva}) {
                      return actions.order.capture().then((details) => {
                          
                          reserva["paypal_order_id"]= details.id
-                         console.log("PAYPAL_ORDER_ID")
-                         console.log(reserva["paypal_order_id"])
-                         console.log("NUEVA RESERVA")
-                         console.log(reserva)
+                         call(`/plazas/${reserva.plaza.id}/reservar`,"POST",reserva).then(response => {
+                          console.log(response)
+                          if (response.ok ){
+                            displayNotification("Éxito","Reserva solicitada correctamente","success")
+                          }
+                          if(response.id!=="undefined" && response.id!=="NaN"){
+                            displayNotification("Éxito","Reserva solicitada correctamente","success")
+                            navigate(`/reservas/${response.id}`)
+                      
+                           }
+
+                        }) 
                          
                          const id =  getData()
                          
