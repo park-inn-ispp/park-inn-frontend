@@ -7,6 +7,7 @@ export default function validateReserva(form){
         diaReserva="0"+diaReserva;
     }
     const fechaActual = fechaReserva.getFullYear() + "-" + 0+(fechaReserva.getMonth() + 1) + "-" + diaReserva;
+    const horaActual = fechaReserva.getHours()+":"+fechaReserva.getMinutes();
 
     //Validación Fecha Incio
     if(!form.fechaInicio.trim()){
@@ -21,11 +22,16 @@ export default function validateReserva(form){
     } else if (form.fechaFin < form.fechaInicio){
         errors.fechaFin = "La fecha de fin debe ser posterior a la de inicio"
     }
-    //Validación de horas para el siguiente Sprint
+
+    //Validación de horas
     
     if(!form.horaInicio.trim()){
         errors.horaInicio = "La hora de inicio es un campo obligatorio";
-    } 
+    }
+
+    if(form.fechaInicio===fechaActual && form.horaInicio < horaActual) {
+        errors.horaInicio = "La hora de inicio debe ser de ahora en adelante";
+    }
 
     if(!form.horaFin.trim()){
         errors.horaFin = "La hora de fin es un campo obligatorio";
