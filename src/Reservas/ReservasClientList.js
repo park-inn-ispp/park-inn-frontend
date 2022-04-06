@@ -11,8 +11,6 @@ const cookies = new Cookies();
 
 export default function ReservaClientList(){
     let navigate = useNavigate();
-
-    const id = useParams().id;
     const [reservas, setReservas] = useState(['loading']);
     const usuario = cookies.get('UserData');
      
@@ -20,7 +18,7 @@ export default function ReservaClientList(){
         call(`/reservas/usuario/`+usuario.id,"GET")
         .then(response => response.json())
         .then((res) => setReservas(res));
-    },[id]);
+    },[usuario.id]);
 
     if (reservas[0] === 'loading'){
         return(
