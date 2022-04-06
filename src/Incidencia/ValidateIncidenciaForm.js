@@ -9,8 +9,8 @@ export default function ValidateIncidenciaForm(form){
     // Validación descripcion
     if(!form.descripcion.trim()){
         errors.descripcion= "La descripción es un campo obligatorio";
-    } else if(form.descripcion.length < 100 || form.descripcion.length > 500){
-        errors.descripcion = "La decripción debe contener entre 100 y 500 caracteres";
+    } else if(form.descripcion.length < 10 || form.descripcion.length > 500){
+        errors.descripcion = "La decripción debe contener entre 10 y 500 caracteres";
     }
     return errors;
 }
