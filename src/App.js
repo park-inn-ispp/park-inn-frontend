@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import './App.css';
 import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
@@ -18,26 +18,25 @@ import CreateIncidencia from './Incidencia/CreateIncidencia'
 import FormularioRegistro from './Registro/FormularioRegistro';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import Pagar from './Payments/Pagar';
 import ReservasDashboard from './Dashboard/ReservasDashboard';
 import PlazasDashboard from './Dashboard/PlazasDashboard';
 import UsuariosDashboard from './Dashboard/UsuariosDashboard';
 import IncidenciasDashboard from './Dashboard/IncidenciasDashboard';
-import Error_403 from './errorViews/403';
-import Error_404 from './errorViews/404';
-import Error_500 from './errorViews/500';
+import ERROR_403 from './errorViews/403';
+import ERROR_404 from './errorViews/404';
+import ERROR_500 from './errorViews/500';
 import AdminRoute from './Services/AdminRoute';
 import ReservaOwnerList from './Reservas/ReservasOwnerList';
 import Terminos from './components/Terminos y Condiciones/Terminos';
 
 
 export default function App() {
-
-return( 
-    
+  const location = useLocation();
+  return( 
+        
         <div className='App'> 
           <ReactNotifications />
-          <Navbar/>  
+          {['/register', '/Terminos-y-condiciones'].includes(location.pathname) ? null : <Navbar/>}  
      
             <Routes>
 
@@ -65,13 +64,13 @@ return(
               </Route>
               <Route path='/login' element={<Login />}/>
               <Route path='/register' element={<FormularioRegistro/>}/>
-              <Route path='/500' element={<Error_500/>}/>
-              <Route path='/404' element={<Error_404/>}/>
-              <Route path='/403' element={<Error_403/>}/>
+              <Route path='/500' element={<ERROR_500/>}/>
+              <Route path='/404' element={<ERROR_404/>}/>
+              <Route path='/403' element={<ERROR_403/>}/>
               <Route path='/Terminos-y-condiciones' element={<Terminos/>}/>
 
               {/* ESTA RUTA TIENE QUE ESTAR SIEMPRE LA ULTIMA */}
-              <Route path ='*' element={<Error_404/>}/>
+              <Route path ='*' element={<ERROR_404/>}/>
             </Routes> 
 
 

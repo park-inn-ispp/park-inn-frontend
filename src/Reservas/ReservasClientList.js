@@ -1,7 +1,6 @@
-import ListComponent from "../components/ListComponent";
 import call from "../Util/Caller";
 import {useEffect, useState} from "react";
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Loading from "../components/Loading";
 import Cookies from 'universal-cookie';
 
@@ -11,8 +10,6 @@ const cookies = new Cookies();
 
 export default function ReservaClientList(){
     let navigate = useNavigate();
-
-    const id = useParams().id;
     const [reservas, setReservas] = useState(['loading']);
     const usuario = cookies.get('UserData');
      
@@ -20,7 +17,7 @@ export default function ReservaClientList(){
         call(`/reservas/usuario/`+usuario.id,"GET")
         .then(response => response.json())
         .then((res) => setReservas(res));
-    },[id]);
+    },[usuario.id]);
 
     if (reservas[0] === 'loading'){
         return(
@@ -67,7 +64,7 @@ export default function ReservaClientList(){
                 </tr>
                 {reservas.map((reserva) => {
                     //var estadoReserva = reserva.estado=="pendiente";
-                    var cancelacionReserva = reserva.estado=="aceptada" || reserva.estado=="rechazada";
+                    var cancelacionReserva = reserva.estado==="aceptada";
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.plaza.direccion}</td>

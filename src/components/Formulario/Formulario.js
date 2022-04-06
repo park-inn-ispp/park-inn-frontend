@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import GeneralButton from "../GeneralButton/GeneraButton";
-import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div, Enlace } from "./Formulario.components";
+import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div} from "./Formulario.components";
 
 export default function Formulario ({ template, onSubmit, watchFields, validate }){
 
@@ -15,6 +15,14 @@ export default function Formulario ({ template, onSubmit, watchFields, validate 
         return fields.map(field => {
             let {title, type, name, placeholder, validationProps} = field;
             switch(type){  
+                case "text":
+                    return(
+                        <Div key={name}>
+                            <Etiqueta htmlFor={name}>{title}</Etiqueta>
+                            <InputForm pattern="[a-zA-Z ]{2,50}" title="Rellena este campo solo con letras de una longitud de 2 a 50 caracteres" type={type} name={name} id={name} placeholder={placeholder} ref={register(validationProps)}/>
+                            {errors[name] && <ErrorMessage>{errors[name]["message"]}</ErrorMessage>}
+                        </Div>
+                    )
                 case "checkbox":
                     return (
                         <Div key={name}>
@@ -27,7 +35,7 @@ export default function Formulario ({ template, onSubmit, watchFields, validate 
                     return (
                         <Div key={name}>
                             <Etiqueta htmlFor={name}>{title}</Etiqueta>
-                            <InputForm pattern="[0-9]{9}" type={type} name={name} id={name} placeholder={placeholder} ref={register(validationProps)}/>
+                            <InputForm pattern="(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}" title="El teléfono debe empezar por 6 o 7 y tener 9 dígitos" type={type} name={name} id={name} placeholder={placeholder} ref={register(validationProps)}/>
                             {errors[name] && <ErrorMessage>{errors[name]["message"]}</ErrorMessage>}
                         </Div>
                     )

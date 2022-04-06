@@ -67,7 +67,7 @@ export default function ReservaDetails() {
         
     function generarIncidencia(id) {
         const url = '/reservas/'+id+'/denegar'
-        call(url,'GET').then(response=>{console.log(response.ok)}).then(navigate("/reservas/"+id+"/incidencia/new"))       
+        navigate("/reservas/"+id+"/incidencia/new")      
     }
 
     //Pantalla de carga
@@ -84,8 +84,7 @@ export default function ReservaDetails() {
         || (reserva.estado!=="confirmadaPropietario" && !esCliente)) && reserva.estado!=="confirmadaAmbos"
         
     let unrelated = !esPropietario && !esCliente
-    let botones = validaFecha && validaEstado && !unrelated
-    let denegada = estado === "denegada"
+    let botones = validaFecha && validaEstado && !unrelated && estado !== "denegada"
 
     let FInicio = reserva.fechaInicio.split('T')
     let FFin = reserva.fechaFin.split('T')
@@ -120,15 +119,10 @@ export default function ReservaDetails() {
                 <Parrafo>{reserva.comentarios}</Parrafo>
                 
 
-                {denegada ? (
-                <><Etiqueta>Servicio:</Etiqueta>
-                <StyledButton type="button" onClick={() => generarIncidencia(reserva.id)}>Generar incidencia</StyledButton></>
-                ) : 
-                    botones ? (
+                {botones ? (
                         <><Etiqueta>Servicio:</Etiqueta>
                         <StyledButton type="button" onClick={() => confirmarServicio(reserva.id)}>Confirmar servicio</StyledButton><br/>
                         <StyledButton type="button" onClick={() => generarIncidencia(reserva.id)}>Generar incidencia</StyledButton></>
-
                     ) :("") 
                 }
                 </div>
