@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import { Etiqueta } from '../components/Formulario/Formulario.components';
 const cookies = new Cookies();
 
+
+
 class Login extends Component {
     state={
         form:{

@@ -11,19 +11,15 @@ const cookies = new Cookies();
 
 export default function ReservaClientList(){
     let navigate = useNavigate();
-
-    const id = useParams().id;
     const [reservas, setReservas] = useState(['loading']);
     const usuario = cookies.get('UserData');
      
-    console.log(id);
     useEffect(() => {
         call(`/reservas/usuario/`+usuario.id,"GET")
         .then(response => response.json())
         .then((res) => setReservas(res));
-    },[id]);
+    },[usuario.id]);
 
-    console.log(reservas);
     if (reservas[0] === 'loading'){
         return(
             <Loading></Loading>
@@ -65,10 +61,11 @@ export default function ReservaClientList(){
                     <th>Fecha Fin</th>
                     <th>Precio total</th>
                     <th>Estado</th>
+                    <th></th>
                 </tr>
                 {reservas.map((reserva) => {
                     //var estadoReserva = reserva.estado=="pendiente";
-                    var cancelacionReserva = reserva.estado=="aceptada" || reserva.estado=="rechazada";
+                    var cancelacionReserva = reserva.estado=="aceptada";
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.plaza.direccion}</td>

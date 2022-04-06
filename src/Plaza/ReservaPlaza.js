@@ -114,7 +114,14 @@ export default function Reserva(){
         setErrors(validateReserva(form))
         var numeroErrores = Object.keys(validateReserva(form)).length;
         if (numeroErrores===0) {
-          setPagando(true)
+          // Validación en backend reservas solapadas
+          call(`/plazas/${body.plaza.id}/validateReservaAntesPago`,"POST",body).then(response => {
+            console.log(response)
+            if (response.ok){
+              setPagando(true)
+            }
+          }) 
+          
         }
     }
 

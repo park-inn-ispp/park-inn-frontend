@@ -78,6 +78,7 @@ export default function ReservaOwnerList(){
         <div className="tablas">
             <table>
                 <tr>
+                    <th>Direccion</th>
                     <th>Cliente</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
@@ -90,6 +91,7 @@ export default function ReservaOwnerList(){
                     var estadoReserva = reserva.estado=="pendiente";
                     var cancelacionReserva = reserva.estado=="aceptada";
                     return <tr>
+                        <td>{reserva.plaza.direccion}</td>
                         <td>{reserva.user.name}</td>
                         <td>{reserva.fechaInicio}</td>
                         <td>{reserva.fechaFin}</td>

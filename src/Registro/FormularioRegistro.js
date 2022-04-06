@@ -15,7 +15,7 @@ export default function FormularioRegistro(){
             validationProps: { required: "El nombre es un campo obligatorio"}
         },
         {
-            title: "Apellidos::",
+            title: "Apellidos:",
             type: "text",
             name: "surname",
             placeholder: "Apellidos",
@@ -25,7 +25,7 @@ export default function FormularioRegistro(){
             title: "Teléfono:",
             type: "tel",
             name: "phone",
-            placeholder: "+34 000 000 000",
+            placeholder: "000 000 000",
             validationProps: { required: "El teléfono es un campo obligatorio"}
         },
         {
