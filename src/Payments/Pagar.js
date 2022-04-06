@@ -82,10 +82,18 @@ export default function Pagar({precio=1.0,reserva}) {
                      return actions.order.capture().then((details) => {
                          
                          reserva["paypal_order_id"]= details.id
-                         console.log("PAYPAL_ORDER_ID")
-                         console.log(reserva["paypal_order_id"])
-                         console.log("NUEVA RESERVA")
-                         console.log(reserva)
+                         call(`/plazas/${reserva.plaza.id}/reservar`,"POST",reserva).then(response => {
+                          console.log(response)
+                          if (response.ok ){
+                            displayNotification("Éxito","Reserva solicitada correctamente","success")
+                          }
+                          if(response.id!=="undefined" && response.id!=="NaN"){
+                            displayNotification("Éxito","Reserva solicitada correctamente","success")
+                            navigate(`/reservas/${response.id}`)
+                      
+                           }
+
+                        }) 
                          
                          const id =  getData()
                          

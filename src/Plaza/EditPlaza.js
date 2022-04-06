@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, Navigate, useNavigate, renderMatches } from 'react-router-dom';
 import validateParkingForm from './ValidatePlazaForm';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import { Store } from 'react-notifications-component'
@@ -27,7 +27,8 @@ export default function EditPlaza() {
     exterior:false,
     descripcion:'',
   })
-
+  
+  const [miPlaza,setMiPlaza]= useState(false);
  
   const id = parseInt(useParams().id)
 
@@ -38,7 +39,11 @@ export default function EditPlaza() {
   const DetallesPlaza = async () => {
 
     const data = await call(`/plazas/${id}`,"GET")
+    if(data.ok){
+      setMiPlaza(true)
+    }
     const plaza = await data.json()
+    
     var direccion = plaza["direccion"]  // DESCOMENTAR ESTO
     //var direccion= "Calle Castillo de Alcala de Guadaira,25,Sevilla,Sevilla,41013" // ELIMINAR ESTO
     var arrayDireccion= direccion.split(",")
@@ -144,10 +149,12 @@ export default function EditPlaza() {
         })
     }*/
   
-  
-
+  console.log(miPlaza)
+  if(miPlaza){
   return (
     
+  
+  
   <div class="form-style-10">
    <h1>Editar Plaza</h1>
     <form onSubmit={handleSubmit}>
@@ -246,5 +253,9 @@ export default function EditPlaza() {
       <input type="submit" value="Guardar plaza" />
     </form>
   </div>
-  );
+  
+    );
+  }else{
+    return(<></>)
+  }
 }
