@@ -5,8 +5,8 @@ import jwt_decode from 'jwt-decode';
 
 const cookies = new Cookies();
 
-const urlBackend ="https://park-inn-ispp-be.herokuapp.com";
-const urlFrontend = "https://park-inn-ispp-fe.herokuapp.com/";
+const urlBackend ="http://parkinn-api-v2.herokuapp.com";
+const urlFrontend = "http://parkinn-app-v2.herokuapp.com/";
 
 
      async function call(pathToCall,method,body){
@@ -40,9 +40,7 @@ const urlFrontend = "https://park-inn-ispp-fe.herokuapp.com/";
                 response.json().then(res => {
 
                     if(res.hasOwnProperty("errores")){ // Mostrar errores CONTROLADOS
-                        console.log("HAY ERRORES CONTROLADOS")
                         var errores= res.errores
-                        console.log(errores)
                         for (var i=0; i<errores.length; i++){
                             displayNotification("Error",errores[i],"danger")
                             
