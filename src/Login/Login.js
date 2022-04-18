@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Cookies from 'universal-cookie';
-import call from '../Util/Caller';
-import Logo from '../components/Logo';
-import displayNotification from '../Util/Notifications';
-import { Container, Wrapper, Icon, LoginInputs, Submit, InputInicio, Label, Registro, Title } from './Login.elements'
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Cookies from "universal-cookie";
+import call from "../Util/Caller";
+import Logo from "../components/Logo";
+import displayNotification from "../Util/Notifications";
+import { Container, Wrapper, Icon, LoginInputs, Submit, InputInicio, Label, Registro, Title } from "./Login.elements";
 
 const cookies = new Cookies();
 
