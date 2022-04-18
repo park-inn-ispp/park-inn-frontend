@@ -20,4 +20,5 @@
    .filter_button:focus {
     outline: 1px dashed;
     outline: 1px auto -webkit-focus-ring-color;
+    z-index: 199;
    }
