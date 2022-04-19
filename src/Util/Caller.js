@@ -5,8 +5,8 @@ import jwt_decode from 'jwt-decode';
 
 const cookies = new Cookies();
 
-const urlBackend ="https://parkinn-api-v2.herokuapp.com";
-const urlFrontend = "https://parkinn-app-v2.herokuapp.com/";
+const urlBackend ="http://localhost:8080";
+const urlFrontend = "http://localhost:3000/";
 
 
      async function call(pathToCall,method,body){
@@ -33,7 +33,7 @@ const urlFrontend = "https://parkinn-app-v2.herokuapp.com/";
         };
 
         return await fetch(urlBackend+pathToCall, requestOptions).then(response =>{
-
+            console.log(response)
             if(response.ok){
                 return response
             }else{

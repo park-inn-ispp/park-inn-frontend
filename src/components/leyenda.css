@@ -1,0 +1,38 @@
+.c{
+  width: 20px;
+  height: 20px;
+  background-color: #f53333;
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: 0.5%;
+
+}
+
+.p{
+  width: 20px;
+  height: 20px;
+  background-color: #f5c133;
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: 0.5%;
+
+
+}
+.texto{
+  display: inline-block;
+
+}
+.containerLeyenda{
+  margin-top: 2%;
+}
+
+.a{
+  width: 20px;
+  height: 20px;
+  background-color: #5af574;
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: 0.5%;
+
+
+}
