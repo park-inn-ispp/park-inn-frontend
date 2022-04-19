@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap  } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';  
 import { Marker } from 'react-leaflet';
 import {  iconLocation  } from './IconLocation';
 import L from 'leaflet';
 import GeoJSON from 'geojson';
 import call from '../Util/Caller';
+import { GeoSearchControl, OpenStreetMapProvider, SearchControl } from 'leaflet-geosearch';
+
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -18,6 +20,26 @@ L.Icon.Default.mergeOptions({
     shadowAnchor: null,
     iconSize: new L.point(90, 90),
 });
+
+function LeafletgeoSearch() {
+  const map = useMap();
+  useEffect(() => {
+    const provider = new OpenStreetMapProvider();
+
+    const searchControl = new GeoSearchControl({
+      provider,
+      marker: {
+        iconLocation
+      }
+    });
+
+    map.addControl(searchControl);
+
+    return () => map.removeControl(searchControl);
+  }, []);
+
+  return null;
+}
 
 function LocationMarker() {
     const [position, setPosition] = useState(null);
@@ -36,51 +58,52 @@ function LocationMarker() {
         call(`/plazas/all`,"GET")
           .then(res => res.json())
           .then(
-            data => GeoJSON.parse(data, {Point: ['latitud', 'longitud'],include: ['id', 'precioHora', 'fianza']})
+            data => GeoJSON.parse(data, {Point: ['latitud', 'longitud'],include: ['id', 'precioHora', 'fianza', 'ancho', 'largo']})
           ).then(data => {
+
+
 
             var menosDe2 = L.geoJSON(data, { 
               onEachFeature: function(feature, layer){
-                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
+                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5><h5> Fianza: ' + layer.feature.properties.fianza + ' €' + '</h5><h5> Ancho: ' + layer.feature.properties.ancho +' metros'+ '</h5><h5> Largo: ' + layer.feature.properties.largo +' metros'+ '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
               },
               filter: function(feature) { return (feature.properties.precioHora > 0 && feature.properties.precioHora <=1.99) }
             });
         
             var entre2Y5 = L.geoJSON(data, { 
               onEachFeature: function(feature, layer){
-                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
+                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5><h5> Fianza: ' + layer.feature.properties.fianza + ' €' + '</h5><h5> Ancho: ' + layer.feature.properties.ancho +' metros'+ '</h5><h5> Largo: ' + layer.feature.properties.largo +' metros'+ '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
               },
               filter: function(feature) { return (feature.properties.precioHora > 1.99 && feature.properties.precioHora <=5.00) }
             });
         
             var masDe5 = L.geoJSON(data, { 
               onEachFeature: function(feature, layer){
-                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
+                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5><h5> Fianza: ' + layer.feature.properties.fianza + ' €' + '</h5><h5> Ancho: ' + layer.feature.properties.ancho +' metros'+ '</h5><h5> Largo: ' + layer.feature.properties.largo +' metros'+ '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
               },
               filter: function(feature) { return feature.properties.precioHora > 5.00 }
-            });
+            });     
 
             var todas = L.geoJSON(data, { 
               onEachFeature: function(feature, layer){
-                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
+                layer.bindPopup('<h5> Precio por hora: ' + layer.feature.properties.precioHora + ' €' + '</h5><h5> Fianza: ' + layer.feature.properties.fianza + ' €' + '</h5><h5> Ancho: ' + layer.feature.properties.ancho +' metros'+ '</h5><h5> Largo: ' + layer.feature.properties.largo +' metros'+ '</h5> <a href="/reservas/plaza/'+layer.feature.properties.id+'"><button>Reservar plaza</button></a>')
               },
             });
-        
-        
-            var baseMaps = {
-              "Todo": todas,
-          };
-          
-          var overlayMaps = {
-              "Menos 2€": menosDe2,
-              "2€-5€": entre2Y5,
-              "Mas 5€": masDe5
-          };
+            
 
-          L.control.layers(baseMaps, overlayMaps,{
-            position: 'topright', // 'topleft', 'bottomleft', 'bottomright'
-            collapsed: true // true
-        }).addTo(map);
+            var overlays = {
+                "Todo": todas,
+                "Menos 2€": menosDe2,
+                "2€-5€":entre2Y5,
+                "Mas 5€": masDe5
+            };
+
+            
+            L.control.layers(overlays, null).addTo(map);
+
+            map.addLayer(todas);
+
+
         }).catch(error => console.error("Error: ",error));
 
       });
@@ -98,11 +121,11 @@ const MapView = () => {
   const position = [51.505, -0.09]
     return(
     <MapContainer center={position} zoom={15}>
-            <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-         />
-      <LocationMarker />
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <LocationMarker />
     </MapContainer>   
     );
 };

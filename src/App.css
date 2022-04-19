@@ -68,11 +68,6 @@
   }
 }
 
-.Buscador{
-  display: flex;
-  align-items: left;
-  background-color:#282c34;
-}
 
 .errorMessage {
   color: #d8000c;
