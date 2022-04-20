@@ -6,7 +6,9 @@ import {  iconLocation  } from './IconLocation';
 import L from 'leaflet';
 import GeoJSON from 'geojson';
 import call from '../Util/Caller';
-import { GeoSearchControl, OpenStreetMapProvider, SearchControl } from 'leaflet-geosearch';
+import { OpenStreetMapProvider, SearchControl } from 'react-leaflet-geosearch';
+
+import './react-leaflet-geosearch.css';
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -20,26 +22,6 @@ L.Icon.Default.mergeOptions({
     shadowAnchor: null,
     iconSize: new L.point(90, 90),
 });
-
-function LeafletgeoSearch() {
-  const map = useMap();
-  useEffect(() => {
-    const provider = new OpenStreetMapProvider();
-
-    const searchControl = new GeoSearchControl({
-      provider,
-      marker: {
-        iconLocation
-      }
-    });
-
-    map.addControl(searchControl);
-
-    return () => map.removeControl(searchControl);
-  }, []);
-
-  return null;
-}
 
 function LocationMarker() {
     const [position, setPosition] = useState(null);
@@ -119,6 +101,8 @@ function LocationMarker() {
 
 const MapView = () => {
   const position = [51.505, -0.09]
+  const prov = OpenStreetMapProvider();
+  const GeoSearchControlElement = SearchControl;
     return(
     <MapContainer center={position} zoom={15}>
         <TileLayer
@@ -126,6 +110,18 @@ const MapView = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <LocationMarker />
+        
+        <GeoSearchControlElement
+          provider={prov}
+          showMarker={false}
+          showPopup={false}
+          retainZoomLevel={false}
+          animateZoom={true}
+          autoClose={true}
+          searchLabel={"Enter address, please"}
+          keepResult={true}
+          popupFormat={({ query, result }) => result.label}
+        />
     </MapContainer>   
     );
 };
