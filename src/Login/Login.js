@@ -1,16 +1,12 @@
-import React, { Component } from 'react';
-import './Login.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Cookies from 'universal-cookie';
-import call from '../Util/Caller';
-import Logo from '../components/Logo';
-import Input from '../components/Input/Input';
-import displayNotification from '../Util/Notifications';
-import { Link } from 'react-router-dom';
-import { Etiqueta } from '../components/Formulario/Formulario.components';
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Cookies from "universal-cookie";
+import call from "../Util/Caller";
+import Logo from "../components/Logo";
+import displayNotification from "../Util/Notifications";
+import { Container, Wrapper, Icon, LoginInputs, Submit, InputInicio, Label, Registro, Title } from "./Login.elements";
+
 const cookies = new Cookies();
-
-
 
 class Login extends Component {
     state={
@@ -52,7 +48,7 @@ class Login extends Component {
         call(`/api/auth/signin`,"POST",data)
             .then(async response  =>  {
 
-                if(response!=undefined && response.ok){
+                if(response !== undefined && response.ok){
                 let auth_token = await (await response.text()).split(" ")[1]
                 
                 if(this.state.form.recuerdame){
@@ -91,9 +87,6 @@ class Login extends Component {
      }
 
     componentDidMount() {
-        // if(cookies.get('email')){
-        //     window.location.href="./";
-        // }
         document.getElementById("navbar-parkinn").setAttribute("hidden",true)
         document.getElementById("footer-parkinn").setAttribute("hidden",true)
     }
@@ -101,35 +94,24 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='login'>
-
-                <div className="container_body">
-                    <div className='parkinn-icon'>
-                        <Logo className="logo" margin-top="500px" />
+            <Container>
+                <Wrapper className="container_body">
+                    <Title>PARK-INN</Title>
+                    <Icon className='parkinn-icon'>
+                        <Logo className="logo"/>
+                    </Icon>
+                    <LoginInputs>
+                        <Label>Correo electrónico:</Label>
+                        <InputInicio type="text" name="email" placeholder="usuario@gmail.com" onChange={this.handleChange}/>
+                        <Label>Contraseña:</Label>
+                        <InputInicio type="password" name="password" placeholder="*********" onChange={this.handleChange}/>
+                    </LoginInputs>
+                    <div>
+                        <Submit onClick={()=> this.iniciarSesion()}>Iniciar Sesión</Submit>
                     </div>
-
-                    <div className='login-inputs'>
-                    
-                    <div className='input'>
-                        <div className='label'>Dirección mail</div>
-                        <input type="text" name="email" placeholder="usuario@gmail.com" onChange={this.handleChange}></input>
-                    </div>   
-
-                    <div className='input'>
-                        <div className='label'>Contraseña</div>
-                        <input type="password" name="password" placeholder="password" onChange={this.handleChange}></input>
-
-                    </div>   
-                        <input className="checkb-input" name="recuerdame" type="checkbox" onChange={this.handleChange}/>
-                    </div>
-                    
-                    <div className='login-footer'>
-                        <button className='button-login' onClick={()=> this.iniciarSesion()}>Log In</button>
-                    </div>
-                    <br/>
-                    <Link to="/register">Registrarme</Link>
-                </div>
-            </div>
+                    <Registro to="/register">Registrarme</Registro>
+                </Wrapper>
+            </Container>
         );
     }
 }
