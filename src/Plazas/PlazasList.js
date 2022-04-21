@@ -11,7 +11,7 @@ import image1 from "../assets/no-image-available-icon-6.jpg";
 const cookies = new Cookies();
 
 export default function PlazasList() {
-    const [plazas, setPlazas] = useState(["Empty"]);
+    const [plazas, setPlazas] = useState(["Loading"]);
     const usuario = cookies.get('UserData');
 
     useEffect (() => {
@@ -45,7 +45,7 @@ export default function PlazasList() {
             )
         }
 
-        console.log(plazas)
+
         return (
             <div>
                 <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
@@ -63,18 +63,6 @@ export default function PlazasList() {
             </div>
           </div>
           </div>
-
-            // <div> 
-            //     {/* <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
-            //     <ListComponentPlazas
-            //         header={"direccion"} 
-            //         data={plazas} 
-            //         attributes={[{position:1,val:'direccion'},{position:2,val:'precioHora'},{position:3,val:'fianza'},{position:4,val:'editURL'}, {position:5,val:'reservasURL'}]} 
-            //         headers={['Dirección', 'Precio hora','Fianza','Detalles', 'Reservas']}
-            //     /> */}
-            //     <Cards />
-
-            // </div>
         );
 }
 

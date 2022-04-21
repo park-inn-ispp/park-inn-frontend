@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import CardReservas from '../components/CardReservas';
 import image1 from "../assets/no-image-available-icon-6.jpg";
 import Leyenda from "../components/Leyenda";
+import parsearFechas from "../Util/FechasParser";
 const cookies = new Cookies();
 
 
@@ -45,7 +46,7 @@ export default function ReservaClientList(){
                   
                 <div className="col-md-4" key={reserva.id}>
                   <CardReservas imageSource={image1} id={reserva.id} title={reserva.plaza.direccion} propietario={reserva.plaza.administrador.name}
-                   fechaInicio={reserva.fechaInicio} fechaFin={reserva.fechaFin} precioTotal={reserva.precioTotal} estado={reserva.estado}
+                   fechaInicio={parsearFechas(reserva.fechaInicio)} fechaFin={parsearFechas(reserva.fechaFin)} precioTotal={reserva.precioTotal} estado={reserva.estado}
                    urlDetalles={"/reservas/"+reserva.id} />
                 </div>
               ))}
