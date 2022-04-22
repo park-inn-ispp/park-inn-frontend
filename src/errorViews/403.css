@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url("https://fonts.googleapis.com/css?family=Lato");
 
- .container_403{
+.container_403 {
   height: 66.5vh;
-   margin-top:10%;
- }
-.lock-img{
+  margin-top: 10%;
+}
+
+.lock-img {
   width: 15%;
   height: 50%;
- }
-.message{
-  margin-top:1%;
-  margin-left:5%;
+}
 
+.message {
+  margin-top: 1%;
+  margin-left: 5%;
 }
