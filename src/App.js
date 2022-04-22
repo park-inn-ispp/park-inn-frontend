@@ -4,7 +4,6 @@ import './App.css';
 import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import PlazasList from './Plazas/PlazasList';
 import ReservasClientList from './Reservas/ReservasClientList';
 import ReservasList from './Plazas/ReservasList';
@@ -74,7 +73,6 @@ export default function App() {
             </Routes> 
 
 
-          <Footer/>   
         </div>
       );
 }

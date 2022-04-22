@@ -88,7 +88,6 @@ class Login extends Component {
 
     componentDidMount() {
         document.getElementById("navbar-parkinn").setAttribute("hidden",true)
-        document.getElementById("footer-parkinn").setAttribute("hidden",true)
     }
     
 
