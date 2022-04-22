@@ -29,6 +29,7 @@ import AdminRoute from './Services/AdminRoute';
 import ReservaOwnerList from './Reservas/ReservasOwnerList';
 import Terminos from './components/Terminos y Condiciones/Terminos';
 import ViewProfile from './Usuarios/ViewProfile';
+import EditProfile from './Usuarios/EditProfile';
 
 
 export default function App() {
@@ -53,6 +54,7 @@ export default function App() {
                 <Route path='/reservas/:id/incidencia/new' element={<CreateIncidencia/>}/>
                 <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
                 <Route path='/clients/view/:id' element={<ViewProfile/>}/>
+                <Route path='/clients/edit/:id' element={<EditProfile/>}/>
 
                 <Route exact path='/' element={<AdminRoute/>}>
                   <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
