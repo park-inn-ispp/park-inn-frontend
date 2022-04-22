@@ -136,18 +136,18 @@ export default function EditPlaza() {
   
   
     
-    /*const borrarPlaza = evt => {
+    const deletePlaza = evt => {
         
       call(`/plazas/`+id, 'DELETE')
         .then(response => {
           console.log(response.ok)
   
           if (response.ok){
-            console.log("ELIMINADA")
+            displayNotification("Éxito","Plaza borrada correctamente","success")
             navigate(`/mis-plazas`)
           }
         })
-    }*/
+    }
   
   console.log(miPlaza)
   if(miPlaza){
@@ -250,7 +250,8 @@ export default function EditPlaza() {
       </div>
       <br/>
      
-      <input type="submit" value="Guardar plaza" />
+      <input type="submit" value="Guardar plaza" /> &nbsp; &nbsp;
+      <button type="button" class="deleteButton" onClick={deletePlaza}> Eliminar plaza </button>
     </form>
   </div>
   
