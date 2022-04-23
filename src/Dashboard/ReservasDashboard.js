@@ -71,8 +71,8 @@ export default function ReservasDashboard(){
 
     if (isLoading) {
         return <Loading/>;
-      }
-
+      } 
+      console.log(reservas)
       return (
         <div className='tablas'>
             <table >
@@ -87,8 +87,10 @@ export default function ReservasDashboard(){
                     <th>Detalles</th>
                 </tr>
                 {reservas.map((reserva) => {
+                    console.log(reserva.plaza)
                     var estadoReserva = reserva.estado==="pendiente";
                     var cancelacionReserva = reserva.estado==="aceptada";
+
                     return <tr>
                         <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.user.name}</td>
@@ -116,6 +118,7 @@ export default function ReservasDashboard(){
                         </td>
 
                     </tr>
+
                 })
             }
             </table>
