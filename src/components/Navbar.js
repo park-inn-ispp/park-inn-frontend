@@ -5,6 +5,11 @@ import {BsBookmarksFill} from "react-icons/bs"
 import { IconContext } from "react-icons";
 import Logo from './Logo'
 import DropdownComponent from "./Dropdown";
+import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+
 export default function Navbar(){
 
     //Estado para el boton del menu desplegable 
@@ -52,7 +57,9 @@ export default function Navbar(){
             </IconContext.Provider>
             <IconContext.Provider value = {{style: {fontSize: "2.7em"}}}>
                 <ProfileIcon>
-                    <FaUserCircle/>
+                    <Link to={`/clients/view/${cookies.get("UserData").id}`}>
+                        <FaUserCircle/>
+                    </Link>
                 </ProfileIcon>
             </IconContext.Provider>
             </Wrapper>
