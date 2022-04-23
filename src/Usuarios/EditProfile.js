@@ -1,16 +1,11 @@
 import React, { useState,useEffect } from 'react';
-import { useParams, Navigate, useNavigate, renderMatches } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import FormErrorMessage from '../Util/FormErrorMessage';
-import { Store } from 'react-notifications-component'
-import { ReactNotifications } from 'react-notifications-component'
 import displayNotification from '../Util/Notifications';
 import 'react-notifications-component/dist/theme.css'
 import call from '../Util/Caller';
-import Cookies from 'universal-cookie';
 import ValidateProfileForm from './ValidateProfileForm';
-
-
-const cookies = new Cookies();
+import Loading from '../components/Loading';
 
 export default function EditProfile(){
 
@@ -53,10 +48,7 @@ export default function EditProfile(){
             evt.preventDefault()
             var nuevosErrores = ValidateProfileForm(form)
             setErrors(nuevosErrores)
-
-            const usuario = cookies.get('UserData');
             var numeroErrores = Object.keys(nuevosErrores).length;
-            //console.log("Numero errores ", numeroErrores)
             if(numeroErrores===0){
                 const data2 = {
                     "id": id,
@@ -66,16 +58,13 @@ export default function EditProfile(){
                     "phone": form.phone,
                     "surname": form.surname
                 }
-                console.log("XXXXX", data2["phone"])
                 call(`/clients/${id}`, "PUT", data2)
                 .then(response => {
                     if(response.ok){
                         displayNotification("Éxito", "Perfil editado correctamente", "success")
                         navigate(`/clients/view/${id}`)
                     }
-
                 })
-                console.log("===Data====",data2["email"])
             }
         }
 
@@ -85,8 +74,8 @@ export default function EditProfile(){
 
             var value = target.value
 
-            if(target.type == 'select-one'){
-                value = target.value == 'true' ? true : false
+            if(target.type === 'select-one'){
+                value = target.value === 'true' ? true : false
             }
             setForm({...form,[name]: value})
         }
@@ -136,9 +125,9 @@ export default function EditProfile(){
 
                 </div>
             );
-        }else{
-            return(<></>)
-        }
-
-    
+        } else{
+            return(
+                <Loading></Loading>
+            )
+        }   
 }   
