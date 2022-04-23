@@ -105,15 +105,7 @@ export default function EditPlaza() {
         }
         
       })
-     
-
-     
-     
-     
-      
-    }  
-    
-   
+    }    
   }
 
   

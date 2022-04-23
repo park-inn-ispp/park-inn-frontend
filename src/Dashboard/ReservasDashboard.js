@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Loading from '../components/Loading';
 import { useParams } from 'react-router-dom';
+import displayNotification from '../Util/Notifications';
 
 
 import call from '../Util/Caller'
@@ -30,6 +31,7 @@ export default function ReservasDashboard(){
         call(`/reservas/`+id, 'DELETE')
           .then(response => {
             if (response.ok){
+              displayNotification("Éxito","Reserva borrada correctamente","success")
               window.location.reload();
             }
           })
@@ -39,6 +41,7 @@ export default function ReservasDashboard(){
         call(`/reservas/`+reservaId+'/aceptar', 'GET')
           .then(response => {
             if (response.ok){
+              displayNotification("Éxito","Reserva aceptada correctamente","success")
               window.location.reload();
             }
           })
@@ -48,6 +51,8 @@ export default function ReservasDashboard(){
         call(`/reservas/`+reservaId+'/rechazar', 'GET')
           .then(response => {
             if (response.ok){
+              displayNotification("Éxito","Reserva rechazada correctamente","success")
+
               window.location.reload();
             }
           })
@@ -57,6 +62,8 @@ export default function ReservasDashboard(){
         call(`/reservas/`+reservaId+'/cancelar', 'GET')
           .then(response => {
             if (response.ok){
+              displayNotification("Éxito","Reserva cancelada correctamente","success")
+
               window.location.reload();
             }
           })
@@ -102,8 +109,11 @@ export default function ReservasDashboard(){
                                 <button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
         
                             ) : ("")}
+                          <button type='button' class='deleteButton' onClick={() => borrarReservas(reserva.id)}>Eliminar reserva</button>
                             </td>
-                        <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a></td>
+                        <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a>
+                              
+                        </td>
 
                     </tr>
                 })
