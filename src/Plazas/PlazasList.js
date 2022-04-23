@@ -21,6 +21,7 @@ export default function PlazasList() {
                 data.map(plazas => {
                     data[i]["editURL"]= "/plaza/edit/"+ data[i]["id"]
                     data[i]["reservasURL"]= "/mis-reservas-de-mis-plazas/plaza/"+ data[i]["id"]
+                    data[i]["horarioURL"]="/disponibilidad/"+data[i]["id"]
                     i++
                     return plazas
                 })
@@ -48,8 +49,8 @@ export default function PlazasList() {
                 <ListComponentPlazas
                     header={"direccion"} 
                     data={plazas} 
-                    attributes={[{position:1,val:'direccion'},{position:2,val:'precioHora'},{position:3,val:'fianza'},{position:4,val:'editURL'}, {position:5,val:'reservasURL'}]} 
-                    headers={['Dirección', 'Precio hora','Fianza','Detalles', 'Reservas']}
+                    attributes={[{position:1,val:'direccion'},{position:2,val:'precioHora'},{position:3,val:'fianza'},{position:4,val:'editURL'}, {position:5,val:'reservasURL'},{position:6,val:'horarioURL'}]} 
+                    headers={['Dirección', 'Precio hora','Fianza','Detalles', 'Reservas','Disponibilidad']}
                 />
             </div>
         );

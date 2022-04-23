@@ -33,8 +33,9 @@ const urlFrontend = "http://localhost:3000/";
         };
 
         return await fetch(urlBackend+pathToCall, requestOptions).then(response =>{
-
+            console.log(response)
             if(response.ok){
+                console.log(response)
                 return response
             }else{
                 response.json().then(res => {
@@ -48,13 +49,13 @@ const urlFrontend = "http://localhost:3000/";
                     } else{ // Errores no controlados
 
                         if(response.status === 500){
-                            window.location.href="/500";           
+                            //window.location.href="/500";           
         
                         }else if(response.status === 403){
                             window.location.href="/403"; 
                             
                         }else if(response.status===404){
-                            window.location.href="/404";  
+                            //window.location.href="/404";  
                         }else{
                             
                             console.log(response)    

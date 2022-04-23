@@ -26,6 +26,9 @@ export default function EditPlaza() {
     largo:"4.50",
     exterior:false,
     descripcion:'',
+    fecha:'',
+    horaInicio:'',
+    horaFin:''
   })
   
   const [miPlaza,setMiPlaza]= useState(false);
@@ -61,12 +64,25 @@ export default function EditPlaza() {
       ["largo"]: "" + plaza["largo"],
       ["exterior"]: plaza["esAireLibre"],
       ["descripcion"]:"" + plaza["descripcion"],
+
     })
+    if (plaza.horarios!==[]) {
+      var horario1=plaza.horarios[0]
+      var fechaHoraInicio1=horario1[0].split('T')
+      var horaFin=horario1[1].split('T')
+      setForm({
+      ["fecha"]: "" + fechaHoraInicio1[0],
+      ["horaInicio"]: "" + fechaHoraInicio1[1],
+      ["horaFin"]: "" + horaFin[1],
+      })
+
+    }
+    console.log(plaza)
+
     
 }
 
   const[errors, setErrors]= useState({})
-  
   
 
   const handleSubmit= evt => {
@@ -248,8 +264,43 @@ export default function EditPlaza() {
       </label>
      
       </div>
-      <br/>
      
+      <div className="section"><span>4</span>Horarios de la plaza</div>
+      <div className='inner-wrap'>
+      <div className="section"><span>4.1</span>Primer tramo</div>
+            <div>
+              <label>Fecha: 
+                <input onChange={handleChange} name="fecha" type="date" value={form.fecha} />
+                <FormErrorMessage jsonErrors={errors} errorName="fecha" />
+              </label>
+              <label>Hora Inicio:
+                <input onChange={handleChange} name="horaInicio" type="time" step="600" value={form.horaInicio} />
+                <FormErrorMessage jsonErrors={errors} errorName="horaInicio" />
+              </label>
+              <label>Hora Fin:
+                <input onChange={handleChange} name="horaFin" type="time" value={form.horaFin} />
+                <FormErrorMessage jsonErrors={errors} errorName="horaFin" />
+              </label>
+              </div>
+              <div className="section"><span>4.2</span>Segundo tramo</div>
+            <div>
+              <label>Fecha: 
+                <input onChange={handleChange} name="fecha" type="date" value={form.fecha} />
+                <FormErrorMessage jsonErrors={errors} errorName="fecha" />
+              </label>
+              <label>Hora Inicio:
+                <input onChange={handleChange} name="horaInicio" type="time" step="600" value={form.horaInicio} />
+                <FormErrorMessage jsonErrors={errors} errorName="horaInicio" />
+              </label>
+              <label>Hora Fin:
+                <input onChange={handleChange} name="horaFin" type="time" value={form.horaFin} />
+                <FormErrorMessage jsonErrors={errors} errorName="horaFin" />
+              </label>
+              </div>
+
+
+      </div>
+      <br/>
       <input type="submit" value="Guardar plaza" />
     </form>
   </div>

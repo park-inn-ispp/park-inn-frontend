@@ -120,5 +120,18 @@ export default function validateParkingForm(form){
         errors.exterior= "La ubicación solo puede ser exterior o interior"
     }
 
+    // Validacion tramos horarios
+    if (form.tramos === true) {
+        if(form.fecha==='' || form.horaInicio===''||form.horaFin==='') {
+            errors.horaFin = "La fecha y las horas de inicio y fin son un campo obligatorio"
+        }
+        if(form.fecha2==='' || form.horaInicio2===''||form.horaFin2==='' && form.tramo2===true) {
+            errors.horaFin2 = "La fecha y las horas de inicio y fin son un campo obligatorio"
+        }
+        if(form.fecha3==='' || form.horaInicio3===''||form.horaFin3==='' && form.tramo3===true) {
+            errors.horaFin3 = "La fecha y las horas de inicio y fin son un campo obligatorio"
+        }
+    }
+    console.log(errors)
     return errors
 }
