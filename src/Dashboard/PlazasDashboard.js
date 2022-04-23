@@ -2,6 +2,7 @@ import React, { useEffect, useState} from 'react';
 import Loading from '../components/Loading';
 import call from '../Util/Caller'
 import { useParams } from 'react-router-dom';
+import displayNotification from '../Util/Notifications';
 
 
 
@@ -28,6 +29,7 @@ export default function PlazasDashboard(){
       call(`/plazas/`+id, 'DELETE')
         .then(response => {
           if (response.ok){
+            displayNotification("Éxito","Plaza borrada correctamente","success")
             window.location.reload();
           }
         })
@@ -60,7 +62,7 @@ export default function PlazasDashboard(){
                     <td>{plaza.fianza}</td>
                     <td>{plaza.ancho}</td>
                     <td>{plaza.largo}</td>
-                    <td><a type="button" className='editButton' href={'/plaza/edit/'+plaza.id}>Editar/Ver detalles</a>
+                    <td><a type="button" className='editButton' href={'/plaza/edit/'+plaza.id}>Editar/Ver detalles</a> <button type='button' class='deleteButton' onClick={() => borrarPlaza(plaza.id)}>Eliminar plaza</button>
                    </td>
                                                             
                 </tr>
