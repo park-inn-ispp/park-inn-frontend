@@ -27,8 +27,12 @@ import ERROR_500 from './errorViews/500';
 import AdminRoute from './Services/AdminRoute';
 import ReservaOwnerList from './Reservas/ReservasOwnerList';
 import Terminos from './components/Terminos y Condiciones/Terminos';
+
+import ComisionDashboard from './Dashboard/ComisionDashboard';
+
 import ViewProfile from './Usuarios/ViewProfile';
 import EditProfile from './Usuarios/EditProfile';
+
 
 
 export default function App() {
@@ -60,6 +64,7 @@ export default function App() {
                   <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
                   <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
                   <Route path='/dashboard-incidencias' element={<IncidenciasDashboard/>}/>
+                  <Route path='/dashboard-comision' element={<ComisionDashboard/>}/>
                 </Route>
 
                 
