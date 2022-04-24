@@ -64,6 +64,7 @@ export default function CreatePlaza() {
         "estaDisponible": true,
         "esAireLibre": form.exterior,
         "descripcion": form.descripcion,
+        "tramos":false,
         "administrador": {
           "id": usuario.id,
           "name": usuario.name,

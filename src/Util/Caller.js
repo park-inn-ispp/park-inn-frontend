@@ -33,7 +33,6 @@ const urlFrontend = "https://park-inn-ispp-fe.herokuapp.com/";
         };
 
         return await fetch(urlBackend+pathToCall, requestOptions).then(response =>{
-
             if(response.ok){
                 return response
             }else{

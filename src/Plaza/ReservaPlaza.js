@@ -9,7 +9,12 @@ import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
 import Cookies from 'universal-cookie';
+import React, { Component } from "react";
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+require('moment/locale/es.js');
 const cookies = new Cookies();
+
+
 
 export default function Reserva(){
 
@@ -18,15 +23,16 @@ export default function Reserva(){
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [pagando, setPagando] = useState(false)
-
     const id = parseInt(useParams().id)
 
+    const hayTramos= !plaza.horarios===[]
 
     useEffect(() => {
       
       const DetallesPlaza = async () => {
         const data = await call(`/plazas/${id}`,"GET")
         const plazas = await data.json()
+        console.log(plazas)
         setPlaza(plazas)
         setIsLoading(false)
       }
@@ -35,6 +41,8 @@ export default function Reserva(){
     },[id]);
 
     const usuario = cookies.get('UserData');
+
+ 
 
     const [form, setForm]= useState({
         fechaInicio:'',
@@ -131,6 +139,12 @@ export default function Reserva(){
       var value= target.value.toString()
       setForm({...form,[name]: value})
      }
+
+    function calen() {
+      window.open('/calendar/'+id, '_blank');
+      
+     
+    }
     
       //Pantalla de carga
       if (isLoading) {
@@ -154,7 +168,11 @@ export default function Reserva(){
           <Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo> 
           <Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo>
           <Etiqueta>Ancho:</Etiqueta><Parrafo>{plaza.ancho} m</Parrafo>
+          <Etiqueta>Calendario:</Etiqueta><Parrafo><button class="botonAzul" onClick={() => calen()}>Ver disponibilidad</button></Parrafo>
           </div>
+        
+
+          
         <Formulario onSubmit={handleSubmit}>
         <div class="section"><span>2</span>Fecha de reserva</div>
         <div class="inner-wrap">
@@ -192,7 +210,6 @@ export default function Reserva(){
         </Formulario>
         </div>
         }
-
         
         </>
     );
