@@ -4,7 +4,6 @@ import './App.css';
 import ReservaPlaza from './Plaza/ReservaPlaza';
 import Home from './Home'
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import PlazasList from './Plazas/PlazasList';
 import ReservasClientList from './Reservas/ReservasClientList';
 import ReservasList from './Plazas/ReservasList';
@@ -33,6 +32,12 @@ import MisTramos from './Tramos/Tramos';
 import CreateTramo from './Tramos/CreateTramo';
 
 
+import ComisionDashboard from './Dashboard/ComisionDashboard';
+
+import ViewProfile from './Usuarios/ViewProfile';
+import EditProfile from './Usuarios/EditProfile';
+
+
 
 export default function App() {
   const location = useLocation();
@@ -58,15 +63,15 @@ export default function App() {
                 <Route path='/calendar/:id' element={<CalendarPlaza/>}/>
                 <Route path='/disponibilidad/:id' element={<MisTramos/>}/>
                 <Route path='/disponibilidad/:id/create' element={<CreateTramo/>}/>
-
-
-
+                <Route path='/clients/view/:id' element={<ViewProfile/>}/>
+                <Route path='/clients/edit/:id' element={<EditProfile/>}/>
 
                 <Route exact path='/' element={<AdminRoute/>}>
                   <Route path='/dashboard-reservas' element={<ReservasDashboard/>}/>
                   <Route path='/dashboard-plazas' element={<PlazasDashboard/>}/>
                   <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
                   <Route path='/dashboard-incidencias' element={<IncidenciasDashboard/>}/>
+                  <Route path='/dashboard-comision' element={<ComisionDashboard/>}/>
                 </Route>
 
                 
@@ -84,7 +89,6 @@ export default function App() {
             </Routes> 
 
 
-          <Footer/>   
         </div>
       );
 }

@@ -52,6 +52,7 @@ export default class DropdownComponent extends React.Component {
                     <DropdownItem href="/dashboard-plazas">Plazas</DropdownItem>
                     <DropdownItem href="/dashboard-incidencias">Incidencias</DropdownItem>
                     <DropdownItem href="/dashboard-usuarios">Usuarios</DropdownItem>
+                    <DropdownItem href="/dashboard-comision">Comisión Park-Inn</DropdownItem>
                     <DropdownItem href="/logout">Cerrar Sesión</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
