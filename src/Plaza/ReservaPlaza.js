@@ -141,7 +141,7 @@ export default function Reserva(){
      }
 
     function calen() {
-      window.open('http://localhost:3000/calendar/'+id, '_blank');
+      window.open('/calendar/'+id, '_blank');
       
      
     }
@@ -168,11 +168,7 @@ export default function Reserva(){
           <Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo> 
           <Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo>
           <Etiqueta>Ancho:</Etiqueta><Parrafo>{plaza.ancho} m</Parrafo>
-          <Etiqueta>Calendario:</Etiqueta><Parrafo><button class="botonAzul" onClick={() => calen()}>Ver calendario</button></Parrafo>
-          {
-            hayTramos ? (""):(<><Etiqueta>Horarios</Etiqueta><Parrafo>Esta plaza está disponible a todas horas</Parrafo></>)
-          }
-
+          <Etiqueta>Calendario:</Etiqueta><Parrafo><button class="botonAzul" onClick={() => calen()}>Ver disponibilidad</button></Parrafo>
           </div>
         
 

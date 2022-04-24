@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
 
@@ -9,24 +9,29 @@ export default function MisTramos() {
 
     const[listaHorarios, setListaHorarios] = useState()
     const[isLoading, setIsLoading] = useState(true)
+    const[plaza, setPlaza] = useState()
     const id = parseInt(useParams().id)
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         const ListaHorarios = async () => {
             const data = await  call(`/plazas/`+id+`/horarios`,"GET")
+            const dataPlaza = await call(`/plazas/${id}`,"GET")
             const list = await data.json()
-            console.log(list)
+            const plaza = await dataPlaza.json()
+            setPlaza(plaza)
             setListaHorarios(list)
             setIsLoading(false)            
         }
         ListaHorarios()
     }, []);
 
-    function seleccionarHorario() {
-        /* const body = {
-            "fechaInicio":form.fechaInicio.toString()+"T"+form.horaInicio.toString()+":00",
-            "fechaFin":form.fechaFin.toString()+"T"+form.horaFin.toString()+":00",
-            "activo":false,
+    function seleccionarHorario(idHorario,fechaInicio,fechaFin,activo) {
+         const body = {
+            "fechaInicio":fechaInicio,
+            "fechaFin":fechaFin,
+            "activo":activo,
             "plaza": {
                 "id": plaza.id,
                 "direccion": plaza.direccion,
@@ -40,19 +45,36 @@ export default function MisTramos() {
                 "descripcion": plaza.descripcion,
                 "administrador": plaza.administrador
             }
-        }*/
-        call()
+        }
+        call(`/horarios/`+idHorario, 'PUT',body)
+          .then(response => {
+            console.log(response)
+            if (response.ok){
+                window.location.reload();
+            }
+          })
     }
 
     function eliminarHorario(id) {
        
-        call(`/horarios/`+id, 'PUT')
+        call(`/horarios/`+id, 'DELETE')
           .then(response => {
             if (response.ok){
               window.location.reload();
             }
           })
     }
+
+    function disponibilidadTotal(id,str) {
+         call(`/plazas/`+id+`/cambiarDisponibilidad/`+str, 'PUT')
+        .then(response => {
+          if (response.ok){
+            window.location.reload();
+          }
+        })
+
+    }
+
     //Pantalla de carga
     if (isLoading) {
         return <Loading/>;
@@ -62,6 +84,7 @@ export default function MisTramos() {
     }else
     return (
         <body>
+            <br/><input type="button" class="botonAzul" onClick={() => { navigate(`/disponibilidad/`+id+`/create`); } } value="Crear Tramo Horario" />
         <div className="tablas">
             <table>
                 <tr>
@@ -79,14 +102,23 @@ export default function MisTramos() {
                     <td>{fechaInicio[1]}</td>
                     <td>{fechaFin[0]}</td>
                     <td>{fechaFin[1]}</td>
-                    <td><button type="button" className='editButton' onClick={() => seleccionarHorario()}>Seleccionar</button>
-                        <button type="button" className='deleteButton' onClick={() => eliminarHorario(horario.id)}>Eliminar</button>
+                    <td>
+                        {horario.activo===true ? (<div>Has seleccionado este horario<button type="button" className='deleteButton' onClick={() => seleccionarHorario(horario.id,horario.fechaInicio, horario.fechaFin,false)}>Deseleccionar</button></div>) : 
+                        (<><button type="button" className='editButton' onClick={() => seleccionarHorario(horario.id,horario.fechaInicio, horario.fechaFin,true)}>Seleccionar</button>
+                        <button type="button" className='deleteButton' onClick={() => eliminarHorario(horario.id)}>Eliminar</button></>
+                        )}
+                        
                     </td>                        
                     </tr>
 })
 }
-            </table>
-            <input type="button" class="botonAzul" onClick={() => { window.open(`/disponibilidad/`+id+`/create`); } } value="Crear Tramo" />
+            </table><br/>
+            {plaza.tramos===false ? (<><div>Tu plaza está disponible siempre. Haz click en el siguiente botón para establecer la disponibilidad únicamente en los horarios seleccionados</div><br /><input type="button" class="botonAzul" onClick={() => { disponibilidadTotal(id,"true"); } } value="Establecer horarios" /></>):
+            (<><div>Tu plaza está disponible en los horarios seleccionados. Haz click en el siguiente botón para hacer que siempre esté disponible</div><br /><input type="button" class="botonAzul" onClick={() => { disponibilidadTotal(id, "false"); } } value="Disponibilidad total" /></>)}
+            <br/>
+
+
+            
             
             </div></body>
 
