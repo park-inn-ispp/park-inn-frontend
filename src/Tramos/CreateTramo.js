@@ -58,8 +58,9 @@ export default function CreateTramo() {
         const handleSubmit= async evt => {
 
         const body = {
-            fechaInicio:form.fechaInicio.toString()+"T"+form.horaInicio.toString()+":00",
-            fechaFin:form.fechaFin.toString()+"T"+form.horaFin.toString()+":00",
+            "fechaInicio":form.fechaInicio.toString()+"T"+form.horaInicio.toString()+":00",
+            "fechaFin":form.fechaFin.toString()+"T"+form.horaFin.toString()+":00",
+            "activo":false,
             "plaza": {
                 "id": plaza.id,
                 "direccion": plaza.direccion,
@@ -68,7 +69,6 @@ export default function CreateTramo() {
                 "ancho": plaza.ancho,
                 "largo": plaza.largo,
                 "tramos":plaza.tramos,
-                "horarios":plaza.horarios,
                 "estaDisponible": plaza.estaDisponible,
                 "esAireLibre": plaza.esAireLibre,
                 "descripcion": plaza.descripcion,

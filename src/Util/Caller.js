@@ -33,9 +33,9 @@ const urlFrontend = "http://localhost:3000/";
         };
 
         return await fetch(urlBackend+pathToCall, requestOptions).then(response =>{
-            console.log(response)
+            //console.log(response)
             if(response.ok){
-                console.log(response)
+                //console.log(response)
                 return response
             }else{
                 response.json().then(res => {

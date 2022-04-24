@@ -31,20 +31,25 @@ export default function CalendarPlaza(){
 
   const [calendarioNoDisp, setCalendarioNoDisp] = useState({});
   const [calendarioDisp, setCalendarioDisp] = useState({});
+  const [calendario, setCalendario] = useState({});
   const [isLoading, setIsLoading] = useState(true)
   const id = parseInt(useParams().id)
 
   useEffect(() => {
       
     const CalendarioPlaza = async () => {
-      const data = await call(`/reservas/${id}/fechasNoDisponibles`,"GET")
-      const calendario = await data.json()
-      const dataDisp = await call(`/reservas/${id}/fechasDiscponibles`,"GET")
+      const dataNoDisp = await call(`/reservas/${id}/fechasNoDisponibles`,"GET")
+      const calendarioNoDisp = await dataNoDisp.json()
+      const dataDisp = await call(`/reservas/${id}/fechasDisponibles`,"GET")
       const calendarioDisp = await dataDisp.json()
-      const datosNoDisp = calendario.map(value=>({"title":"Reservado","start":new Date(value[0]), "end":new Date(value[1])}))
-      const datosDisp = calendarioDisp.map(value=>({"title":"Reservado","start":new Date(value[0]), "end":new Date(value[1])}))
+      const datosNoDisp = calendarioNoDisp.map(value=>({"title":"Reservado","start":new Date(value[0]), "end":new Date(value[1])}))
+      const datosDisp = calendarioDisp.map(value=>({"title":"Libre","start":new Date(value[0]), "end":new Date(value[1])}))
+      console.log(datosNoDisp)
       console.log(datosDisp)
+      console.log(datosNoDisp.concat(datosDisp))
       setCalendarioNoDisp(datosNoDisp);
+      setCalendarioDisp(datosDisp);
+      setCalendario(datosNoDisp.concat(datosDisp))
       setIsLoading(false)
     }
       CalendarioPlaza()
@@ -78,16 +83,19 @@ export default function CalendarPlaza(){
         <Calendar
           components={components}
           defaultDate={defaultDate}
-          events={calendarioNoDisp}
+          events={calendario}
           localizer={localizer}
           max={max}
           showMultiDayTimes
           step={60}
           views={views}
           eventPropGetter={title => {
-            const backgroundColor="#DC143C"
+            const Reservado="#DC143C"
+            const Libre="3B83BD"
             if(title.title==="Reservado") {
-              return { style: { backgroundColor } };
+              return { style: { backgroundColor:"#DC143C" } };
+            } else {
+              return { style: { backgroundColor:"3B83BD" } };
             }
           }}
           messages={{
