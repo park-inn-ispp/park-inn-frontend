@@ -57,10 +57,9 @@ export default function Navbar(){
             </IconContext.Provider>
             <IconContext.Provider value = {{style: {fontSize: "2.7em"}}}>
                 <ProfileIcon>
-                    
-                    {cookies.get("UserData") ? <Link to={`/clients/view/${cookies.get("UserData").id}`}><FaUserCircle/></Link>
-                    : ("")}
-                    
+                    <Link to={cookies.get("AuthToken")===undefined ? '' : `/clients/view/${cookies.get("UserData").id}`}>
+                        <FaUserCircle/>
+                    </Link>
                 </ProfileIcon>
             </IconContext.Provider>
             </Wrapper>

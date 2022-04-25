@@ -1,4 +1,3 @@
-import ListComponentPlazas from '../components/ListComponentPlazas'
 import call from '../Util/Caller';
 import Cookies from 'universal-cookie';
 import Loading from '../components/Loading';

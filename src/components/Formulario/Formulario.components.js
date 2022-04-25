@@ -20,9 +20,9 @@ export const StyledForm = styled.form`
 	border-radius: 10px;
 	-webkit-border-radius:10px;
 	-moz-border-radius: 10px;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
-	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
-	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
+	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
 
     @media screen and (max-width: 650px){
         width: 100%;
@@ -33,7 +33,6 @@ export const InputForm = styled.input`
     width: 80%;
     padding: 5px;
     border-radius: 15px;
-    margin-bottom: 20px;
     @media screen and (max-width: 650px){
         width: 100%;
     }
