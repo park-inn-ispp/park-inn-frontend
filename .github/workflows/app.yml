@@ -27,4 +27,4 @@ jobs:
         run: heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
         
       - name: Deploy to heroku
-        run: git push heroku develop:main
+        run: heroku whoami
