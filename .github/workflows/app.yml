@@ -6,11 +6,8 @@ jobs:
   heroku-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Update Repository
+      - name: Create Heroku Auth File
         run: |
-          git clone https://github.com/park-inn-ispp/park-inn-frontend.git
-          cd park-inn-frontend
-          git checkout develop
           cd ~/
           > .netrc
           echo 'machine api.heroku.com' >> .netrc
@@ -19,5 +16,10 @@ jobs:
           echo 'machine git.heroku.com' >> .netrc
           echo 'login ${{secrets.HEROKU_EMAIL}}' >> .netrc
           echo 'password ${{secrets.HEROKU_API_KEY}}' >> .netrc
-          cd /home/runner/work/park-inn-frontend/park-inn-frontend/park-inn-frontend
-          ls -a
+
+      - name: Clone repository
+        run: |
+          cd /home/runner/work
+          git clone https://github.com/park-inn-ispp/park-inn-frontend.git
+          cd park-inn-frontend
+          git checkout develop
