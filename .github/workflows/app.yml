@@ -11,7 +11,6 @@ jobs:
           git clone https://github.com/park-inn-ispp/park-inn-frontend.git
           cd park-inn-frontend
           git checkout develop
-          pwd
           cd ~/
           > .netrc
           echo 'machine api.heroku.com' >> .netrc
@@ -20,4 +19,6 @@ jobs:
           echo 'machine git.heroku.com' >> .netrc
           echo 'login ${{secrets.HEROKU_EMAIL}}' >> .netrc
           echo 'password ${{secrets.HEROKU_API_KEY}}' >> .netrc
-          ls
+          cd /home/runner/work/park-inn-frontend/park-inn-frontend/park-inn-frontend
+          heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
+          git push heroku develop:main
