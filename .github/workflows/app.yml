@@ -11,11 +11,11 @@ jobs:
           cd ~/
           > .netrc
           echo 'machine api.heroku.com' >> .netrc
-          echo 'login ${{secrets.HEROKU_EMAIL}}' >> .netrc
-          echo 'password ${{secrets.HEROKU_API_KEY}}' >> .netrc
+          echo 'login xnegis@gmail.com' >> .netrc
+          echo 'password 311e90e1-23ab-46be-99d5-d45b9027f756' >> .netrc
           echo 'machine git.heroku.com' >> .netrc
-          echo 'login ${{secrets.HEROKU_EMAIL}}' >> .netrc
-          echo 'password ${{secrets.HEROKU_API_KEY}}' >> .netrc
+          echo 'login xnegis@gmail.com' >> .netrc
+          echo 'password 311e90e1-23ab-46be-99d5-d45b9027f756' >> .netrc
 
       - name: Clone repository
         run: |
