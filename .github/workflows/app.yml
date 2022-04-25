@@ -12,3 +12,4 @@ jobs:
         run: |
           git clone https://xNegis:311e90e1-23ab-46be-99d5-d45b9027f756@git.heroku.com/park-inn-ispp-fe.git
           heroku git:https://xNegis:311e90e1-23ab-46be-99d5-d45b9027f756@git.heroku.com/park-inn-ispp-fe.git
+          git push heroku develop:main
