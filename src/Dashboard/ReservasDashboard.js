@@ -110,7 +110,10 @@ export default function ReservasDashboard(){
                                 <button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
         
                             ) : ("")}
-                          <button type='button' class='deleteButton' onClick={() => borrarReservas(reserva.id)}>Eliminar reserva</button>
+
+                        {
+                          !estadoReserva && !cancelacionReserva ? (<span> No disponibles </span>) : ("")
+                        }
                             </td>
                         <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a>
                               
