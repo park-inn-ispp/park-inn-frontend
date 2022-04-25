@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update Repository
-        run: git pull https://github.com/park-inn-ispp/park-inn-frontend.git
+        run: git clone https://github.com/park-inn-ispp/park-inn-frontend.git
         
     
