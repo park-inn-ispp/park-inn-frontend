@@ -3,9 +3,15 @@ import { ProfileIcon, Container, LogoContainer, Menu, MenuItem, MenuItemLink, Dr
 import {FaBars, FaHome, FaParking, FaTimes, FaUserCircle} from "react-icons/fa"
 import {BsBookmarksFill} from "react-icons/bs"
 import { IconContext } from "react-icons";
-import Logo from './Logo'
+import logo from '../resources/logoSinFondo.png';
 import DropdownComponent from "./Dropdown";
 import ProfileDropdown from './ProfileDropdown'
+import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+import {RiShutDownLine} from "react-icons/ri"
+
+const cookies = new Cookies();
+
 export default function Navbar(){
 
     //Estado para el boton del menu desplegable 
@@ -16,7 +22,7 @@ export default function Navbar(){
         <Wrapper>
             <IconContext.Provider value = {{style: {fontSize: "2em"}}}>
             <LogoContainer>
-                <Logo size="100px"/>
+                <img class="logoNav" alt="Logo" src={logo}/>
                 <ParkinnTitle><LinkTitle to="/">PARK-INN</LinkTitle></ParkinnTitle>
             </LogoContainer>
 
@@ -34,7 +40,6 @@ export default function Navbar(){
                     </MenuItemLink>
                 </MenuItem>
                 <MenuItem>
-
                     <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/mis-reservas">
                         <BsBookmarksFill/>
                         MIS RESERVAS
@@ -43,10 +48,25 @@ export default function Navbar(){
                 <MenuItem>
                 <ProfileDropdown/>
                 </MenuItem>
+                <MenuItem>
+                    <MenuItemLink onClick={() => setShowMobileMenu(!showMobileMenu)} to="/logout">
+                        <RiShutDownLine/>
+                        CERRAR SESIÓN
+                    </MenuItemLink>
+                </MenuItem>
+
+                
             </Menu>
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? <FaTimes/> : <FaBars/>}
             </MobileIcon>
+            </IconContext.Provider>
+            <IconContext.Provider value = {{style: {fontSize: "2.7em"}}}>
+                <ProfileIcon>
+                    <Link to={cookies.get("AuthToken")===undefined ? '' : `/clients/view/${cookies.get("UserData").id}`}>
+                        <FaUserCircle/>
+                    </Link>
+                </ProfileIcon>
             </IconContext.Provider>
             </Wrapper>
     </Container>

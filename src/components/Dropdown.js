@@ -29,7 +29,7 @@ export default class DropdownComponent extends React.Component {
       var is_authorized =false
       for(let i=0;i<user_data.roles.length;i++){
 
-          if(user_data.roles[i].name=='ROLE_ADMIN'){
+          if(user_data.roles[i].name==='ROLE_ADMIN'){
               is_authorized =true
               break
           }
@@ -46,6 +46,8 @@ export default class DropdownComponent extends React.Component {
                     <DropdownItem href="/dashboard-plazas">Plazas</DropdownItem>
                     <DropdownItem href="/dashboard-incidencias">Incidencias</DropdownItem>
                     <DropdownItem href="/dashboard-usuarios">Usuarios</DropdownItem>
+                    <DropdownItem href="/dashboard-comision">Comisión Park-Inn</DropdownItem>
+                    <DropdownItem href="/logout">Cerrar Sesión</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
               

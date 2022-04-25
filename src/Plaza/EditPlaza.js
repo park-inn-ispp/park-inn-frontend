@@ -26,6 +26,9 @@ export default function EditPlaza() {
     largo:"4.50",
     exterior:false,
     descripcion:'',
+    fecha:'',
+    horaInicio:'',
+    horaFin:''
   })
   
   const [miPlaza,setMiPlaza]= useState(false);
@@ -61,12 +64,25 @@ export default function EditPlaza() {
       ["largo"]: "" + plaza["largo"],
       ["exterior"]: plaza["esAireLibre"],
       ["descripcion"]:"" + plaza["descripcion"],
+
     })
+    if (plaza.horarios!==[]) {
+      var horario1=plaza.horarios[0]
+      var fechaHoraInicio1=horario1[0].split('T')
+      var horaFin=horario1[1].split('T')
+      setForm({
+      ["fecha"]: "" + fechaHoraInicio1[0],
+      ["horaInicio"]: "" + fechaHoraInicio1[1],
+      ["horaFin"]: "" + horaFin[1],
+      })
+
+    }
+    console.log(plaza)
+
     
 }
 
   const[errors, setErrors]= useState({})
-  
   
 
   const handleSubmit= evt => {
@@ -105,15 +121,7 @@ export default function EditPlaza() {
         }
         
       })
-     
-
-     
-     
-     
-      
-    }  
-    
-   
+    }    
   }
 
   
@@ -136,18 +144,18 @@ export default function EditPlaza() {
   
   
     
-    /*const borrarPlaza = evt => {
+    const deletePlaza = evt => {
         
       call(`/plazas/`+id, 'DELETE')
         .then(response => {
           console.log(response.ok)
   
           if (response.ok){
-            console.log("ELIMINADA")
+            displayNotification("Éxito","Plaza borrada correctamente","success")
             navigate(`/mis-plazas`)
           }
         })
-    }*/
+    }
   
   console.log(miPlaza)
   if(miPlaza){
@@ -248,9 +256,9 @@ export default function EditPlaza() {
       </label>
      
       </div>
-      <br/>
      
-      <input type="submit" value="Guardar plaza" />
+      <input type="submit" value="Guardar plaza" /> &nbsp; &nbsp;
+      <button type="button" class="deleteButton" onClick={deletePlaza}> Eliminar plaza </button>
     </form>
   </div>
   

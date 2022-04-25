@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 const cookies = new Cookies();
 
 const urlBackend ="http://localhost:8080";
-const urlFrontend = "http://localhost:3000";
+const urlFrontend = "http://localhost:3000/";
 
 
      async function call(pathToCall,method,body){
@@ -33,7 +33,6 @@ const urlFrontend = "http://localhost:3000";
         };
 
         return await fetch(urlBackend+pathToCall, requestOptions).then(response =>{
-
             if(response.ok){
                 return response
             }else{
@@ -42,7 +41,12 @@ const urlFrontend = "http://localhost:3000";
                     if(res.hasOwnProperty("errores")){ // Mostrar errores CONTROLADOS
                         var errores= res.errores
                         for (var i=0; i<errores.length; i++){
-                            displayNotification("Error",errores[i],"danger")
+                            if(errores[i]=="Este usuario no tiene ninguna plaza"){
+                                throw "Este usuario no tiene ninguna plaza"
+                            }else{
+                                displayNotification("Error",errores[i],"danger")
+
+                            }
                             
                         }
                     } else{ // Errores no controlados

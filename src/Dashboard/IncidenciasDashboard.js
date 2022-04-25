@@ -2,6 +2,7 @@ import React, { useEffect, useState} from 'react';
 import Loading from '../components/Loading';
 import call from '../Util/Caller'
 import Popup from '../components/Popup'
+import displayNotification from '../Util/Notifications';
 
 export default function IncidenciasDashboard(){
     const [incidencias, setIncidencias] = useState([]);
@@ -26,7 +27,8 @@ export default function IncidenciasDashboard(){
         call(`/incidencias/`+id, 'PUT')
           .then(response => {
             if (response.ok){
-              window.location.reload();
+            displayNotification("Éxito","Incidencia cerrada correctamente","success")
+            window.location.reload();
             }
           })
     }
