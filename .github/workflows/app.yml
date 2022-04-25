@@ -13,4 +13,10 @@ jobs:
           git checkout develop
           cd ~/
           > .netrc
-  
+          echo 'machine api.heroku.com' >> .netrc
+          echo 'login ${{secrets.HEROKU_EMAIL}}' >> .netrc
+          echo 'password ${{secrets.HEROKU_API_KEY}}' >> .netrc
+          echo 'machine git.heroku.com' >> .netrc
+          echo 'login ${{secrets.HEROKU_EMAIL}}' >> .netrc
+          echo 'password ${{secrets.HEROKU_API_KEY}}' >> .netrc
+
