@@ -19,4 +19,5 @@ jobs:
 
       - name: Clone repository
         run: |
-          pwd
+          ls
+          
