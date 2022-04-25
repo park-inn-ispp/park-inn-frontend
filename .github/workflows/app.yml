@@ -6,25 +6,9 @@ jobs:
   heroku-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Create Heroku Auth File
-        run: |
-          cd ~/
-          > .netrc
-          echo 'machine api.heroku.com' >> .netrc
-          echo 'login xnegis@gmail.com' >> .netrc
-          echo 'password 311e90e1-23ab-46be-99d5-d45b9027f756' >> .netrc
-          echo 'machine git.heroku.com' >> .netrc
-          echo 'login xnegis@gmail.com' >> .netrc
-          echo 'password 311e90e1-23ab-46be-99d5-d45b9027f756' >> .netrc
-
-      - name: Clone repository
-        run: |
-          git clone https://github.com/park-inn-ispp/park-inn-frontend.git
-          cd park-inn-frontend
-          git checkout develop
-          
-      - name: Link repositories
-        run: heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
+    
         
       - name: Deploy to heroku
-        run: heroku whoami
+        run: |
+          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+          git push heroku HEAD:master -f
