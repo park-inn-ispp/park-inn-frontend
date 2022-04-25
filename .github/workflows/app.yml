@@ -12,4 +12,5 @@ jobs:
           cd park-inn-frontend
           git checkout develop
           heroku login
+          cat ~/.netrc
   
