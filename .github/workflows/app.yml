@@ -21,4 +21,3 @@ jobs:
           echo 'password ${{secrets.HEROKU_API_KEY}}' >> .netrc
           cd /home/runner/work/park-inn-frontend/park-inn-frontend/park-inn-frontend
           heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
-          git push heroku develop:main
