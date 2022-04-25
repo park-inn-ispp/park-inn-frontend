@@ -67,7 +67,7 @@ function ListaMisReservas(data) {
       {data.data.map(element =>{
         return(
           <tr>
-            <td>{element.plaza.direccion}</td>
+            <td>{element.direccion}</td>
             <td>{element.user.name}</td>
             <td>{parsearFechas(element.fechaInicio)}</td>
             <td>{parsearFechas(element.fechaFin)}</td>

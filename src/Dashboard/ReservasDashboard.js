@@ -77,7 +77,7 @@ export default function ReservasDashboard(){
         <div className='tablas'>
             <table >
                 <tr>
-                    <th>Propietario</th>
+                    
                     <th>Cliente</th>
                     <th>Dirección</th>
                     <th>Fecha Solicitud</th>
@@ -92,9 +92,8 @@ export default function ReservasDashboard(){
                     var cancelacionReserva = reserva.estado==="aceptada";
 
                     return <tr>
-                        <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.user.name}</td>
-                        <td>{reserva.plaza.direccion}</td>
+                        <td>{reserva.direccion}</td>
                         <td>{reserva.fechaSolicitud}</td>
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>

@@ -17,7 +17,7 @@ function cancelarReserva(reservaId) {
 }
 
 
-function CardReservas({ imageSource,id, title,propietario,fechaInicio,fechaFin,precioTotal, estado, urlCancelar,urlDetalles }) {
+function CardReservas({ imageSource,id, title,fechaInicio,fechaFin,precioTotal, estado, urlCancelar,urlDetalles }) {
   let canceledDiv =  <div className="cancelada"></div>
   let pendentDiv =  <div className="pendiente"></div>
   let aceptedDiv =  <div className="aceptada"></div>
@@ -36,11 +36,7 @@ function CardReservas({ imageSource,id, title,propietario,fechaInicio,fechaFin,p
               : aceptedDiv
               }
         </p>
-        <p className="card-text text-secondary">
-          {propietario
-            ? "Propietario : " + propietario 
-            : "Propietario : -"}
-        </p>
+        
         <p className="card-text text-secondary">
           {fechaInicio
             ? "Fecha Inicio : " + fechaInicio 
