@@ -7,12 +7,6 @@ import { MenuItemLink } from "./Navbar.elements";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 export default class DropdownComponent extends React.Component {
-
-
-
-
-    
-
   constructor(props) {
     super(props);
 
@@ -52,16 +46,13 @@ export default class DropdownComponent extends React.Component {
                     <DropdownItem href="/dashboard-plazas">Plazas</DropdownItem>
                     <DropdownItem href="/dashboard-incidencias">Incidencias</DropdownItem>
                     <DropdownItem href="/dashboard-usuarios">Usuarios</DropdownItem>
-                    <DropdownItem href="/logout">Cerrar Sesión</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
+              
             );
       }else{
           return (
-          <MenuItemLink to="/logout">
-              <BsBookmarksFill/>
-              CERRAR SESIÓN
-          </MenuItemLink>
+          <></>
           );
       }
     }catch{

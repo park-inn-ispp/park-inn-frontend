@@ -171,6 +171,20 @@ export const ProfileIcon = styled.div`
     }
 
     @media screen and (max-width: 960px){
-        display: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0rem 2rem 1rem 2rem;
+        size: 100;
+        cursor: pointer;
+        svg{
+        fill: ${colors.fivth};
+        cursor: pointer;
+
+        &:hover{
+            fill: #fff;
+            transition: 0.5s all ease;
+        }
+    }
     }
 `;

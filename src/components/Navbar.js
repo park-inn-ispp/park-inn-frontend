@@ -5,6 +5,7 @@ import {BsBookmarksFill} from "react-icons/bs"
 import { IconContext } from "react-icons";
 import Logo from './Logo'
 import DropdownComponent from "./Dropdown";
+import ProfileDropdown from './ProfileDropdown'
 export default function Navbar(){
 
     //Estado para el boton del menu desplegable 
@@ -39,21 +40,13 @@ export default function Navbar(){
                         MIS RESERVAS
                     </MenuItemLink>
                 </MenuItem>
-
                 <MenuItem>
-                    <DropdownStyle>
-                        <DropdownComponent /> 
-                    </DropdownStyle> 
+                <ProfileDropdown/>
                 </MenuItem>
             </Menu>
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? <FaTimes/> : <FaBars/>}
             </MobileIcon>
-            </IconContext.Provider>
-            <IconContext.Provider value = {{style: {fontSize: "2.7em"}}}>
-                <ProfileIcon>
-                    <FaUserCircle/>
-                </ProfileIcon>
             </IconContext.Provider>
             </Wrapper>
     </Container>
