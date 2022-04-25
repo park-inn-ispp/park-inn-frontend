@@ -90,7 +90,7 @@ export default function UsuariosDashboard(){
                     <td>
                     <button type='button' class='deleteButton' onClick={() => banearUsuario(usuario.id)}>Banear usuario</button>  
                     <button type='button' class='deleteButton' onClick={() => borrarUsuario(usuario.id)}>Eliminar usuario</button>
-                    <a type="button" className="editButton" href={'/clients/'+usuario.id}>Editar</a> <span>(meter url real en Editar)</span>
+                    <a type="button" className="editButton" href={'/clients/edit/'+usuario.id}>Editar</a> <span>(meter url real en Editar)</span>
                     
                     </td>
                                                                                                                                                                                                                                                
