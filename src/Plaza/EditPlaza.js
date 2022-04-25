@@ -26,6 +26,9 @@ export default function EditPlaza() {
     largo:"4.50",
     exterior:false,
     descripcion:'',
+    fecha:'',
+    horaInicio:'',
+    horaFin:''
   })
   
   const [miPlaza,setMiPlaza]= useState(false);
@@ -61,12 +64,25 @@ export default function EditPlaza() {
       ["largo"]: "" + plaza["largo"],
       ["exterior"]: plaza["esAireLibre"],
       ["descripcion"]:"" + plaza["descripcion"],
+
     })
+    if (plaza.horarios!==[]) {
+      var horario1=plaza.horarios[0]
+      var fechaHoraInicio1=horario1[0].split('T')
+      var horaFin=horario1[1].split('T')
+      setForm({
+      ["fecha"]: "" + fechaHoraInicio1[0],
+      ["horaInicio"]: "" + fechaHoraInicio1[1],
+      ["horaFin"]: "" + horaFin[1],
+      })
+
+    }
+    console.log(plaza)
+
     
 }
 
   const[errors, setErrors]= useState({})
-  
   
 
   const handleSubmit= evt => {
@@ -240,7 +256,6 @@ export default function EditPlaza() {
       </label>
      
       </div>
-      <br/>
      
       <input type="submit" value="Guardar plaza" /> &nbsp; &nbsp;
       <button type="button" class="deleteButton" onClick={deletePlaza}> Eliminar plaza </button>

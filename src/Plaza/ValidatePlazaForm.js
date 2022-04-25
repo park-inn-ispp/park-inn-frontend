@@ -119,6 +119,5 @@ export default function validateParkingForm(form){
     if (form.exterior !== true && form.exterior !== false){
         errors.exterior= "La ubicación solo puede ser exterior o interior"
     }
-
     return errors
 }

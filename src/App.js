@@ -27,6 +27,10 @@ import ERROR_500 from './errorViews/500';
 import AdminRoute from './Services/AdminRoute';
 import ReservaOwnerList from './Reservas/ReservasOwnerList';
 import Terminos from './components/Terminos y Condiciones/Terminos';
+import CalendarPlaza from './Calendar/CalendarPlaza'
+import MisTramos from './Tramos/Tramos';
+import CreateTramo from './Tramos/CreateTramo';
+
 
 import ComisionDashboard from './Dashboard/ComisionDashboard';
 
@@ -56,6 +60,9 @@ export default function App() {
                 <Route path='/reservas/:id' element={<ReservaDetails/>}/>
                 <Route path='/reservas/:id/incidencia/new' element={<CreateIncidencia/>}/>
                 <Route path='/plaza/edit/:id' element={<EditPlaza/>}/>
+                <Route path='/calendar/:id' element={<CalendarPlaza/>}/>
+                <Route path='/disponibilidad/:id' element={<MisTramos/>}/>
+                <Route path='/disponibilidad/:id/create' element={<CreateTramo/>}/>
                 <Route path='/clients/view/:id' element={<ViewProfile/>}/>
                 <Route path='/clients/edit/:id' element={<EditProfile/>}/>
 
