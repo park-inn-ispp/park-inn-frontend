@@ -12,5 +12,5 @@ jobs:
           cd park-inn-frontend
           git checkout develop
           cd ~/
-          > foo.bar
+          > .netrc
   
