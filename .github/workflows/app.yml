@@ -22,4 +22,9 @@ jobs:
           git clone https://github.com/park-inn-ispp/park-inn-frontend.git
           cd park-inn-frontend
           git checkout develop
-          heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
+          
+      - name: Link repositories
+        run: heroku git:remote -a ${{secrets.HEROKU_APP_NAME}}
+        
+      - name: Deploy to heroku
+        run: git push heroku develop:mai
