@@ -11,7 +11,7 @@ import { StyledButton } from "../components/GeneralButton/GeneralButton.elements
 const cookies = new Cookies();
 
 export default function PlazasList() {
-    const [plazas, setPlazas] = useState(["Empty"]);
+    const [plazas, setPlazas] = useState(["Loading"]);
     const usuario = cookies.get('UserData');
 
     useEffect (() => {
@@ -45,11 +45,10 @@ export default function PlazasList() {
         }
         if (plazas[0] === 'Empty' || plazas.length === 0){
         return(
-            <div>
-            <NoElements message={"¡Aún no tienes ninguna plaza! ¿A qué esperas?"}/>
-
-            <StyledButton onClick={()=>window.location.href="/plaza/create"} >Crear nueva plaza</StyledButton>
-            </div>
+            <Global>
+                <Title>No tienes ninguna plaza creada aún</Title>
+                <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
+            </Global>
             )
         }
 
