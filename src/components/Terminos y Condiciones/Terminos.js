@@ -14,7 +14,7 @@ const Box = styled.div`
   
   @media screen and (max-width: 800px){
     width: 90%;
-    height: 100%;
+    height: 100vh;
     margin-bottom: 0;
   }
 `;
@@ -31,6 +31,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 800px){
     width: 100%;
+    height: 90%;
   }
 `;
 

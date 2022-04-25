@@ -35,7 +35,7 @@ export default class DropdownComponent extends React.Component {
       var is_authorized =false
       for(let i=0;i<user_data.roles.length;i++){
 
-          if(user_data.roles[i].name=='ROLE_ADMIN'){
+          if(user_data.roles[i].name==='ROLE_ADMIN'){
               is_authorized =true
               break
           }

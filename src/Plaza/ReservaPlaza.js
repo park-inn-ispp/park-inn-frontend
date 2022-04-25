@@ -9,7 +9,6 @@ import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
 import Cookies from 'universal-cookie';
-import React, { Component } from "react";
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 require('moment/locale/es.js');
 const cookies = new Cookies();
@@ -24,8 +23,6 @@ export default function Reserva(){
     const [isLoading, setIsLoading] = useState(true)
     const [pagando, setPagando] = useState(false)
     const id = parseInt(useParams().id)
-
-    const hayTramos= !plaza.horarios===[]
 
     useEffect(() => {
       
@@ -142,8 +139,6 @@ export default function Reserva(){
 
     function calen() {
       window.open('/calendar/'+id, '_blank');
-      
-     
     }
     
       //Pantalla de carga

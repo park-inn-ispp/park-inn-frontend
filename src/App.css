@@ -23,6 +23,11 @@
   pointer-events:  none;
 }
 
+.logoNav {
+  width: 100px;
+  height: 100px;
+}
+
 @media (prefers-reduced-motion:  no-preference) {
   .App-logo {
     animation:  App-logo-spin in nite 20s linear;

@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import call from "../Util/Caller";
-import Leyenda from "./Leyenda";
-import "./card.css";
 function cancelarReserva(reservaId) {
 
   call(`/reservas/`+reservaId+'/cancelar', 'GET')
