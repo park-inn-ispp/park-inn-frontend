@@ -26,6 +26,7 @@ export default function PlazasList() {
                 data.map(plazas => {
                     data[i]["editURL"]= "/plaza/edit/"+ data[i]["id"]
                     data[i]["reservasURL"]= "/mis-reservas-de-mis-plazas/plaza/"+ data[i]["id"]
+                    data[i]["horarioURL"]="/disponibilidad/"+data[i]["id"]
                     i++
                     return plazas
                 })
@@ -66,7 +67,7 @@ export default function PlazasList() {
               {plazas.map(plaza => (
                   
                 <div className="col-md-4" key={plaza.id}>
-                  <Card imageSource={image1} title={plaza.direccion} ancho={plaza.ancho} largo ={plaza.largo} precioHora={plaza.precioHora} esAireLibre={plaza.esAireLibre ? 'Si' : 'No' } urlEdit={plaza.editURL} urlReserva={plaza.reservasURL} />
+                  <Card imageSource={image1} title={plaza.direccion} ancho={plaza.ancho} largo ={plaza.largo} precioHora={plaza.precioHora} esAireLibre={plaza.esAireLibre ? 'Si' : 'No' } urlEdit={plaza.editURL} urlReserva={plaza.reservasURL} urlHorario={plazas.horarioURL}/>
                 </div>
               ))}
             </div>
