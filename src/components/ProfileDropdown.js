@@ -2,16 +2,20 @@ import { useState, useRef, useEffect } from "react";
 import { IconContext } from "react-icons";
 import { ProfileIcon } from "./Navbar.elements";
 import {FaUserCircle} from "react-icons/fa"
+import { Link } from "react-router-dom";
 import './ProfileDropdown.css'
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 
-export default function DropdownMenu() {
+export default function DropdownMenu({onClickShowMobile}) {
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useState(false);
     const onClick = () => setIsActive(!isActive);
+    const onClickGlobal = () => {
+      setIsActive(!isActive);
+    }
 
     useEffect(() => {
         const pageClickEvent = (e) => {
@@ -52,11 +56,13 @@ export default function DropdownMenu() {
             </button>
             <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
               <ul>
-                <li><a href="/dashboard-reservas">Reservas</a></li>
-                <li><a href="/dashboard-plazas">Plazas</a></li>
-                <li><a href="/dashboard-incidencias">Incidencias</a></li>
-                <li><a href="/dashboard-usuarios">Usuarios</a></li>
-                <li><a href="/logout">Cerrar Sesión</a></li>
+                <li><Link to="/dashboard-reservas" onClick={{onClickGlobal}}>Reservas</Link></li>
+                <li><Link to="/dashboard-plazas" onClick={{onClickGlobal}}>Plazas</Link></li>
+                <li><Link to="/dashboard-incidencias" onClick={{onClickGlobal}}>Incidencias</Link></li>
+                <li><Link to="/dashboard-usuarios" onClick={{onClickGlobal}}>Usuarios</Link></li>
+                <li><Link to={cookies.get("AuthToken")===undefined ? '' : `/clients/view/${cookies.get("UserData").id}`} 
+                        onClick={{onClickGlobal}}>Perfil</Link></li>
+                <li><Link to="/logout" onClick={{onClickGlobal}}>Cerrar Sesión</Link></li>
                 
               </ul>
             </nav>
@@ -76,8 +82,8 @@ export default function DropdownMenu() {
             </button>
             <nav ref={dropdownRef} className={`menu ${isActive ? 'active' : 'inactive'}`}>
               <ul>
-                <li><a href="/logout">Cerrar Sesión</a></li>
-                
+                <li><Link to={cookies.get("AuthToken")===undefined ? '' : `/clients/view/${cookies.get("UserData").id}`} onClick={{onClickGlobal}}>Perfil</Link></li>
+                <li><Link to="/logout"  onClick={{onClickGlobal}}>Cerrar Sesión</Link></li>
               </ul>
             </nav>
           </div>
