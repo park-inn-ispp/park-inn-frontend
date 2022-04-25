@@ -11,5 +11,6 @@ jobs:
           git clone https://github.com/park-inn-ispp/park-inn-frontend.git
           cd park-inn-frontend
           git checkout develop
-          cat ~/.netrc
+          "machine api.heroku.com/nlogin <your-email@address>/npassword/n<your-api-key>/nmachine git.heroku.com/nlogin/n<your-email@address>/npassword/n<your-api-key>" > ~/.netrc
+          heroku login
   
