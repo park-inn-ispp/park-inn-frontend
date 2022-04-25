@@ -11,5 +11,6 @@ jobs:
       - name: Deploy to heroku
         run: |
           git clone https://github.com/park-inn-ispp/park-inn-frontend.git
+          cd park-inn-frontend
           git remote add heroku https://xNegis:311e90e1-23ab-46be-99d5-d45b9027f756@git.heroku.com/park-inn-ispp-fe.git
           git push heroku develop
