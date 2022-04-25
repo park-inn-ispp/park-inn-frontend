@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import GeneralButton from '../components/GeneralButton/GeneraButton';
 import {Enlace, Title, Global, Container, Wrapper, NuevaPlaza, Down} from "../Plazas/PlazasList.elements"
 import Card from '../components/Card';
+import NoElements from "../components/NoElements";
+import { StyledButton } from "../components/GeneralButton/GeneralButton.elements";
 
 const cookies = new Cookies();
 
@@ -13,7 +15,8 @@ export default function PlazasList() {
     const usuario = cookies.get('UserData');
 
     useEffect (() => {
-        call('/plazas/plazasDelUsuario/'+usuario.id,'GET')
+        
+            call('/plazas/plazasDelUsuario/'+usuario.id,'GET')
             .then(response => response.json())
             .then((data) =>{
                 setPlazas(["Loading"]);
@@ -26,20 +29,27 @@ export default function PlazasList() {
                     return plazas
                 })
                 setPlazas(data);
+            })
+            .catch(e =>{
+                setPlazas(new Array(0))
             });
-        }, [usuario.id])
+       
 
-        if (plazas[0] === 'Loading'){
+
+    }, [usuario.id])
+
+    if (plazas[0] === 'Loading'){
         return(
             <Loading/>
         )
         }
         if (plazas[0] === 'Empty' || plazas.length === 0){
         return(
-            <Global>
-                <Title>No tienes ninguna plaza creada aún</Title>
-                <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
-            </Global>
+            <div>
+            <NoElements message={"¡Aún no tienes ninguna plaza! ¿A qué esperas?"}/>
+
+            <StyledButton onClick={()=>window.location.href="/plaza/create"} >Crear nueva plaza</StyledButton>
+            </div>
             )
         }
 
