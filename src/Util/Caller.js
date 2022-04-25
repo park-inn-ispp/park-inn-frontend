@@ -5,8 +5,8 @@ import jwt_decode from 'jwt-decode';
 
 const cookies = new Cookies();
 
-const urlBackend ="https://park-inn-ispp-be.herokuapp.com";
-const urlFrontend = "https://park-inn-ispp-fe.herokuapp.com/";
+const urlBackend ="http://localhost:8080";
+const urlFrontend = "http://localhost:3000/";
 
 
      async function call(pathToCall,method,body){
