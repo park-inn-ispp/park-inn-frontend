@@ -27,14 +27,6 @@ export default function UsuariosDashboard(){
         Dashboard();
     }, []);
 
-    function loggedInParse(usuario){
-        if (usuario.loggedIn===true) {
-            return 'Si';
-        } else {
-            return 'No';
-        }
-    }
-
 
     function borrarUsuario(id) {
         console.log(id)
@@ -43,6 +35,7 @@ export default function UsuariosDashboard(){
             console.log(response.ok)
     
             if (response.ok){
+              window.location.reload();
               displayNotification("Éxito","Usuario borrado correctamente","success")
               navigate(`/dashboard-usuarios`)
             }
@@ -56,6 +49,7 @@ export default function UsuariosDashboard(){
             console.log(response.ok)
     
             if (response.ok){
+              window.location.reload();
               displayNotification("Éxito","Usuario baneado correctamente","success")
               navigate(`/dashboard-usuarios`)
             }
@@ -69,6 +63,7 @@ export default function UsuariosDashboard(){
             console.log(response.ok)
     
             if (response.ok){
+              window.location.reload();
               displayNotification("Éxito","Usuario desbaneado correctamente","success")
               navigate(`/dashboard-usuarios`)
             }
@@ -101,7 +96,8 @@ export default function UsuariosDashboard(){
                     <td>{usuario.email}</td>
                     <td>{usuario.phone}</td> 
                     <td>
-                   {usuario.roles.length===0 ?
+                  {console.log(usuario.roles)}
+                   {usuario.roles[0].name==="ROLE_BANNED" ?
                     (<button type='button' class='deleteButton' onClick={() => desbanearUsuario(usuario.id)}>Desbanear usuario</button>  
                     ): 
                     (
