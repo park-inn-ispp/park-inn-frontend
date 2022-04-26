@@ -7,6 +7,8 @@ import GeneralButton from '../components/GeneralButton/GeneraButton';
 import {Enlace} from "../Plazas/PlazasList.elements"
 import Card from '../components/Card';
 import image1 from "../assets/no-image-available-icon-6.jpg";
+import NoElements from "../components/NoElements";
+import { StyledButton } from "../components/GeneralButton/GeneralButton.elements";
 
 const cookies = new Cookies();
 
@@ -15,7 +17,8 @@ export default function PlazasList() {
     const usuario = cookies.get('UserData');
 
     useEffect (() => {
-        call('/plazas/plazasDelUsuario/'+usuario.id,'GET')
+        
+            call('/plazas/plazasDelUsuario/'+usuario.id,'GET')
             .then(response => response.json())
             .then((data) =>{
                 setPlazas(["Loading"]);
@@ -28,11 +31,16 @@ export default function PlazasList() {
                     return plazas
                 })
                 setPlazas(data);
+            })
+            .catch(e =>{
+                setPlazas(new Array(0))
             });
+       
+
 
     }, [usuario.id])
 
-        if (plazas[0] === 'Loading'){
+    if (plazas[0] === 'Loading'){
         return(
             <Loading/>
         )
@@ -40,8 +48,9 @@ export default function PlazasList() {
         if (plazas[0] === 'Empty' || plazas.length === 0){
         return(
             <div>
-                <h2>No tienes ninguna plaza creada aún</h2>
-                <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
+            <NoElements message={"¡Aún no tienes ninguna plaza! ¿A qué esperas?"}/>
+
+            <StyledButton onClick={()=>window.location.href="/plaza/create"} >Crear nueva plaza</StyledButton>
             </div>
             )
         }
@@ -49,7 +58,7 @@ export default function PlazasList() {
 
         return (
             <div>
-                <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
+            <StyledButton onClick={()=>window.location.href="/plaza/create"} >Crear nueva plaza</StyledButton>
 
             <div className="container d-flex justify-content-center align-items-center h-100">
 

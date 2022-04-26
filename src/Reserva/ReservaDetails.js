@@ -13,6 +13,9 @@ export default function ReservaDetails() {
     const [reserva, setReserva] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [fechaFin, setFechaFin] = useState(new Date())
+    const [nombrePropietario, setNombrePropietario] = useState("")
+    const [emailPropietario, setEmailPropietario] = useState("")
+
     const id = parseInt(useParams().id)
     const today = new Date()
     const cookies = new Cookies();
@@ -29,15 +32,18 @@ export default function ReservaDetails() {
     useEffect(() => {
         const DetallesReserva = async () => {
             const data = await  call(`/reservas/${id}`,"GET")
-            const reserva = await data.json()
-            setReserva(reserva)
-            setFechaFin(new Date(reserva.fechaFin))
-            const esCli = reserva.user.id===usuario.id;
-            const esPro = reserva.plaza.administrador.id===usuario.id;
+            const response = await data.json()
+            setReserva(response.reserva)
+            setFechaFin(new Date(response.reserva.fechaFin))
+            const esCli = response.reserva.user.id===usuario.id;
+            const esPro = response.reserva.propietarioId===usuario.id;
             setEsCliente(esCli)
             setEsPropietario(esPro)
-            setEstado(reserva.estado)
+            setEstado(response.reserva.estado)
             setIsLoading(false)
+            setNombrePropietario(response.nombrePropietario)
+            setEmailPropietario(response.emailPropietario)
+
         }
         DetallesReserva()
     }, [id]);
@@ -99,9 +105,9 @@ export default function ReservaDetails() {
                 <Etiqueta>Estado:</Etiqueta><p/> 
                 <Parrafo>{estado}</Parrafo><p/>
                 <Etiqueta>Dirección:</Etiqueta><p/> 
-                <Parrafo>{reserva.plaza.direccion}</Parrafo><p/>
+                <Parrafo>{reserva.direccion}</Parrafo><p/>
                 <Etiqueta>Precio de la fianza:</Etiqueta><p/> 
-                <Parrafo>{reserva.plaza.fianza} €</Parrafo><p/>
+                <Parrafo>{reserva.fianza} €</Parrafo><p/>
                 <Etiqueta>Precio total:</Etiqueta><p/> 
                 <Parrafo>{reserva.precioTotal} €</Parrafo><p/>
                 <Etiqueta>Fecha de inicio:</Etiqueta> <p/>
@@ -113,8 +119,8 @@ export default function ReservaDetails() {
                 <Etiqueta>Fecha de solicitud:</Etiqueta> <p/>
                 <Parrafo>{FSolicitud[0]}</Parrafo><p/>
                 <Etiqueta>Propietario:</Etiqueta> <p/>
-                <Parrafo>{reserva.plaza.administrador.name}</Parrafo><p/>
-                <Parrafo>{reserva.plaza.administrador.email}</Parrafo><p/>
+                <Parrafo>{nombrePropietario}</Parrafo><p/>
+                <Parrafo>{emailPropietario}</Parrafo><p/>
                 <Etiqueta>Comentarios:</Etiqueta> <p/>
                 <Parrafo>{reserva.comentarios}</Parrafo>
                 

@@ -88,6 +88,8 @@ export default function Reserva(){
         "estado": "pendiente",
         "fechaSolicitud": FechaYHoraSolicitud,
         "incidencias": null,
+        "fianza": plaza.fianza,
+        "direccion": plaza.direccion,
         "plaza": {
             "id": plaza.id,
             "direccion": plaza.direccion,

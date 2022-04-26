@@ -5,8 +5,8 @@ import jwt_decode from 'jwt-decode';
 
 const cookies = new Cookies();
 
-const urlBackend ="https://park-inn-ispp-be.herokuapp.com";
-const urlFrontend = "https://park-inn-ispp-fe.herokuapp.com/";
+const urlBackend ="http://localhost:8080";
+const urlFrontend = "http://localhost:3000";
 
 
      async function call(pathToCall,method,body){
@@ -41,7 +41,12 @@ const urlFrontend = "https://park-inn-ispp-fe.herokuapp.com/";
                     if(res.hasOwnProperty("errores")){ // Mostrar errores CONTROLADOS
                         var errores= res.errores
                         for (var i=0; i<errores.length; i++){
-                            displayNotification("Error",errores[i],"danger")
+                            if(errores[i]=="Este usuario no tiene ninguna plaza"){
+                                throw "Este usuario no tiene ninguna plaza"
+                            }else{
+                                displayNotification("Error",errores[i],"danger")
+
+                            }
                             
                         }
                     } else{ // Errores no controlados

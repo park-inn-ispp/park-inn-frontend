@@ -7,6 +7,10 @@ import CardReservas from '../components/CardReservas';
 import image1 from "../assets/no-image-available-icon-6.jpg";
 import Leyenda from "../components/Leyenda";
 import parsearFechas from "../Util/FechasParser";
+import NoElements from "../components/NoElements";
+import GeneralButton from "../components/GeneralButton/GeneraButton";
+import { StyledButton } from "../components/GeneralButton/GeneralButton.elements";
+import { BsWindowSidebar } from "react-icons/bs";
 const cookies = new Cookies();
 
 
@@ -29,7 +33,11 @@ export default function ReservaClientList(){
     }
     if (reservas === 'undefined' || reservas.length === 0){
         return(
-            <h2>No hay reservas asociadas a este usuario</h2>
+            <div>
+            <NoElements message={"¡Aún no tienes ninguna reserva! ¿A qué esperas?"}/>
+
+            <StyledButton onClick={()=>window.location.href="/"} >Hacer una reserva</StyledButton>
+            </div>
         )
     }
 
@@ -45,7 +53,7 @@ export default function ReservaClientList(){
               {reservas.map(reserva => (
                   
                 <div className="col-md-4" key={reserva.id}>
-                  <CardReservas imageSource={image1} id={reserva.id} title={reserva.plaza.direccion} propietario={reserva.plaza.administrador.name}
+                  <CardReservas imageSource={image1} id={reserva.id} title={reserva.direccion} 
                    fechaInicio={parsearFechas(reserva.fechaInicio)} fechaFin={parsearFechas(reserva.fechaFin)} precioTotal={reserva.precioTotal} estado={reserva.estado}
                    urlDetalles={"/reservas/"+reserva.id} />
                 </div>

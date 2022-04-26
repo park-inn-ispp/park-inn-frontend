@@ -1,11 +1,12 @@
 on:
   push:
     branches:
-      - feature/128-github-actions
+      - develop
 jobs:
   heroku-deploy:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Deploy to Heroku
