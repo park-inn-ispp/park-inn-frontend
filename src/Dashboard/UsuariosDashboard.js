@@ -62,6 +62,19 @@ export default function UsuariosDashboard(){
           })
       }
 
+      function desbanearUsuario(id) {
+        console.log(id)
+        call(`/clients/`+id + '/desbanear', 'PUT')
+          .then(response => {
+            console.log(response.ok)
+    
+            if (response.ok){
+              displayNotification("Éxito","Usuario desbaneado correctamente","success")
+              navigate(`/dashboard-usuarios`)
+            }
+          })
+      }
+
     if (isLoading) {
         return <Loading/>;
       }
@@ -80,7 +93,7 @@ export default function UsuariosDashboard(){
                     <th>Acciones</th>
                 </tr>
                 {usuarios.map((usuario) => {
-    
+                    
                     return <tr>
                     <td>{usuario.id}</td>   
                     <td>{usuario.name}</td>
@@ -88,9 +101,17 @@ export default function UsuariosDashboard(){
                     <td>{usuario.email}</td>
                     <td>{usuario.phone}</td> 
                     <td>
-                    <button type='button' class='deleteButton' onClick={() => banearUsuario(usuario.id)}>Banear usuario</button>  
+                   {usuario.roles.length===0 ?
+                    (<button type='button' class='deleteButton' onClick={() => desbanearUsuario(usuario.id)}>Desbanear usuario</button>  
+                    ): 
+                    (
+                      <button type='button' class='deleteButton' onClick={() => banearUsuario(usuario.id)}>Banear usuario</button>  
+
+                    ) 
+                   
+                  }
                     <button type='button' class='deleteButton' onClick={() => borrarUsuario(usuario.id)}>Eliminar usuario</button>
-                    <a type="button" className="editButton" href={'/clients/'+usuario.id}>Editar</a> <span>(meter url real en Editar)</span>
+                    <a type="button" className="editButton" href={'/clients/edit/'+usuario.id}>Editar</a>
                     
                     </td>
                                                                                                                                                                                                                                                

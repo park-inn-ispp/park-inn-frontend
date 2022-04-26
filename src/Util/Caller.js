@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 const cookies = new Cookies();
 
 const urlBackend ="http://localhost:8080";
-const urlFrontend = "http://localhost:3000/";
+const urlFrontend = "http://localhost:3000";
 
 
      async function call(pathToCall,method,body){

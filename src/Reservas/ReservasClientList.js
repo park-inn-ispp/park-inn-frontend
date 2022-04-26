@@ -53,7 +53,7 @@ export default function ReservaClientList(){
               {reservas.map(reserva => (
                   
                 <div className="col-md-4" key={reserva.id}>
-                  <CardReservas imageSource={image1} id={reserva.id} title={reserva.plaza.direccion} propietario={reserva.plaza.administrador.name}
+                  <CardReservas imageSource={image1} id={reserva.id} title={reserva.direccion} 
                    fechaInicio={parsearFechas(reserva.fechaInicio)} fechaFin={parsearFechas(reserva.fechaFin)} precioTotal={reserva.precioTotal} estado={reserva.estado}
                    urlDetalles={"/reservas/"+reserva.id} />
                 </div>
