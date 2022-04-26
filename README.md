@@ -1,5 +1,5 @@
 # Lanzar el proyecto
-a
+
 Para lanzar el proyecto debemos tener instalado `Node.js` y `npm`
 https://phoenixnap.com/kb/install-node-js-npm-on-windows
 
