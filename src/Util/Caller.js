@@ -41,7 +41,12 @@ const urlFrontend = "http://localhost:3000";
                     if(res.hasOwnProperty("errores")){ // Mostrar errores CONTROLADOS
                         var errores= res.errores
                         for (var i=0; i<errores.length; i++){
-                            displayNotification("Error",errores[i],"danger")
+                            if(errores[i]=="Este usuario no tiene ninguna plaza"){
+                                throw "Este usuario no tiene ninguna plaza"
+                            }else{
+                                displayNotification("Error",errores[i],"danger")
+
+                            }
                             
                         }
                     } else{ // Errores no controlados

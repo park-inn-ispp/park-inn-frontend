@@ -74,11 +74,5 @@ function CardReservas({ imageSource,id, title,fechaInicio,fechaFin,precioTotal, 
   );
 }
 
-CardReservas.propTypes = {
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string,
-  url: PropTypes.string,
-  imageSource: PropTypes.string
-};
 
 export default CardReservas;
