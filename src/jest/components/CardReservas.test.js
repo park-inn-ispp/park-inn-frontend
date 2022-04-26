@@ -9,7 +9,7 @@ test('Renderizar una CardReservas vacía', () => {
 
     const emptyCard = shallow(<CardReservas />);
 
-    expect(emptyCard.text()).toEqual('Propietario : -Fecha Inicio : -Fecha Fin : -Precio total : -CancelarDetalles');
+    expect(emptyCard.text()).toEqual('Fecha Inicio : -Fecha Fin : -Precio total : -CancelarDetalles');
   
 });
 
@@ -19,7 +19,7 @@ test('Renderizar una CardReservas no vacía', () => {
     fechaInicio={"test 1 fechaInicio"} fechaFin={"test 1 fechaFin"} precioTotal={"test 1 precioTotal"}
     urlCancelar={"test 1 urlCancelar"} urlDetalles={"test 1 urlDetalles"}  />);
 
-    expect(notEmptyCard.text()).toEqual("test 1 titlePropietario : test 1 propietarioFecha Inicio : test 1 fechaInicioFecha Fin : test 1 fechaFinPrecio total : test 1 precioTotal€CancelarDetalles");
+    expect(notEmptyCard.text()).toEqual("test 1 titleFecha Inicio : test 1 fechaInicioFecha Fin : test 1 fechaFinPrecio total : test 1 precioTotal€CancelarDetalles");
   
 });
 
@@ -29,7 +29,7 @@ test('Renderizar una CardReservas sin titulo vacía', () => {
     fechaInicio={"test 1 fechaInicio"} fechaFin={"test 1 fechaFin"} precioTotal={"test 1 precioTotal"}
     urlCancelar={"test 1 urlCancelar"} urlDetalles={"test 1 urlDetalles"}  />);
 
-    expect(notEmptyCard.text()).toEqual("Propietario : test 1 propietarioFecha Inicio : test 1 fechaInicioFecha Fin : test 1 fechaFinPrecio total : test 1 precioTotal€CancelarDetalles");
+    expect(notEmptyCard.text()).toEqual("Fecha Inicio : test 1 fechaInicioFecha Fin : test 1 fechaFinPrecio total : test 1 precioTotal€CancelarDetalles");
   
 });
 
