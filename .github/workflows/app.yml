@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - feature/128-github-actions
+      - develop
 jobs:
   heroku-deploy:
     runs-on: ubuntu-latest
