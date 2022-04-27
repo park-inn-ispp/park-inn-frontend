@@ -88,9 +88,10 @@ export const Parrafo = styled.div`
     font-family: sans-serif;
     font-size: 22px;
     width: 40%;
-    overflow: scroll;
-    @media screen and (max-width: 500px){
+    
+    @media screen and (max-width: 600px){
         font-size: 18px;
+        overflow: scroll;
     }
 `;
 

@@ -12,7 +12,10 @@ export const Parrafo = styled.div`
     font-family: sans-serif;
     font-size: 22px;
     width: 50%;
-    overflow: scroll;
+    
+    @media screen and (max-width:600px){
+        overflow: scroll;
+    }
 `;
 
 export const Global = styled.div`
