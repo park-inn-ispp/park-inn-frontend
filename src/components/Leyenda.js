@@ -1,10 +1,20 @@
+import styled from "styled-components";
 import "./leyenda.css";
+
+const Leyend = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+`;
 
 function Leyenda() {
     
   
     return (
-      <div className="containerLeyenda">
+      <Leyend>
           <div>
             <div className="texto">Aceptada  </div>
             <div className="a"></div>
@@ -18,7 +28,7 @@ function Leyenda() {
             <div className="c"></div>
           </div>
 
-      </div>
+      </Leyend>
     ); 
   }
 
