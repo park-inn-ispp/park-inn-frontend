@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Loading from '../components/Loading';
 import call from '../Util/Caller'
 import { useNavigate } from 'react-router-dom';
+import displayNotification from '../Util/Notifications';
 
 
 
@@ -26,22 +27,44 @@ export default function UsuariosDashboard(){
         Dashboard();
     }, []);
 
-    function loggedInParse(usuario){
-        if (usuario.loggedIn===true) {
-            return 'Si';
-        } else {
-            return 'No';
-        }
-    }
 
-
-    function borrarUsuario(id) {      
+    function borrarUsuario(id) {
+        console.log(id)
         call(`/clients/`+id, 'DELETE')
           .then(response => {
             console.log(response.ok)
     
             if (response.ok){
-              console.log("ELIMINADA")
+              window.location.reload();
+              displayNotification("Éxito","Usuario borrado correctamente","success")
+              navigate(`/dashboard-usuarios`)
+            }
+          })
+      }
+
+      function banearUsuario(id) {
+        console.log(id)
+        call(`/clients/`+id + '/banear', 'PUT')
+          .then(response => {
+            console.log(response.ok)
+    
+            if (response.ok){
+              window.location.reload();
+              displayNotification("Éxito","Usuario baneado correctamente","success")
+              navigate(`/dashboard-usuarios`)
+            }
+          })
+      }
+
+      function desbanearUsuario(id) {
+        console.log(id)
+        call(`/clients/`+id + '/desbanear', 'PUT')
+          .then(response => {
+            console.log(response.ok)
+    
+            if (response.ok){
+              window.location.reload();
+              displayNotification("Éxito","Usuario desbaneado correctamente","success")
               navigate(`/dashboard-usuarios`)
             }
           })
@@ -65,14 +88,29 @@ export default function UsuariosDashboard(){
                     <th>Acciones</th>
                 </tr>
                 {usuarios.map((usuario) => {
-    
+                    
                     return <tr>
                     <td>{usuario.id}</td>   
                     <td>{usuario.name}</td>
                     <td>{usuario.surname}</td>
                     <td>{usuario.email}</td>
                     <td>{usuario.phone}</td> 
-                    <td></td>                                                          
+                    <td>
+                  {console.log(usuario.roles)}
+                   {usuario.roles[0].name==="ROLE_BANNED" ?
+                    (<button type='button' class='deleteButton' onClick={() => desbanearUsuario(usuario.id)}>Desbanear usuario</button>  
+                    ): 
+                    (
+                      <button type='button' class='deleteButton' onClick={() => banearUsuario(usuario.id)}>Banear usuario</button>  
+
+                    ) 
+                   
+                  }
+                    <button type='button' class='deleteButton' onClick={() => borrarUsuario(usuario.id)}>Eliminar usuario</button>
+                    <a type="button" className="editButton" href={'/clients/edit/'+usuario.id}>Editar</a>
+                    
+                    </td>
+                                                                                                                                                                                                                                               
                 </tr>
                 })
             }

@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     margin: auto;
 
-    @media screen and (max-width: 960px){
+    @media screen and (max-width: 1150px){
         justify-content: center;
     }
 `;
@@ -28,7 +28,7 @@ export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
     font-family: sans-serif;
-    justify-content: left;
+    justify-content: space-between;  
 `;
 
 export const Menu = styled.ul`
@@ -37,13 +37,13 @@ export const Menu = styled.ul`
     justify-content: space-between;
     list-style: none;
 
-    @media screen and (max-width: 960px){
-        z-index: 2;
+    @media screen and (max-width: 1150px){
+        z-index: 200;
         position: absolute;
         top: 90px;
         left: ${({open}) => open ? "0" : "-100%"};
         width: 100%;
-        height: 113vh;
+        height: 100vh;
         justify-content: center;
         flex-direction: column;
         align-items: center;
@@ -56,12 +56,13 @@ export const Menu = styled.ul`
 export const MenuItem = styled.li`
     height: 100%;
 
-    @media screen and (max-width:960px){
+    @media screen and (max-width:1150px){
         width: 100%;
         height: 70px;
         display: flex;
         justify-content: center;
         align-items: center;
+        
     }
 `;
 
@@ -94,7 +95,7 @@ export const MenuItemLink = styled(Link)`
         display: none;
     }
 
-    @media screen and (max-width:960px){
+    @media screen and (max-width:1150px){
         width: 100%;
 
         svg{
@@ -141,7 +142,7 @@ export const LinkTitle = styled(Link)`
 export const MobileIcon = styled.div`
     display: none;
 
-    @media screen and (max-width: 960px){
+    @media screen and (max-width: 1150px){
         margin-left: 2rem;
         display: flex;
         height:inherit;
@@ -170,7 +171,21 @@ export const ProfileIcon = styled.div`
         }
     }
 
-    @media screen and (max-width: 960px){
-        display: none;
+    @media screen and (max-width: 1150px){
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 2rem 1rem 2rem;
+        size: 100;
+        cursor: pointer;
+        svg{
+        fill: ${colors.fivth};
+        cursor: pointer;
+
+        &:hover{
+            fill: #fff;
+            transition: 0.5s all ease;
+        }
+    }
     }
 `;

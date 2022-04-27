@@ -1,0 +1,27 @@
+.cancelada {
+  width:  20px;
+  height:  20px;
+  margin-left: 47%;
+  background-color: #f53333;
+  border-radius:  10px;
+}
+
+.pendiente {
+  width:  20px;
+  height:  20px;
+  margin-left: 47%;
+  background-color:  #f5c133;
+  border-radius:  10px;
+
+  @media screen and (max-width: 600px) {
+    margin-left:  50%;
+ }
+}
+
+.aceptada {
+  width: 20px;
+  height: 20px;
+  margin-left: 47%;
+  background-color: #5af574;
+  border-radius: 10px;
+}

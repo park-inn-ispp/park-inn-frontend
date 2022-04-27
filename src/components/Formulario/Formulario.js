@@ -19,7 +19,7 @@ export default function Formulario ({ template, onSubmit, watchFields, validate 
                     return(
                         <Div key={name}>
                             <Etiqueta htmlFor={name}>{title}</Etiqueta>
-                            <InputForm pattern="[a-zA-Z ]{2,50}" title="Rellena este campo solo con letras de una longitud de 2 a 50 caracteres" type={type} name={name} id={name} placeholder={placeholder} ref={register(validationProps)}/>
+                            <InputForm pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]{2,50}" title="Rellena este campo solo con letras de una longitud de 2 a 50 caracteres" type={type} name={name} id={name} placeholder={placeholder} ref={register(validationProps)}/>
                             {errors[name] && <ErrorMessage>{errors[name]["message"]}</ErrorMessage>}
                         </Div>
                     )

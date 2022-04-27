@@ -1,5 +1,16 @@
 import logo from '../resources/logoSinFondo.png'
+import styled from 'styled-components'
 
-export default function Logo(props){
-    return <img style={{width: props.size}} alt="Logo" src={logo}/>
+const Img = styled.img`
+    width: 250px;
+    height: 250px;
+
+    @media screen and (max-width: 800px){
+        width: 200px;
+        height: 200px;
+    }
+`;
+
+export default function Logo(){
+    return <Img alt="Logo" src={logo}/>
 }

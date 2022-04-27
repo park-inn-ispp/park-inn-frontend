@@ -3,7 +3,15 @@ import {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import Loading from "../components/Loading";
 import Cookies from 'universal-cookie';
-
+import CardReservas from '../components/CardReservas';
+import image1 from "../assets/no-image-available-icon-6.jpg";
+import Leyenda from "../components/Leyenda";
+import parsearFechas from "../Util/FechasParser";
+import NoElements from "../components/NoElements";
+import GeneralButton from "../components/GeneralButton/GeneraButton";
+import { StyledButton } from "../components/GeneralButton/GeneralButton.elements";
+import { BsWindowSidebar } from "react-icons/bs";
+import { Container, Wrapper } from "../Plazas/PlazasList.elements";
 const cookies = new Cookies();
 
 
@@ -26,67 +34,24 @@ export default function ReservaClientList(){
     }
     if (reservas === 'undefined' || reservas.length === 0){
         return(
-            <h2>No hay reservas asociadas a este usuario</h2>
+            <div>
+            <NoElements message={"¡Aún no tienes ninguna reserva! ¿A qué esperas?"}/>
+
+            <StyledButton onClick={()=>window.location.href="/"} >Hacer una reserva</StyledButton>
+            </div>
         )
     }
 
-   
-    function cancelarReserva(reservaId) {
-        call(`/reservas/`+reservaId+'/cancelar', 'GET')
-          .then(response => {
-            console.log(response)
-    
-            if (response.ok){
-              //navigate(`/mis-reservas`)
-              window.location.reload()
-            }
-          })
-      }
-
-      function verDetallesReserva(reservaId) {
-              navigate(`/reservas/`+reservaId)
-            
-        
-      }
 
     return(
-        <body>
-        <div className="tablas">
-            <table>
-                <tr>
-                    <th>Propietario</th>
-                    <th>Direccion</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
-                    <th>Precio total</th>
-                    <th>Estado</th>
-                    <th></th>
-                </tr>
-                {reservas.map((reserva) => {
-                    //var estadoReserva = reserva.estado=="pendiente";
-                    var cancelacionReserva = reserva.estado==="aceptada";
-                    return <tr>
-                        <td>{reserva.plaza.administrador.name}</td>
-                        <td>{reserva.plaza.direccion}</td>
-
-                        <td>{reserva.fechaInicio}</td>
-                        <td>{reserva.fechaFin}</td>
-                        <td>{reserva.precioTotal}</td>
-                        <td>
-                        {
-                    cancelacionReserva ? (
-                        <><button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button></>
-
-                    ) : (reserva.estado)}
-                        </td>
-                        <td>
-                        <button type='button' class='editButton' onClick={() => verDetallesReserva(reserva.id)}>Ver detalles</button>
-                        </td>
-                    </tr>
-                })}
-            </table>
-        </div>
-        </body>
-        
+        <Wrapper>
+            <Leyenda></Leyenda>
+            <Container>
+              {reservas.map(reserva => (
+                  <CardReservas id={reserva.id} direccion={reserva.direccion} 
+                   fechaInicio={parsearFechas(reserva.fechaInicio)} fechaFin={parsearFechas(reserva.fechaFin)} precioTotal={reserva.precioTotal} estado={reserva.estado}
+                 />))}
+            </Container>
+        </Wrapper>
     );
 }

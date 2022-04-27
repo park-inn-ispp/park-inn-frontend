@@ -5,8 +5,10 @@ import jwt_decode from 'jwt-decode';
 
 const cookies = new Cookies();
 
-const urlBackend ="https://parkinn-api-v2.herokuapp.com";
-const urlFrontend = "https://parkinn-app-v2.herokuapp.com/";
+const urlBackend ="https://parkinn-api-v3.herokuapp.com";
+const urlFrontend = "https://parkinn-app-v3.herokuapp.com/";
+//const urlBackend ="http://localhost:8080";
+//const urlFrontend = "http://localhost:3000/";
 
 
      async function call(pathToCall,method,body){
@@ -33,7 +35,6 @@ const urlFrontend = "https://parkinn-app-v2.herokuapp.com/";
         };
 
         return await fetch(urlBackend+pathToCall, requestOptions).then(response =>{
-
             if(response.ok){
                 return response
             }else{
@@ -42,16 +43,32 @@ const urlFrontend = "https://parkinn-app-v2.herokuapp.com/";
                     if(res.hasOwnProperty("errores")){ // Mostrar errores CONTROLADOS
                         var errores= res.errores
                         for (var i=0; i<errores.length; i++){
-                            displayNotification("Error",errores[i],"danger")
+                            if(errores[i]=="Este usuario no tiene ninguna plaza"){
+                                throw "Este usuario no tiene ninguna plaza"
+                            }else{
+                                displayNotification("Error",errores[i],"danger")
+
+                            }
                             
                         }
                     } else{ // Errores no controlados
 
                         if(response.status === 500){
-                            window.location.href="/500";           
+                        
+                                window.location.href="/500"; 
+                            
+                                      
         
                         }else if(response.status === 403){
-                            window.location.href="/403"; 
+                           
+
+                            if(/^\/clients\/usuariopormail\//.test(pathToCall)){
+
+                                displayNotification("Error","Este usuario se encuentra baneado o no tiene permisos","danger")
+                            }else{
+                                    window.location.href="/403"; 
+
+                            }
                             
                         }else if(response.status===404){
                             window.location.href="/404";  

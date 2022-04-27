@@ -49,7 +49,7 @@ export default function validateReserva(form){
     var mins2 = trozos2[1];
     var hcompleta2 = (horas2+mins2);
     if((form.fechaFin==form.fechaInicio) && (hcompleta2-hcompleta<=100)){
-        errors.horaFin = "La hora de fin debe ser una hora posterior a la hora de inicio";
+        errors.horaFin = "No puedes realizar una reserva con menos de 1 hora de duración";
     }
     
 

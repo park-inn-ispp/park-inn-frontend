@@ -1,57 +1,59 @@
 .slided {
-  height: 17vh;
-  transition: all 0.1s;
-  cursor: pointer;  
-}
-
-.divPlaza:hover {
-  background-color: rgb(237, 240, 243);
-} 
-
-.no-slided {
-  height: 3vh;
-  transition: all 0.1s;
-  cursor: pointer;
-  overflow-y: hidden;
+  height:  17vh;
+  transition:  all 0.1s;
+  cursor:  pointer;
 }
 
 .divPlaza {
-  padding: 2vh;
-  width: 100%;
-  height: 20%;
-  background-color: #f1f7fe;
-  box-shadow: 0 0 9px 0px rgba(0,0,0,0.1);
-  margin-bottom: 1vh;
-  margin-top: 1vh;
+  padding:  2vh;
+  width:  100%;
+  height:  20%;
+  background-color:  #f1f7fe;
+  box-shadow:  0 0 9px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom:  1vh;
+  margin-top:  1vh;
+}
+
+.divPlaza:hover {
+  background-color:  rgb(237, 240, 243);
+}
+
+.no-slided {
+  height:  3vh;
+  transition:  all 0.1s;
+  cursor:  pointer;
+  overflow-y:  hidden;
 }
 
 .container {
-  display: flex; /* establish flex container */
-  justify-content: center; /* center flex items horizontally, in this case */
-}   
+  display:  flex; /* establish flex container */
+  justify-content:  center; /* center flex items horizontally, in this case */
+}
 
 /* ajustes para la tabla */
-td,th { 
-  padding-left: 3vh;
-  padding-right: 3vh;
+td,
+th {
+  padding-left:  3vh;
+  padding-right:  3vh;
 }
 
-td,th { 
-  text-align: center;
-}
-
-table { 
-  margin-top: 2vh;   
-}
-
-thead { 
-  height: 6vh;
-  background: #4a7eac;
-  font-size: 16px;
-  color: white;
+td,
+th {
+  text-align:  center;
 }
 
 table {
-  margin: 0 auto; /* or margin: 0 auto 0 auto */
-  margin-top: 2vh;
+  margin-top:  2vh;
+}
+
+thead {
+  height:  6vh;
+  background:  #4a7eac;
+  font-size:  16px;
+  color:  white;
+}
+
+table {
+  margin:  0 auto; /* or margin:   0 auto 0 auto */
+  margin-top:  2vh;
 }

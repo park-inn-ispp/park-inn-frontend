@@ -4,12 +4,16 @@ import validateReserva from './validateReserva';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import {Etiqueta, Parrafo, Formulario} from '../Plaza/ReservaPlaza.elements';
+import {Etiqueta, Parrafo, Formulario, BotonCalendario, Container, Line, Title, Datos, Wrapper, EnvioForm, Precio, Back} from '../Plaza/ReservaPlaza.elements';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
 import Cookies from 'universal-cookie';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+require('moment/locale/es.js');
 const cookies = new Cookies();
+
+
 
 export default function Reserva(){
 
@@ -18,15 +22,14 @@ export default function Reserva(){
     const [plaza, setPlaza] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const [pagando, setPagando] = useState(false)
-
     const id = parseInt(useParams().id)
-
 
     useEffect(() => {
       
       const DetallesPlaza = async () => {
         const data = await call(`/plazas/${id}`,"GET")
         const plazas = await data.json()
+        console.log(plazas)
         setPlaza(plazas)
         setIsLoading(false)
       }
@@ -35,6 +38,8 @@ export default function Reserva(){
     },[id]);
 
     const usuario = cookies.get('UserData');
+
+ 
 
     const [form, setForm]= useState({
         fechaInicio:'',
@@ -80,6 +85,8 @@ export default function Reserva(){
         "estado": "pendiente",
         "fechaSolicitud": FechaYHoraSolicitud,
         "incidencias": null,
+        "fianza": plaza.fianza,
+        "direccion": plaza.direccion,
         "plaza": {
             "id": plaza.id,
             "direccion": plaza.direccion,
@@ -139,60 +146,54 @@ export default function Reserva(){
 
     return (
         <>
-        {pagando ? <> <Pagar precio={body.precioTotal} reserva={body}/>
-         <button class="botonAzul" type="submit" onClick={()=> {setPagando(false)}}> Atrás </button> </>
+        {pagando ? <Wrapper> <Pagar precio={body.precioTotal} reserva={body}/>
+        <Back class="botonAzul" type="submit" onClick={()=> {setPagando(false)}}> Atrás </Back> </Wrapper>
          : 
         
-        <div className="form-style-10">
-          <h1>Reservar Plaza</h1>
-          <ReactNotifications />
+        <Container>
+            <Wrapper>
+              <Title>Reservar Plaza</Title>
+              <ReactNotifications />
+              <Line><Etiqueta>Propietario:</Etiqueta><Parrafo>{plaza.administrador.name}</Parrafo></Line>
+              <Line><Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo></Line> 
+              <Line><Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo></Line>
+              <Line><Etiqueta>Ancho:</Etiqueta><Parrafo>{plaza.ancho} m</Parrafo></Line>
+              <Line><Etiqueta>Calendario:</Etiqueta>
+              <BotonCalendario to={'/calendar/'+id}>Ver disponibilidad</BotonCalendario></Line>
           
-          <div class="section"><span>1</span>Propiedades de la plaza</div>
-          <div class="inner-wrap">
-          
-          <Etiqueta>Propietario:</Etiqueta><Parrafo>{plaza.administrador.name}</Parrafo>
-          <Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo> 
-          <Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo>
-          <Etiqueta>Ancho:</Etiqueta><Parrafo>{plaza.ancho} m</Parrafo>
-          </div>
-        <Formulario onSubmit={handleSubmit}>
-        <div class="section"><span>2</span>Fecha de reserva</div>
-        <div class="inner-wrap">
-            <Etiqueta>Fecha Inicio:</Etiqueta>
-            <Parrafo>
-              <input onChange={handleChange} name= "fechaInicio" type="date" value={form.fechaInicio}/>
-              <FormErrorMessage jsonErrors={errors} errorName="fechaInicio"/>
-            </Parrafo>
-            <p/>
-            <Etiqueta>Fecha Fin:</Etiqueta>
-            <Parrafo>
-              <input onChange={handleChange} name= "fechaFin" type="date" value={form.fechaFin}/>
-              <FormErrorMessage jsonErrors={errors} errorName="fechaFin"/>
-            </Parrafo>
-            
-            <Etiqueta>Hora Inicio: </Etiqueta>
-            <Parrafo>
-              <input  onChange={handleChange} name= "horaInicio" type="time" step="600" value={form.horaInicio}/>
-              <FormErrorMessage jsonErrors={errors} errorName="horaInicio"/>
-            </Parrafo>
-            <Etiqueta>Hora Fin: </Etiqueta>
-            <Parrafo>
-              <input  onChange={handleChange} name= "horaFin" type="time" value={form.horaFin}/>
-              <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
-    </Parrafo>
-          </div>
-          <div class="section"><span>3</span>Precios</div>
-          <div class="inner-wrap">
-          <Etiqueta>Precio por hora:</Etiqueta><Parrafo>{plaza.precioHora} €</Parrafo>
-          <Etiqueta>Precio de la fianza:</Etiqueta><Parrafo>{plaza.fianza} €</Parrafo>  
-          <Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{precioEstacionamiento} €</Parrafo>  
-          <Etiqueta>Precio total con fianza:</Etiqueta><Parrafo>{precioTotalConFianza} €</Parrafo>
-          </div>  
-          <input type="submit" value="Siguiente"/>
-        </Formulario>
-        </div>
-        }
+            <Formulario onSubmit={handleSubmit}>
+        
+        
+                <Line><Etiqueta>Fecha Inicio:</Etiqueta>
+                  <Datos onChange={handleChange} name= "fechaInicio" type="date" value={form.fechaInicio}></Datos>
+                  <FormErrorMessage jsonErrors={errors} errorName="fechaInicio"/>
+                </Line>
 
+                <Line><Etiqueta>Fecha Fin:</Etiqueta>
+                  <Datos onChange={handleChange} name= "fechaFin" type="date" value={form.fechaFin}></Datos>
+                  <FormErrorMessage jsonErrors={errors} errorName="fechaFin"/>
+                </Line>
+
+                <Line><Etiqueta>Hora Inicio:</Etiqueta>
+                  <Datos onChange={handleChange} name= "horaInicio" type="time" step="600" value={form.horaInicio}></Datos>
+                  <FormErrorMessage jsonErrors={errors} errorName="horaInicio"/>
+                </Line>
+              
+                <Line><Etiqueta>Hora Fin:</Etiqueta>
+                  <Datos onChange={handleChange} name= "horaFin" type="time" step="600" value={form.horaFin}></Datos>
+                  <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
+                </Line>
+
+              <Line><Etiqueta>Precio por hora:</Etiqueta><Parrafo>{plaza.precioHora} €</Parrafo></Line>
+              <Line><Etiqueta>Precio de la fianza:</Etiqueta><Parrafo>{plaza.fianza} €</Parrafo></Line>  
+              <Line><Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{precioEstacionamiento} €</Parrafo></Line>  
+              <Line><Etiqueta>Precio total:</Etiqueta><Precio>{precioTotalConFianza} €</Precio></Line>
+              <EnvioForm type="submit" value="Siguiente"/>
+              
+            </Formulario>
+          </Wrapper>
+        </Container>
+        }
         
         </>
     );
