@@ -6,6 +6,8 @@ import 'react-notifications-component/dist/theme.css'
 import call from '../Util/Caller';
 import ValidateProfileForm from './ValidateProfileForm';
 import Loading from '../components/Loading';
+import { Datos, EnvioForm, Etiqueta, Formulario, Line, Title } from '../Plaza/EditPlaza.elements';
+import { Global2 } from './ViewProfileElements';
 
 export default function EditProfile(){
 
@@ -82,48 +84,42 @@ export default function EditProfile(){
 
         if(miPerfil){
             return(
-                <div class="form-style-10">
-                    <h1>Editar perfil</h1>
-                    <form onSubmit={handleSubmit}>
-                        <div className="section"><span>1</span>Dirección</div>
-                        <div className="inner-wrap">
-                            <label>
-                                Nombre:
-                                <input onChange={handleChange} name="name" type="text" value={form.name}/>
-                                <FormErrorMessage jsonErrors={errors} errorName="name"/>
+                <Global2>
+                    <Formulario onSubmit={handleSubmit}>
+                        <Title>Editar Perfil</Title>
+                        <Line>
+                            <Etiqueta>Nombre:</Etiqueta>
+                            <Datos onChange={handleChange} name= "name" type="text" value={form.name}/>
+                            <FormErrorMessage jsonErrors={errors} errorName="name"/>
+                        </Line>
 
-                            </label>
+                        <Line>
+                            <Etiqueta>Apellidos:</Etiqueta>
+                            <Datos onChange={handleChange} name= "surname" type="text" value={form.surname}/>
+                            <FormErrorMessage jsonErrors={errors} errorName="surname"/>
+                        </Line>
 
-                            <label>
-                                Email:
-                                <input onChange={handleChange} name="email" type="text" value={form.email}/>
-                                <FormErrorMessage jsonErrors={errors} errorName="email"/>
-                            </label>
+                        <Line>
+                            <Etiqueta>Teléfono:</Etiqueta>
+                            <Datos onChange={handleChange} name= "phone" type="text" value={form.phone}/>
+                            <FormErrorMessage jsonErrors={errors} errorName="phone"/>
+                        </Line>
 
-                            <label>
-                                Contraseña
-                                <input onChange={handleChange} name="password" type="text" value={form.password}/>
-                                <FormErrorMessage jsonErrors={errors} errorName="password"/>
-                            </label>
+                        <Line>
+                            <Etiqueta>Correo:</Etiqueta>
+                            <Datos onChange={handleChange} name= "email" type="text" value={form.email}/>
+                            <FormErrorMessage jsonErrors={errors} errorName="email"/>
+                        </Line>
 
-                            <label>
-                                Telefono
-                                <input onChange={handleChange} name="phone" type="text" value={form.phone}/>
-                                <FormErrorMessage jsonErrors={errors} errorName="phone"/>
-                            </label>
-
-                            <label>
-                                Apellidos
-                                <input onChange={handleChange} name="surname" type="text" value={form.surname}/>
-                                <FormErrorMessage jsonErrors={errors} errorName="surname"/>
-                            </label>
-                        </div>
-                        <input type="submit" value="Editar perfil"/>
+                        <Line>
+                            <Etiqueta>Contraseña:</Etiqueta>
+                            <Datos onChange={handleChange} name= "password" type="text" value={form.password}/>
+                            <FormErrorMessage jsonErrors={errors} errorName="password"/>
+                        </Line>
                         
-                    </form>
-                
-
-                </div>
+                        <EnvioForm type="submit" value="Guardar cambios" />      
+                    </Formulario>
+                </Global2>
             );
         } else{
             return(

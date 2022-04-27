@@ -93,10 +93,10 @@ class Login extends Component {
     render() {
         return (
             <Container>
-                <Wrapper className="container_body">
+                <Wrapper>
                     <Title>PARK-INN</Title>
-                    <Icon className='parkinn-icon'>
-                        <Logo className="logo"/>
+                    <Icon>
+                        <Logo/>
                     </Icon>
                     <LoginInputs>
                         <Label>Correo electrónico:</Label>

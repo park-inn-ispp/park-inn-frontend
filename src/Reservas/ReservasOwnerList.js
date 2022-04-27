@@ -1,18 +1,13 @@
-import ListComponent from "../components/ListComponent";
 import call from "../Util/Caller";
 import {useEffect, useState} from "react";
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Loading from "../components/Loading";
-import Cookies from 'universal-cookie';
-import { BsWindowSidebar } from "react-icons/bs";
 import ListaMisReservas from "../components/TablaMisReservas";
 import '../components/table.css'
-const cookies = new Cookies();
+import { Cover, Reserva } from "../components/TabalMisReservas.elemnts";
 
 
 export default function ReservaOwnerList(){
-    let navigate = useNavigate();
-
     const id = useParams().id;
     const [reservas, setReservas] = useState(['loading']);
      
@@ -39,12 +34,10 @@ export default function ReservaOwnerList(){
 
     return(
         <div className="container-tabla">
-        <div className="table-users">
-            <div className="header">Mis reservas</div>
-        
+            <Cover>
+            <Reserva>Reservas</Reserva>
             <ListaMisReservas data={reservas}/>
-        
-        </div>
+            </Cover>
         </div>
     );
 

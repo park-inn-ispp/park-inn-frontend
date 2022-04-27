@@ -1,14 +1,10 @@
-import ListComponentPlazas from '../components/ListComponentPlazas'
 import call from '../Util/Caller';
 import Cookies from 'universal-cookie';
 import Loading from '../components/Loading';
 import { useEffect, useState } from 'react';
 import GeneralButton from '../components/GeneralButton/GeneraButton';
-import {Enlace} from "../Plazas/PlazasList.elements"
+import {Enlace, Title, Global, Container, Wrapper, NuevaPlaza, Down} from "../Plazas/PlazasList.elements"
 import Card from '../components/Card';
-import image1 from "../assets/no-image-available-icon-6.jpg";
-import NoElements from "../components/NoElements";
-import { StyledButton } from "../components/GeneralButton/GeneralButton.elements";
 
 const cookies = new Cookies();
 
@@ -47,32 +43,25 @@ export default function PlazasList() {
         }
         if (plazas[0] === 'Empty' || plazas.length === 0){
         return(
-            <div>
-            <NoElements message={"¡Aún no tienes ninguna plaza! ¿A qué esperas?"}/>
-
-            <StyledButton onClick={()=>window.location.href="/plaza/create"} >Crear nueva plaza</StyledButton>
-            </div>
+            <Global>
+                <Title>No tienes ninguna plaza creada aún</Title>
+                <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
+            </Global>
             )
         }
 
 
         return (
-            <div>
-            <StyledButton onClick={()=>window.location.href="/plaza/create"} >Crear nueva plaza</StyledButton>
-
-            <div className="container d-flex justify-content-center align-items-center h-100">
-
-            <div className="row">
-                
-              {plazas.map(plaza => (
-                  
-                <div className="col-md-4" key={plaza.id}>
-                  <Card imageSource={image1} title={plaza.direccion} ancho={plaza.ancho} largo ={plaza.largo} precioHora={plaza.precioHora} esAireLibre={plaza.esAireLibre ? 'Si' : 'No' } urlEdit={plaza.editURL} urlReserva={plaza.reservasURL} urlHorario={plazas.horarioURL}/>
-                </div>
-              ))}
-            </div>
-          </div>
-          </div>
+            <Wrapper>
+                <Down>
+                    <NuevaPlaza to="/plaza/create">Crear nueva plaza</NuevaPlaza>
+                </Down>
+                <Container>
+                    {plazas.map(plaza => (
+                        <Card id={plaza.id} title={plaza.direccion} ancho={plaza.ancho} largo ={plaza.largo} precioHora={plaza.precioHora} esAireLibre={plaza.esAireLibre ? 'Si' : 'No' } urlEdit={plaza.editURL} urlReserva={plaza.reservasURL} urlHorario={plazas.horarioURL}/>
+                    ))}
+                </Container> 
+            </Wrapper>
         );
 }
 

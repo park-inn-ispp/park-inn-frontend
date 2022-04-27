@@ -1,14 +1,13 @@
 import React, { useState,useEffect } from 'react';
-import { useParams, Navigate, useNavigate, renderMatches } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import validateParkingForm from './ValidatePlazaForm';
 import FormErrorMessage from '../Util/FormErrorMessage';
-import { Store } from 'react-notifications-component'
-import { ReactNotifications } from 'react-notifications-component'
 import displayNotification from '../Util/Notifications';
 import 'react-notifications-component/dist/theme.css'
 import call from '../Util/Caller';
 
 import Cookies from 'universal-cookie';
+import { Datos, EnvioForm, Etiqueta, Formulario, Global, Line, Selector, Title } from './EditPlaza.elements';
 const cookies = new Cookies();
 
 export default function EditPlaza() {
@@ -142,125 +141,93 @@ export default function EditPlaza() {
     
   }
   
-  
-    
-    const deletePlaza = evt => {
-        
-      call(`/plazas/`+id, 'DELETE')
-        .then(response => {
-          console.log(response.ok)
-  
-          if (response.ok){
-            displayNotification("Éxito","Plaza borrada correctamente","success")
-            navigate(`/mis-plazas`)
-          }
-        })
-    }
-  
   console.log(miPlaza)
   if(miPlaza){
   return (
     
-  
-  
-  <div class="form-style-10">
-   <h1>Editar Plaza</h1>
-    <form onSubmit={handleSubmit}>
-    
-    <div className="section"><span>1</span>Dirección</div>
-    <div className="inner-wrap">
-    
-      <label>
-      Dirección:
-        <input onChange={handleChange} name= "calle" type="text" value={form.calle} placeholder="Calle Bami"/>
+  <Global>
+   
+    <Formulario onSubmit={handleSubmit}>
+      <Title>Editar Plaza</Title>
+
+      <Line>
+        <Etiqueta>Dirección:</Etiqueta>
+        <Datos onChange={handleChange} name= "calle" type="text" value={form.calle} placeholder="Calle Bami"/>
         <FormErrorMessage jsonErrors={errors} errorName="calle"/>
-        
-
-      </label>
-
-      <label>
-      Número:
-        <input onChange={handleChange} name= "numero" type="text" value={form.numero} placeholder="4"/>
-        
+      </Line>
+      
+      
+      <Line>
+        <Etiqueta>Número:</Etiqueta>
+        <Datos onChange={handleChange} name= "numero" type="text" value={form.numero} placeholder="4"/>
         <FormErrorMessage jsonErrors={errors} errorName="numero"/>
+      </Line>
 
-      </label>
+      <Line>
+        <Etiqueta>Ciudad:</Etiqueta>
+        <Datos onChange={handleChange} name= "ciudad" type="text" value={form.ciudad}/>
+        <FormErrorMessage jsonErrors={errors} errorName="ciudad"/>
+      </Line>
 
-      <label>
-      Ciudad:
-        <input onChange={handleChange} name= "ciudad" type="text" value={form.ciudad}/>
-        <FormErrorMessage jsonErrors={errors} errorName="ciudad" placeholder="Sevilla"/>
-
-      </label>
-
-      <label>
-      Provincia:
-        <input onChange={handleChange} name= "provincia" type="text" value={form.provincia} placeholder="Sevilla"/>
+      <Line>
+        <Etiqueta>Provincia:</Etiqueta>
+        <Datos onChange={handleChange} name= "provincia" type="text" value={form.provincia}/>
         <FormErrorMessage jsonErrors={errors} errorName="provincia"/>
-      </label>
+      </Line>
 
-      <label>
-      Código Postal:
-        <input onChange={handleChange} name= "codigoPostal" type="number" value={form.codigoPostal} placeholder="41004"/>
+      <Line>
+        <Etiqueta>Código Postal:</Etiqueta>
+        <Datos onChange={handleChange} name= "codigoPostal" type="text" value={form.codigoPostal}/>
         <FormErrorMessage jsonErrors={errors} errorName="codigoPostal"/>
-      </label>
-    </div>
+      </Line>
+      
+      <Line>
+        <Etiqueta>Precio/Hora:</Etiqueta>
+        <Datos onChange={handleChange} name= "precioHora" type="text" value={form.precioHora}/>
+        <FormErrorMessage jsonErrors={errors} errorName="precioHora"/>
+      </Line>
+      
+      <Line>
+        <Etiqueta>Provincia:</Etiqueta>
+        <Datos onChange={handleChange} name= "provincia" type="text" value={form.provincia}/>
+        <FormErrorMessage jsonErrors={errors} errorName="provincia"/>
+      </Line>
 
-      <br/> 
+      <Line>
+        <Etiqueta>Fianza:</Etiqueta>
+        <Datos onChange={handleChange} name= "fianza" type="text" value={form.fianza}/>
+        <FormErrorMessage jsonErrors={errors} errorName="fianza"/>
+      </Line>
 
-    <div className="section"><span>2</span>Precios</div>
-    <div className="inner-wrap">
-      <label>
-          Precio/Hora (€):
-          <input onChange={handleChange} name="precioHora" type="number"  value={form.precioHora} placeholder="1.20"/>
-          <FormErrorMessage jsonErrors={errors} errorName="precioHora"/>
+      <Line>
+        <Etiqueta>Ancho:</Etiqueta>
+        <Datos onChange={handleChange} name= "ancho" type="text" value={form.ancho}/>
+        <FormErrorMessage jsonErrors={errors} errorName="ancho"/>
+      </Line>
 
-      </label>
-      <br/>
-      <label>
-          Fianza (€):
-          <input onChange={handleChange} name="fianza" type="number"  value={form.fianza} placeholder="10"/>
-          <FormErrorMessage jsonErrors={errors} errorName="fianza"/>
+      <Line>
+        <Etiqueta>Largo:</Etiqueta>
+        <Datos onChange={handleChange} name= "largo" type="text" value={form.largo}/>
+        <FormErrorMessage jsonErrors={errors} errorName="largo"/>
+      </Line>
 
-      </label>
-      </div>
-      <br/>
-      <div className="section"><span>3</span>Características de la plaza</div>
-      <div className="inner-wrap">
-      <label>
-          Ancho (metros):
-          <input onChange={handleChange} name="ancho" type="number"  value={form.ancho}/>
-          <FormErrorMessage jsonErrors={errors} errorName="ancho"/>
-
-      </label>
-      <br/>
-      <label>
-          Largo (metros):
-          <input onChange={handleChange} name="largo" type="number" value={form.largo}/>
-          <FormErrorMessage jsonErrors={errors} errorName="largo"/>
-
-      </label>
-      <br/>
-      <label>
-        Ubicación:
-      <select onChange={handleChange} value={form.exterior}  name="exterior" id="exterior">
+      <Line>
+        <Etiqueta>Ubicación:</Etiqueta>
+        <Selector onChange={handleChange} name= "exterior" value={form.exterior}>
           <option value="false" selected>Interior</option>
           <option value="true">Exterior</option>
-    </select>
-      </label>
-      <br/>
-      <label>
-      Descripción:
-        <input  onChange={handleChange} name= "descripcion" type="text" value={form.descripcion}/>
+        </Selector>
+        <FormErrorMessage jsonErrors={errors} errorName="largo"/>
+      </Line>
+     
+      <Line>
+        <Etiqueta>Descripción:</Etiqueta>
+        <Datos onChange={handleChange} name= "descripcion" type="text" value={form.descripcion}/>
         <FormErrorMessage jsonErrors={errors} errorName="descripcion"/>
-      </label>
-     
-      </div>
-     
-      <input type="submit" value="Guardar plaza" /> &nbsp; &nbsp;
-      <button type="button" class="deleteButton" onClick={deletePlaza}> Eliminar plaza </button>
-    </form>
-  </div>
+      </Line>
+      <EnvioForm type="submit" value="Guardar cambios" />
+    </Formulario>
+  </Global>
   
     );
   }else{

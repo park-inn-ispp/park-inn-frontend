@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import call from "../Util/Caller";
-import Leyenda from "./Leyenda";
-import "./card.css";
 function cancelarReserva(reservaId) {
 
   call(`/reservas/`+reservaId+'/cancelar', 'GET')
@@ -29,9 +27,9 @@ function CardReservas({ imageSource,id, title,fechaInicio,fechaFin,precioTotal, 
         <h4 className="card-title">{title}</h4>
         <div className="card-text-div">
         <p className="card-text text-secondary">
-          {(estado=='cancelada' || estado=='rechazada')
+          {(estado==='cancelada' || estado==='rechazada')
             ? canceledDiv
-            : (estado=='pendiente')
+            : (estado==='pendiente')
               ? pendentDiv
               : aceptedDiv
               }
