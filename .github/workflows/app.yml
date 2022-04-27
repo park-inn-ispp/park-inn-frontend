@@ -7,7 +7,7 @@ on:
       - feature*
       - bug*
       - develop
-  
+      - master
 jobs:
   heroku-deploy:
     runs-on: ubuntu-latest
