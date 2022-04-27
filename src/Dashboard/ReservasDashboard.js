@@ -77,7 +77,7 @@ export default function ReservasDashboard(){
         <div className='tablas'>
             <table >
                 <tr>
-                    <th>Propietario</th>
+                    
                     <th>Cliente</th>
                     <th>Dirección</th>
                     <th>Fecha Solicitud</th>
@@ -92,9 +92,8 @@ export default function ReservasDashboard(){
                     var cancelacionReserva = reserva.estado==="aceptada";
 
                     return <tr>
-                        <td>{reserva.plaza.administrador.name}</td>
                         <td>{reserva.user.name}</td>
-                        <td>{reserva.plaza.direccion}</td>
+                        <td>{reserva.direccion}</td>
                         <td>{reserva.fechaSolicitud}</td>
                         <td>{reserva.precioTotal}</td>
                         <td>{reserva.estado}</td>
@@ -111,7 +110,10 @@ export default function ReservasDashboard(){
                                 <button type='button' class='deleteButton' onClick={() => cancelarReserva(reserva.id)}>Cancelar reserva</button>
         
                             ) : ("")}
-                          <button type='button' class='deleteButton' onClick={() => borrarReservas(reserva.id)}>Eliminar reserva</button>
+
+                        {
+                          !estadoReserva && !cancelacionReserva ? (<span> No disponibles </span>) : ("")
+                        }
                             </td>
                         <td><a type="button" className="editButton" href={'/reservas/'+reserva.id}>Ver detalles</a>
                               
