@@ -15,7 +15,7 @@ export const Principal = styled.div`
     }
 `;
 
-export const Tarjeta = styled.div`
+export const Tarjeta = styled(Link)`
     width: 390px;
     height: 45%;
     background-color: lightblue;
@@ -26,7 +26,15 @@ export const Tarjeta = styled.div`
     margin-bottom: 50px;
     margin-right: 20px;
     justify-content: center;
-    
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 6px 8px 6px -6px black;
+
+    &:hover{
+        transform: scale(1.05);
+        transition: all 0.5s ease;
+        box-shadow: 10px 14px 10px -10px black;
+    }
 
     @media screen and (max-width: 600px){
         height: 280px;

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom';
-import {Etiqueta, Parrafo, Formulario} from '../Plaza/ReservaPlaza.elements';
+import {Etiqueta, Formulario, Line, Datos, EnvioForm} from '../Plaza/ReservaPlaza.elements';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import validateTramoForm from './validateCreateTramoForm';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
+import { Title } from '../Plaza/EditPlaza.elements';
+import { Full } from './Tramos.elements';
 
 
 
@@ -95,35 +97,32 @@ export default function CreateTramo() {
       }
 
     return(
-    <div className="form-style-10">
-    <h1>Crear Tramo Horario</h1>
-    <form onSubmit={handleSubmit}>
+     <Full> 
+      <Formulario onSubmit={handleSubmit}>
+      <Title>Añadir Tramo Horario</Title>
+        
+      <Line><Etiqueta>Fecha Inicio:</Etiqueta>
+        <Datos onChange={handleChange} name= "fechaInicio" type="date" value={form.fechaInicio}></Datos>
+        <FormErrorMessage jsonErrors={errors} errorName="fechaInicio"/>
+      </Line>
+
+      <Line><Etiqueta>Fecha Fin:</Etiqueta>
+        <Datos onChange={handleChange} name= "fechaFin" type="date" value={form.fechaFin}></Datos>
+        <FormErrorMessage jsonErrors={errors} errorName="fechaFin"/>
+      </Line>
+
+      <Line><Etiqueta>Hora Inicio:</Etiqueta>
+        <Datos onChange={handleChange} name= "horaInicio" type="time" step="600" value={form.horaInicio}></Datos>
+        <FormErrorMessage jsonErrors={errors} errorName="horaInicio"/>
+      </Line>
     
-    <div className="section"><span>1</span>Horarios</div>
-    <div className="inner-wrap"></div>
-            <Etiqueta>Fecha de Inicio: </Etiqueta>
-            <Parrafo>
-                <input onChange={handleChange} name="fechaInicio" type="date" value={form.fechaInicio} />
-                <FormErrorMessage jsonErrors={errors} errorName="fechaInicio" />
-            </Parrafo>
-            <Etiqueta>Fecha de Fin: </Etiqueta>
-            <Parrafo>
-                <input onChange={handleChange} name="fechaFin" type="date" value={form.fechaFin} />
-                <FormErrorMessage jsonErrors={errors} errorName="fechaFin" />
-            </Parrafo>
-            <Etiqueta>Hora Inicio: </Etiqueta>
-            <Parrafo>
-                <input onChange={handleChange} name="horaInicio" type="time" step="600" value={form.horaInicio} />
-                <FormErrorMessage jsonErrors={errors} errorName="horaInicio" />
-            </Parrafo>
-            <Etiqueta>Hora Fin: </Etiqueta>
-            <Parrafo>
-                <input onChange={handleChange} name="horaFin" type="time" value={form.horaFin} />
-                <FormErrorMessage jsonErrors={errors} errorName="horaFin" />
-            </Parrafo>
-
-            <input type="submit" value="Crear Tramo" />
-
-    </form> </div>
+      <Line><Etiqueta>Hora Fin:</Etiqueta>
+        <Datos onChange={handleChange} name= "horaFin" type="time" step="600" value={form.horaFin}></Datos>
+        <FormErrorMessage jsonErrors={errors} errorName="horaFin"/>
+      </Line>
+    <EnvioForm type="submit" value="Añadir"/>
+    
+  </Formulario>
+  </Full> 
     )
 }

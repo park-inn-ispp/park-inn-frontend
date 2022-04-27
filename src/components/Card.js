@@ -17,7 +17,7 @@ function Card({id, title, ancho, largo, precioHora, esAireLibre, urlEdit, urlRes
 }
   return (
     <Principal>
-      <Tarjeta>
+      <Tarjeta to={`/disponibilidad/${id}`}>
         <Direccion>DIRECCIÓN: {title}</Direccion>
         <Datos>DIMENSIONES: {ancho}m x {largo}m</Datos>
         <Datos>PRECIO: {precioHora}€</Datos>

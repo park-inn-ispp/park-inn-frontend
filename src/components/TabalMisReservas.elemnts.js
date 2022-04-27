@@ -81,7 +81,6 @@ export const TD = styled.td`
 `;
 
 export const Fila = styled.div`
-    width: 40%;
     height: 100%;
     display: flex;
     flex-direction: row;

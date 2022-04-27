@@ -46,7 +46,7 @@ export const Line = styled.div`
     border-bottom-style: solid;
     border-width: 0.5px;
     border-color: gray;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     margin-top: 10px;
 `;
 
