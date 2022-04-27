@@ -9,7 +9,7 @@ on:
       - develop
       - master
 jobs:
-  heroku-deploy:
+  Run-test-before-merge:
     runs-on: ubuntu-latest
     steps:
     
