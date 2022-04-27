@@ -153,7 +153,7 @@ export default function Terminos(){
               <li>Todos los datos de las reservas y pagos que haya realizado usted mediante la aplicación.</li> 
             </ul>
 
-            Usted puede solicitar a los administradores del sistema eliminar su cuenta mediante el correo app.parkinn@gmail.com. En ese caso,  aceptando estos términos accede a que Park-Inn siga almacenando datos sobre sus reservas, pagos, así como la dirección y precio de la fianza de todas sus plazas que están involucradas en alguna reserva. Los datos personales de
+            Usted puede solicitar a los administradores del sistema eliminar su cuenta asimismo como los datos almacenados sobre usted que hay en ese instante en la base de datos mediante el correo gestion.parkinn@gmail.com. En ese caso,  aceptando estos términos accede a que Park-Inn siga almacenando datos sobre sus reservas, pagos, así como la dirección y precio de la fianza de todas sus plazas que están involucradas en alguna reserva. Los datos personales de
             nombre, apellidos, correo electrónico y teléfono se eliminarán de nuestra base de datos.
             Park-Inn no almacenará su contraseña en ningún momento ni ningún agente se la pedirá nunca, está estará encriptada en la base de datos. Además tampoco guardamos información
             sobre su cuenta de PayPal.
