@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renderizar una CardReservas no vacía con estado cancelada 1`] = `
+<div
+  className="card text-center bg-dark animate__animated animate__fadeInUp"
+>
+  <div
+    className="card-body text-light"
+  >
+    <h4
+      className="card-title"
+    />
+    <div
+      className="card-text-div"
+    >
+      <p
+        className="card-text text-secondary"
+      >
+        <div
+          className="cancelada"
+        />
+      </p>
+      <p
+        className="card-text text-secondary"
+      >
+        Propietario : test 1 propietario
+      </p>
+      <p
+        className="card-text text-secondary"
+      >
+        Fecha Inicio : test 1 fechaInicio
+      </p>
+      <p
+        className="card-text text-secondary"
+      >
+        Fecha Fin : test 1 fechaFin
+      </p>
+      <p
+        className="card-text text-secondary"
+      >
+        Precio total : test 1 precioTotal€
+      </p>
+      <a
+        className="btn btn-outline-secondary border-0"
+        onClick={[Function]}
+        rel="noreferrer"
+      >
+        Cancelar
+      </a>
+      <a
+        className="btn btn-outline-secondary border-0"
+        href="test 1 urlDetalles"
+        rel="noreferrer"
+      >
+        Detalles
+      </a>
+    </div>
+  </div>
+</div>
+`;
