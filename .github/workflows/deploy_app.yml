@@ -1,7 +1,6 @@
 on:
   push:
     branches:
-      - develop
       - master
 jobs:
   heroku-deploy:
