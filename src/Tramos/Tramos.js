@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import { Columna, Tabla, TD, TH, TR } from '../components/TabalMisReservas.elemnts';
-import { Full } from './Tramos.elements';
+import { Enlace, Frase, Full } from './Tramos.elements';
+import { Global } from '../Plaza/EditPlaza.elements';
 
 
 
@@ -82,8 +83,9 @@ export default function MisTramos() {
         return <Loading/>;
       } else if (listaHorarios.length===0) {
         return (
-        <><div>Aún no tienes horarios creados para tu plaza</div><div><input type="button" class="botonAzul" onClick={() => { window.open(`/disponibilidad/`+id+`/create`); } } value="Crear Horario" /></div></>)
-    }else
+        <Global><Frase>Aún no tienes horarios creados para tu plaza</Frase><Enlace to={`/disponibilidad/`+id+`/create`}>Añadir Tramo</Enlace></Global>
+        )
+      }
     return (
       <Full>
         <input type="button" class="botonAzul" onClick={() => { navigate(`/disponibilidad/`+id+`/create`); } } value="Añadir Tramo" />

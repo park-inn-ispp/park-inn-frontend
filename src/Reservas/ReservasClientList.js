@@ -11,6 +11,7 @@ import NoElements from "../components/NoElements";
 import GeneralButton from "../components/GeneralButton/GeneraButton";
 import { StyledButton } from "../components/GeneralButton/GeneralButton.elements";
 import { BsWindowSidebar } from "react-icons/bs";
+import { Container, Wrapper } from "../Plazas/PlazasList.elements";
 const cookies = new Cookies();
 
 
@@ -43,25 +44,14 @@ export default function ReservaClientList(){
 
 
     return(
-        <div>
+        <Wrapper>
             <Leyenda></Leyenda>
-
-            <div className="container d-flex justify-content-center align-items-center h-100">
-
-            <div className="row">
-                
+            <Container>
               {reservas.map(reserva => (
-                  
-                <div className="col-md-4" key={reserva.id}>
-                  <CardReservas imageSource={image1} id={reserva.id} title={reserva.direccion} 
+                  <CardReservas id={reserva.id} direccion={reserva.direccion} 
                    fechaInicio={parsearFechas(reserva.fechaInicio)} fechaFin={parsearFechas(reserva.fechaFin)} precioTotal={reserva.precioTotal} estado={reserva.estado}
-                   urlDetalles={"/reservas/"+reserva.id} />
-                </div>
-              ))}
-            </div>
-          </div>
-          </div>
-        
-        
+                 />))}
+            </Container>
+        </Wrapper>
     );
 }

@@ -60,7 +60,7 @@ export default function EditProfile(){
                     "phone": form.phone,
                     "surname": form.surname
                 }
-                call(`/clients/${id}`, "PUT", data2)
+                call(`/clients/${id}/edit`, "PUT", data2)
                 .then(response => {
                     if(response.ok){
                         displayNotification("Éxito", "Perfil editado correctamente", "success")
@@ -109,12 +109,6 @@ export default function EditProfile(){
                             <Etiqueta>Correo:</Etiqueta>
                             <Datos onChange={handleChange} name= "email" type="text" value={form.email}/>
                             <FormErrorMessage jsonErrors={errors} errorName="email"/>
-                        </Line>
-
-                        <Line>
-                            <Etiqueta>Contraseña:</Etiqueta>
-                            <Datos onChange={handleChange} name= "password" type="text" value={form.password}/>
-                            <FormErrorMessage jsonErrors={errors} errorName="password"/>
                         </Line>
                         
                         <EnvioForm type="submit" value="Guardar cambios" />      

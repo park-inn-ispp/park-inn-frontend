@@ -7,7 +7,7 @@ import { Columna, Fila, Tabla, TD, TH, TR, Enlace } from "./TabalMisReservas.ele
 
 function aceptarReserva(reservaId) {
   call(`/reservas/`+reservaId+'/aceptar', 'GET')
-    .THen(response => {
+    .then(response => {
 
 
       if (response.ok){
@@ -20,7 +20,7 @@ function aceptarReserva(reservaId) {
 
 function rechazarReserva(reservaId) {
   call(`/reservas/`+reservaId+'/rechazar', 'GET')
-    .THen(response => {
+    .then(response => {
       console.log(response)
 
       if (response.ok){
@@ -31,7 +31,7 @@ function rechazarReserva(reservaId) {
 }
 function cancelarReserva(reservaId) {
   call(`/reservas/`+reservaId+'/cancelar', 'GET')
-    .THen(response => {
+    .then(response => {
       console.log(response)
 
       if (response.ok){
@@ -73,7 +73,7 @@ function ListaMisReservas(data) {
             <TD>{element.precioTotal} €</TD>
             <TD>{element.estado==="aceptada" ? 
                 aceptedDiv
-                : element.estado==="cancelada" ?
+                : element.estado==="cancelada" || element.estado==="rechazada" ?
                 canceledDiv
                 :pendenTDiv}</TD>
             <TD>{element.estado==="pendiente" ?

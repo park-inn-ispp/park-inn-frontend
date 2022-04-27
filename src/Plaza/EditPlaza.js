@@ -186,12 +186,6 @@ export default function EditPlaza() {
         <Datos onChange={handleChange} name= "precioHora" type="text" value={form.precioHora}/>
         <FormErrorMessage jsonErrors={errors} errorName="precioHora"/>
       </Line>
-      
-      <Line>
-        <Etiqueta>Provincia:</Etiqueta>
-        <Datos onChange={handleChange} name= "provincia" type="text" value={form.provincia}/>
-        <FormErrorMessage jsonErrors={errors} errorName="provincia"/>
-      </Line>
 
       <Line>
         <Etiqueta>Fianza:</Etiqueta>

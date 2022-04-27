@@ -55,13 +55,6 @@ export default function Navbar(){
                 {showMobileMenu ? <FaTimes/> : <FaBars/>}
             </MobileIcon>
             </IconContext.Provider>
-            <IconContext.Provider value = {{style: {fontSize: "2.7em"}}}>
-                <ProfileIcon>
-                    <Link to={cookies.get("AuthToken")===undefined? '' :`/clients/view/${cookies.get("UserData").id}`}>
-                        <FaUserCircle/>
-                    </Link>
-                </ProfileIcon>
-            </IconContext.Provider>
             </Wrapper>
     </Container>
     )

@@ -101,9 +101,7 @@ export default function Terminos(){
             propiedad y el otro hace uso de ella mediante un alquiler durante un tiempo especificado. Para ello el usuario interesado en alquiler pagará por este servicio según
             el precio que haya estipulado previamente el propietario. Un usuario registrado puede actuar como cualqueira de estos dos roles mencionados.
             Al aceptar estos términos usted acepta que se guarden sus datos proporcionados en la aplicación, una vez registrado, en nuestra base de datos, así como las plazas que cree y las reservas y 
-            pagos que haga. Del mismo usted puede eliminar su cuenta en cualquier momento y por el consiguiente se borrarán sus datos personales tales como nombre, apellidos, correo, etc.
-            Sin embargo la información sobre las reservas realizadas y sus plazas sobre las que se hayan realizado alguna reserva serán persistentes en la base de datos para consulta de los demás 
-            clientes relacionados con esta información.<br/>
+            pagos que haga. <br/>
             Al aceptar estos términos y condiciones se compromete, en caso de uso de un parking comuntario, a avisar a los demás propietarios de la comunidad a que usted va a alquilar esa plaza
             para posibles percances que ocurran dentro de dicha propiedad privada. Este tipo de percances es ajeno a Park-Inn pero la empresa se involucrará para resolver dicho conflicto.
             
@@ -113,6 +111,8 @@ export default function Terminos(){
             Los pagos que se realicen en Park-Inn son ajenos a la aplicación, ya que se hace mediante la propia cuenta de PayPal de cada uno de los usuarios. El precio del servicio está
             estipulado por el propietario de la plaza además de una fianza que se le suma al precio total. Está fianza sirve para mantener la seguridad del usuario en caso de que se necesite 
             algún tipo de mando, llave para el uso de la plaza o en caso de que ocurra algún percance dentro de la misma durante el uso del otro usuario.
+            Tras la fecha de finalización de una reserva, tanto el cliente como el propietario de la plaza podrán confirmar su servicio. Tras ser confirmada por ambos, el propietario recibirá el pago del importe total de la reserva, exceptuando la fianza, que se devolverá al cliente, y una pequeña comisión, que se llevará Park-Inn.
+            El porcentaje de comisión recibida por Park-Inn será aquella que estuviera estipulada en el sistema en el momento de la solicitud de la reserva, y puede estar sujeta a cambios. Esta comisión se aplicará al importe total de la reserva exceptuando la fianza.
             <strong>LICENCIA</strong>
             <br/>
             <strong>Park-Inn</strong>
@@ -148,15 +148,18 @@ export default function Terminos(){
               <li>Nombre y apellidos</li>
               <li>Correo electrónico</li>
               <li>Teléfono</li>
-              <li>Dirección de las plazas creadas por usted</li>
+              <li>Todos los datos de plazas creadas por usted</li>
               <li>Código Postal</li>
               <li>Todos los datos de las reservas y pagos que haya realizado usted mediante la aplicación.</li> 
             </ul>
 
-            Si usted desea eliminar su cuenta aceptando estos términos accede a que Park-Inn siga almacenando datos sobre sus plazas, reservas y pagos. Los datos personales de
+            Usted puede solicitar a los administradores del sistema eliminar su cuenta mediante el correo app.parkinn@gmail.com. En ese caso,  aceptando estos términos accede a que Park-Inn siga almacenando datos sobre sus reservas, pagos, así como la dirección y precio de la fianza de todas sus plazas que están involucradas en alguna reserva. Los datos personales de
             nombre, apellidos, correo electrónico y teléfono se eliminarán de nuestra base de datos.
             Park-Inn no almacenará su contraseña en ningún momento ni ningún agente se la pedirá nunca, está estará encriptada en la base de datos. Además tampoco guardamos información
             sobre su cuenta de PayPal.
+
+            Si el sistema presenta numerosas incidencias contra usted  como consecuencia de diversos conflictos con el resto de usuarios de la aplicación, los administradores podrían tomar la decisión de banear su cuenta del sistema temporalmente, impidiéndole acceder al servicio.
+            Usted puede solicitar al correo app.parkinn@gmail.com obtener todos los datos de su perfil, sus plazas creadas y sus reservas realizadas.
 
           </Parrafo>
           <Volver to="/register">Volver</Volver>
