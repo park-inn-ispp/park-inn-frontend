@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import ValidateIncidenciaForm from './ValidateIncidenciaForm';
 import { useParams, useNavigate } from 'react-router-dom';
 import FormErrorMessage from '../Util/FormErrorMessage';
-import {Etiqueta, Parrafo, Formulario} from '../Plaza/ReservaPlaza.elements';
+import {Etiqueta, Parrafo} from '../Plaza/ReservaPlaza.elements';
 import { ReactNotifications } from 'react-notifications-component'
 import call from '../Util/Caller';
 import Cookies from 'universal-cookie';
+import { Global2 } from '../Usuarios/ViewProfileElements';
+import { Title, Wrapper } from '../Plazas/PlazasList.elements';
+import { EnvioForm, Formulario, Line } from '../Plaza/EditPlaza.elements';
+import { Datos } from '../components/CardReservas.elements';
 const cookies = new Cookies();
 const email = cookies.get('user_mail');
 
@@ -32,7 +36,7 @@ export default function CreateIncidencia() {
             "descripcion": form.descripcion,
             "estado": "pendiente",
             "fecha": new Date(),
-            "user": {
+            "email": {
               "email" : email
             },
             "reserva": {
@@ -57,24 +61,25 @@ export default function CreateIncidencia() {
 
   return (
     
-  <div className="form-style-10">
-    <h1>Crear incidencia</h1>
+  <Global2>
+    
     <ReactNotifications />
     <Formulario onSubmit={handleSubmit}>
-      <div class="inner-wrap">
+      <Title>Crear incidencia</Title>
+      <Line>
         <Etiqueta>Título:</Etiqueta>
-        <Parrafo>
-          <input onChange={handleChange} name= "titulo" type="text" value={form.titulo}/>
-          <FormErrorMessage jsonErrors={errors} errorName="titulo"/>
-        </Parrafo>
+        <input onChange={handleChange} name= "titulo" type="text" value={form.titulo}/>
+        <FormErrorMessage jsonErrors={errors} errorName="titulo"/>
+      </Line>
+
+      <Line>
         <Etiqueta>Descripción:</Etiqueta>
-        <Parrafo>
-          <textarea onChange={handleChange} name= "descripcion" value={form.descripcion}/>
-          <FormErrorMessage jsonErrors={errors} errorName="descripcion"/>
-        </Parrafo>
-      </div>
-      <input type="submit" value="Crear incidencia"/>
+        <textarea onChange={handleChange} name= "descripcion" type="text" value={form.descripcion}/>
+        <FormErrorMessage jsonErrors={errors} errorName="descripcion"/>
+      </Line>
+      
+      <EnvioForm type="submit" value="Crear incidencia"/>
     </Formulario>
-  </div>
+  </Global2>
   );
 }
