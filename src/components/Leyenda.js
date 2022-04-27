@@ -4,10 +4,12 @@ import "./leyenda.css";
 const Leyend = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 80%;
   align-items: center;
   justify-content: center;
   padding: 10px;
+  background-color: white;
+  border-radius: 20px;
 `;
 
 function Leyenda() {

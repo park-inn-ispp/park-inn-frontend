@@ -30,8 +30,8 @@ export default function ReservaDetails() {
             const reserva = await data.json()
             setReserva(reserva)
             setFechaFin(new Date(reserva.fechaFin))
-            const esCli = reserva.user.id===usuario.id;
-            const esPro = reserva.plaza.administrador.id===usuario.id;
+            const esCli = reserva.reserva.user.id===usuario.id;
+            const esPro = reserva.reserva.plaza.administrador.id===usuario.id;
             setEsCliente(esCli)
             setEsPropietario(esPro)
             setEstado(reserva.estado)
