@@ -15,6 +15,9 @@ export default function ReservaDetails() {
     const [reserva, setReserva] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [fechaFin, setFechaFin] = useState(new Date())
+    const [nombrePropietario, setNombrePropietario] = useState("")
+    const [emailPropietario, setEmailPropietario] = useState("")
+
     const id = parseInt(useParams().id)
     const today = new Date()
     const cookies = new Cookies();
@@ -27,15 +30,18 @@ export default function ReservaDetails() {
     useEffect(() => {
         const DetallesReserva = async () => {
             const data = await  call(`/reservas/${id}`,"GET")
-            const reserva = await data.json()
-            setReserva(reserva)
-            setFechaFin(new Date(reserva.fechaFin))
-            const esCli = reserva.user.id===usuario.id;
-            const esPro = reserva.plaza.administrador.id===usuario.id;
+            const response = await data.json()
+            setReserva(response.reserva)
+            setFechaFin(new Date(response.reserva.fechaFin))
+            const esCli = response.reserva.user.id===usuario.id;
+            const esPro = response.reserva.propietarioId===usuario.id;
             setEsCliente(esCli)
             setEsPropietario(esPro)
-            setEstado(reserva.estado)
+            setEstado(response.reserva.estado)
             setIsLoading(false)
+            setNombrePropietario(response.nombrePropietario)
+            setEmailPropietario(response.emailPropietario)
+
         }
         DetallesReserva()
     }, [usuario.id, id]);

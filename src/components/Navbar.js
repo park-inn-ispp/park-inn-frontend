@@ -8,6 +8,7 @@ import DropdownComponent from "./Dropdown";
 import ProfileDropdown from './ProfileDropdown'
 import Cookies from "universal-cookie";
 import {RiShutDownLine} from "react-icons/ri"
+import { Link } from "react-router-dom";
 
 const cookies = new Cookies();
 
@@ -53,6 +54,13 @@ export default function Navbar(){
             <MobileIcon onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? <FaTimes/> : <FaBars/>}
             </MobileIcon>
+            </IconContext.Provider>
+            <IconContext.Provider value = {{style: {fontSize: "2.7em"}}}>
+                <ProfileIcon>
+                    <Link to={cookies.get("AuthToken")===undefined? '' :`/clients/view/${cookies.get("UserData").id}`}>
+                        <FaUserCircle/>
+                    </Link>
+                </ProfileIcon>
             </IconContext.Provider>
             </Wrapper>
     </Container>

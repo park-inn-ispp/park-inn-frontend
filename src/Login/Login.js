@@ -49,29 +49,28 @@ class Login extends Component {
             .then(async response  =>  {
 
                 if(response !== undefined && response.ok){
-                let auth_token = await (await response.text()).split(" ")[1]
+                let respuestaTexto= await response.text()
+                let auth_token = await respuestaTexto.split(" ")[1]
+                let emailLogeado =  await respuestaTexto.split(" ")[0]
                 
-                if(this.state.form.recuerdame){
-                    localStorage["AuthToken"] = auth_token
-                }
 
                 cookies.set("AuthToken",auth_token)
 
-                const data = await call('/clients', 'GET');
-                const usuarios = await data.json()
-            
-                function usuarioLogueado(userEmail, usuarios){
-                    for (var i=0; i<usuarios.length; i++) {
-                      if (usuarios[i].email===userEmail) {
-                        return usuarios[i]
-                      }
-                    }
-                  }
-                
-                const usuario = await usuarioLogueado(this.state.form.email, usuarios);
-                cookies.set("UserData",usuario);
+                call('/clients/usuariopormail/'+emailLogeado, 'GET').then(async response => {
 
-                 window.location.href="./";           
+                    if(response !== undefined && response.ok){
+                        const usuario = await response.json()               
+                        cookies.set("UserData",usuario);
+                        window.location.href="./";     
+
+                    }else{
+                        cookies.remove("AuthToken");
+                        localStorage.removeItem("AuthToken");
+                    }
+
+
+                });
+                    
 
              }else{
 
@@ -87,7 +86,7 @@ class Login extends Component {
      }
 
     componentDidMount() {
-        document.getElementById("navbar-parkinn").setAttribute("hidden",true)
+        document.getElementById("navbar-parkinn").setAttribute("hidden",true);
     }
     
 

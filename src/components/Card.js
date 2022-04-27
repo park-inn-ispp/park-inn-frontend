@@ -32,11 +32,5 @@ function Card({id, title, ancho, largo, precioHora, esAireLibre, urlEdit, urlRes
   );
 }
 
-Card.propTypes = {
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string,
-  url: PropTypes.string,
-  imageSource: PropTypes.string
-};
 
 export default Card;
