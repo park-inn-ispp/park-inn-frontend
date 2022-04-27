@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading';
-import {Etiqueta, Parrafo} from '../Reserva/ReservaDetails.elements';
 import call from '../Util/Caller';
 import Cookies from 'universal-cookie';
 import { StyledButton } from '../components/GeneralButton/GeneralButton.elements';
 import { Store } from 'react-notifications-component';
+import { Etiqueta, Global, Parrafo, Title} from '../Usuarios/ViewProfileElements';
+import { Line } from '../Plaza/EditPlaza.elements';
+import { Wrapper2 } from '../Reserva/ReservaDetails.elements';
 
 
 export default function ReservaDetails() {
@@ -22,10 +24,6 @@ export default function ReservaDetails() {
     const [estado, setEstado] = useState(false);
 
     let navigate = useNavigate();
-    
-
-
-
     useEffect(() => {
         const DetallesReserva = async () => {
             const data = await  call(`/reservas/${id}`,"GET")
@@ -40,7 +38,7 @@ export default function ReservaDetails() {
             setIsLoading(false)
         }
         DetallesReserva()
-    }, [id]);
+    }, [usuario.id, id]);
 
 
 
@@ -93,40 +91,25 @@ export default function ReservaDetails() {
     console.log(esPropietario)
 
     return (   
-        <div className="form-style-10">
-            <h1>Detalles de la Reserva</h1>
-                <div className="Details">
-                <Etiqueta>Estado:</Etiqueta><p/> 
-                <Parrafo>{estado}</Parrafo><p/>
-                <Etiqueta>Dirección:</Etiqueta><p/> 
-                <Parrafo>{reserva.plaza.direccion}</Parrafo><p/>
-                <Etiqueta>Precio de la fianza:</Etiqueta><p/> 
-                <Parrafo>{reserva.plaza.fianza} €</Parrafo><p/>
-                <Etiqueta>Precio total:</Etiqueta><p/> 
-                <Parrafo>{reserva.precioTotal} €</Parrafo><p/>
-                <Etiqueta>Fecha de inicio:</Etiqueta> <p/>
-                <Parrafo>{FInicio[0]}</Parrafo><p/>
-                <Parrafo>{FInicio[1]}</Parrafo><p/>
-                <Etiqueta>Fecha de fin:</Etiqueta> <p/>
-                <Parrafo>{FFin[0]}</Parrafo><p/>
-                <Parrafo>{FFin[1]}</Parrafo><p/>
-                <Etiqueta>Fecha de solicitud:</Etiqueta> <p/>
-                <Parrafo>{FSolicitud[0]}</Parrafo><p/>
-                <Etiqueta>Propietario:</Etiqueta> <p/>
-                <Parrafo>{reserva.plaza.administrador.name}</Parrafo><p/>
-                <Parrafo>{reserva.plaza.administrador.email}</Parrafo><p/>
-                <Etiqueta>Comentarios:</Etiqueta> <p/>
-                <Parrafo>{reserva.comentarios}</Parrafo>
-                
-
+        <Global>
+            <Wrapper2>
+                <Title>Detalles Reserva</Title>
+                <Line><Etiqueta>Estado: </Etiqueta><Parrafo>{estado}</Parrafo></Line>
+                <Line><Etiqueta>Dirección: </Etiqueta><Parrafo>{reserva.plaza.direccion}</Parrafo></Line> 
+                <Line><Etiqueta>Fianza: </Etiqueta><Parrafo>{reserva.plaza.fianza} €</Parrafo></Line> 
+                <Line><Etiqueta>Precio: </Etiqueta><Parrafo>{reserva.precioTotal} €</Parrafo></Line> 
+                <Line><Etiqueta>Tramo: </Etiqueta><Parrafo>{FInicio} - {FFin}</Parrafo></Line> 
+                <Line><Etiqueta>Fecha Solicitud: </Etiqueta><Parrafo>{FSolicitud[0]}</Parrafo></Line> 
+                <Line><Etiqueta>Propietario: </Etiqueta><Parrafo>{reserva.plaza.administrador.name} - {reserva.plaza.administrador.email}</Parrafo></Line> 
+                <Line><Etiqueta>Comentarios: </Etiqueta><Parrafo>{reserva.comentarios}</Parrafo></Line>
                 {botones ? (
                         <><Etiqueta>Servicio:</Etiqueta>
                         <StyledButton type="button" onClick={() => confirmarServicio(reserva.id)}>Confirmar servicio</StyledButton><br/>
                         <StyledButton type="button" onClick={() => generarIncidencia(reserva.id)}>Generar incidencia</StyledButton></>
                     ) :("") 
                 }
-                </div>
-        </div>
+            </Wrapper2>
+        </Global>
     );
 }
 

@@ -12,13 +12,15 @@ export const Global = styled.div`
 `;
 
 export const Wrapper = styled.div`
-    margin-top: 30px;
+    padding-top: 30px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url(https://media.istockphoto.com/vectors/parking-in-city-vector-id1130876494?k=20&m=1130876494&s=612x612&w=0&h=aEZAWPkszgjmki_nyFtskUGsKUv_IOw6Ue-MTyOo7tc=);
+    background-size: contain;
 `;
 
 export const Container = styled.div`
@@ -32,7 +34,6 @@ export const Container = styled.div`
     padding-top: 20px;
     @media screen and (max-width: 800px){
         flex-direction: column;
-        padding-top: 20px;
         padding-left: 25px;
     }
 `;
@@ -42,13 +43,12 @@ export const Down = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 50px;
 `;
 
 export const NuevaPlaza = styled(Link)`
     padding: 10px;
     border-radius: 10px;
-    width: 50%;
+    width: 40%;
     background-color: ${colors.fourth};
     border-style: solid;
     text-decoration: none;
@@ -60,6 +60,10 @@ export const NuevaPlaza = styled(Link)`
         background-color: ${colors.third};
         transition: all 0.5s ease;
         color: white;
+    }
+
+    @media screen and (max-width:600px){
+        width: 78%;
     }
 `;
 

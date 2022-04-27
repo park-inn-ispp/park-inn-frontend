@@ -171,11 +171,11 @@ export const ProfileIcon = styled.div`
         }
     }
 
-    @media screen and (max-width: 960px){
+    @media screen and (max-width: 1150px){
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0rem 2rem 1rem 2rem;
+        margin: 0 2rem 1rem 2rem;
         size: 100;
         cursor: pointer;
         svg{

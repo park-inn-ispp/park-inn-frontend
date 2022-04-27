@@ -1,8 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Principal, Tarjeta, Datos, Editar, Botones, Eliminar, Reservas, Direccion } from "./card.elements";
+import call from "../Util/Caller";
+import displayNotification from "../Util/Notifications";
 
-function Card({title, ancho, largo, precioHora, esAireLibre, urlEdit, urlReserva }) {
+function Card({id, title, ancho, largo, precioHora, esAireLibre, urlEdit, urlReserva }) {
+  
+  const deletePlaza = evt => {
+  call(`/plazas/`+id, 'DELETE')
+    .then(response => {
+      if (response.ok){
+        displayNotification("Éxito","Plaza borrada correctamente","success");
+        window.location.reload();
+      }
+    })
+}
   return (
     <Principal>
       <Tarjeta>
@@ -13,7 +25,7 @@ function Card({title, ancho, largo, precioHora, esAireLibre, urlEdit, urlReserva
         <Botones>
           <Editar to={urlEdit}>Editar</Editar>
           <Reservas to={urlReserva}>Reservas</Reservas>
-          <Eliminar to=''>Eliminar</Eliminar>
+          <Eliminar onClick={deletePlaza} to=''>Eliminar</Eliminar>
         </Botones>
       </Tarjeta>
     </Principal>

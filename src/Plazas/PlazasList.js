@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react';
 import GeneralButton from '../components/GeneralButton/GeneraButton';
 import {Enlace, Title, Global, Container, Wrapper, NuevaPlaza, Down} from "../Plazas/PlazasList.elements"
 import Card from '../components/Card';
-import NoElements from "../components/NoElements";
-import { StyledButton } from "../components/GeneralButton/GeneralButton.elements";
 
 const cookies = new Cookies();
 
@@ -55,14 +53,14 @@ export default function PlazasList() {
 
         return (
             <Wrapper>
-                <Container>
-                    {plazas.map(plaza => (
-                        <Card title={plaza.direccion} ancho={plaza.ancho} largo ={plaza.largo} precioHora={plaza.precioHora} esAireLibre={plaza.esAireLibre ? 'Si' : 'No' } urlEdit={plaza.editURL} urlReserva={plaza.reservasURL} urlHorario={plazas.horarioURL}/>
-                    ))}
-                </Container>
                 <Down>
                     <NuevaPlaza to="/plaza/create">Crear nueva plaza</NuevaPlaza>
                 </Down>
+                <Container>
+                    {plazas.map(plaza => (
+                        <Card id={plaza.id} title={plaza.direccion} ancho={plaza.ancho} largo ={plaza.largo} precioHora={plaza.precioHora} esAireLibre={plaza.esAireLibre ? 'Si' : 'No' } urlEdit={plaza.editURL} urlReserva={plaza.reservasURL} urlHorario={plazas.horarioURL}/>
+                    ))}
+                </Container> 
             </Wrapper>
         );
 }

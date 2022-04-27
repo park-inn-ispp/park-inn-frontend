@@ -9,24 +9,30 @@ export const Principal = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: right;
+
+    @media screen and (max-width: 600px){
+        margin-left: 10px;
+    }
 `;
 
 export const Tarjeta = styled.div`
     width: 390px;
-    height: 53%;
+    height: 45%;
     background-color: lightblue;
     border-width: 3px;
     border-radius: 20px;
     border-style: solid;
     border-color: ${colors.fivth};
     margin-bottom: 50px;
+    margin-right: 20px;
     justify-content: center;
-    margin-right: 30px;
+    
 
-    @media screen and (max-width: 500px){
+    @media screen and (max-width: 600px){
         height: 280px;
-        width: 315px;
+        width: 315px;   
     }
+    
     @media screen and (min-width: 1300px){
         height: 295px;
         width: 315px;
@@ -36,7 +42,7 @@ export const Direccion = styled.header`
     background-color: #3368AD;
     font-weight: 400;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     color: white;
     border-top: #3368AD;
     border-top-right-radius: 18px;
@@ -44,6 +50,7 @@ export const Direccion = styled.header`
     border-bottom-style: solid;
     width: 100.5%;
     border-color: ${colors.fivth};
+    padding: 6px;
 `;
 
 export const Datos = styled.p`
@@ -75,6 +82,7 @@ export const Editar = styled(Link)`
     &:hover{
         color: white;
         transform: scale(1.05);
+        transition: all 0.5s ease;
     }
 `;
 
@@ -92,6 +100,7 @@ export const Eliminar = styled(Link)`
     &:hover{
         color: white;
         transform: scale(1.05);
+        transition: all 0.5s ease;
     }
 `;
 
@@ -109,5 +118,6 @@ export const Reservas = styled(Link)`
     &:hover{
         color: white;
         transform: scale(1.05);
+        transition: all 0.5s ease;
     }
 `;

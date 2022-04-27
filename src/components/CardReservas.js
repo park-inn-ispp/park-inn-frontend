@@ -27,9 +27,9 @@ function CardReservas({ imageSource,id, title,propietario,fechaInicio,fechaFin,p
         <h4 className="card-title">{title}</h4>
         <div className="card-text-div">
         <p className="card-text text-secondary">
-          {(estado=='cancelada' || estado=='rechazada')
+          {(estado==='cancelada' || estado==='rechazada')
             ? canceledDiv
-            : (estado=='pendiente')
+            : (estado==='pendiente')
               ? pendentDiv
               : aceptedDiv
               }

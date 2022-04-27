@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../theme';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
     color: white;
@@ -41,4 +42,13 @@ export const Parrafo = styled.p`
     @media screen and (max-width: 500px){
         font-size: 18px;
     }
+`;
+
+export const BotonCalendario = styled(Link)`
+    border-style: solid;
+    background-color: ${colors.fourth};
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    width: 100%;
 `;

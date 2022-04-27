@@ -4,7 +4,7 @@ import validateReserva from './validateReserva';
 import FormErrorMessage from '../Util/FormErrorMessage';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import {Etiqueta, Parrafo, Formulario} from '../Plaza/ReservaPlaza.elements';
+import {Etiqueta, Parrafo, Formulario, BotonCalendario} from '../Plaza/ReservaPlaza.elements';
 import call from '../Util/Caller';
 import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
@@ -136,10 +136,6 @@ export default function Reserva(){
       var value= target.value.toString()
       setForm({...form,[name]: value})
      }
-
-    function calen() {
-      window.open('/calendar/'+id, '_blank');
-    }
     
       //Pantalla de carga
       if (isLoading) {
@@ -156,15 +152,16 @@ export default function Reserva(){
           <h1>Reservar Plaza</h1>
           <ReactNotifications />
           
-          <div class="section"><span>1</span>Propiedades de la plaza</div>
-          <div class="inner-wrap">
+          
+          
           
           <Etiqueta>Propietario:</Etiqueta><Parrafo>{plaza.administrador.name}</Parrafo>
           <Etiqueta>Direccion:</Etiqueta><Parrafo>{plaza.direccion}</Parrafo> 
           <Etiqueta>Largo:</Etiqueta><Parrafo>{plaza.largo} m</Parrafo>
           <Etiqueta>Ancho:</Etiqueta><Parrafo>{plaza.ancho} m</Parrafo>
-          <Etiqueta>Calendario:</Etiqueta><Parrafo><button class="botonAzul" onClick={() => calen()}>Ver disponibilidad</button></Parrafo>
-          </div>
+          <Etiqueta>Calendario:</Etiqueta>
+          <BotonCalendario to={'/calendar/'+id}>Ver disponibilidad</BotonCalendario>
+          
         
 
           
