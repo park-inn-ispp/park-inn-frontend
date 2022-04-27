@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - feature*
+      - bug*
+      - develop
+      - master
+jobs:
+  Run-test-before-merge:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Check out repository
+        uses: actions/checkout@v2
+        
+      - name: Run tests
+        run: |
+         npm install
+         npm test
+     
