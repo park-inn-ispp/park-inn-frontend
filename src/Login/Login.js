@@ -86,17 +86,17 @@ class Login extends Component {
      }
 
     componentDidMount() {
-        document.getElementById("navbar-parkinn").setAttribute("hidden",true)
+        document.getElementById("navbar-parkinn").setAttribute("hidden",true);
     }
     
 
     render() {
         return (
             <Container>
-                <Wrapper className="container_body">
+                <Wrapper>
                     <Title>PARK-INN</Title>
-                    <Icon className='parkinn-icon'>
-                        <Logo className="logo"/>
+                    <Icon>
+                        <Logo/>
                     </Icon>
                     <LoginInputs>
                         <Label>Correo electrónico:</Label>

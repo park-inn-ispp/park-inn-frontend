@@ -3,45 +3,72 @@ import styled from "styled-components";
 import { colors } from "../../theme";
 import { Link } from "react-router-dom";
 
-const Container = styled.div`
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
+const Box = styled.div`
+  margin:auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 50%;
   height: 100vh;
-  background-color: ${colors.fivth};
-  border-radius: 10px;
-
+  
   @media screen and (max-width: 800px){
     width: 90%;
-    height: 80vh;
+    height: 100vh;
     margin-bottom: 0;
+  }
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  background-color: ${colors.fourth};
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media screen and (max-width: 800px){
+    width: 100%;
+    height: 90%;
   }
 `;
 
 const Parrafo = styled.div`
   margin: 5px 5px 5px 5px;
   color: #fff;
-  padding: 25px;
+  padding: 30px;
+  width: 100%;
   overflow: scroll;
   ::-webkit-scrollbar{
   display: block;
-  width: 10px ;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb{
-    background-color: lightgray;
+    background-color: ${colors.third};
     border-radius: 60px;
 }
 `;
 
-const Resalto = styled.strong`
-  text-decoration: underline;
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${colors.fivth};
+  width: inherit;
+  height: 14vh;
+  margin-bottom: 30px;
+  border-radius: 10px;
+`;
+
+const Resalto = styled.p`
   font-size: 25px;
+  font-weight: bold;
+  @media screen and (max-width: 600px){
+    font-size: 20px;
+  }
 `;
 
 const Volver = styled(Link)`
@@ -65,72 +92,77 @@ const Volver = styled(Link)`
 
 export default function Terminos(){
     return (
+      <Box>
         <Container>
           <Parrafo>
-            <Resalto>Términos y Condiciones de Uso</Resalto><br/><br/>
-            <strong>INFORMACIÓN RELEVANTE</strong><br/>
-            Es requisito necesario para la adquisición de los productos que se ofrecen en este sitio, que lea y acepte los siguientes Términos y Condiciones 
-            que a continuación se redactan. El uso de nuestros servicios así como la compra de nuestros productos implicará que usted ha leído y aceptado los Términos y 
-            Condiciones de Uso en el presente documento. Todas los productos  que son ofrecidos por nuestro sitio web pudieran ser creadas, cobradas, enviadas o 
-            presentadas por una página web tercera y en tal caso estarían sujetas a sus propios Términos y Condiciones. En algunos casos, para adquirir un producto, 
-            será necesario el registro por parte del usuario, con ingreso de datos personales fidedignos y definición de una contraseña. 
-            El usuario puede elegir y cambiar la clave para su acceso de administración de la cuenta en cualquier momento, en caso de que se haya registrado y 
-            que sea necesario para la compra de alguno de nuestros productos. https://herohttps://park-inn-ispp-fe.herokuapp.com no asume la responsabilidad en caso 
-            de que entregue dicha clave a terceros.
+            <Header><Resalto>Términos y Condiciones de Uso <br/> PARK-INN</Resalto><br/><br/></Header>
+            <strong>INFORMACIÓN RELEVANTE</strong><br/><br/>
+            <section>El servicio que proporciona <strong>Park-Inn</strong> consiste en poner en contacto a dos usuarios interesados, uno de ellos que hace alquiler de un parking privado de su 
+            propiedad y el otro hace uso de ella mediante un alquiler durante un tiempo especificado. Para ello el usuario interesado en alquiler pagará por este servicio según
+            el precio que haya estipulado previamente el propietario. Un usuario registrado puede actuar como cualqueira de estos dos roles mencionados.
+            Al aceptar estos términos usted acepta que se guarden sus datos proporcionados en la aplicación, una vez registrado, en nuestra base de datos, así como las plazas que cree y las reservas y 
+            pagos que haga. <br/>
+            Al aceptar estos términos y condiciones se compromete, en caso de uso de un parking comuntario, a avisar a los demás propietarios de la comunidad a que usted va a alquilar esa plaza
+            para posibles percances que ocurran dentro de dicha propiedad privada. Este tipo de percances es ajeno a Park-Inn pero la empresa se involucrará para resolver dicho conflicto.
             
-            Todas las compras y transacciones que se lleven a cabo por medio de este sitio web, están sujetas a un proceso de confirmación y verificación, el cual podría incluir la verificación del stock y disponibilidad de producto, validación de la forma de pago, validación de la factura (en caso de existir) y el cumplimiento de las condiciones requeridas por el medio de pago seleccionado. 
-            En algunos casos puede que se requiera una verificación por medio de correo electrónico.
-            Los precios de los productos ofrecidos en esta Tienda Online es válido solamente en las compras realizadas en este sitio web.
+            </section>
             <br/>
+            <strong>PRECIOS Y PAGOS</strong><br/><br/>
+            Los pagos que se realicen en Park-Inn son ajenos a la aplicación, ya que se hace mediante la propia cuenta de PayPal de cada uno de los usuarios. El precio del servicio está
+            estipulado por el propietario de la plaza además de una fianza que se le suma al precio total. Está fianza sirve para mantener la seguridad del usuario en caso de que se necesite 
+            algún tipo de mando, llave para el uso de la plaza o en caso de que ocurra algún percance dentro de la misma durante el uso del otro usuario.
+            Tras la fecha de finalización de una reserva, tanto el cliente como el propietario de la plaza podrán confirmar su servicio. Tras ser confirmada por ambos, el propietario recibirá el pago del importe total de la reserva, exceptuando la fianza, que se devolverá al cliente, y una pequeña comisión, que se llevará Park-Inn.
+            El porcentaje de comisión recibida por Park-Inn será aquella que estuviera estipulada en el sistema en el momento de la solicitud de la reserva, y puede estar sujeta a cambios. Esta comisión se aplicará al importe total de la reserva exceptuando la fianza.
             <strong>LICENCIA</strong>
             <br/>
             <strong>Park-Inn</strong>
-            a través de su sitio web concede una licencia para que los usuarios utilicen los productos que son vendidos en este sitio web de acuerdo a 
+            a través de su sitio web concede una licencia para que los usuarios utilicen los servicios que se ofrecen en este sitio web de acuerdo a 
             los Términos y Condiciones que se describen en este documento.
-            <br/>
+            <br/><br/>
             <strong>USO NO AUTORIZADO</strong>
-            <br/>
-            En caso de que aplique (para venta de software, templetes, u otro producto de diseño y programación) usted no puede colocar uno de nuestros productos,
-             modificado o sin modificar, en un CD, sitio web o ningún otro medio y ofrecerlos para la redistribución o la reventa de ningún tipo.
-            <br/>
-            <strong>PROPIEDAD</strong>
+            <br/><br/>
+            Si desea usar la aplicación para fines profesionales donde se vea nuestra marca deberá ponerse antes en contacto con nuestro equipo. El uso de nuestro servicio indebido
+            podrá suponer denuncias y procesos judiciles. Esta aplicación consta de Copyright.
             <br/> 
-            Usted no puede declarar propiedad intelectual o exclusiva a ninguno de nuestros productos, modificado o sin modificar. 
-            Todos los productos son propiedad  de los proveedores del contenido. En caso de que no se especifique lo contrario, nuestros productos se proporcionan  
-            sin ningún tipo de garantía, expresa o implícita. En ningún esta compañía será  responsables de ningún daño incluyendo, pero no limitado a, daños directos, indirectos, especiales, fortuitos o consecuentes u otras pérdidas resultantes del uso o de la imposibilidad de utilizar nuestros productos.
             <br/>
-            <strong>POLÍTICA DE REEMBOLSO Y GARANTÍA</strong>
+            <strong>POLÍTICA DE REEMBOLSO Y GARANTÍA DE FIANZA</strong><br/>
             <br/>
-            En el caso de productos que sean  mercancías irrevocables no-tangibles, no realizamos reembolsos después de que se envíe el producto, usted tiene la responsabilidad de entender antes de comprarlo.  Le pedimos que lea cuidadosamente antes de comprarlo. Hacemos solamente excepciones con esta regla cuando la descripción no se ajusta al producto. Hay algunos productos que pudieran tener garantía y posibilidad de reembolso pero este será especificado al comprar el producto. En tales casos la garantía solo cubrirá fallas de fábrica y sólo se hará efectiva cuando el producto se haya usado correctamente. La garantía no cubre averías o daños ocasionados por uso indebido. Los términos de la garantía están asociados a fallas de fabricación y funcionamiento en condiciones normales de los productos y sólo se harán efectivos estos términos si el equipo ha sido usado correctamente. Esto incluye:
-            <ul>
-              <li>De acuerdo a las especificaciones técnicas indicadas para cada producto.</li>
-              <li>En condiciones ambientales acorde con las especificaciones indicadas por el fabricante.</li>
-              <li>En uso específico para la función con que fue diseñado de fábrica.</li>
-              <li>En condiciones de operación eléctricas acorde con las especificaciones y tolerancias indicadas.</li>
-            </ul>
             El reembolso que recibas dependerá del momento en el que canceles tu reserva y también del motivo que indiques (según quién sea el responsable de la cancelación).
+            La devolución del presupuesto del servicio y de la fianza se realizará acorde a las siguientes especificaciones:
+            <ul>
+              <li>Si cancelas con <strong>más de 24 horas de antelación</strong> respecto a la reserva de la plaza y eres el responsable de 
+                  la cancelación: recibirás el reembolso de la aportación que pagaste por los gastos del alquiler de la plaza y de la fianza completa.</li>
+              <li>Si cancelas en las últimas 24 horas antes del uso de la plaza se te devolverá el importe íntegro relacionado a la fianza pero no el del importe del servicio de alquiler.</li>
+              <li>Si cancelas despúes de la fecha de reserva o no haces uso de la plaza durante el tramo alquilado se te devolverá el importe de la fianza pero no el del servicio de alquiler.</li>
+              <li>Si el propietario de la plaza pone una incidencia con pruebas solventes de algun imperfecto o conflicto el importe de la fianza se lo quedará el propietario.</li>
+              <li>En caso de incidencia por parte del propietario, el usuario puede alegar con otra incidencia para reclamar dicha fianza. El equipo de Park-Inn evaluará la situación y devolverá el 
+                importe a quién considere que tiene razón sujetándonos siempre a las pruebas más reales y concluyentes.</li>
+            </ul>
+          
+            <br/>
+            
+            <strong>PRIVACIDAD</strong><br/><br/>
+            <strong>Park-Inn</strong> garantiza que el tratamiento de los datos personales solo se utilizarán para el uso de la aplicación y que no se transferiran
+            a terceros. Se almacenaran en la base de datos los siguientes datos mientras usted tenga una cuenta en la aplicación:
+            <ul>
+              <li>Nombre y apellidos</li>
+              <li>Correo electrónico</li>
+              <li>Teléfono</li>
+              <li>Todos los datos de plazas creadas por usted</li>
+              <li>Código Postal</li>
+              <li>Todos los datos de las reservas y pagos que haya realizado usted mediante la aplicación.</li> 
+            </ul>
 
-            Si cancelas con más de 24 horas de antelación respecto a la reserva de la plaza y eres el responsable de 
-            la cancelación: recibirás el reembolso de la aportación que pagaste por los gastos del alquiler con el propietario de la plaza.
-            Si cancelas en las últimas 24 horas antes de la salida y eres el responsable de la 
-            cancelación: recibirás el 50% del importe que habías pagado para los gastos del trayecto. El otro 50% permite que Park-Inn indemnice a tu administrador de la plaza por esta cancelación de última hora.
-            Si cancelas después del viaje o no te presentas a la cita: no recibirás ningún 
-            reembolso y el propietario recibirá el 100% del importe que habías pagado por los gastos del trayecto con él, como si hubieras viajado con él. BlaBlaCar recibirá los gastos de gestión que hayas abonado.
-            Si se cancela la reserva y el propietario es el responsable, recibirás el 
-            reembolso íntegro.
-            <br/>
-            <strong>COMPROBACIÓN ANTIFRAUDE</strong>
-            <br/>
-            La compra del cliente puede ser aplazada para la comprobación antifraude. También puede ser suspendida por más tiempo para una investigación más 
-            rigurosa, para evitar transacciones fraudulentas.
-            <br/>
-            <strong>PRIVACIDAD</strong>
-            <br/>
-            Este https://herohttps://park-inn-ispp-fe.herokuapp.com garantiza que la fc barcelona noticias información personal que usted envía cuenta con la seguridad necesaria. Los datos ingresados por usuario o en el caso de requerir una validación de los pedidos no serán entregados a terceros, salvo que deba ser revelada en cumplimiento a una orden judicial o requerimientos legales.
-            La suscripción a boletines de correos electrónicos publicitarios es voluntaria y podría ser seleccionada al momento de crear su cuenta.
-            Park-Inn reserva los derechos de cambiar o de modificar estos términos sin previo aviso.
-            Estas terminos y condiciones se han generado en terminosycondicionesdeusoejemplo.com.
+            Usted puede solicitar a los administradores del sistema eliminar su cuenta asimismo como los datos almacenados sobre usted que hay en ese instante en la base de datos mediante el correo gestion.parkinn@gmail.com. En ese caso,  aceptando estos términos accede a que Park-Inn siga almacenando datos sobre sus reservas, pagos, así como la dirección y precio de la fianza de todas sus plazas que están involucradas en alguna reserva. Los datos personales de
+            nombre, apellidos, correo electrónico y teléfono se eliminarán de nuestra base de datos.
+            Park-Inn no almacenará su contraseña en ningún momento ni ningún agente se la pedirá nunca, está estará encriptada en la base de datos. Además tampoco guardamos información
+            sobre su cuenta de PayPal.
+
+            Si el sistema presenta numerosas incidencias contra usted  como consecuencia de diversos conflictos con el resto de usuarios de la aplicación, los administradores podrían tomar la decisión de banear su cuenta del sistema temporalmente, impidiéndole acceder al servicio.
+            Usted puede solicitar al correo app.parkinn@gmail.com obtener todos los datos de su perfil, sus plazas creadas y sus reservas realizadas.
+
           </Parrafo>
           <Volver to="/register">Volver</Volver>
         </Container>
+      </Box>
     )}

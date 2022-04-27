@@ -21,3 +21,22 @@ export const Parrafo = styled.p`
     font-size: 22px;
     display: inline-block;
 `;
+
+export const Wrapper2 = styled.div`
+    width: 60%;
+    height: 100%;
+    background-color: lightblue;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+    border-style: solid;
+    border-color: ${colors.fivth};
+    border-width: 4px;
+
+    @media screen and (max-width:600px){
+        width: 100%;
+    }
+`;

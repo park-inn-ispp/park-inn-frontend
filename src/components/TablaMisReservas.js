@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import call from "../Util/Caller";
 import "./table.css";
 import parsearFechas from "../Util/FechasParser";
+import { Columna, Fila, Tabla, TD, TH, TR, Enlace } from "./TabalMisReservas.elemnts";
+
 function aceptarReserva(reservaId) {
   call(`/reservas/`+reservaId+'/aceptar', 'GET')
     .then(response => {
@@ -43,74 +45,62 @@ function cancelarReserva(reservaId) {
 
 function ListaMisReservas(data) {
   let canceledDiv =  <div className="cancelada"></div>
-  let pendentDiv =  <div className="pendiente"></div>
+  let pendenTDiv =  <div className="pendiente"></div>
   let aceptedDiv =  <div className="aceptada"></div>
   
     return (
       
-
-    <table cellSpacing="0">
-      <thead>
-      <tr>
-        <th>Direccion</th>
-        <th>Cliente</th>
-        <th>Fecha Inicio</th>
-        <th>Fecha Fin</th>
-        <th>Precio total</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-        <th>Detalles</th>
-      </tr>
-      </thead>
+    <Tabla cellSpacing="0">
+      <Columna>
+      <TR>
+        <TH>Cliente</TH>
+        <TH>Fecha Inicio</TH>
+        <TH>Fecha Fin</TH>
+        <TH>Precio total</TH>
+        <TH>Estado</TH>
+        <TH>Acciones</TH>
+        <TH>Detalles</TH>
+      </TR>
+      </Columna>
       <tbody>
       
       {data.data.map(element =>{
         return(
-          <tr>
-            <td>{element.direccion}</td>
-            <td>{element.user.name}</td>
-            <td>{parsearFechas(element.fechaInicio)}</td>
-            <td>{parsearFechas(element.fechaFin)}</td>
-            <td>{element.precioTotal}</td>
-            <td>{element.estado=="aceptada" ? 
+          <TR>
+            <TD>{element.user.name}</TD>
+            <TD>{parsearFechas(element.fechaInicio)}</TD>
+            <TD>{parsearFechas(element.fechaFin)}</TD>
+            <TD>{element.precioTotal} €</TD>
+            <TD>{element.estado==="aceptada" ? 
                 aceptedDiv
-                : element.estado=="cancelada" ?
+                : element.estado==="cancelada" || element.estado==="rechazada" ?
                 canceledDiv
-                :pendentDiv}</td>
-            <td>{element.estado=="pendiente" ?
-                      <>
+                :pendenTDiv}</TD>
+            <TD>{element.estado==="pendiente" ?
+                      <Fila>
                       <button type='button' class='btnAceptar' onClick={() => aceptarReserva(element.id)}>&#10004;</button>
-
                       <button type='button' class='btnCancelar' onClick={() => rechazarReserva(element.id)}>X</button>
-                       </>
+                       </Fila>
                       : ("")
                     }
                     
-                {element.estado=="aceptada" ?
+                {element.estado==="aceptada" ?
                       <>
                       <button type='button' class='btnCancelar' onClick={() => cancelarReserva(element.id)}>X</button>
                       </>
                       : ("")
               
               }
-              </td>
+              </TD>
               
-            <td><a
-                href={"/reservas/"+element.id}
-                className="btn btn-outline-secondary border-0"
-                rel="noreferrer"
-              >Detalles</a></td>
+            <TD>
+              <Enlace to={"/reservas/"+element.id} className="btn btn-outline-secondary border-0" rel="noreferrer">Detalles</Enlace></TD>
            
-        </tr>
+        </TR>
         )
       })}
       </tbody>
-         
-      
-
-
-      
-   </table>
+   </Tabla>
   );
 }
 

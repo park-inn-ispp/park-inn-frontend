@@ -100,7 +100,7 @@ function LocationMarker() {
 
 
 const MapView = () => {
-  const position = [51.505, -0.09]
+  const position = [40.42532588715934, -3.691904777609234]
   const prov = OpenStreetMapProvider();
   const GeoSearchControlElement = SearchControl;
     return(

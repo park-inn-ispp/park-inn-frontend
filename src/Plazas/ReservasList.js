@@ -8,7 +8,6 @@ class ReservasList extends Component {
     constructor(props) {
         super(props);
         this.state = {reservas: []};
-       // this.remove = this.remove.bind(this);
     }
     
     componentDidMount() {
