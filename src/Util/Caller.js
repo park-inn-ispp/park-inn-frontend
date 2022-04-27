@@ -7,6 +7,8 @@ const cookies = new Cookies();
 
 const urlBackend ="https://parkinn-api-v3.herokuapp.com";
 const urlFrontend = "https://parkinn-app-v3.herokuapp.com/";
+//const urlBackend ="http://localhost:8080";
+//const urlFrontend = "http://localhost:3000/";
 
 
      async function call(pathToCall,method,body){
