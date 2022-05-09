@@ -21,33 +21,30 @@ export const Parrafo = styled.div`
 export const Global = styled.div`
     width: 100%;
     height: 100%;
-    background-image: url(https://media.istockphoto.com/vectors/parking-in-city-vector-id1130876494?k=20&m=1130876494&s=612x612&w=0&h=aEZAWPkszgjmki_nyFtskUGsKUv_IOw6Ue-MTyOo7tc=);
-    background-size: contain;
+    background-image: url(https://pixelperfect.com.ar/wp-content/uploads/2017/03/Material-design.jpg);
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px;
 `;
 
 export const Wrapper = styled.div`
     width: 60%;
-    height: 100%;
-    background-color: lightblue;
+    height: auto;
+    background-color: ${colors.second};
     border-radius: 20px;
-    margin-bottom: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-bottom: 15px;
-    border-style: solid;
-    border-color: ${colors.fivth};
-    border-width: 4px;
+    box-shadow: 0 0 10px rgba(0 0 0.55);
+
 
     @media screen and (max-width:600px){
         margin-top: 40%;
-        width: 100%;
+        width: 90%;
+        margin-bottom: 90%;
     }
 `;
 

@@ -5,7 +5,7 @@ import call from "../Util/Caller";
 
 export default function FormularioRegistro(){
     let template = {
-        title: "Registro nuevo usuario",
+        title: "Nuevo usuario",
         fields: [{
             title: "Nombre:",
             type: "text",
