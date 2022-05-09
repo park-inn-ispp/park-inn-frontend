@@ -9,5 +9,4 @@ jobs:
     - name: Install SQL Server
       uses: Particular/install-sql-server-action@main
       with:
-        connection-string-env-var: parkinn-dbsprint3.database.windows.net
-        catalog: parkinn-dbsprint3.database.windows.net
+        connection-string-env-var: xd
