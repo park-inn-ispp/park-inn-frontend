@@ -47,6 +47,7 @@
     "reactstrap": "^8.10.1",
     "rsuite": "^5.6.6",
     "smooth-scrollbar": "^8.7.4",
+    "sqlcmd": "^3.0.4",
     "styled-components": "^5.3.3",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
