@@ -10,7 +10,11 @@ jobs:
       uses: Particular/install-sql-server-action@main
       with:
         connection-string-env-var: xd
-    - name: Create schemas
+    
+    - name: Check out repository
+      uses: actions/checkout@v2
+        
+    - name: Run tests
       run: |
-          echo "Create additional schemas"
-          npm install
+         npm install
+         npm test
