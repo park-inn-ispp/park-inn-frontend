@@ -8,6 +8,8 @@ jobs:
     steps:
     - name: Install SQL Server
       uses: Particular/install-sql-server-action@main
+      with:
+        connection-string-env-var: parkinn-dbsprint3.database.windows.net
     - name: Create schemas
       shell: pwsh
       run: |
