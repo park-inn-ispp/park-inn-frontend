@@ -2,13 +2,15 @@ on:
   push:
     branches:
       - feature/script_actions
-
-steps:
-  - name: Install SQL Server
-    uses: Particular/install-sql-server-action@main
-  - name: Create schemas
-    shell: pwsh
-    run: |
-        echo "Run tests"
-        npm install
-        npm test
+jobs:
+ Run-test-before-merge:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install SQL Server
+      uses: Particular/install-sql-server-action@main
+    - name: Create schemas
+      shell: pwsh
+      run: |
+          echo "Run tests"
+          npm install
+          npm test
