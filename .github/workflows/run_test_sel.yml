@@ -1,0 +1,14 @@
+on:
+  push:
+    branches:
+      - feature/script_actions
+
+steps:
+  - name: Install SQL Server
+    uses: Particular/install-sql-server-action@main
+  - name: Create schemas
+    shell: pwsh
+    run: |
+        echo "Run tests"
+        npm install
+        npm test
