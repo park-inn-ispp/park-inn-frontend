@@ -6,9 +6,23 @@ import { useNavigate } from 'react-router-dom';
 import displayNotification from '../Util/Notifications';
 import { Precio, Etiqueta} from '../Plaza/ReservaPlaza.elements';
 import { Title, Container, Wrapper, Line } from './Pagar.elements';
+import React, {useState} from "react";
 
 export default function Pagar({precio=1.0,reserva}) {
  
+  const [precioTotal, setValue] = useState(precio);
+
+  let valorCupon="";
+
+
+  const handleChangeInputEnviar= evt => {
+    
+    const target = evt.target
+    const name = target.name
+    var value= target.value
+    valorCupon = value
+  }
+
   let navigate = useNavigate();
   const initialOptions= {
     "client-id":"Adu4jUtTkaJxNFqufhztoNp-CQuZWJLkvV5FDn_aIpkhbWlSvnPwSq2TNDsT4vFZt-_uEmF_rtH89Mvk",
@@ -16,6 +30,17 @@ export default function Pagar({precio=1.0,reserva}) {
     
 
   }
+
+  function enviarDescuento(){
+    call("/descuento/name/"+valorCupon,"GET").then(async res =>{
+      let descuento = await res.json()
+      if(res.ok){
+        setValue((Math.round((precio - (precio*descuento.descuento)) * 100) / 100))
+        displayNotification("Exito","Se ha aplicado el cupon correctamente","success")
+
+      }
+    })
+}
   return (
   
     <Container>
@@ -58,7 +83,13 @@ export default function Pagar({precio=1.0,reserva}) {
     </PayPalScriptProvider>
      
     </Wrapper>
-    <Line><Etiqueta>Precio total:</Etiqueta><Precio>{precio} €</Precio></Line>
-  </Container>
+    <Line><Etiqueta>Precio total:</Etiqueta><Precio>{precioTotal} €</Precio></Line>
+    <div className='cabeceraCrearCupon'>Aplicar cupón</div>
+            <div className='crearCupon'>
+            <input type="text" placeholder="Nombre del cupón" className='inputNombreCupon' onChange={handleChangeInputEnviar}></input>
+            <button className='inputBotonEnviarCupon' onClick={() => enviarDescuento()}>&#8594;</button>
+
+            </div> 
+    </Container>
   );
 }

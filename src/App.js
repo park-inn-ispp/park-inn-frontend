@@ -30,7 +30,7 @@ import Terminos from './components/Terminos y Condiciones/Terminos';
 import CalendarPlaza from './Calendar/CalendarPlaza'
 import MisTramos from './Tramos/Tramos';
 import CreateTramo from './Tramos/CreateTramo';
-
+import Cupones from './Dashboard/Cupones';
 
 import ComisionDashboard from './Dashboard/ComisionDashboard';
 
@@ -72,6 +72,7 @@ export default function App() {
                   <Route path='/dashboard-usuarios' element={<UsuariosDashboard/>}/>
                   <Route path='/dashboard-incidencias' element={<IncidenciasDashboard/>}/>
                   <Route path='/dashboard-comision' element={<ComisionDashboard/>}/>
+                  <Route path='/dashboard-cupones' element={<Cupones/>}/>
                 </Route>
 
                 
