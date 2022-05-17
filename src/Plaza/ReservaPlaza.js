@@ -10,6 +10,7 @@ import Loading from '../components/Loading';
 import Pagar from '../Payments/Pagar';
 import Cookies from 'universal-cookie';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import displayNotification from '../Util/Notifications';
 require('moment/locale/es.js');
 const cookies = new Cookies();
 
@@ -23,6 +24,9 @@ export default function Reserva(){
     const [isLoading, setIsLoading] = useState(true)
     const [pagando, setPagando] = useState(false)
     const id = parseInt(useParams().id)
+
+
+
 
     useEffect(() => {
       
@@ -71,13 +75,65 @@ export default function Reserva(){
     let horas = 0
     let precioEstacionamiento = 0;
     let precioTotalConFianza=plaza.fianza;
-    
     if (FechaYHoraFin>FechaYHoraInicio) {
        horas = ((FechaYHoraFin-FechaYHoraInicio)/(1000 * 60 * 60))
        precioEstacionamiento = (horas*plaza.precioHora).toFixed(2)
        precioTotalConFianza = Number((plaza.fianza + horas*plaza.precioHora).toFixed(2))
 
     }
+
+
+
+    console.log("PREICO CON FIANZA" + precioTotalConFianza)
+    const [precioDescuento, setValue] = useState(0);
+    const [cuponAplicado, setCuponAplicado] = useState(false);
+    const [valorCupon, setValorCupon] = useState("");
+
+  
+  
+    const handleChangeInputEnviar= evt => {
+      
+      const target = evt.target
+      const name = target.name
+      var value= target.value
+      setValorCupon(value)
+    }
+    function enviarDescuento(){
+      if(valorCupon==="" ||valorCupon==null ||valorCupon==undefined){
+        if(cuponAplicado){
+          displayNotification("⚠","Ya has aplicado un cupón","warning")
+
+        }else{
+          displayNotification("⚠","Debes de introducir un cupón","warning")
+
+        }
+
+      }else{
+        call("/descuento/name/"+valorCupon,"GET").then(async res =>{
+          let descuento = await res.json()
+          
+          if(cuponAplicado){
+            displayNotification("⚠","Ya has aplicado un cupón","warning")
+  
+          }else if(res.ok){
+            setValue((Math.round(((precioTotalConFianza*(descuento.descuento / 100))) * 100) / 100))
+            displayNotification("Exito","Se ha aplicado el cupón correctamente","success")
+            setCuponAplicado(true)
+            setValorCupon("")
+  
+          }
+        })
+      }
+     
+      }
+
+      function refreshDescuento(){
+        setCuponAplicado(false)
+        setValue(0)
+        displayNotification("ⓘ","Se ha desaplicado el cupon","info")
+        
+        }
+
 
     //Cuerpo de la petición
     const body = {
@@ -99,7 +155,7 @@ export default function Reserva(){
             "descripcion": plaza.descripcion,
             "administrador": plaza.administrador
         },
-        "precioTotal": precioTotalConFianza,
+        "precioTotal":Math.round((precioTotalConFianza-precioDescuento) * 100) / 100,
         "user": {
             "id": usuario.id,
             "name": usuario.name,
@@ -131,7 +187,7 @@ export default function Reserva(){
           
         }
     }
-
+ 
     const handleChange = evt => {
       const target = evt.target
       const name = target.name
@@ -187,7 +243,14 @@ export default function Reserva(){
               <Line><Etiqueta>Precio por hora:</Etiqueta><Parrafo>{plaza.precioHora} €</Parrafo></Line>
               <Line><Etiqueta>Precio de la fianza:</Etiqueta><Parrafo>{plaza.fianza} €</Parrafo></Line>  
               <Line><Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{precioEstacionamiento} €</Parrafo></Line>  
-              <Line><Etiqueta>Precio total:</Etiqueta><Precio>{precioTotalConFianza} €</Precio></Line>
+              <Line><Etiqueta>Precio total:</Etiqueta><Precio>{Math.round((precioTotalConFianza-precioDescuento) * 100) / 100} €</Precio></Line>
+              <div className='cabeceraCrearCupon plazaFormCupon'>Cupón</div>
+              <div className='crearCupon plazaFormCupon'>
+              <input type="text" placeholder="Nombre del cupón" className='inputNombreCupon' onChange={handleChangeInputEnviar} value={valorCupon}></input>
+              <button className='inputBotonEnviarCupon' type="button" onClick={() => enviarDescuento()}>&#8594;</button>
+              <button className='refreshDescuentoButton' type="button" onClick={() => refreshDescuento()}>&#8634;</button>
+
+            </div> 
               <EnvioForm type="submit" value="Siguiente"/>
               
             </Formulario>

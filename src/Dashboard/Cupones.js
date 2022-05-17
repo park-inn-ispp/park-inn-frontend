@@ -5,39 +5,50 @@ import displayNotification from '../Util/Notifications';
 
 export default function Cupones(){
 
-    let valorCupon="";
-    let descuentoCupon="";
-    let cuponAEliminar="";
+
+    const [valorCupon, setValorCupon] = useState("");
+    const [descuentoCupon, setDescuentoCupon] = useState("");
+    const [cuponAEliminar, setCuponAEliminar] = useState("");
 
     function enviarDescuento(){
-        console.log(valorCupon)
-        console.log(descuentoCupon)
+
         const body = {
             "name" : valorCupon,
             "descuento" : descuentoCupon
         }
-        call("/descuento","POST",body).then(async res =>{
-          if(res.ok){
-            displayNotification("Exito","Se ha creado el cupon correctamente","success")
-
-          }else{
-            displayNotification("Error","El cupon no es valido","error")
-
-          }
-        })
+        if(valorCupon==="" ||valorCupon==null ||valorCupon==undefined){
+          displayNotification("⚠","Debes de introducir un cupón","warning")
+  
+        }else{
+          call("/descuento","POST",body).then(async res =>{
+            if(res.ok){
+              displayNotification("Exito","Se ha creado el cupon correctamente","success")
+  
+            }else{
+              displayNotification("Error","El cupon no es valido","error")
+  
+            }
+          })
+        }
     }
     function eliminarDescuento(){
-        
-        
+      if(cuponAEliminar==="" ||cuponAEliminar==null ||cuponAEliminar==undefined){
+        displayNotification("⚠","Debes de introducir un cupón a eliminar","warning")
+
+      }else{
         call("/descuento/name/"+cuponAEliminar,"GET").then(async res=>{
-            let data = await res.json()
-            await call("/descuento/delete/"+data.id,"DELETE").then(async res =>{
-              if(res.ok){
-                displayNotification("Exito","Se ha borrado el cupon correctamente","success")
-    
-              }
-            })
-        })
+          let data = await res.json()
+          await call("/descuento/delete/"+data.id,"DELETE").then(async res =>{
+            if(res.ok){
+              displayNotification("Exito","Se ha borrado el cupon correctamente","success")
+  
+            }
+          })
+      })
+      }
+
+        
+        
     }
 
     const handleChangeInputEnviar= evt => {
@@ -45,7 +56,7 @@ export default function Cupones(){
         const target = evt.target
         const name = target.name
         var value= target.value
-        valorCupon = value
+        setValorCupon(value)
       }
 
       const handleChangeInputEnviarValor= evt => {
@@ -53,14 +64,14 @@ export default function Cupones(){
         const target = evt.target
         const name = target.name
         var value= target.value
-        descuentoCupon = value
+        setDescuentoCupon(value)
       }
       const handleChangeInputEliminar= evt => {
     
         const target = evt.target
         const name = target.name
         var value= target.value
-        cuponAEliminar = value
+        setCuponAEliminar(value)
       }
 
     return(<div className='divCupones'>
@@ -68,7 +79,7 @@ export default function Cupones(){
             <div className='cabeceraCrearCupon'>Crear cupón</div>
             <div className='crearCupon'>
             <input type="text" placeholder="Nombre del cupón" className='inputNombreCupon' onChange={handleChangeInputEnviar}></input>
-            <input type="text" placeholder="Descuento" className='inputDescuentoCupon' onChange={handleChangeInputEnviarValor}></input>
+            <input type="number" min="0" max="100" placeholder="Descuento" className='inputDescuentoCupon' onChange={handleChangeInputEnviarValor}></input>
             <button className='inputBotonEnviarCupon' onClick={() => enviarDescuento()}>&#8594;</button>
             </div>
 

@@ -10,18 +10,6 @@ import React, {useState} from "react";
 
 export default function Pagar({precio=1.0,reserva}) {
  
-  const [precioTotal, setValue] = useState(precio);
-
-  let valorCupon="";
-
-
-  const handleChangeInputEnviar= evt => {
-    
-    const target = evt.target
-    const name = target.name
-    var value= target.value
-    valorCupon = value
-  }
 
   let navigate = useNavigate();
   const initialOptions= {
@@ -31,16 +19,7 @@ export default function Pagar({precio=1.0,reserva}) {
 
   }
 
-  function enviarDescuento(){
-    call("/descuento/name/"+valorCupon,"GET").then(async res =>{
-      let descuento = await res.json()
-      if(res.ok){
-        setValue((Math.round((precio - (precio*descuento.descuento)) * 100) / 100))
-        displayNotification("Exito","Se ha aplicado el cupon correctamente","success")
-
-      }
-    })
-}
+  
   return (
   
     <Container>
@@ -51,11 +30,12 @@ export default function Pagar({precio=1.0,reserva}) {
     <PayPalScriptProvider options={initialOptions}>
                 <PayPalButtons
                  createOrder={(data, actions) => {
-                     return actions.order.create({
+
+                  return actions.order.create({
                          purchase_units: [
                              {   
                                 amount: {
-                                     value: precio,
+                                     value:precio,
                                  },
                              },
                          ],
@@ -83,13 +63,8 @@ export default function Pagar({precio=1.0,reserva}) {
     </PayPalScriptProvider>
      
     </Wrapper>
-    <Line><Etiqueta>Precio total:</Etiqueta><Precio>{precioTotal} €</Precio></Line>
-    <div className='cabeceraCrearCupon'>Aplicar cupón</div>
-            <div className='crearCupon'>
-            <input type="text" placeholder="Nombre del cupón" className='inputNombreCupon' onChange={handleChangeInputEnviar}></input>
-            <button className='inputBotonEnviarCupon' onClick={() => enviarDescuento()}>&#8594;</button>
-
-            </div> 
+    <Line><Etiqueta>Precio total:</Etiqueta><Precio>{precio} €</Precio></Line>
+   
     </Container>
   );
 }

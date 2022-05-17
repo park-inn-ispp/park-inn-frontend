@@ -23,7 +23,10 @@
     box-shadow: 2px 2px 2px 2px #888888;
     display: grid;
 }
+.plazaFormCupon{
+    margin-left: 4%;
 
+}
 .eliminarCupon{
     height: 15%;    
     background-color: white;
@@ -56,6 +59,16 @@
 
 .inputBotonEnviarCupon{
     background-color: #49c75e;
+    width: 25%;
+    height: 75%;  
+    outline: none;
+    border-color: transparent;
+    margin-left: 36%;
+    display: inline-block;
+}
+
+.refreshDescuentoButton{
+    background-color: #ddd347;
     width: 25%;
     height: 75%;  
     outline: none;
