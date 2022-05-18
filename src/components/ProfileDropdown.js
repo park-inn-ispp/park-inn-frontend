@@ -60,6 +60,7 @@ export default function DropdownMenu({onClickShowMobile}) {
                 <li><Link to="/dashboard-plazas" onClick={{onClickGlobal}}>Plazas</Link></li>
                 <li><Link to="/dashboard-incidencias" onClick={{onClickGlobal}}>Incidencias</Link></li>
                 <li><Link to="/dashboard-usuarios" onClick={{onClickGlobal}}>Usuarios</Link></li>
+                <li><Link to="/dashboard-cupones" onClick={{onClickGlobal}}>Cupones</Link></li>
                 <li><Link to={cookies.get("AuthToken")===undefined ? '' : `/clients/view/${cookies.get("UserData").id}`} 
                         onClick={{onClickGlobal}}>Perfil</Link></li>
                 <li><Link to="/logout" onClick={{onClickGlobal}}>Cerrar Sesión</Link></li>
