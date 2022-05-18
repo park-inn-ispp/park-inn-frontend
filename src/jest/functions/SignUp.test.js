@@ -1,4 +1,4 @@
-/*
+
 jest.setTimeout(100000);
 
 const {Builder, By, Key, until} = require('selenium-webdriver');
@@ -56,4 +56,3 @@ test('Test de registro negativo', async () => {
     }
 
 })
-*/
