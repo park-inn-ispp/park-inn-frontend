@@ -105,12 +105,8 @@ export default function UsuariosDashboard(){
 
                     ) 
                    
-                  }
-                    <button type='button' class='deleteButton' onClick={() => borrarUsuario(usuario.id)}>Eliminar usuario</button>
-                    <a type="button" className="editButton" href={'/clients/edit/'+usuario.id}>Editar</a>
-                    
-                    </td>
-                                                                                                                                                                                                                                               
+                  } 
+                    </td>                                                                                                                                                                                                                             
                 </tr>
                 })
             }
