@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import displayNotification from '../Util/Notifications';
 import { Precio, Etiqueta} from '../Plaza/ReservaPlaza.elements';
 import { Title, Container, Wrapper, Line } from './Pagar.elements';
+import React, {useState} from "react";
 
 export default function Pagar({precio=1.0,reserva}) {
  
+
   let navigate = useNavigate();
   const initialOptions= {
     "client-id":"Adu4jUtTkaJxNFqufhztoNp-CQuZWJLkvV5FDn_aIpkhbWlSvnPwSq2TNDsT4vFZt-_uEmF_rtH89Mvk",
@@ -16,6 +18,8 @@ export default function Pagar({precio=1.0,reserva}) {
     
 
   }
+
+  
   return (
   
     <Container>
@@ -26,11 +30,12 @@ export default function Pagar({precio=1.0,reserva}) {
     <PayPalScriptProvider options={initialOptions}>
                 <PayPalButtons
                  createOrder={(data, actions) => {
-                     return actions.order.create({
+
+                  return actions.order.create({
                          purchase_units: [
                              {   
                                 amount: {
-                                     value: precio,
+                                     value:precio,
                                  },
                              },
                          ],
@@ -59,6 +64,7 @@ export default function Pagar({precio=1.0,reserva}) {
      
     </Wrapper>
     <Line><Etiqueta>Precio total:</Etiqueta><Precio>{precio} €</Precio></Line>
-  </Container>
+   
+    </Container>
   );
 }

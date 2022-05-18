@@ -423,3 +423,12 @@
 .btnAceptar:hover {
   border-color:  rgba(255, 255, 255, 1);
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+    
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(176, 176, 176);
+  border-radius: 25px 25px 25px 25px;
+}
