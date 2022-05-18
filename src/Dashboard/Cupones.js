@@ -9,7 +9,12 @@ export default function Cupones(){
     const [valorCupon, setValorCupon] = useState("");
     const [descuentoCupon, setDescuentoCupon] = useState("");
     const [cuponAEliminar, setCuponAEliminar] = useState("");
+    const [listaCupones, setLista] = useState([]);
 
+    call("/descuento/all").then(async res =>{
+      let allCupones = await res.json()
+      setLista(allCupones)
+    })
     function enviarDescuento(){
 
         const body = {
@@ -41,7 +46,8 @@ export default function Cupones(){
           await call("/descuento/delete/"+data.id,"DELETE").then(async res =>{
             if(res.ok){
               displayNotification("Exito","Se ha borrado el cupon correctamente","success")
-  
+              setLista(listaCupones.filter(function(el) { return el.id != data.id; })); 
+              
             }
           })
       })
@@ -86,8 +92,19 @@ export default function Cupones(){
 
             <div className='cabeceraCrearCupon'>Eliminar cupón</div>
             <div className='eliminarCupon'>
-            <input type="text" placeholder="Nombre del a eliminar" className='inputNombreCupon' onChange={handleChangeInputEliminar}></input>
+            <input type="text" placeholder="Nombre del cupón" className='inputNombreCupon' onChange={handleChangeInputEliminar}></input>
             <button className='inputBotonEnviarCupon' onClick={() => eliminarDescuento()}>&#8594;</button>
+            </div>
+
+            <div className='cabeceraCrearCupon'>Lista cupones</div>
+            <div className='listaCupones'>
+              {listaCupones.map(cupon =>{
+                return(<div className='rowCupon'>
+                <div className='cuponValue'>{cupon.name}</div>
+                <div className='cuponValue'>Descuento : {cupon.descuento}%</div>
+                </div>
+                )
+              })}
             </div>
     </div>)
 }

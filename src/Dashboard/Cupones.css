@@ -67,6 +67,7 @@
     display: inline-block;
 }
 
+
 .refreshDescuentoButton{
     background-color: #ddd347;
     width: 25%;
@@ -75,4 +76,31 @@
     border-color: transparent;
     margin-left: 36%;
     display: inline-block;
+}
+
+.listaCupones{
+    height: 30%;    
+    background-color: white;
+    width: 60%;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 2px 2px 2px 2px #888888;
+    display: inline-block;
+    overflow-y: scroll;
+}
+
+
+.cuponValue{
+
+    padding:10px;
+}
+
+.rowCupon{
+    width: 20%;
+    height: 60%;
+    margin-right: 2%;
+    display: inline-block;
+    margin-top: 2%;
+    padding: 2%;
+    border-radius: 25px 25px 25px 25px;
+    background-color: #c9d9e5;
 }
