@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-    background-color: ${colors.second};
+    background-color: ${colors.seventh};
     border-radius: 20px;
     width: 30%;
     height: 90vh;
