@@ -26,7 +26,7 @@ export default function ReservaOwnerList(){
         return(
 
             <div>
-            <NoElements message={"¡Esta plaza no tiene reservas asociadas!...Aún ;)"} buttonMessage={"🢀"} buttonRef={"/mis-plazas"}/>
+            <NoElements message={"¡Esta plaza no tiene reservas asociadas!...Aún ;)"} buttonMessage={"<-"} buttonRef={"/mis-plazas"}/>
 
             </div>
         )

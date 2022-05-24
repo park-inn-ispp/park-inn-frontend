@@ -44,7 +44,7 @@ export default function PlazasList() {
         if (plazas[0] === 'Empty' || plazas.length === 0){
         return(
             <div>
-            <NoElements message={"¡Aún no tienes ninguna plaza! ¿A qué esperas?"} buttonMessage={"🢂"} buttonRef={"/plaza/create"}/>
+            <NoElements message={"¡Aún no tienes ninguna plaza! ¿A qué esperas?"} buttonMessage={"->"} buttonRef={"/plaza/create"}/>
 
             </div>
             )

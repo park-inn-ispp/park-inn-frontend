@@ -245,12 +245,12 @@ export default function Reserva(){
               <Line><Etiqueta>Precio estacionamiento:</Etiqueta><Parrafo>{precioEstacionamiento} €</Parrafo></Line>  
               <Line><Etiqueta>Precio total:</Etiqueta><Precio>{Math.round((precioTotalConFianza-precioDescuento) * 100) / 100} €</Precio></Line>
               <div className='cabeceraCrearCupon plazaFormCupon'>Cupón</div>
-              <div className='crearCupon plazaFormCupon'>
-              <input type="text" placeholder="Nombre del cupón" className='inputNombreCupon' onChange={handleChangeInputEnviar} value={valorCupon}></input>
-              <button className='inputBotonEnviarCupon' type="button" onClick={() => enviarDescuento()}>&#8594;</button>
-              <button className='refreshDescuentoButton' type="button" onClick={() => refreshDescuento()}>&#8634;</button>
+              <div className='crearCupon plazaFormCupon2'>
+              <input type="text" placeholder="Nombre del cupón" className='inputNombreCupon2' onChange={handleChangeInputEnviar} value={valorCupon}></input>
+              <button className='inputBotonEnviarCupon2' type="button" onClick={() => enviarDescuento()}>&#8594;</button>
+              <button className='refreshDescuentoButton2' type="button" onClick={() => refreshDescuento()}>&#8634;</button>
 
-            </div> 
+              </div> 
               <EnvioForm type="submit" value="Siguiente"/>
               
             </Formulario>
