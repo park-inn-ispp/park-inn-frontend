@@ -5,7 +5,7 @@ import { colors } from "../theme";
 export const Container = styled.div`
     width: 100%;
     height: 90px;
-    background-color: ${colors.fivth}; 
+    background-color: ${colors.fivth};
 `;
 
 export const Wrapper = styled.div`

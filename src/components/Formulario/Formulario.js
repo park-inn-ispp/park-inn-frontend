@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import GeneralButton from "../GeneralButton/GeneraButton";
-import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div} from "./Formulario.components";
+import { Wrapper, StyledForm, InputForm, Etiqueta, CheckBox, ErrorMessage, Div, Title} from "./Formulario.components";
 
 export default function Formulario ({ template, onSubmit, watchFields, validate }){
 
@@ -62,7 +62,7 @@ export default function Formulario ({ template, onSubmit, watchFields, validate 
     return (
         <Wrapper>
             <StyledForm onSubmit={handleSubmit(onSubmit)}>
-            <h2>{title}</h2>
+            <Title>{title}</Title>
             {renderFields(fields)}<br/>
             <GeneralButton type="submit" content="Confirmar"></GeneralButton>
             </StyledForm>

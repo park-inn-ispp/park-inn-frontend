@@ -105,7 +105,7 @@ class Login extends Component {
                         <InputInicio type="password" name="password" placeholder="*********" onChange={this.handleChange}/>
                     </LoginInputs>
                     <div>
-                        <Submit onClick={()=> this.iniciarSesion()}>Iniciar Sesión</Submit>
+                        <Submit onClick={()=> this.iniciarSesion()}>INICIAR SESIÓN</Submit>
                     </div>
                     <Registro to="/register">Registrarme</Registro>
                 </Wrapper>
