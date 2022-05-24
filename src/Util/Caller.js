@@ -5,10 +5,17 @@ import jwt_decode from 'jwt-decode';
 
 const cookies = new Cookies();
 
+<<<<<<< HEAD
 // const urlBackend ="https://parkinn-api-v3.herokuapp.com";
 // const urlFrontend = "https://parkinn-app-v3.herokuapp.com/";
 const urlBackend ="http://localhost:8080";
 const urlFrontend = "http://localhost:3000/";
+=======
+const urlBackend ="https://parkinn-api-v4.herokuapp.com";
+const urlFrontend = "https://parkinn-app-v4.herokuapp.com/";
+// const urlBackend ="http://localhost:8080";
+// const urlFrontend = "http://localhost:3000/";
+>>>>>>> develop
 
 
      async function call(pathToCall,method,body){

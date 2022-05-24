@@ -1,0 +1,106 @@
+.divCupones{
+    height: 85vh;
+}
+
+.cabeceraCrearCupon{
+    margin-top: 3%;
+    width: 60%;
+    height: 5%;    
+    background-color: #011A30;
+    margin-left: 20%;
+    border-radius: 25px 25px 0px 0px;
+    box-shadow: 2px 2px 2px 2px #888888;
+    color: white;
+    font-size: 25px;
+}
+
+.crearCupon{
+    height: 20%;    
+    background-color: white;
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 2px 2px 2px 2px #888888;
+    display: grid;
+}
+.plazaFormCupon{
+    margin-left: 4%;
+
+}
+.eliminarCupon{
+    height: 15%;    
+    background-color: white;
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 2px 2px 2px 2px #888888;
+    display: grid;
+
+}
+.inputNombreCupon{
+    width: 60%;
+    height: 60%;   
+    outline: none;
+    margin-top: 2%;
+    margin-left: 22%;
+    border-color: transparent;
+    border-bottom: 2px solid #011A30;
+}
+
+.inputDescuentoCupon{
+    width: 60%;
+    height: 75%;  
+    outline: none;
+    margin-left: 22%;
+    border-color: transparent;
+    border-bottom: 2px solid #011A30;
+}
+
+
+.inputBotonEnviarCupon{
+    background-color: #49c75e;
+    width: 25%;
+    height: 75%;  
+    outline: none;
+    border-color: transparent;
+    margin-left: 36%;
+    display: inline-block;
+}
+
+
+.refreshDescuentoButton{
+    background-color: #ddd347;
+    width: 25%;
+    height: 75%;  
+    outline: none;
+    border-color: transparent;
+    margin-left: 36%;
+    display: inline-block;
+}
+
+.listaCupones{
+    height: 30%;    
+    background-color: white;
+    width: 60%;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 2px 2px 2px 2px #888888;
+    display: inline-block;
+    overflow-y: scroll;
+}
+
+
+.cuponValue{
+
+    padding:10px;
+}
+
+.rowCupon{
+    width: 20%;
+    height: 60%;
+    margin-right: 2%;
+    display: inline-block;
+    margin-top: 2%;
+    padding: 2%;
+    border-radius: 25px 25px 25px 25px;
+    background-color: #c9d9e5;
+}
