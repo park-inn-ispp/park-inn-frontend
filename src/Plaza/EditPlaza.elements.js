@@ -5,7 +5,7 @@ export const Global = styled.div`
   width:  100%;
   height: 100%;
   padding: 20px;
-  border-radius: 10px;
+  background-color:#DDE5F4;
 `;
 
 export const Formulario = styled.form`

@@ -4,11 +4,12 @@ import { colors } from '../theme';
 
 export const Global = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 89%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
 `;
 
 export const Wrapper = styled.div`

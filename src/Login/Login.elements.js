@@ -13,7 +13,7 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
     background-color: #F1F7FE;
     border-radius: 20px;
-    width: 60vh;
+    width: 30%;
     height: 90vh;
 
     @media screen and (max-width: 600px){

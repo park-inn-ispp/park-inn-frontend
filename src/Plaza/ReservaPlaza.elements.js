@@ -6,6 +6,7 @@ export const Container = styled.div`
   width:  100%;
   height: 100%;
   border-radius: 10px;
+  background-color:#DDE5F4;
 `;
 
 export const Wrapper = styled.div`
@@ -13,6 +14,8 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color:#DDE5F4;
+
 `;
 
 export const Formulario = styled.form`

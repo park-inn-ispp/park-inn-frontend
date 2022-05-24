@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-    height: 100%;
+    height: 100vh;
     padding: 30px;
-	background: #b4d7f3;
+	background: #DDE5F4;
 	border-radius: 6px;
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
 `;
 
 export const StyledForm = styled.form` 
@@ -13,16 +17,13 @@ export const StyledForm = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width:60%;
+    width:31%;
+    height: 96%;
 	padding:30px;
 	margin:auto;
-	background: lightblue;
-	border-radius: 10px;
-	-webkit-border-radius:10px;
-	-moz-border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
-	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
-	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
+	background: #F1F7FE;
+    border-radius: 20px;
+
 
     @media screen and (max-width: 650px){
         width: 100%;
@@ -33,9 +34,13 @@ export const InputForm = styled.input`
     width: 80%;
     padding: 5px;
     border-radius: 15px;
+    
     @media screen and (max-width: 650px){
         width: 100%;
     }
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #bbb;
 `;
 
 export const CheckBox = styled.input`
@@ -65,6 +70,7 @@ export const Div = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
+    
 `;
 
 
