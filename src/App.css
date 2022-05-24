@@ -424,7 +424,6 @@
   border-color:  rgba(255, 255, 255, 1);
 }
 
-<<<<<<< HEAD
 ::-webkit-scrollbar{
   display: block;
   width: 5px;
@@ -435,13 +434,4 @@
 ::-webkit-scrollbar-thumb{
   background-color: #011A30;
   border-radius: 60px;
-=======
-::-webkit-scrollbar {
-  width: 10px;
-    
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(176, 176, 176);
-  border-radius: 25px 25px 25px 25px;
->>>>>>> develop
 }
