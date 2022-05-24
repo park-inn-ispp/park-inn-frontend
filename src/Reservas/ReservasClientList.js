@@ -35,7 +35,7 @@ export default function ReservaClientList(){
     if (reservas === 'undefined' || reservas.length === 0){
         return(
             <div>
-            <NoElements message={"¡Aún no tienes ninguna reserva! ¿A qué esperas?"} buttonMessage={"🠮"} buttonRef={"/"}/>
+            <NoElements message={"¡Aún no tienes ninguna reserva! ¿A qué esperas?"} buttonMessage={"🢂"} buttonRef={"/"}/>
 
             </div>
         )

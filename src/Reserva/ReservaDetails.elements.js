@@ -23,20 +23,19 @@ export const Parrafo = styled.p`
 `;
 
 export const Wrapper2 = styled.div`
-    width: 60%;
-    height: 100%;
-    background-color: lightblue;
+    width: 70%;
+    height: auto;
+    background-color: ${colors.second};
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-bottom: 15px;
-    border-style: solid;
-    border-color: ${colors.fivth};
-    border-width: 4px;
+    box-shadow: 0 0 10px rgba(0 0 0.55);
+    margin-top: 120px;
+    padding-bottom: 20px;
 
     @media screen and (max-width:600px){
-        width: 100%;
+        width: 90%;
     }
 `;

@@ -7,7 +7,14 @@ function NoElements({ message,buttonMessage,buttonRef }) {
     <div class="message-no-elements">
     <h2 > {message ?? "No hay contenido disponible" }   </h2>
 
-    <StyledButton onClick={()=>window.location.href=buttonRef} >{buttonMessage}</StyledButton>
+    {[buttonMessage].map(msg =>{
+      if(msg){
+        return (<StyledButton onClick={()=>window.location.href=buttonRef} >{buttonMessage}</StyledButton>)
+      }else{
+        return (<div></div>)
+      }
+    })}
+    
 
     </div>
   );

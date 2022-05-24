@@ -18,7 +18,6 @@ export const Formulario = styled.form`
   margin: auto;
   background:  #f1f7fe;
   border-radius: 30px;
-  border-style: solid;
 
   @media screen and (max-width:800px){
       width: 100%;
@@ -57,7 +56,6 @@ export const Datos = styled.input`
     text-align: center;
     margin-left: 10px;
     border-style: solid;
-    border-color: ${colors.fivth};
     padding: 5px;
 
     @media screen and (max-width:800px){
