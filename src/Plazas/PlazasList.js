@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import GeneralButton from '../components/GeneralButton/GeneraButton';
 import {Enlace, Title, Global, Container, Wrapper, NuevaPlaza, Down} from "../Plazas/PlazasList.elements"
 import Card from '../components/Card';
-
+import NoElements from '../components/NoElements';
 const cookies = new Cookies();
 
 export default function PlazasList() {
@@ -43,10 +43,10 @@ export default function PlazasList() {
         }
         if (plazas[0] === 'Empty' || plazas.length === 0){
         return(
-            <Global>
-                <Title>No tienes ninguna plaza creada aún</Title>
-                <GeneralButton content={<Enlace to="/plaza/create">Crear nueva plaza </Enlace>}></GeneralButton>
-            </Global>
+            <div>
+            <NoElements message={"¡Aún no tienes ninguna plaza! ¿A qué esperas?"} buttonMessage={"->"} buttonRef={"/plaza/create"}/>
+
+            </div>
             )
         }
 

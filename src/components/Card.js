@@ -16,19 +16,17 @@ function Card({id, title, ancho, largo, precioHora, esAireLibre, urlEdit, urlRes
     })
 }
   return (
-    <Principal>
+    
       <Tarjeta to={`/disponibilidad/${id}`}>
-        <Direccion>DIRECCIÓN: {title}</Direccion>
-        <Datos>DIMENSIONES: {ancho}m x {largo}m</Datos>
-        <Datos>PRECIO: {precioHora}€</Datos>
-        <Datos>EXTERIOR: {esAireLibre}</Datos>
+        <Direccion>{title}</Direccion>
+        <Datos><b>PRECIO:</b> {precioHora}€</Datos>
         <Botones>
           <Editar to={urlEdit}>Editar</Editar>
           <Reservas to={urlReserva}>Reservas</Reservas>
           <Eliminar onClick={deletePlaza} to=''>Eliminar</Eliminar>
         </Botones>
       </Tarjeta>
-    </Principal>
+    
   );
 }
 

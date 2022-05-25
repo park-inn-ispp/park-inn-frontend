@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 import ListaMisReservas from "../components/TablaMisReservas";
 import '../components/table.css'
 import { Cover, Reserva } from "../components/TabalMisReservas.elemnts";
-
+import NoElements from "../components/NoElements";
 
 export default function ReservaOwnerList(){
     const id = useParams().id;
@@ -24,11 +24,11 @@ export default function ReservaOwnerList(){
     }
     if (reservas === 'undefined' || reservas.length === 0){
         return(
-            <div className="container-tabla">
 
-            <h2>Esta plaza no existe, no está disponible en este momento o no tiene reservas asociadas</h2>
+            <div>
+            <NoElements message={"¡Esta plaza no tiene reservas asociadas!...Aún ;)"} buttonMessage={"<-"} buttonRef={"/mis-plazas"}/>
+
             </div>
-
         )
     }
 

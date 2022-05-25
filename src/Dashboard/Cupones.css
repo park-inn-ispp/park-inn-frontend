@@ -27,6 +27,38 @@
     margin-left: 4%;
 
 }
+
+.plazaFormCupon2{
+    margin-left: 4%;
+
+}
+
+.refreshDescuentoButton2{
+    width: 15%;
+    margin-left: 40%;
+    background-color: #ddd347;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.inputBotonEnviarCupon2{
+    width: 15%;
+    margin-left: 40%;
+    background-color: #49c75e;
+    border: none;
+    margin-top: 10px;
+
+}
+.inputNombreCupon2{
+    width: 150px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #011A30;
+    margin-left: 15%;
+
+}
 .eliminarCupon{
     height: 15%;    
     background-color: white;
@@ -95,10 +127,10 @@
 }
 
 .rowCupon{
-    width: 20%;
+    width: 80%;
     height: 60%;
+    margin-left: 10%;
     margin-right: 2%;
-    display: inline-block;
     margin-top: 2%;
     padding: 2%;
     border-radius: 25px 25px 25px 25px;
